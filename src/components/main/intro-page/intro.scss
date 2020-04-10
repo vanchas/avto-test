@@ -1,0 +1,260 @@
+.intro-page {
+	display: grid;
+	justify-content: center;
+
+	header {
+		width: 100vw;
+		background: url("../../header/image/head-bg.png") center center / cover
+			no-repeat;
+		.header-content {
+			max-width: 1300px;
+			margin: 0 auto;
+		}
+	}
+
+	h1 {
+		font-size: 3.9em;
+		padding: 0 1em;
+	}
+	h2 {
+		padding: 0 1em;
+	}
+}
+.vin-input-block {
+	display: flex;
+	height: 2.4em;
+	overflow: hidden;
+	border-radius: 2em;
+	.check-car-btn {
+		background-color: #df4d5a;
+		color: #fff;
+		display: flex;
+		flex-basis: 35%;
+		align-items: center;
+		align-content: center;
+		justify-content: space-around;
+	}
+}
+.vin-input-block-wrapper {
+	background: none;
+	width: 70%;
+	margin: 0 auto;
+	position: relative;
+	small {
+		color: #eee;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		transform: translateY(100%);
+	}
+}
+
+.instruction {
+	max-width: 1300px;
+	margin: 0 auto;
+	position: relative;
+	.line {
+		position: absolute;
+		top: 4.8em;
+		width: 100%;
+		border-bottom: 1px solid #888;
+	}
+
+	display: flex;
+	justify-content: space-evenly;
+	.instruction-item {
+		display: grid;
+		justify-content: center;
+		justify-items: center;
+		position: relative;
+		* {
+			margin: 0.5em 0;
+		}
+		.dots {
+			position: absolute;
+			left: 0.8em;
+			top: 0.3em;
+			display: flex;
+			img {
+				margin: 0 0.15em;
+			}
+		}
+	}
+}
+@media (max-width: 767px) {
+	.instruction {
+		display: none;
+	}
+	.intro-page {
+		h1 {
+			font-size: 2.4em;
+		}
+	}
+
+	.vin-input-block {
+		display: grid;
+		grid-gap: 1.5em;
+		height: auto;
+		border-radius: 0;
+		input {
+			border-radius: 2em;
+		}
+		.check-car-btn {
+			border-radius: 2em;
+		}
+	}
+	.vin-input-block-wrapper {
+		small {
+			display: none;
+		}
+	}
+}
+
+// order form block
+
+.order-form-section {
+	max-width: 1300px;
+	margin: 0 auto;
+
+	padding: 5em 0;
+	display: grid;
+	justify-content: center;
+	justify-items: center;
+	// box-shadow: 0 0 40px rgba(219, 217, 217, 0.35);
+
+	h3 {
+		img {
+			width: 1.3em;
+		}
+	}
+	.order-form {
+		margin: 1.5em 0;
+		padding: 2.5em 1em;
+		box-shadow: 0 0 30px 10px rgba(37, 37, 37, 0.14);
+		background: linear-gradient(15deg, #f8f9fa, #ebeced);
+		border-radius: 1em;
+		h4 {
+			width: 80%;
+		}
+		.form-group {
+			margin: 0;
+			padding: 0;
+			.form-control {
+				border-radius: 2em;
+			}
+			.check-car-btn {
+				grid-column: span 2;
+				background-color: #df4d5a;
+				color: #fff;
+				display: flex;
+				align-items: center;
+				align-content: center;
+				justify-content: space-around;
+				border-radius: 2em;
+				img {
+					margin-left: 1em;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	.order-form-section {
+		margin-top: 0 !important;
+		h3 {
+			display: grid;
+			justify-items: center;
+			grid-gap: 0.5em;
+		}
+	}
+}
+
+// price block
+
+.price-block {
+	max-width: 1300px;
+	margin: 0 auto;
+
+	h2 {
+		margin: 1.5em 0 1em 0;
+	}
+	h4 {
+		margin: 0 0 2em 0;
+	}
+	.price-card {
+		button {
+			grid-column: span 2;
+			background-color: #df4d5a;
+			color: #fff;
+			margin: 1.3em auto;
+			display: flex;
+			align-items: center;
+			align-content: center;
+			justify-content: space-around;
+			border-radius: 2em;
+			img {
+				margin-left: 1em;
+			}
+		}
+		.image-container {
+			display: grid;
+			justify-items: center;
+			justify-content: center;
+		}
+		.card-image {
+			margin: 0.8em 0;
+		}
+		.price {
+			color: #df4d5a;
+		}
+	}
+	.price-description {
+		height: 20em;
+		border-radius: 1.3em;
+		box-shadow: 0 0 40px rgb(219, 217, 217);
+		background-color: #fff;
+		h5 {
+			background-color: #86bb9d;
+			border-radius: 1em;
+			padding: 0.2em;
+			color: #fff;
+			margin: 0.4em 2em;
+		}
+	}
+}
+
+// consultation-block
+
+.consultation-block {
+	max-width: 1300px;
+	margin: 0 auto;
+
+	background-color: #fff;
+	width: 100%;
+	.text-center {
+		.btn {
+			grid-column: span 2;
+			background-color: #df4d5a;
+			color: #fff;
+			margin: 1.3em auto;
+			display: flex;
+			align-items: center;
+			align-content: center;
+			justify-content: space-around;
+			border-radius: 2em;
+			img {
+				margin-left: 1em;
+			}
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.consultation-block {
+		.img-holder-block {
+			order: 2;
+			margin-top: 2.5em;
+		}
+	}
+}

@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'Helvetica Neue Cyr';
+  font-style: normal;
+  src: local('Helvetica'), url(./fonts/HelveticaNeueCyr.ttf) format('truetype');
+}
