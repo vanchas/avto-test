@@ -18,7 +18,8 @@ import Woman from './image/woman.png'
 export default class IntroPage extends Component {
   render() {
     return (
-      <div className="intro-page">
+      <div className="intro-page container-fluid overflow-hidden">
+
         <header className="text-center text-white py-2">
           <div className="header-content">
             <h1 className="mt-5 font-weight-bolder">З чого почати пошук б/у авто?</h1>
@@ -27,12 +28,11 @@ export default class IntroPage extends Component {
               <div className="vin-input-block my-5">
                 <input type="text" placeholder="&#x260C; Уведіть VIN код" className="form-control" />
                 <button className="btn check-car-btn">Перевірити авто
-            <img src={ArrowRight} alt="arrow" />
+                  <img src={ArrowRight} alt="arrow" />
                 </button>
               </div>
               <small>* Перевірка vin коду відбуватиметься на сайті партнера</small>
             </div>
-
             <div className="instruction">
               <div className="line"></div>
               <div className="instruction-item">

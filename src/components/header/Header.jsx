@@ -48,9 +48,9 @@ export default class Header extends Component {
               </li>
               <li className="nav-item nav-item-select">
                 <select className="browser-default custom-select language-select text-white" defaultValue={this.state.language} onChange={e => this.onSelectLanguage(e.target.value)}>
-                  <option className="h5" value="UA">UA</option>
-                  <option className="h5" value="RU">RU</option>
-                  <option className="h5" value="EN">EN</option>
+                  <option className="" value="UA">UA</option>
+                  <option className="" value="RU">RU</option>
+                  <option className="" value="EN">EN</option>
                 </select>
                 <img src={ArrowDown} alt="" />
               </li>

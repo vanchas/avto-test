@@ -55,7 +55,8 @@
 	position: relative;
 	.line {
 		position: absolute;
-		top: 4.8em;
+		top: 0;
+		transform: translateY(4.8em);
 		width: 100%;
 		border-bottom: 1px solid #888;
 	}
