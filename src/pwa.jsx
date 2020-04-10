@@ -28,15 +28,17 @@ const InstallPWA = () => {
     return null;
   }
   return (
-    <button
-      className="link-button"
-      id="setup_button"
-      aria-label="Install app"
-      title="Install app"
-      onClick={onClick}
-    >
-      Install
+    <div style={{ background: '#4b4d4b' }}>
+      <button
+        className="link-button btn btn-light"
+        id="setup_button"
+        aria-label="Install app"
+        title="Install app"
+        onClick={onClick}
+      >
+        Установить <b>Avto</b>Test на рабочий стол
     </button>
+    </div>
   );
 };
 
