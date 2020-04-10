@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8b3095d8d7d1468c52c4d7a6bdf1a35c",
+    "revision": "e0378d780c787b64fb182480f5dfd616",
     "url": "/avto-test/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/avto-test/static/css/2.de424728.chunk.css"
   },
   {
-    "revision": "aab52b2046340d69fa61",
-    "url": "/avto-test/static/css/main.1c6b7c47.chunk.css"
+    "revision": "e265e30a7da75d46f633",
+    "url": "/avto-test/static/css/main.cf43bdd3.chunk.css"
   },
   {
     "revision": "a22e825c85e89c235f99",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/avto-test/static/js/2.9b0c9731.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "aab52b2046340d69fa61",
-    "url": "/avto-test/static/js/main.294e25db.chunk.js"
+    "revision": "e265e30a7da75d46f633",
+    "url": "/avto-test/static/js/main.02efd91d.chunk.js"
   },
   {
     "revision": "c0fbb1f5e4121a97be4f",
