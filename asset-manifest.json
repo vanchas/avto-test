@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/avto-test/static/css/main.cf43bdd3.chunk.css",
-    "main.js": "/avto-test/static/js/main.69cb0a19.chunk.js",
-    "main.js.map": "/avto-test/static/js/main.69cb0a19.chunk.js.map",
+    "main.js": "/avto-test/static/js/main.5a95f5bb.chunk.js",
+    "main.js.map": "/avto-test/static/js/main.5a95f5bb.chunk.js.map",
     "runtime-main.js": "/avto-test/static/js/runtime-main.a89c1ee2.js",
     "runtime-main.js.map": "/avto-test/static/js/runtime-main.a89c1ee2.js.map",
     "static/css/2.de424728.chunk.css": "/avto-test/static/css/2.de424728.chunk.css",
     "static/js/2.9b0c9731.chunk.js": "/avto-test/static/js/2.9b0c9731.chunk.js",
     "static/js/2.9b0c9731.chunk.js.map": "/avto-test/static/js/2.9b0c9731.chunk.js.map",
     "index.html": "/avto-test/index.html",
-    "precache-manifest.aa83d8a59516ab150d626bbda4b1976f.js": "/avto-test/precache-manifest.aa83d8a59516ab150d626bbda4b1976f.js",
+    "precache-manifest.16f161522157f4f4c224d17e38cedb41.js": "/avto-test/precache-manifest.16f161522157f4f4c224d17e38cedb41.js",
     "service-worker.js": "/avto-test/service-worker.js",
     "static/css/2.de424728.chunk.css.map": "/avto-test/static/css/2.de424728.chunk.css.map",
     "static/css/main.cf43bdd3.chunk.css.map": "/avto-test/static/css/main.cf43bdd3.chunk.css.map",
@@ -23,6 +23,6 @@
     "static/css/2.de424728.chunk.css",
     "static/js/2.9b0c9731.chunk.js",
     "static/css/main.cf43bdd3.chunk.css",
-    "static/js/main.69cb0a19.chunk.js"
+    "static/js/main.5a95f5bb.chunk.js"
   ]
 }
