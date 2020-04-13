@@ -14,14 +14,14 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        // history.push('/avto-test');
+        // history.push('/home');
     }
 
     render() {
         return (
             <Router history={history} >
                 <div className="App" >
-                    <Header/>
+                    <Header />
                     <Main />
                     <Footer />
                 </div>

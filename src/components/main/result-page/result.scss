@@ -3,10 +3,15 @@
   margin: 0 auto;
   
   .card-holder {
-    .card {
-      box-shadow: 0 0 40px rgba(219, 217, 217, 0.5);
+    .car-card {
+      box-shadow: 0 0 40px rgba(219, 217, 217, 0.7);
       border-radius: 1.5em;
       border: none;
+      .card-heading {
+        height: 4.5em;
+        display: table-cell;
+        vertical-align: middle;
+      }
       .btn-danger {
         border-radius: 3em;
       }
@@ -14,24 +19,38 @@
   }
 }
 .what-we-found {
-	// max-width: 1300px;
-	// margin: 0 auto;
 }
 .what-we-found-description {
   border-radius: 3em;
   box-shadow: 0 0 40px rgba(232, 229, 229, 0.35);
   border: 1px solid #9ad8b5;
-  .question-sign {
-  }
-  .row {
+  .green-border {
     border-bottom: 1px solid #eee;
   }
 }
 @media (max-width: 768px) {
   .what-we-found-description {
     border-radius: 1.5em;
-    .row {
+    .green-border {
       border-bottom: 1px solid #9ad8b5;
+    }
+  }
+  .card-holder {
+    .card {
+      .card-heading {
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .card-holder {
+    .card {
+      .card-heading {
+        // height: 6em;
+        // display: table-cell;
+        // vertical-align: middle;
+      }
     }
   }
 }

@@ -9,6 +9,10 @@ import { BrowserRouter } from 'react-router-dom';
 import PWAPrompt from 'react-ios-pwa-prompt';
 import InstallPWA from './pwa';
 
+// setup fake backend
+import { configureFakeBackend } from './_helpers/fake-backaend';
+configureFakeBackend();
+
 const root = document.getElementById("root");
 
 if (root.hasChildNodes()) {

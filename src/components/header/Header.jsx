@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './header.scss'
 import { Link } from 'react-router-dom'
+import { history } from '../../_helpers/history'
 import Logo from './image/navbar-brand-logo.png'
 import ArrowDown from './image/arrow-down.png'
 import Phone from './image/phone.png'
@@ -17,6 +18,10 @@ export default class Header extends Component {
 
   onSelectLanguage(value) {
     this.setState({ language: value })
+  }
+
+  goToLoginPage() {
+    history.push('/login');
   }
 
   render() {
@@ -46,9 +51,10 @@ export default class Header extends Component {
                   to="/avto-test" >Авто «під ключ»</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-white h5 font-weight-light mb-0"
-                  to="/avto-test" >Вхід
-                <img src={Enter} alt="" className="ml-2" /></Link>
+                <button className="btn nav-link text-white h5 font-weight-light mb-0"
+                  onClick={this.goToLoginPage}
+                >Вхід
+                <img src={Enter} alt="" className="ml-2" /></button>
               </li>
               <li className="nav-item nav-item-select">
                 <select className="browser-default custom-select language-select text-white" defaultValue={this.state.language} onChange={e => this.onSelectLanguage(e.target.value)}>
