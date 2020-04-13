@@ -1,30 +1,29 @@
 {
   "files": {
-    "main.css": "/avto-test/static/css/main.a6c91088.chunk.css",
-    "main.js": "/avto-test/static/js/main.24e49d2d.chunk.js",
-    "main.js.map": "/avto-test/static/js/main.24e49d2d.chunk.js.map",
+    "main.css": "/avto-test/static/css/main.528ef365.chunk.css",
+    "main.js": "/avto-test/static/js/main.5604064e.chunk.js",
+    "main.js.map": "/avto-test/static/js/main.5604064e.chunk.js.map",
     "runtime-main.js": "/avto-test/static/js/runtime-main.a89c1ee2.js",
     "runtime-main.js.map": "/avto-test/static/js/runtime-main.a89c1ee2.js.map",
     "static/css/2.de424728.chunk.css": "/avto-test/static/css/2.de424728.chunk.css",
-    "static/js/2.995033d6.chunk.js": "/avto-test/static/js/2.995033d6.chunk.js",
-    "static/js/2.995033d6.chunk.js.map": "/avto-test/static/js/2.995033d6.chunk.js.map",
+    "static/js/2.1721d88f.chunk.js": "/avto-test/static/js/2.1721d88f.chunk.js",
+    "static/js/2.1721d88f.chunk.js.map": "/avto-test/static/js/2.1721d88f.chunk.js.map",
     "index.html": "/avto-test/index.html",
-    "precache-manifest.3a476ee2e669f7108e4b7790e0a1dc3b.js": "/avto-test/precache-manifest.3a476ee2e669f7108e4b7790e0a1dc3b.js",
+    "precache-manifest.1d4444109afaa9bcbfcd9ca1e942571c.js": "/avto-test/precache-manifest.1d4444109afaa9bcbfcd9ca1e942571c.js",
     "service-worker.js": "/avto-test/service-worker.js",
     "static/css/2.de424728.chunk.css.map": "/avto-test/static/css/2.de424728.chunk.css.map",
-    "static/css/main.a6c91088.chunk.css.map": "/avto-test/static/css/main.a6c91088.chunk.css.map",
-    "static/js/2.995033d6.chunk.js.LICENSE.txt": "/avto-test/static/js/2.995033d6.chunk.js.LICENSE.txt",
+    "static/css/main.528ef365.chunk.css.map": "/avto-test/static/css/main.528ef365.chunk.css.map",
+    "static/js/2.1721d88f.chunk.js.LICENSE.txt": "/avto-test/static/js/2.1721d88f.chunk.js.LICENSE.txt",
     "static/media/index.css": "/avto-test/static/media/HelveticaNeueCyr.afe760ff.ttf",
     "static/media/cv-logo.png": "/avto-test/static/media/cv-logo.93516264.png",
     "static/media/intro.scss": "/avto-test/static/media/head-bg.a0948c5f.png",
-    "static/media/question.png": "/avto-test/static/media/question.f2fed888.png",
     "static/media/woman.png": "/avto-test/static/media/woman.02b39f96.png"
   },
   "entrypoints": [
     "static/js/runtime-main.a89c1ee2.js",
     "static/css/2.de424728.chunk.css",
-    "static/js/2.995033d6.chunk.js",
-    "static/css/main.a6c91088.chunk.css",
-    "static/js/main.24e49d2d.chunk.js"
+    "static/js/2.1721d88f.chunk.js",
+    "static/css/main.528ef365.chunk.css",
+    "static/js/main.5604064e.chunk.js"
   ]
 }
