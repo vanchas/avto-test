@@ -13,13 +13,18 @@ import Tablet from './image/tablet.png'
 import Hands from './image/hands.png'
 import CheckSign from './image/check-sign.png'
 import Woman from './image/woman.png'
-
+import { history } from '../../../_helpers/history'
 
 export default class IntroPage extends Component {
+  goToResultPage() {
+    history.push('/result');
+  }
+
   render() {
+    console.log(this.props);
+
     return (
       <div className="intro-page container-fluid overflow-hidden">
-
         <header className="text-center text-white py-2">
           <div className="header-content">
             <h1 className="mt-5 font-weight-bolder">З чого почати пошук б/у авто?</h1>
@@ -27,7 +32,10 @@ export default class IntroPage extends Component {
             <div className="vin-input-block-wrapper">
               <div className="vin-input-block my-5">
                 <input type="text" placeholder="&#x260C; Уведіть VIN код" className="form-control" />
-                <button className="btn check-car-btn">Перевірити авто
+                <button className="btn check-car-btn"
+                  onClick={this.goToResultPage}
+                >
+                  Перевірити авто
                   <img src={ArrowRight} alt="arrow" />
                 </button>
               </div>
@@ -74,8 +82,10 @@ export default class IntroPage extends Component {
               <input className="form-control col-md-5 col-sm-12 my-2" type="text" placeholder="Ваше ім’я" />
               <input className="form-control col-md-5 col-sm-12 my-2" type="text" placeholder="Ваш телефон" />
               <div className="col-12 d-flex justify-content-center">
-                <button className="btn check-car-btn px-4 mt-3">Замовити перевірку
-            <img src={ArrowRight} alt="arrow" />
+                <button className="btn check-car-btn px-4 mt-3"
+                  onClick={this.goToResultPage} >
+                  Замовити перевірку
+                  <img src={ArrowRight} alt="arrow" />
                 </button>
               </div>
             </form>

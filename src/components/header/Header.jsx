@@ -23,7 +23,7 @@ export default class Header extends Component {
     return (
       <header className="header">
         <nav className="navbar navbar-dark navbar-expand-lg">
-          <Link className="navbar-brand d-flex flex-column text-white justify-content-center" to="/">
+          <Link className="navbar-brand d-flex flex-column text-white justify-content-center" to="/avto-text">
             <img src={Logo} alt="logo" className="m-auto" />
             <h2 className="h5"><b>Avto</b>Test</h2>
           </Link>
@@ -34,16 +34,20 @@ export default class Header extends Component {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto w-100 d-flex justify-content-around align-content-center px-3">
               <li className="nav-item">
-                <Link className="nav-link text-white h5 font-weight-light mb-0" to="" >VIN код</Link>
+                <Link className="nav-link text-white h5 font-weight-light mb-0"
+                  to="/avto-test" >VIN код</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-white h5 font-weight-light mb-0" to="" >Огляд авто</Link>
+                <Link className="nav-link text-white h5 font-weight-light mb-0"
+                  to="/avto-test" >Огляд авто</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-white h5 font-weight-light mb-0" to="" >Авто «під ключ»</Link>
+                <Link className="nav-link text-white h5 font-weight-light mb-0"
+                  to="/avto-test" >Авто «під ключ»</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-white h5 font-weight-light mb-0" to="/" >Вхід
+                <Link className="nav-link text-white h5 font-weight-light mb-0"
+                  to="/avto-test" >Вхід
                 <img src={Enter} alt="" className="ml-2" /></Link>
               </li>
               <li className="nav-item nav-item-select">

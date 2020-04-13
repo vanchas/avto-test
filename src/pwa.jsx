@@ -28,7 +28,7 @@ const InstallPWA = () => {
     return null;
   }
   return (
-    <div style={{ background: '#4b4d4b' }}>
+    <div style={{ background: '#4b4d4b' }} className="py-1 d-flex justify-content-center justify-items-center">
       <button
         className="link-button btn btn-light"
         id="setup_button"
