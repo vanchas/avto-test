@@ -30,6 +30,7 @@ export default class Header extends Component {
 
   onNavItemClick(item) {
     // this.props.scrollToElement(item);
+    history.push('/');
   }
 
   render() {

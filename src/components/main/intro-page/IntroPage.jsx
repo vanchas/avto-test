@@ -119,7 +119,7 @@ export default class IntroPage extends Component {
             </div>
           </div>
         </header>
-
+{/* 
         <section className="order-form-section font-weight-bolder">
           <h3 className="h2 font-weight-bolder">Не знаешь VIN код? <img src={RedArrow} alt="arrow" /></h3>
           <div className="order-form container">
@@ -150,7 +150,7 @@ export default class IntroPage extends Component {
               </div>
             </form>
           </div>
-        </section>
+        </section> */}
 
         <section className="price-block text-center container-fluid pt-2 pb-5 bg-light font-weight-bolder">
           <h2 className="h1 font-weight-bolder">Знайшов достойне авто?</h2>

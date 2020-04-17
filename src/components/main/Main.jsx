@@ -17,7 +17,7 @@ export default class Main extends Component {
           <PrivateRoute exact path="/home" component={HomePage} />
           <Route path="/login" component={LoginPage} />
 
-          <Route exact path="/avto-test" render={() => <IntroPage />} />
+          <Route exact path="/" render={() => <IntroPage />} />
           <Route path="/result" render={() => <ResultPage />} />
         </Switch>
       </main>
