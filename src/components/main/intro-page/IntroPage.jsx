@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './intro.scss'
+import SearchIcon from '@material-ui/icons/Search'
 import ArrowRight from './image/arrow-right.png'
 import DebitCard from './image/debit-card.png'
 import Dot from './image/dot.png'
@@ -16,8 +17,51 @@ import Woman from './image/woman.png'
 import { history } from '../../../_helpers/history'
 
 export default class IntroPage extends Component {
-  goToResultPage() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      vin: '',
+      link: '',
+      number: '',
+      name: '',
+      phone: ''
+    };
+    this.onVinInput = this.onVinInput.bind(this);
+    this.sendVin = this.sendVin.bind(this);
+    this.onNumberInput = this.onNumberInput.bind(this);
+    this.onNameInput = this.onNameInput.bind(this);
+    this.onPhoneInput = this.onPhoneInput.bind(this);
+    this.onLinkInput = this.onLinkInput.bind(this);
+    this.requestConsultation = this.requestConsultation.bind(this);
+    this.sendUserData = this.sendUserData.bind(this);
+  }
+
+  onVinInput(vin) {
+    this.setState({ vin });
+  }
+  onLinkInput(link) {
+    this.setState({ link });
+  }
+  onNumberInput(number) {
+    this.setState({ number });
+  }
+  onNameInput(name) {
+    this.setState({ name });
+  }
+  onPhoneInput(phone) {
+    this.setState({ phone });
+  }
+
+  sendVin() {
+    // req
     history.push('/result');
+  }
+  sendUserData() {
+    // req
+    history.push('/result');
+  }
+  requestConsultation() {
+    // req
   }
 
   render() {
@@ -31,9 +75,13 @@ export default class IntroPage extends Component {
             <h2 className="h4 font-weight-light">Перевірка авто по vin коду — це перший крок при купівлі</h2>
             <div className="vin-input-block-wrapper">
               <div className="vin-input-block my-5">
-                <input type="text" placeholder="&#x260C; Уведіть VIN код" className="form-control" />
+                <SearchIcon className="search-icon" />
+                <input type="text"
+                  placeholder=" Уведіть VIN код" className="form-control pl-5"
+                  onChange={e => this.onVinInput(e.target.value)}
+                />
                 <button className="btn check-car-btn"
-                  onClick={this.goToResultPage}
+                  onClick={this.sendVin}
                 >
                   Перевірити авто
                   <img src={ArrowRight} alt="arrow" />
@@ -77,13 +125,25 @@ export default class IntroPage extends Component {
           <div className="order-form container">
             <h4 className="text-center m-auto">Замов перевірку авто за посиланням на оголошення або реєстраційним номером авто</h4>
             <form className="container form-group py-4 row d-flex justify-content-around" action="#">
-              <input className="form-control col-md-5 col-sm-12 my-2" type="text" placeholder="Введіть посилання на " />
-              <input className="form-control col-md-5 col-sm-12 my-2" type="text" placeholder="Введіть номерний знак" />
-              <input className="form-control col-md-5 col-sm-12 my-2" type="text" placeholder="Ваше ім’я" />
-              <input className="form-control col-md-5 col-sm-12 my-2" type="text" placeholder="Ваш телефон" />
+              <input className="form-control col-md-5 col-sm-12 my-2"
+                type="text"
+                onChange={e => this.onLinkInput(e.target.value)}
+                placeholder="Введіть посилання на " />
+              <input className="form-control col-md-5 col-sm-12 my-2"
+                type="text"
+                onChange={e => this.onNumberInput(e.target.value)}
+                placeholder="Введіть номерний знак" />
+              <input className="form-control col-md-5 col-sm-12 my-2"
+                type="text"
+                onChange={e => this.onNameInput(e.target.value)}
+                placeholder="Ваше ім’я" />
+              <input className="form-control col-md-5 col-sm-12 my-2"
+                type="text"
+                onChange={e => this.onPhoneInput(e.target.value)}
+                placeholder="Ваш телефон" />
               <div className="col-12 d-flex justify-content-center">
                 <button className="btn check-car-btn px-4 mt-3"
-                  onClick={this.goToResultPage} >
+                  onClick={this.sendUserData} >
                   Замовити перевірку
                   <img src={ArrowRight} alt="arrow" />
                 </button>
@@ -116,7 +176,9 @@ export default class IntroPage extends Component {
                   <span className="price font-weight-bold">399 грн</span>
                 </div>
               </div>
-              <button className="btn check-car-btn px-4">Дізнатися більше
+              <button className="btn check-car-btn px-4"
+                onClick={this.requestConsultation} >
+                Дізнатися більше
             <img src={ArrowRight} alt="arrow" />
               </button>
             </div>
@@ -141,7 +203,9 @@ export default class IntroPage extends Component {
                   <span className="price font-weight-bold">999 грн</span>
                 </div>
               </div>
-              <button className="btn check-car-btn px-4">Дізнатися більше
+              <button className="btn check-car-btn px-4"
+                onClick={this.requestConsultation}>
+                Дізнатися більше
             <img src={ArrowRight} alt="arrow" />
               </button>
             </div>
@@ -166,7 +230,9 @@ export default class IntroPage extends Component {
                   <span className="price font-weight-bold">1399 грн</span>
                 </div>
               </div>
-              <button className="btn check-car-btn px-4">Дізнатися більше
+              <button className="btn check-car-btn px-4"
+                onClick={this.requestConsultation}>
+                Дізнатися більше
             <img src={ArrowRight} alt="arrow" />
               </button>
             </div>
@@ -182,7 +248,9 @@ export default class IntroPage extends Component {
             <h2 className="h1 font-weight-bolder">Немає часу на пошук авто?</h2>
             <p className="h5">Довір це нам — підберем його від і до</p>
 
-            <button className="btn px-4 mt-3">Замовити консультацію
+            <button className="btn px-4 mt-3"
+              onClick={this.requestConsultation}>
+              Замовити консультацію
             <img src={ArrowRight} alt="arrow" />
             </button>
           </div>

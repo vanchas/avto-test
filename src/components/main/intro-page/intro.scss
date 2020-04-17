@@ -2,6 +2,13 @@
 	display: grid;
 	justify-content: center;
 
+	.search-icon {
+		position: absolute;
+		color: #b3b3b3;
+		top: .3em;
+		left: .4em;
+	}
+
 	header {
 		width: 100vw;
 		background: url("../../header/image/head-bg.png") center center / cover

@@ -5,12 +5,22 @@ import { Link } from 'react-router-dom'
 import Logo from './image/footer-logo.png'
 
 export default class Footer extends Component {
+  constructor(props) {
+    super(props);
+    this.requestConsultation = this.requestConsultation.bind(this);
+  }
+
+  requestConsultation() {
+    // req
+  }
+
   render() {
     return (
       <footer className={`${s.footer} py-2`}>
         <div className={`${s.footer_content} container`}>
           <div className={`${s.btn_block}`}>
-            <button className={`${s.btn} btn px-4`}>
+            <button className={`${s.btn} btn px-4`}
+              onClick={this.requestConsultation} >
               Дізнатися більше
               <img src={ArrowRight} alt="arrow" />
             </button>

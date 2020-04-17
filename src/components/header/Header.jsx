@@ -24,6 +24,14 @@ export default class Header extends Component {
     history.push('/login');
   }
 
+  requestCall() {
+    // req
+  }
+
+  onNavItemClick(item) {
+    // this.props.scrollToElement(item);
+  }
+
   render() {
     return (
       <header className="header">
@@ -39,16 +47,16 @@ export default class Header extends Component {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto w-100 d-flex justify-content-around align-content-center px-3">
               <li className="nav-item">
-                <Link className="nav-link text-white h5 font-weight-light mb-0"
-                  to="/avto-test" >VIN код</Link>
+                <button className="btn nav-link text-white h5 font-weight-light mb-0"
+                  onClick={this.onNavItemClick('vin')} >VIN код</button>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-white h5 font-weight-light mb-0"
-                  to="/avto-test" >Огляд авто</Link>
+                <button className="btn nav-link text-white h5 font-weight-light mb-0"
+                  onClick={this.onNavItemClick('overview')} >Огляд авто</button>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-white h5 font-weight-light mb-0"
-                  to="/avto-test" >Авто «під ключ»</Link>
+                <button className="btn nav-link text-white h5 font-weight-light mb-0"
+                  onClick={this.onNavItemClick('full selection')} >Авто «під ключ»</button>
               </li>
               <li className="nav-item">
                 <button className="btn nav-link text-white h5 font-weight-light mb-0"
@@ -71,7 +79,8 @@ export default class Header extends Component {
             <a href="tel:+380964702700" className="text-white number">
               <img src={Phone} alt="phone" className="mr-2 mb-1" />
               +38096 470 27 00</a>
-            <button className="order-call-btn bg-transparent py-1 px-3">Замовити дзвінок</button>
+            <button className="order-call-btn bg-transparent py-1 px-3"
+              onClick={this.requestCall} >Замовити дзвінок</button>
           </div>
         </nav>
       </header>
