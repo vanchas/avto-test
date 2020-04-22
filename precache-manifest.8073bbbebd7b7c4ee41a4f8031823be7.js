@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bc6a0a3d708ee8c975f0f481c1654e59",
+    "revision": "059db2c21a75d084bd95fb2ee0e28189",
     "url": "/avto-test/index.html"
   },
   {
-    "revision": "620b59e7ce62220a25a1",
+    "revision": "1a09a4c6fc41984beb92",
     "url": "/avto-test/static/css/2.de424728.chunk.css"
   },
   {
-    "revision": "aa81efa3e2a0f3d7ab4f",
-    "url": "/avto-test/static/css/main.528ef365.chunk.css"
+    "revision": "ec78c20ec548c2b2eb1f",
+    "url": "/avto-test/static/css/main.9b2bde85.chunk.css"
   },
   {
-    "revision": "620b59e7ce62220a25a1",
-    "url": "/avto-test/static/js/2.1721d88f.chunk.js"
+    "revision": "1a09a4c6fc41984beb92",
+    "url": "/avto-test/static/js/2.26577066.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/avto-test/static/js/2.1721d88f.chunk.js.LICENSE.txt"
+    "url": "/avto-test/static/js/2.26577066.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "aa81efa3e2a0f3d7ab4f",
-    "url": "/avto-test/static/js/main.5604064e.chunk.js"
+    "revision": "ec78c20ec548c2b2eb1f",
+    "url": "/avto-test/static/js/main.8a7e4955.chunk.js"
   },
   {
     "revision": "c0fbb1f5e4121a97be4f",
