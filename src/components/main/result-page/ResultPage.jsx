@@ -34,11 +34,11 @@ export default class ResultPage extends Component {
   }
 
   render() {
-    const car = this.state.carInfo;
+    const car = this.props.carInfo;
 
     return (
       <div className="result-page">
-        {(this.state.carInfo.brand) ?
+        {(this.props.carInfo.brand) ?
           <section className="py-5 what-we-found container">
             <div className="pb-4 text-center d-lg-flex justify-content-center">
               <div className="h2 font-weight-bold mr-lg-3 mr-md-0">Вот что мы нашли по VIN:</div>
@@ -206,14 +206,14 @@ export default class ResultPage extends Component {
           <h3 className="h2 font-weight-bold mb-3 px-2">Приобретите подробный отчет и узнайте всю правду</h3>
           <p className="font-weight-bold mb-4">
             <span>
-              {(!this.state.carInfo.brand) ?
+              {(!this.props.carInfo.brand) ?
                 <span className="spinner-border text-success" role="status">
                   <span className="sr-only">Loading...</span>
                 </span> :
                 `${car.brand} ${car.model} ${car.year}:`}
             </span>
             <span className="text-success pl-2">
-              {(!this.state.carInfo.brand) ?
+              {(!this.props.carInfo.brand) ?
                 <span></span> :
                 `${car.vin}`}
             </span>
