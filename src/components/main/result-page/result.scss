@@ -1,6 +1,11 @@
 .result-page {
 	max-width: 1300px;
   margin: 0 auto;
+
+  .spinner-border {
+    margin: 10% auto;
+    display: block;
+  }
   
   .card-holder {
     .car-card {

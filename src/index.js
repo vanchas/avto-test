@@ -23,8 +23,9 @@ if (root.hasChildNodes()) {
 
       <BrowserRouter>
         <App />
-      </BrowserRouter>
-    </React.StrictMode>, root );
+      </BrowserRouter>,
+    </React.StrictMode>,
+     root );
 } else {
   ReactDOM.render(
     <React.StrictMode>

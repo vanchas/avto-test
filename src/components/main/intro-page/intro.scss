@@ -4,15 +4,13 @@
 
 	.search-icon {
 		position: absolute;
-		color: #b3b3b3;
-		top: .3em;
-		left: .4em;
+		width: 2.5em;
+		left: .3em;
 	}
 
 	header {
 		width: 100vw;
-		background: url("../../header/image/head-bg.png") center center / cover
-			no-repeat;
+		background: url("../../header/image/head-bg.png") center center / cover no-repeat;
 		.header-content {
 			max-width: 1300px;
 			margin: 0 auto;
@@ -28,7 +26,8 @@
 	}
 }
 .vin-input-block {
-	display: flex;
+	display: grid;
+	grid-template-columns: 2fr 1fr;
 	height: 2.4em;
 	overflow: hidden;
 	border-radius: 2em;
@@ -36,7 +35,6 @@
 		background-color: #df4d5a;
 		color: #fff;
 		display: flex;
-		flex-basis: 35%;
 		align-items: center;
 		align-content: center;
 		justify-content: space-around;
@@ -101,6 +99,7 @@
 
 	.vin-input-block {
 		display: grid;
+		grid-template-columns: 1fr;
 		grid-gap: 1.5em;
 		height: auto;
 		border-radius: 0;

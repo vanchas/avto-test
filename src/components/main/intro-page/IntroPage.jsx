@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './intro.scss'
-import SearchIcon from '@material-ui/icons/Search'
+// import SearchIcon from '@material-ui/icons/Search'
+import SearchIcon from './image/search-icon.png'
 import ArrowRight from './image/arrow-right.png'
 import DebitCard from './image/debit-card.png'
 import Dot from './image/dot.png'
@@ -20,53 +21,63 @@ export default class IntroPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      vin: '',
-      link: '',
-      number: '',
-      name: '',
-      phone: ''
+      value: '',
+      // link: '',
+      // number: '',
+      // name: '',
+      // phone: '',
+      carInfo: {}
     };
-    this.onVinInput = this.onVinInput.bind(this);
+    this.onValueInput = this.onValueInput.bind(this);
     this.sendVin = this.sendVin.bind(this);
-    this.onNumberInput = this.onNumberInput.bind(this);
-    this.onNameInput = this.onNameInput.bind(this);
-    this.onPhoneInput = this.onPhoneInput.bind(this);
-    this.onLinkInput = this.onLinkInput.bind(this);
-    this.requestConsultation = this.requestConsultation.bind(this);
-    this.sendUserData = this.sendUserData.bind(this);
+    // this.onNumberInput = this.onNumberInput.bind(this);
+    // this.onNameInput = this.onNameInput.bind(this);
+    // this.onPhoneInput = this.onPhoneInput.bind(this);
+    // this.onLinkInput = this.onLinkInput.bind(this);
+    // this.requestConsultation = this.requestConsultation.bind(this);
   }
 
-  onVinInput(vin) {
-    this.setState({ vin });
+  onValueInput(value) {
+    this.setState({ value });
   }
-  onLinkInput(link) {
-    this.setState({ link });
-  }
-  onNumberInput(number) {
-    this.setState({ number });
-  }
-  onNameInput(name) {
-    this.setState({ name });
-  }
-  onPhoneInput(phone) {
-    this.setState({ phone });
-  }
+  // onLinkInput(link) {
+  //   this.setState({ link });
+  // }
+  // onNumberInput(number) {
+  //   this.setState({ number });
+  // }
+  // onNameInput(name) {
+  //   this.setState({ name });
+  // }
+  // onPhoneInput(phone) {
+  //   this.setState({ phone });
+  // }
 
   sendVin() {
-    // req
-    history.push('/result');
+    fetch('https://rocky-castle-91317.herokuapp.com/api/search', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify({
+        search_filed: this.state.vin
+      })
+    }).then((res) => {
+      this.setState({ value: '' });
+      const result = res.json();
+      console.log('form intro page:', result);
+      // this.setState({ carInfo: result });
+      this.props.setCarInfo(result);
+    }).then(() => {
+      history.push('/result')
+    });
   }
-  sendUserData() {
-    // req
-    history.push('/result');
-  }
-  requestConsultation() {
-    // req
-  }
+
+  // requestConsultation() {
+  // req
+  // }
 
   render() {
-    // console.log(this.props);
-
     return (
       <div className="intro-page container-fluid overflow-hidden">
         <header className="text-center text-white py-2">
@@ -75,17 +86,17 @@ export default class IntroPage extends Component {
             <h2 className="h4 font-weight-light">Перевірка авто по vin коду — це перший крок при купівлі</h2>
             <div className="vin-input-block-wrapper">
               <div className="vin-input-block my-5">
-                <SearchIcon className="search-icon" />
+                <img src={SearchIcon} className="search-icon" alt="" />
                 <input type="text"
+                  value={this.state.value}
                   placeholder=" Уведіть VIN код" className="form-control pl-5"
-                  onChange={e => this.onVinInput(e.target.value)}
+                  onChange={e => this.onValueInput(e.target.value)}
                 />
-                <button className="btn check-car-btn"
-                  onClick={this.sendVin}
-                >
-                  Перевірити авто
-                  <img src={ArrowRight} alt="arrow" />
-                </button>
+                <div>
+                  <input type="submit" className="btn check-car-btn w-100"
+                    value="Перевірити авто &#x2192;"
+                    onClick={this.sendVin} />
+                </div>
               </div>
               <small>* Перевірка vin коду відбуватиметься на сайті партнера</small>
             </div>
@@ -119,7 +130,7 @@ export default class IntroPage extends Component {
             </div>
           </div>
         </header>
-{/* 
+        {/* 
         <section className="order-form-section font-weight-bolder">
           <h3 className="h2 font-weight-bolder">Не знаешь VIN код? <img src={RedArrow} alt="arrow" /></h3>
           <div className="order-form container">
