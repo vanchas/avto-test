@@ -1,9 +1,13 @@
-export const authHeader = () => {
-    // return authorization header with basic auth credentials
-    let user = JSON.parse(localStorage.getItem('user'));
+// import { history } from "./history";
 
-    if (user && user.authdata) {
-        return { 'Authorization': 'Basic ' + user.authdata };
+export const authHeader = () => {
+
+    let user = JSON.parse(localStorage.getItem('avto-test-user'));
+
+    if (user && user.email) {
+        // console.log('Authorization:' + user);
+
+        return { 'Authorization': user };
     } else {
         return {};
     }

@@ -15,26 +15,27 @@ export default class Footer extends Component {
   }
 
   render() {
+    const text = this.props.langData;
+
     return (
       <footer className={`${s.footer} py-2`}>
         <div className={`${s.footer_content} container`}>
           <div className={`${s.btn_block}`}>
             <button className={`${s.btn} btn px-4`}
               onClick={this.requestConsultation} >
-              Дізнатися більше
+              {text.footer_btn}
               <img src={ArrowRight} alt="arrow" />
             </button>
           </div>
-
           <div className={`${s.info_block}`}>
-            <div>Пошук по VIN коду</div>
-            <div>VIN код</div>
-            <div>Огляд авто</div>
-            <div>Авто «під ключ»</div>
+            <div>{text.footer_list_item_1}</div>
+            <div>{text.footer_list_item_2}</div>
+            <div>{text.footer_list_item_3}</div>
+            <div>{text.footer_list_item_4}</div>
           </div>
 
           <div className={`${s.text_block}`}>
-            <p><b>Avto</b>Test — сервіс для перевірки VIN коду, заощаджуючи ваші кошти. Будь-яка додаткова інформація може допомогти Вам вибрати правильний автомобіль або домовитися про більш вигідною ціною. </p>
+            <p><b>Avto</b>Test {text.footer_text} </p>
           </div>
 
           <div className={s.logo_block}>
@@ -46,7 +47,7 @@ export default class Footer extends Component {
 
           <div className={`${s.foot_block}`}>
             <a href="tel:+380964702700" className={`text-dark font-weight-bolder`}>+38096 470 27 00</a>
-            <p>© 2020 <b>Avto</b>Test. Політика конфединціальності. Всі права захищені.</p>
+            <p>© 2020 <b>Avto</b>Test. {text.company_information}</p>
           </div>
         </div>
       </footer>

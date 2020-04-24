@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 import './result.scss'
-import NumberImg from './image/1_number.png'
-import CarImg from './image/2_car.png'
-import CarSearchImg from './image/3_car.png'
-import PetrolImg from './image/4_petrol.png'
-import KgImg from './image/5_kg.png'
-import ReportImg from './image/6_report.png'
-import PlaceImg from './image/7_place.png'
-import WheelImg from './image/8_wheel.png'
-import MegaphoneImg from './image/9_megaphone.png'
-import MotorImg from './image/10_motor.png'
-import CoinsImg from './image/11_coins.png'
-import WalletImg from './image/12_wallet.png'
-import GlobeImg from './image/13_globe.png'
-import CustomsImg from './image/14_customs.png'
-import CheckImg from './image/15_check.png'
+import NumberImg from './image/number_g.png'
+import CarImg from './image/car_g.png'
+import CarSearchImg from './image/car-search_g.png'
+import PetrolImg from './image/petrol_g.png'
+import KgImg from './image/kg_g.png'
+import ReportImg from './image/report_g.png'
+import PlaceImg from './image/place_g.png'
+import WheelImg from './image/wheel_g.png'
+import MegaphoneImg from './image/rupport_g.png'
+import MotorImg from './image/motor_g.png'
+import CoinsImg from './image/cash_g.png'
+import WalletImg from './image/wallet_g.png'
+import GlobeImg from './image/globe_g.png'
+import CustomsImg from './image/customs_g.png'
+import CheckImg from './image/car-check_g.png'
 // import QuestionSign from './image/question.png'
 import GreenArrow from './image/green-arrow.png'
 import CvLogo from './image/cv-logo.png'
@@ -34,6 +34,7 @@ export default class ResultPage extends Component {
   }
 
   render() {
+    const text = this.props.langData;
     const car = this.props.carInfo;
 
     return (
@@ -41,15 +42,20 @@ export default class ResultPage extends Component {
         {(this.props.carInfo.brand) ?
           <section className="py-5 what-we-found container">
             <div className="pb-4 text-center d-lg-flex justify-content-center">
-              <div className="h2 font-weight-bold mr-lg-3 mr-md-0">Вот что мы нашли по VIN:</div>
+              <div className="h2 font-weight-bold mr-lg-3 mr-md-0">{text.result_page_header} : {' '}</div>
               <div className="h2 font-weight-bold text-success">{car.vin}</div>
             </div>
-            <div className="what-we-found-description d-lg-flex justify-content-between px-lg-5 pt-lg-5 row font-weight-bold container m-0">
+            <div className="what-we-found-description d-lg-flex justify-content-between px-lg-5 pt-lg-5 row container m-0">
               <div className="col-lg-6 col-md-12 pt-lg-0 pt-md-5">
                 <div className="row py-2 green-border">
-                  <div className="col-2 text-danger font-weight-bold">
-                    <span className="float-left font-weight-bold"
-                      style={{ letterSpacing: '3px' }}
+                  <div className="col-2">
+                    <span className="float-left"
+                      id="vin"
+                      style={{
+                        letterSpacing: '3px',
+                        color: '#68bc9d',
+                        fontWeight: 900
+                      }}
                     >VIN</span>
                   </div>
                   <div className="col-10 btn p-0 pl-2">
@@ -89,12 +95,12 @@ export default class ResultPage extends Component {
                     <img width={30} src={KgImg} alt="" /></div>
                   <div className="col-10 btn p-0 pl-2">
                     <span className="float-left font-weight-bold"
-                      title="total weight">
+                      title="общий вес">
                       {car.total_weight} кг
                     <span className="mx-2">|</span>
                     </span>
                     <span className="float-left font-weight-bold"
-                      title="own weight">
+                      title="собственный вес">
                       {car.own_weight} кг</span>
                   </div>
                 </div>
@@ -135,12 +141,11 @@ export default class ResultPage extends Component {
                     <img width={28} src={MegaphoneImg} alt="" /></div>
                   <div className="col-10 pl-0">
                     <span className="btn p-0 pl-2 font-weight-bold text-dark"
-                      title="count week" >
+                      title="количество в неделю" >
                       {car.count_week}</span>
                     <span className="btn p-0 pl-2 font-weight-bold text-dark"
-                      title="count day" >
+                      title="количество в день" >
                       {car.count_day}</span>
-                    {/* <span className="btn p-0 pl-2 font-weight-bold text-dark">25</span> */}
                   </div>
                 </div>
                 <div className="row py-2 green-border">
@@ -183,7 +188,11 @@ export default class ResultPage extends Component {
                   <div className="col-2">
                     <img width={30} src={CheckImg} alt="" /></div>
                   <div className="col-10 btn p-0 pl-2">
-                    <span className="float-left font-weight-bold">{car.insurance}</span>
+                    <a href={car.insurance}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="float-left font-weight-bold text-dark">
+                      {car.insurance}</a>
                   </div>
                 </div>
               </div>
@@ -198,18 +207,18 @@ export default class ResultPage extends Component {
             </div>
           </section>
           :
-          <div className="spinner-border text-danger" role="status">
-            <span className="sr-only">Loading...</span>
+          <div className="py-5 px-3 text-center">
+            <div className="d-inline-block alert alert-danger" role="alert">
+              {text.error_message}
+            </div>
           </div>}
 
         <section className="text-center pb-5 pt-2">
-          <h3 className="h2 font-weight-bold mb-3 px-2">Приобретите подробный отчет и узнайте всю правду</h3>
+          <h3 className="h2 font-weight-bold mb-3 px-2">{text.result_page_cards_block_header}</h3>
           <p className="font-weight-bold mb-4">
             <span>
               {(!this.props.carInfo.brand) ?
-                <span className="spinner-border text-success" role="status">
-                  <span className="sr-only">Loading...</span>
-                </span> :
+                null :
                 `${car.brand} ${car.model} ${car.year}:`}
             </span>
             <span className="text-success pl-2">
@@ -224,20 +233,19 @@ export default class ResultPage extends Component {
             <div className="col-md-4 col-sm-12 px-2">
               <div className="card car-card mb-4 p-3" >
                 <div className="">
-                  <p className="card-heading px-1 card-text h4 font-weight-bold">Полная проверка авто
-              по VIN номеру из Европы и США</p>
+                  <p className="card-heading px-1 card-text h4 font-weight-bold">{text.result_page_card_1_header}</p>
                   <div className="">
-                    <img className="card-img-top w-50 m-auto" src={CvLogo} alt="Card image cap" />
+                    <img className="card-img-top w-50 m-auto" src={CvLogo} alt="Card cap" />
                     <h5 className="card-title font-weight-bold">carVertical</h5>
                   </div>
                 </div>
                 <div className="card-body">
                   <div className="text-danger h2 font-weight-bold">
-                    249 грн</div>
-                  <a href="#" className="text-dark small font-weight-bold">Как выглядит отчет?</a>
+                    249 {text.price_block_card_currency}</div>
+                  <a href="#" className="text-dark small font-weight-bold">{text.price_block_card_report_link}</a>
                   <div>
-                    <button className="btn btn-danger px-5">
-                      Купить</button>
+                    <button className="mt-1 btn btn-danger px-5">
+                      {text.price_block_card_btn_buy}</button>
                   </div>
                 </div>
               </div>
@@ -245,19 +253,19 @@ export default class ResultPage extends Component {
             <div className="col-md-4 col-sm-12 px-2">
               <div className="card car-card mb-4 p-3" >
                 <div className="">
-                  <p className="card-heading px-1 card-text h4 font-weight-bold">CarFax проверка авто из Америки по вин коду</p>
+                  <p className="card-heading px-1 card-text h4 font-weight-bold">{text.result_page_card_2_header}</p>
                   <div className="">
-                    <img style={{ width: '45%' }} className=" card-img-top mx-auto" src={CarfaxLogo} alt="Card image cap" />
+                    <img style={{ width: '45%' }} className=" card-img-top mx-auto" src={CarfaxLogo} alt="Card cap" />
                     <h5 className="card-title mt-1 font-weight-bold">carFax</h5>
                   </div>
                 </div>
                 <div className="card-body pt-1">
                   <div className="text-danger h2 font-weight-bold">
-                    49 грн</div>
-                  <a href="#" className="text-dark small font-weight-bold">Как выглядит отчет?</a>
+                    49 {text.price_block_card_currency}</div>
+                  <a href="#" className="text-dark small font-weight-bold">{text.price_block_card_report_link}</a>
                   <div>
-                    <button className="btn btn-danger px-5">
-                      Купить</button>
+                    <button className="mt-1 btn btn-danger px-5">
+                      {text.price_block_card_btn_buy}</button>
                   </div>
                 </div>
               </div>
@@ -265,19 +273,19 @@ export default class ResultPage extends Component {
             <div className="col-md-4 col-sm-12 px-2">
               <div className="card car-card mb-4 p-3" >
                 <div className="">
-                  <p className="card-heading px-1 card-text h4 font-weight-bold">Выписка из базы МВД Украины</p>
+                  <p className="card-heading px-1 card-text h4 font-weight-bold d-flex justify-content-center align-items-center text-center">{text.result_page_card_3_header}</p>
                   <div className="">
-                    <img style={{ width: '45%' }} className=" card-img-top mx-auto" src={UaLogo} alt="Card image cap" />
-                    <h5 className="card-title mt-1 font-weight-bold">База МВД</h5>
+                    <img style={{ width: '45%' }} className=" card-img-top mx-auto" src={UaLogo} alt="Card cap" />
+                    <h5 className="card-title mt-1 font-weight-bold">{text.price_block_card_3_base}</h5>
                   </div>
                 </div>
                 <div className="card-body pt-1">
                   <div className="text-danger h2 font-weight-bold">
-                    49 грн</div>
-                  <a href="#" className="text-dark small font-weight-bold">Как выглядит отчет?</a>
+                    49 {text.price_block_card_currency}</div>
+                  <a href="#" className="text-dark small font-weight-bold">{text.price_block_card_report_link}</a>
                   <div>
-                    <button className="btn btn-danger px-5">
-                      Купить</button>
+                    <button className="mt-1 btn btn-danger px-5">
+                      {text.price_block_card_btn_buy}</button>
                   </div>
                 </div>
               </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import './intro.scss'
 // import SearchIcon from '@material-ui/icons/Search'
 import SearchIcon from './image/search-icon.png'
@@ -9,96 +10,115 @@ import Hand from './image/hand.png'
 import Report from './image/report.png'
 import Search from './image/search.png'
 import Square from './image/square.png'
-import RedArrow from './image/red-arrow-down.png'
+// import RedArrow from './image/red-arrow-down.png'
 import Tools from './image/tools.png'
 import Tablet from './image/tablet.png'
 import Hands from './image/hands.png'
 import CheckSign from './image/check-sign.png'
 import Woman from './image/woman.png'
-import { history } from '../../../_helpers/history'
+
 
 export default class IntroPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       value: '',
-      // link: '',
-      // number: '',
-      // name: '',
-      // phone: '',
-      carInfo: {}
+      carInfo: {},
+      loading: false
     };
     this.onValueInput = this.onValueInput.bind(this);
-    this.sendVin = this.sendVin.bind(this);
-    // this.onNumberInput = this.onNumberInput.bind(this);
-    // this.onNameInput = this.onNameInput.bind(this);
-    // this.onPhoneInput = this.onPhoneInput.bind(this);
-    // this.onLinkInput = this.onLinkInput.bind(this);
-    // this.requestConsultation = this.requestConsultation.bind(this);
+    this.sendValue = this.sendValue.bind(this);
+    this.Vin = React.createRef();
+    this.Overview = React.createRef();
+    this.FullSelection = React.createRef();
+    this.scrollToElement = this.scrollToElement.bind(this);
   }
 
-  onValueInput(value) {
-    this.setState({ value });
+  componentWillReceiveProps() {
+    if (this.props.scrollValue.length) {
+      this.scrollToElement(this.props.scrollValue);
+    }
   }
-  // onLinkInput(link) {
-  //   this.setState({ link });
-  // }
-  // onNumberInput(number) {
-  //   this.setState({ number });
-  // }
-  // onNameInput(name) {
-  //   this.setState({ name });
-  // }
-  // onPhoneInput(phone) {
-  //   this.setState({ phone });
-  // }
 
-  sendVin() {
-    fetch('https://rocky-castle-91317.herokuapp.com/api/search', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify({
-        search_filed: this.state.vin
-      })
-    }).then((res) => {
-      this.setState({ value: '' });
-      const result = res.json();
-      console.log('form intro page:', result);
-      // this.setState({ carInfo: result });
-      this.props.setCarInfo(result);
-    }).then(() => {
-      history.push('/result')
+  scrollToElement(ref) {
+    let elementClick;
+    if (ref === 'vin') {
+      elementClick = this.Vin;
+    } else if (ref === 'overview') {
+      elementClick = this.Overview;
+    } else if (ref === 'full selection') {
+      elementClick = this.FullSelection;
+    }
+    let destination = ReactDOM.findDOMNode(elementClick.current).getBoundingClientRect().top;
+    window.scroll({
+      top: destination,
+      behavior: 'smooth'
     });
+    return false;
   }
 
-  // requestConsultation() {
-  // req
-  // }
+  onValueInput(e) {
+    e.preventDefault();
+    this.setState({ value: e.target.value });
+  }
+
+  sendValue() {
+    if (this.state.value.toString().trim().length) {
+      this.setState({ loading: true });
+      fetch('https://strateg.link/public/api/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+          search_filed: this.state.value
+        })
+      }).then((res) => {
+        this.setState({ value: '' });
+        const result = res.json();
+        this.props.setCarInfo(result);
+      }).catch(error => {
+        console.error(error);
+      });
+    } else {
+      alert('Полe должно быть корректно заполнено')
+    }
+  }
 
   render() {
+    let text = this.props.langData;
+
     return (
       <div className="intro-page container-fluid overflow-hidden">
-        <header className="text-center text-white py-2">
+        <header ref={this.Vin} className="text-center text-white py-2">
           <div className="header-content">
-            <h1 className="mt-5 font-weight-bolder">З чого почати пошук б/у авто?</h1>
-            <h2 className="h4 font-weight-light">Перевірка авто по vin коду — це перший крок при купівлі</h2>
+            <h1 className="mt-5 font-weight-bolder">{text.intro_header}</h1>
+            <h2 className="h4 font-weight-light">{text.intro_subheader}</h2>
             <div className="vin-input-block-wrapper">
-              <div className="vin-input-block my-5">
+              <form action="#" className="vin-input-block my-5">
                 <img src={SearchIcon} className="search-icon" alt="" />
                 <input type="text"
                   value={this.state.value}
-                  placeholder=" Уведіть VIN код" className="form-control pl-5"
-                  onChange={e => this.onValueInput(e.target.value)}
+                  placeholder={text.intro_header__input_placeholder} className="form-control pl-5"
+                  onChange={e => this.onValueInput(e)}
                 />
                 <div>
-                  <input type="submit" className="btn check-car-btn w-100"
-                    value="Перевірити авто &#x2192;"
-                    onClick={this.sendVin} />
+                  {
+                    !this.state.loading ?
+                      <div className="btn check-car-btn w-100 d-flex justify-content-center align-items-center">
+                        <input type="submit" className="pr-3"
+                          value={text.intro_header_btn_check}
+                          onClick={this.sendValue} />
+                        <img src={ArrowRight} alt="" />
+                      </div>
+                      :
+                      <div className="spinner-border text-danger" role="status">
+                        <span className="sr-only">Loading...</span>
+                      </div>
+                  }
                 </div>
-              </div>
-              <small>* Перевірка vin коду відбуватиметься на сайті партнера</small>
+              </form>
+              <small>* {text.intro_header__input_substring}</small>
             </div>
             <div className="instruction">
               <div className="line"></div>
@@ -110,22 +130,22 @@ export default class IntroPage extends Component {
                 </div>
                 <img src={Hand} alt="hand" />
                 <img src={Square} alt="" />
-                <span>Уведіть VIN код</span>
+                <span>{text.intro_header_desc_item_1}</span>
               </div>
               <div className="instruction-item">
                 <img src={Search} alt="search" />
                 <img src={Square} alt="" />
-                <span>Пошук данних</span>
+                <span>{text.intro_header_desc_item_2}</span>
               </div>
               <div className="instruction-item">
                 <img src={DebitCard} alt="card" />
                 <img src={Square} alt="" />
-                <span>Сплати</span>
+                <span>{text.intro_header_desc_item_3}</span>
               </div>
               <div className="instruction-item">
                 <img src={Report} alt="report" />
                 <img src={Square} alt="" />
-                <span>Отримай звіт</span>
+                <span>{text.intro_header_desc_item_4}</span>
               </div>
             </div>
           </div>
@@ -163,106 +183,106 @@ export default class IntroPage extends Component {
           </div>
         </section> */}
 
-        <section className="price-block text-center container-fluid pt-2 pb-5 bg-light font-weight-bolder">
-          <h2 className="h1 font-weight-bolder">Знайшов достойне авто?</h2>
-          <h4>Переконайся, що це дійсно так! Лише огляд на місці покаже реальний стан авто!</h4>
+        <section ref={this.Overview} className="price-block text-center container-fluid pt-2 pb-5 bg-light font-weight-bolder">
+          <h2 className="h1 font-weight-bolder">{text.price_block_header}</h2>
+          <h4>{text.price_block_subheader}</h4>
           <div className="prices-cards row d-md-flex justify-content-around justify-items-center">
             <div className="price-card col-lg-4 col-md-12">
               <div className="price-description py-4 mx-1 row ">
-                <h5 className="text-center w-100">Попередня перевірка</h5>
+                <h5 className="text-center w-100">{text.price_block_card_1_header}</h5>
                 <span className="col-12">
                   <img className="mr-1" src={CheckSign} alt="" />
-                  пошук історії
+                  {text.price_block_card_1_string_1}
                 </span>
                 <span className="col-12">
                   <img className="mr-1" src={CheckSign} alt="" />
-                  юридична перевірка
+                  {text.price_block_card_1_string_2}
                 </span>
                 <span className="col-12">
                   <img className="mr-1" src={CheckSign} alt="" />
-                  оцінка доцільності
+                  {text.price_block_card_1_string_3}
                 </span>
                 <div className="image-container w-100">
                   <img className="card-image" src={Tablet} alt="" />
-                  <span className="price font-weight-bold">399 грн</span>
+                  <span className="price font-weight-bold">399 {text.price_block_card_currency}</span>
                 </div>
               </div>
               <button className="btn check-car-btn px-4"
                 onClick={this.requestConsultation} >
-                Дізнатися більше
-            <img src={ArrowRight} alt="arrow" />
+                {text.price_block_card_btn}
+                <img src={ArrowRight} alt="arrow" />
               </button>
             </div>
 
             <div className="price-card col-lg-4 col-md-12">
               <div className="price-description  mx-1 py-4 row">
-                <h5 className="text-center w-100">Виїздна перевірка</h5>
+                <h5 className="text-center w-100">{text.price_block_card_2_header}</h5>
                 <span className="col-12">
-                  <img className="mr-1" src={CheckSign} alt="" />
-                  перевірка кузова
+                  <img className="mr-1" src={CheckSign} alt="." />
+                  {text.price_block_card_2_string_1}
                 </span>
                 <span className="col-12">
-                  <img className="mr-1" src={CheckSign} alt="" />
-                  комп’ютерна діагностика
+                  <img className="mr-1" src={CheckSign} alt="." />
+                  {text.price_block_card_2_string_2}
                 </span>
                 <span className="col-12">
-                  <img className="mr-1" src={CheckSign} alt="" />
-                  пошук прихованих дефектів
+                  <img className="mr-1" src={CheckSign} alt="." />
+                  {text.price_block_card_2_string_3}
                 </span>
                 <div className="image-container w-100">
-                  <img className="card-image" src={Hands} alt="" />
-                  <span className="price font-weight-bold">999 грн</span>
+                  <img className="card-image" src={Hands} alt="." />
+                  <span className="price font-weight-bold">999 {text.price_block_card_currency}</span>
                 </div>
               </div>
               <button className="btn check-car-btn px-4"
                 onClick={this.requestConsultation}>
-                Дізнатися більше
-            <img src={ArrowRight} alt="arrow" />
+                {text.price_block_card_btn}
+                <img src={ArrowRight} alt="." />
               </button>
             </div>
 
             <div className="price-card col-lg-4 col-md-12">
               <div className="price-description  mx-1 py-4 row">
-                <h5 className="text-center w-100">Перевірка на сто</h5>
+                <h5 className="text-center w-100">{text.price_block_card_3_header}</h5>
                 <span className="col-12">
-                  <img className="mr-1" src={CheckSign} alt="" />
-                  перевірка кузова
+                  <img className="mr-1" src={CheckSign} alt="." />
+                  {text.price_block_card_3_string_1}
                 </span>
                 <span className="col-12">
-                  <img className="mr-1" src={CheckSign} alt="" />
-                  перевірка ходової та агрегатів
+                  <img className="mr-1" src={CheckSign} alt="." />
+                  {text.price_block_card_3_string_2}
                 </span>
                 <span className="col-12">
-                  <img className="mr-1" src={CheckSign} alt="" />
-                  комп’ютерна діагностика
+                  <img className="mr-1" src={CheckSign} alt="." />
+                  {text.price_block_card_3_string_3}
                 </span>
                 <div className="image-container w-100">
-                  <img className="card-image" src={Tools} alt="" />
-                  <span className="price font-weight-bold">1399 грн</span>
+                  <img className="card-image" src={Tools} alt="." />
+                  <span className="price font-weight-bold">1399 {text.price_block_card_currency}</span>
                 </div>
               </div>
               <button className="btn check-car-btn px-4"
                 onClick={this.requestConsultation}>
-                Дізнатися більше
-            <img src={ArrowRight} alt="arrow" />
+                {text.price_block_card_btn}
+                <img src={ArrowRight} alt="." />
               </button>
             </div>
           </div>
         </section>
 
-        <section className="consultation-block d-flex flex-md-row flex-sm-column row py-5 my-0 mx-0">
+        <section ref={this.FullSelection} className="consultation-block d-flex flex-md-row flex-sm-column row py-5 my-0 mx-0">
           <div className="col-md-6 col-sm-12 img-holder-block">
             <img src={Woman} alt="woman" className="w-100" />
           </div>
 
           <div className="col-md-6 col-sm-12 text-center d-flex flex-column justify-content-center font-weight-bolder">
-            <h2 className="h1 font-weight-bolder">Немає часу на пошук авто?</h2>
-            <p className="h5">Довір це нам — підберем його від і до</p>
+            <h2 className="h1 font-weight-bolder">{text.consultation_block_header}</h2>
+            <p className="h5">{text.consultation_block_subheader}</p>
 
             <button className="btn px-4 mt-3"
               onClick={this.requestConsultation}>
-              Замовити консультацію
-            <img src={ArrowRight} alt="arrow" />
+              {text.consultation_block_btn}
+              <img src={ArrowRight} alt="arrow" />
             </button>
           </div>
         </section>
