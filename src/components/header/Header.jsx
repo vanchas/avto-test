@@ -47,7 +47,7 @@ export default class Header extends Component {
   }
 
   render() {
-    const user = this.props.user;
+    // const user = this.props.user;
     const text = this.props.langData;
 
     return (

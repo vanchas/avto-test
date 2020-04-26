@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Link, Route } from 'react-router-dom'
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm';
-import { history } from '../../../_helpers/history';
 import { userService } from '../../../_services/user.service';
 
 export default class Login extends Component {

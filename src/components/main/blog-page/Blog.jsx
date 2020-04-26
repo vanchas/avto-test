@@ -108,7 +108,7 @@ export default class Blog extends Component {
         <h1 className="text-center py-5">Блог</h1>
 
         <div>
-          {user && user.is_admin == 1 ?
+          {user && user.is_admin === "1" ?
             <div>
               <div className="text-center container py-2">
                 <h6>добавить пост</h6>

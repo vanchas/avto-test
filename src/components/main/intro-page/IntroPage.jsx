@@ -33,7 +33,7 @@ export default class IntroPage extends Component {
     this.scrollToElement = this.scrollToElement.bind(this);
   }
 
-  componentWillReceiveProps() {
+  componentDidUpdate() {
     if (this.props.scrollValue.length) {
       this.scrollToElement(this.props.scrollValue);
     }

@@ -48,7 +48,7 @@ export class HomePage extends React.Component {
                         onClick={this.getUserDetails}>
                         User Details
                     </button>
-                    {user && user.is_admin == 1 ?
+                    {user && user.is_admin === '1' ?
                         <button
                             onClick={this.goToAdminPage}
                             className="btn btn-warning">

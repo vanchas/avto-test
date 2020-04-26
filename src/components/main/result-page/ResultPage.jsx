@@ -262,7 +262,7 @@ export default class ResultPage extends Component {
                 <div className="card-body">
                   <div className="text-danger h2 font-weight-bold">
                     249 {text.price_block_card_currency}</div>
-                  <a href="#" className="text-dark small font-weight-bold">{text.price_block_card_report_link}</a>
+                  <span className="btn text-dark small font-weight-bold">{text.price_block_card_report_link}</span>
                   <div>
                     <button className="mt-1 btn btn-danger px-5">
                       {text.price_block_card_btn_buy}</button>
@@ -282,7 +282,7 @@ export default class ResultPage extends Component {
                 <div className="card-body pt-1">
                   <div className="text-danger h2 font-weight-bold">
                     49 {text.price_block_card_currency}</div>
-                  <a href="#" className="text-dark small font-weight-bold">{text.price_block_card_report_link}</a>
+                  <span className="btn text-dark small font-weight-bold">{text.price_block_card_report_link}</span>
                   <div>
                     <button className="mt-1 btn btn-danger px-5">
                       {text.price_block_card_btn_buy}</button>
@@ -302,7 +302,7 @@ export default class ResultPage extends Component {
                 <div className="card-body pt-1">
                   <div className="text-danger h2 font-weight-bold">
                     49 {text.price_block_card_currency}</div>
-                  <a href="#" className="text-dark small font-weight-bold">{text.price_block_card_report_link}</a>
+                  <span className="btn text-dark small font-weight-bold">{text.price_block_card_report_link}</span>
                   <div>
                     <button className="mt-1 btn btn-danger px-5">
                       {text.price_block_card_btn_buy}</button>

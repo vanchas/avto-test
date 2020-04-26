@@ -3,10 +3,6 @@ import { Form, Button } from 'react-bootstrap'
 
 
 export default class LoginForm extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const text = this.props.langData;
 
