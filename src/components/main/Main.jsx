@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import IntroPage from './intro-page/IntroPage'
 import ResultPage from './result-page/ResultPage'
-
 import { Route, Switch } from 'react-router-dom';
 import { PrivateRoute } from '../../_services/PrivatRoute';
 import { HomePage } from '../main/home-page/HomePage';
-import { history } from '../../_helpers/history';
 import Header from '../header/Header';
 import Login from './login-page/Login';
 import Blog from './blog-page/Blog';
@@ -19,27 +17,20 @@ export default class Main extends Component {
       carInfo: {},
       scrollValue: ''
     };
-    this.setCarInfo = this.setCarInfo.bind(this);
     this.scrollFunc = this.scrollFunc.bind(this);
-  }
-
-  setCarInfo(result) {
-    result.then(data => {
-      this.setState({ carInfo: data });
-    })
-    history.push('/result');
   }
 
   scrollFunc(scrollValue) {
     new Promise(res => {
-      this.setState({ scrollValue })
+      this.setState({ scrollValue });
       res();
     }).then(() => {
-      this.setState({ scrollValue: '' })
+      this.setState({ scrollValue: '' });
     })
   }
 
   render() {
+
     return (
       <div>
         <Header
@@ -50,30 +41,21 @@ export default class Main extends Component {
         />
         <main>
           <Switch>
-            <PrivateRoute exact path="/home"
+            <PrivateRoute path="/home"
               component={props => {
-                return <HomePage
-                  setCurrentUser={this.props.setCurrentUser}
-                  user={this.props.user}
+                return <HomePage {...props} />
+              }} />
+
+            <PrivateRoute path="/admin"
+              component={props => {
+                return <AdminPage
                   {...props} />
               }} />
 
-            {(this.props.user && this.props.user.is_admin == 1) ?
-              <PrivateRoute exact path="/admin"
-                component={props => {
-                  return <AdminPage
-                    setCurrentUser={this.props.setCurrentUser}
-                    user={this.props.user}
-                    {...props} />
-                }} /> :
-              null
-            }
-
             <Route path="/login"
-              render={props => <Login
-                setCurrentUser={this.props.setCurrentUser}
+              render={() => <Login
                 langData={this.props.langData.form_login}
-                {...props} />} />
+              />} />
 
             <Route path="/blog"
               render={props => <Blog {...props} />} />
@@ -81,8 +63,8 @@ export default class Main extends Component {
             <Route exact path="/" render={() => <IntroPage
               langData={this.props.langData.intro_page}
               scrollValue={this.state.scrollValue}
-              setCarInfo={this.setCarInfo}
             />} />
+
             <Route path="/result" render={() => <ResultPage
               carInfo={this.state.carInfo}
               langData={this.props.langData.result_page}

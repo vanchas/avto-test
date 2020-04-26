@@ -9,6 +9,7 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
       user: {},
       name: '',
       email: '',
@@ -24,8 +25,9 @@ export default class Login extends Component {
     this.emailInput = this.emailInput.bind(this);
     this.passwordInput = this.passwordInput.bind(this);
   }
-
-  componentDidMount() {
+  
+  componentWillUnmount() {
+    this.setState({ loading: false });
   }
 
   loginHandler(e) {
@@ -35,41 +37,10 @@ export default class Login extends Component {
 
       this.setState({ loading: true });
       userService.login(this.state.email, this.state.password);
-      // fetch('https://strateg.link/public/api/login', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json;charset=utf-8'
-      //   },
-      //   body: JSON.stringify({
-      //     email: this.state.email,
-      //     password: this.state.password
-      //   })
-      // }).then((res) => {
-      //   // console.log(res);
-
-      //   this.setState({
-      //     user: res.user
-      //   });
-      //   const result = res.json();
-      //   result.then(data => {
-      //     // console.log('data:', data);
-
-      //     this.setState({
-      //       token: data.token,
-      //       token_type: data.token_type,
-      //       user: data.user
-      //     });
-      //     this.props.setCurrentUser(data.user);
-      //   })
-      // })
-      //   .catch(error => {
-      //     console.error(error);
-      //   });
     } else {
       alert('Все поля должны быть корректно заполнены.')
     }
   }
-
 
   registerHandler(e) {
     e.preventDefault();
@@ -79,38 +50,11 @@ export default class Login extends Component {
       this.state.password.toString().trim().length
     ) {
       this.setState({ loading: true });
-      fetch('https://strateg.link/public/api/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify({
-          name: this.state.name,
-          email: this.state.email,
-          password: this.state.password
-        })
-      }).then((res) => {
-        this.setState({
-          status: res.status,
-          name: '',
-          email: '',
-          password: ''
-        });
-        const result = res.json();
-        result.then(response => {
-          console.log('message:', response);
-
-          this.setState({ message: response });
-        })
-          .catch(error => console.log('Error:', error));
-
-      })
-        .then(() => {
-          if (this.state.status === 201) history.push('/home');
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
+      userService.registration(
+        this.state.name,
+        this.state.email,
+        this.state.password
+      );
     } else {
       alert('Все поля должны быть корректно заполнены.')
     }
@@ -145,23 +89,6 @@ export default class Login extends Component {
             </ul>
           </nav>
 
-          <div>
-            {this.state.status == 400 ?
-              <span>The email has already been taken.</span> : null
-            }
-          </div>
-
-          <div>
-            {(this.state.status !== 200 && this.state.status !== 400) ?
-              <span>Error</span> : null
-            }
-          </div>
-
-          {/* <div>
-            {(this.state.status == 200) ?
-            '' : '' }
-          </div> */}
-
           <Route path="/login/sign-in" render={props => <LoginForm
             email={this.state.email}
             password={this.state.password}
@@ -181,6 +108,16 @@ export default class Login extends Component {
             registerHandler={this.registerHandler}
             langData={this.props.langData}
             {...props} />} />
+
+          <div>
+            <div className="w-100 text-center pb-3">
+              {this.state.loading ?
+                <div className="spinner-border text-success" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+                : null}
+            </div>
+          </div>
 
         </div>
       </div>

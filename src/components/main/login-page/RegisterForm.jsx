@@ -15,7 +15,7 @@ export default class RegisterForm extends React.Component {
         <Form className="mx-auto" style={{ maxWidth: '700px' }}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>{text.email_label}</Form.Label>
-            <Form.Control autoComplete="false"
+            <Form.Control
               type="email" placeholder=""
               value={this.props.email}
               onChange={e => this.props.emailInput(e.target.value)} />
@@ -25,7 +25,7 @@ export default class RegisterForm extends React.Component {
           </Form.Group>
           <Form.Group controlId="formBasicLogin">
             <Form.Label>{text.login_label}</Form.Label>
-            <Form.Control autoComplete="false"
+            <Form.Control
               type="text" placeholder=""
               value={this.props.name}
               onChange={e => this.props.loginInput(e.target.value)} />

@@ -14,7 +14,7 @@ export default class LoginForm extends React.Component {
       <div>
         <Form onSubmit={e => this.props.loginHandler(e)} className="mx-auto" style={{ maxWidth: '700px' }}>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>{text.nav_item_sign_in}</Form.Label>
+            <Form.Label>{text.login_label}</Form.Label>
             <Form.Control autoComplete="true"
               type="email" placeholder=""
               value={this.props.email}

@@ -11,13 +11,18 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: this.props.user || {},
             lang: 'UA',
-            langData: strings._props.UA
+            langData: strings._props.UA,
+            user: {}
         }
-        this.user = {};
-        this.setCurrentUser = this.setCurrentUser.bind(this);
         this.onSetLanguage = this.onSetLanguage.bind(this);
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        if (authHeader().Authorization) {
+            return { user: authHeader().Authorization };
+        }
+        return null;
     }
 
     onSetLanguage = (lang) => {
@@ -32,20 +37,6 @@ class App extends React.Component {
         }
     }
 
-    setCurrentUser = (user) => {
-        // console.log('current user: ', user);
-        this.user = user;
-    }
-
-    componentDidMount() {
-        let user = authHeader().Authorization;
-        this.setState({
-            langData: strings._props.UA,
-            user
-        });
-        // history.push('/');
-    }
-
     render() {
         return (
             <Router history={history} >
@@ -54,7 +45,6 @@ class App extends React.Component {
                         user={this.state.user}
                         langData={this.state.langData}
                         onSetLanguage={this.onSetLanguage}
-                        setCurrentUser={this.setCurrentUser}
                     />
                     <Footer
                         langData={this.state.langData.footer}

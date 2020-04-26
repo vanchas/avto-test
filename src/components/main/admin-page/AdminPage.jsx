@@ -10,17 +10,11 @@ export class AdminPage extends React.Component {
             message: '',
             user: {}
         };
-        this.user = {};
         this.logout = this.logout.bind(this);
     }
 
-    componentDidMount() {
-        // console.log('home user: ', this.props.user);
-        this.setState({ user: this.user });
-    }
-
     componentWillMount() {
-        if (!authHeader().Authorization.is_admin == 1) {
+        if (authHeader().Authorization.is_admin !== 1) {
             history.push('/home');
         }
     }
@@ -30,11 +24,11 @@ export class AdminPage extends React.Component {
     }
 
     render() {
-        const user = this.user;
+        const user = authHeader().Authorization;
 
         return (
             <div style={{ minHeight: '100vh' }}
-                className="col-md-6 col-md-offset-3">
+                className="mx-auto">
                 <h1 className="text-center py-5">Hi, admin {user.name}, at Admin page!</h1>
                 <p className="text-center">
                     <button

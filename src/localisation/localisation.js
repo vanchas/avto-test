@@ -48,7 +48,8 @@ export let strings = new LocalizedStrings({
       header_reviews_item: "Car review",
       header_full_constructor_item: "Full construction",
       header_blog_item: "Blog",
-      header_enter_item: "Enter",
+      header_enter_item: "Sign In",
+      header_home_item: "Profile",
       header_btn_call: "Order a call"
     },
     form_login: {
@@ -120,6 +121,7 @@ export let strings = new LocalizedStrings({
       header_full_constructor_item: "Авто «під ключ»",
       header_blog_item: "Блог",
       header_enter_item: "Вхід",
+      header_home_item: "Профіль",
       header_btn_call: "Замовити дзвінок"
     },
     form_login: {
@@ -191,6 +193,7 @@ export let strings = new LocalizedStrings({
       header_full_constructor_item: "Авто «под ключ»",
       header_blog_item: "Блог",
       header_enter_item: "Вход",
+      header_home_item: "Профиль",
       header_btn_call: "Заказать дзвонок"
     },
     form_login: {

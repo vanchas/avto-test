@@ -15,11 +15,11 @@ import WalletImg from './image/wallet_g.png'
 import GlobeImg from './image/globe_g.png'
 import CustomsImg from './image/customs_g.png'
 import CheckImg from './image/car-check_g.png'
-// import QuestionSign from './image/question.png'
 import GreenArrow from './image/green-arrow.png'
 import CvLogo from './image/cv-logo.png'
 import CarfaxLogo from './image/carfax-logo.png'
 import UaLogo from './image/ua-logo.png'
+import { getCar } from '../../../_helpers/get-car'
 
 export default class ResultPage extends Component {
   constructor(props) {
@@ -29,17 +29,17 @@ export default class ResultPage extends Component {
     };
   }
 
-  componentDidMount() {
-    this.setState({ carInfo: this.props.carInfo })
+  componentDidMount = async () => {
+    await this.setState({ carInfo: getCar().Found })
   }
 
   render() {
     const text = this.props.langData;
-    const car = this.props.carInfo;
+    const car = this.state.carInfo;
 
     return (
       <div className="result-page">
-        {(this.props.carInfo.brand) ?
+        {(car && car.brand) ?
           <section className="py-5 what-we-found container">
             <div className="pb-4 text-center d-lg-flex justify-content-center">
               <div className="h2 font-weight-bold mr-lg-3 mr-md-0">{text.result_page_header} : {' '}</div>
@@ -80,7 +80,11 @@ export default class ResultPage extends Component {
                   <div className="col-2">
                     <img width={30} src={CarSearchImg} alt="" /></div>
                   <div className="col-10 btn p-0 pl-2">
-                    <span className="float-left font-weight-bold">{car.kind} {car.color}</span>
+                    <span className="float-left font-weight-bold">
+                      <span>{car.kind} | </span>
+                      <span>{car.color} | </span>
+                      <span>{car.num_seating} МЕСТ</span>
+                    </span>
                   </div>
                 </div>
                 <div className="row py-2 green-border">
@@ -107,23 +111,31 @@ export default class ResultPage extends Component {
                 <div className="row green-border pt-2">
                   <div className="col-2">
                     <img width={28} src={ReportImg} alt="" className="" /></div>
-                  <div className="col-10 row">
-                    <div className="btn p-0 pl-2 col-12">
-                      <span className="float-left font-weight-bold"
-                        title="date" >
+                  <div className="col-10 p-0 m-0 py-2">
+                    <div className="btn p-0 pl-2">
+                      <span className="float-left font-weight-bold question-sign"
+                        title="Дата последней регистрации" >
                         {car.date}</span>
                     </div>
-                    <div className=" btn p-0 pl-2 col-12">
-                      <span className="float-left font-weight-bold"
-                        title="first registration date" >
-                        {car.first_reg_date}</span>
+                    <div className=" btn p-0 pl-2 ">
+                      <span className="float-left font-weight-bold question-sign"
+                        title={`${car.region}, ${car.place}`} > | &nbsp;
+                        {car.dep}</span>
+                    </div>
+                    <div className=" btn p-0 pl-2">
+                      <span className="float-left font-weight-bold question-sign"
+                        title={`${car.registration_code} - ${car.registration}`} > | &nbsp;
+                        {car.registration_code}</span>
                     </div>
                   </div>
                 </div>
                 <div className="row py-2 green-border">
-                  <div className="col-2"><img width={25} src={PlaceImg} alt="" /></div>
+                  <div className="col-2">
+                    <img width={25} src={PlaceImg} alt="" />
+                  </div>
                   <div className="col-10 btn p-0 pl-2">
-                    <span className="float-left font-weight-bold">{car.num_seating} СИДЯЧИХ МЕСТ</span>
+                    <span className="float-left font-weight-bold">{car.region}, </span>
+                    <span className="float-left font-weight-bold">&nbsp; {car.place}</span>
                   </div>
                 </div>
               </div>
@@ -131,21 +143,27 @@ export default class ResultPage extends Component {
               <div className="col-lg-5 col-md-12 ">
                 <div className="row py-2 green-border">
                   <div className="col-2">
-                    <img width={28} src={WheelImg} alt="" /></div>
+                    <img width={28} src={WheelImg} alt="" />
+                  </div>
                   <div className="col-10 btn p-0 pl-2">
-                    <span className="float-left font-weight-bold">{car.count} авто на auto.ria</span>
+                    <span title="Всего похожих предложений"
+                      className="float-left font-weight-bold question-sign">
+                      {car.count}</span>
+                    <span title="Выставлено на прошлой неделе"
+                      className="ml-2 float-left font-weight-bold question-sign">
+                      | &nbsp; {car.count}</span>
+                    <span title="Выставлено за сутки"
+                      className="ml-2 float-left font-weight-bold question-sign">
+                      | &nbsp; {car.count} на auto.ria</span>
                   </div>
                 </div>
                 <div className="row py-2 green-border">
                   <div className="col-2">
                     <img width={28} src={MegaphoneImg} alt="" /></div>
-                  <div className="col-10 pl-0">
-                    <span className="btn p-0 pl-2 font-weight-bold text-dark"
-                      title="количество в неделю" >
-                      {car.count_week}</span>
-                    <span className="btn p-0 pl-2 font-weight-bold text-dark"
-                      title="количество в день" >
-                      {car.count_day}</span>
+                  <div className="col-10 d-flex pl-0">
+                    <a href={car.drorm} className="btn p-0 pl-2 font-weight-bold text-dark"
+                      title="ДЕРЖАВНИЙ РЕЄСТР ОБТЯЖЕНЬ РУХОМОГО МАЙНА" target="_blank" rel="noopener noreferrer">
+                      {car.drorm}</a>
                   </div>
                 </div>
                 <div className="row py-2 green-border">
@@ -217,14 +235,16 @@ export default class ResultPage extends Component {
           <h3 className="h2 font-weight-bold mb-3 px-2">{text.result_page_cards_block_header}</h3>
           <p className="font-weight-bold mb-4">
             <span>
-              {(!this.props.carInfo.brand) ?
-                null :
-                `${car.brand} ${car.model} ${car.year}:`}
+              {(car && car.brand) ?
+                `${car.brand} ${car.model} ${car.year}:`
+                : null
+              }
             </span>
             <span className="text-success pl-2">
-              {(!this.props.carInfo.brand) ?
-                <span></span> :
-                `${car.vin}`}
+              {(car && car.brand) ?
+                `${car.vin}`
+                : <span></span>
+              }
             </span>
           </p>
 

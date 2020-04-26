@@ -1,12 +1,11 @@
-// import { authHeader } from '../_helpers/auth-header';
-
 import { history } from "../_helpers/history";
+import App from "../components/app/App";
 
 export const userService = {
   login,
   logout,
   userDetails,
-  // getAll
+  registration
 };
 
 function login(email, password) {
@@ -22,18 +21,20 @@ function login(email, password) {
     })
   }).then((res) => {
     if (res.status === 200) {
-
       const result = res.json();
-      result.then(data => {
 
-        localStorage.setItem('avto-test-user', JSON.stringify(data.user));
+      result.then(async data => {
+        const user = await data.user;
+        user.token = await data.token;
+        await localStorage.setItem('avto-test-user', JSON.stringify(user));
       })
-        .then(() => history.push('/home'));
+        .then(() => App.getDerivedStateFromProps())
+        .then(() => history.push('/home'))
+        .catch(err => console.log(err));
+    } else {
+      alert('Неверно введен логин или пароль.');
     }
   })
-    .then(() => {
-      window.location.reload(true);
-    })
     .catch(error => {
       console.error(error);
     });
@@ -48,48 +49,45 @@ function logout() {
       'Content-Type': 'application/json;charset=utf-8'
     }
   })
-    .then((res) => {
-      // console.log('logout res:', res);
+    .then(() => history.push('/login/sign-in'))
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
 
-      history.push('/');
+function registration(name, email, password) {
+  fetch('https://strateg.link/public/api/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify({
+      name,
+      email,
+      password
     })
-    .then(() => {
-      window.location.reload(true);
+  })
+    .then((res) => {
+      if (res.status === 200) {
+
+        const result = res.json();
+        result.then(data => {
+
+
+          localStorage.setItem('avto-test-user', JSON.stringify(data.user));
+        })
+          .then(() => history.push('/home'))
+          .catch(err => console.log(err));
+      } else {
+        alert('Все поля должны быть корректно заполнены.');
+      }
     })
     .catch(error => {
       console.error('Error:', error);
     });
 }
 
-
 // https://strateg.link/public/api/details
 function userDetails() {
   return JSON.parse(localStorage.getItem('avto-test-user'));
 }
-
-// function getAll() {
-//     const requestOptions = {
-//         method: 'GET',
-//         headers: authHeader()
-//     };
-
-//     return fetch(`/users`, requestOptions).then(handleResponse);
-// }
-
-// function handleResponse(response) {
-//     return response.text().then(text => {
-//         const data = text && JSON.parse(text);
-//         if (!response.ok) {
-//             if (response.status === 401) {
-//                 // auto logout if 401 response returned from api
-//                 logout();
-//                 window.location.reload(true);
-//             }
-
-//             const error = (data && data.message) || response.statusText;
-//             return Promise.reject(error);
-//         }
-
-//         return data;
-//     });
-// }

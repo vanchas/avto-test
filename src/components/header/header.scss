@@ -4,6 +4,9 @@
 	background: #4b4d4b;
 }
 .navbar {
+	.navbar-nav {
+		padding: 0;
+	}
 	max-width: 1300px;
 	margin: 0 auto;
 	z-index: 1;
@@ -63,13 +66,12 @@
 		display: none;
 	}
 	option {
-		background: #222;
+		background: #4b4d4b;
 	}
 }
 
 .number,
-.nav-link,
-.navbar-toggler {
+.nav-link {
 	i {
 		background-color: #fff;
 		width: 1.6em;
@@ -89,11 +91,14 @@
 	display: flex;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1199px) {
 	.admin-home-links {
 		display: grid;
 	}
 	.navbar {
+		.navbar-nav {
+			padding: 0 0 1em 0;
+		}
 		.nav-item {
 			width: 100%;
 			.nav-link {

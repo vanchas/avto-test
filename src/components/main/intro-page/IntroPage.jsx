@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import './intro.scss'
-// import SearchIcon from '@material-ui/icons/Search'
 import SearchIcon from './image/search-icon.png'
 import ArrowRight from './image/arrow-right.png'
 import DebitCard from './image/debit-card.png'
@@ -10,12 +9,12 @@ import Hand from './image/hand.png'
 import Report from './image/report.png'
 import Search from './image/search.png'
 import Square from './image/square.png'
-// import RedArrow from './image/red-arrow-down.png'
 import Tools from './image/tools.png'
 import Tablet from './image/tablet.png'
 import Hands from './image/hands.png'
 import CheckSign from './image/check-sign.png'
 import Woman from './image/woman.png'
+import { carInfoService } from '../../../_services/carInfo.service'
 
 
 export default class IntroPage extends Component {
@@ -49,7 +48,13 @@ export default class IntroPage extends Component {
     } else if (ref === 'full selection') {
       elementClick = this.FullSelection;
     }
-    let destination = ReactDOM.findDOMNode(elementClick.current).getBoundingClientRect().top;
+    let destination;
+    if (window.innerWidth > 1200) {
+      destination = ReactDOM.findDOMNode(elementClick.current).getBoundingClientRect().top + 50;
+    } else if (window.innerWidth <= 1200) {
+      destination = ReactDOM.findDOMNode(elementClick.current).getBoundingClientRect().top - 270;
+    }
+
     window.scroll({
       top: destination,
       behavior: 'smooth'
@@ -65,21 +70,7 @@ export default class IntroPage extends Component {
   sendValue() {
     if (this.state.value.toString().trim().length) {
       this.setState({ loading: true });
-      fetch('https://strateg.link/public/api/search', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify({
-          search_filed: this.state.value
-        })
-      }).then((res) => {
-        this.setState({ value: '' });
-        const result = res.json();
-        this.props.setCarInfo(result);
-      }).catch(error => {
-        console.error(error);
-      });
+      carInfoService.getCarInfo(this.state.value);
     } else {
       alert('Полe должно быть корректно заполнено')
     }
@@ -99,7 +90,7 @@ export default class IntroPage extends Component {
                 <img src={SearchIcon} className="search-icon" alt="" />
                 <input type="text"
                   value={this.state.value}
-                  placeholder={text.intro_header__input_placeholder} className="form-control pl-5"
+                  placeholder={text.intro_header__input_placeholder} className="form-control pl-5 py-0"
                   onChange={e => this.onValueInput(e)}
                 />
                 <div>
