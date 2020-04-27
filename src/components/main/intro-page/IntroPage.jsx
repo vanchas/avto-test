@@ -64,6 +64,7 @@ export default class IntroPage extends Component {
 
   onValueInput(e) {
     e.preventDefault();
+    this.props.setValue(e.target.value);
     this.setState({ value: e.target.value });
   }
 

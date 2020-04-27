@@ -6,10 +6,6 @@ import { userService } from '../../../_services/user.service';
 export class AdminPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            message: '',
-            user: {}
-        };
         this.logout = this.logout.bind(this);
     }
 

@@ -28,8 +28,13 @@
 
   }
   .post {
+    margin-bottom: 2em;
     border: none;
-		box-shadow: -5px -5px 15px 5px #fafafa, 5px 5px 15px 5px #eee;
+    box-shadow: -5px -5px 15px 5px #fafafa, 5px 5px 15px 5px #eee;
+    .wastebasket {
+      font-size: 1.5em;
+      padding: 0 .5em;
+    }
   }
 }
 

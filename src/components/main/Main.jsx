@@ -15,9 +15,11 @@ export default class Main extends Component {
     super(props);
     this.state = {
       carInfo: {},
-      scrollValue: ''
+      scrollValue: '',
+      inputValue: ''
     };
     this.scrollFunc = this.scrollFunc.bind(this);
+    this.setValue = this.setValue.bind(this);
   }
 
   scrollFunc(scrollValue) {
@@ -29,12 +31,14 @@ export default class Main extends Component {
     })
   }
 
-  render() {
+  setValue(inputValue) {
+    this.setState({ inputValue });
+  }
 
+  render() {
     return (
       <div>
         <Header
-          user={this.props.user}
           langData={this.props.langData.header}
           onSetLanguage={this.props.onSetLanguage}
           scrollFunc={this.scrollFunc}
@@ -61,11 +65,13 @@ export default class Main extends Component {
               render={props => <Blog {...props} />} />
 
             <Route exact path="/" render={() => <IntroPage
+              setValue={this.setValue}
               langData={this.props.langData.intro_page}
               scrollValue={this.state.scrollValue}
             />} />
 
             <Route path="/result" render={() => <ResultPage
+              inputValue={this.state.inputValue}
               carInfo={this.state.carInfo}
               langData={this.props.langData.result_page}
             />} />

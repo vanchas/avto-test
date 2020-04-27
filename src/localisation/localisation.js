@@ -49,6 +49,7 @@ export let strings = new LocalizedStrings({
       header_full_constructor_item: "Full construction",
       header_blog_item: "Blog",
       header_enter_item: "Sign In",
+      header_exit_item: "Sign Out",
       header_home_item: "Profile",
       header_btn_call: "Order a call"
     },
@@ -61,6 +62,8 @@ export let strings = new LocalizedStrings({
       email_sublabel: "We'll never share your email with anyone else."
     },
     result_page: {
+      error_submessage: "Search for your request",
+      error_link: "https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=",
       error_message: "Unfortunately, your data did not match any of the options.",
       result_page_header: "That's what we found by VIN",
       result_page_cards_block_header: "Get a detailed report and find out the truth",
@@ -121,6 +124,7 @@ export let strings = new LocalizedStrings({
       header_full_constructor_item: "Авто «під ключ»",
       header_blog_item: "Блог",
       header_enter_item: "Вхід",
+      header_exit_item: "Вихід",
       header_home_item: "Профіль",
       header_btn_call: "Замовити дзвінок"
     },
@@ -133,6 +137,8 @@ export let strings = new LocalizedStrings({
       email_sublabel: "Ми ніколи не поділимося вашим електронним листом ні з ким іншим."
     },
     result_page: {
+      error_submessage: "Пошук по вашому запиту",
+      error_link: "https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=",
       error_message: "На жаль ваші дані не збіглися з жодним з можливих варіантів.",
       result_page_header: "Ось що ми знайшли по VIN",
       result_page_cards_block_header: "Придбайте докладний звіт і дізнайтеся всю правду",
@@ -193,6 +199,7 @@ export let strings = new LocalizedStrings({
       header_full_constructor_item: "Авто «под ключ»",
       header_blog_item: "Блог",
       header_enter_item: "Вход",
+      header_exit_item: "Выхoд",
       header_home_item: "Профиль",
       header_btn_call: "Заказать дзвонок"
     },
@@ -205,6 +212,8 @@ export let strings = new LocalizedStrings({
       email_sublabel: "Мы никогда не передадим вашу электронную почту кому-либо еще."
     },
     result_page: {
+      error_submessage: "Поиск по вашему запросу",
+      error_link: "https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=",
       error_message: "К сожалению ваши данные не совпали ни с одним из возможных вариантов.",
       result_page_header: "Вот что мы нашли по VIN",
       result_page_cards_block_header: "Приобретите подробный отчет и узнайте всю правду",

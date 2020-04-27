@@ -15,18 +15,18 @@ import InstallPWA from './pwa';
 
 const root = document.getElementById("root");
 
-if (root.hasChildNodes()) {
-  ReactDOM.hydrate(
-    <React.StrictMode>
-      <PWAPrompt promptOnVisit={1} timesToShow={3} copyClosePrompt="Close" permanentlyHideOnDismiss={false} />
-      <InstallPWA />
+// if (root.hasChildNodes()) {
+//   ReactDOM.hydrate(
+//     <React.StrictMode>
+//       <PWAPrompt promptOnVisit={1} timesToShow={3} copyClosePrompt="Close" permanentlyHideOnDismiss={false} />
+//       <InstallPWA />
 
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>,
-    </React.StrictMode>,
-     root );
-} else {
+//       <BrowserRouter>
+//         <App />
+//       </BrowserRouter>,
+//     </React.StrictMode>,
+//      root );
+// } else {
   ReactDOM.render(
     <React.StrictMode>
       <PWAPrompt promptOnVisit={1} timesToShow={3} copyClosePrompt="Close" permanentlyHideOnDismiss={false} />
@@ -36,7 +36,7 @@ if (root.hasChildNodes()) {
         <App />
       </BrowserRouter>
     </React.StrictMode>, root );
-}
+// }
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

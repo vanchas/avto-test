@@ -15,6 +15,7 @@ import {
   MDBNavbarToggler,
   MDBCollapse
 } from 'mdbreact';
+import { authHeader } from '../../_helpers/auth-header'
 
 
 export default class Header extends Component {
@@ -35,7 +36,10 @@ export default class Header extends Component {
   }
 
   logOut() {
-    userService.logout();
+    if (authHeader().Authorization) {
+      userService.logout();
+    }
+    return;
   }
 
   toggleCollapse = () => {
@@ -102,6 +106,7 @@ export default class Header extends Component {
                 <MDBNavItem>
                   <Link to="/login/sign-in" className="btn nav-link h5 font-weight-light mb-0"
                     onClick={() => {
+                      this.logOut();
                       $('.navbar-toggler').click();
                     }}
                   >{text.header_enter_item}

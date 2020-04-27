@@ -25,6 +25,8 @@ function login(email, password) {
 
       result.then(async data => {
         const user = await data.user;
+        // console.log(user);
+        user.token_type = await data.token_type;
         user.token = await data.token;
         await localStorage.setItem('avto-test-user', JSON.stringify(user));
       })

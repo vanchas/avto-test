@@ -16,14 +16,31 @@ async function getCarInfo(value) {
     })
   })
     .then((res) => {
-      const data = res.json();
-      data.then(car => {
-        return localStorage.setItem('avto-test-car', JSON.stringify(car));
-      })
-        .then(() => history.push('/result'))
-        .catch(error => console.error(error));
-})
-    .catch (error => {
-  console.error(error);
-});
+      if (res.status === 500) {
+        alert('Ошибка поиска по введенным данным');
+        window.location.reload(true);
+      } else {
+        const data = res.json();
+        // console.log('res data',data);
+        
+
+        data.then(async carData => {
+          let car = await carData;
+
+          for (let key in car) {
+            if (car[key] === null && key !== 'vin') {
+              car[key] = 'Н / Д';
+            }
+          }
+          if (car.vin === null) car.vin = 'продавець не надав VIN';
+
+          return localStorage.setItem('avto-test-car', JSON.stringify(car));
+        })
+          .then(() => history.push('/result'))
+          .catch(error => console.error('Error:', error));
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
 }

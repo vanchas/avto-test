@@ -7,8 +7,6 @@ export class HomePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            message: '',
-            user: {},
             showDetails: false
         };
         this.logout = this.logout.bind(this);
@@ -48,7 +46,7 @@ export class HomePage extends React.Component {
                         onClick={this.getUserDetails}>
                         User Details
                     </button>
-                    {user && user.is_admin === '1' ?
+                    {user && user.is_admin === 1 ?
                         <button
                             onClick={this.goToAdminPage}
                             className="btn btn-warning">

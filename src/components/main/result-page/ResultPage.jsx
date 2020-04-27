@@ -9,9 +9,9 @@ import ReportImg from './image/report_g.png'
 import PlaceImg from './image/place_g.png'
 import WheelImg from './image/wheel_g.png'
 import MegaphoneImg from './image/rupport_g.png'
-import MotorImg from './image/motor_g.png'
+// import MotorImg from './image/motor_g.png'
 import CoinsImg from './image/cash_g.png'
-import WalletImg from './image/wallet_g.png'
+// import WalletImg from './image/wallet_g.png'
 import GlobeImg from './image/globe_g.png'
 import CustomsImg from './image/customs_g.png'
 import CheckImg from './image/car-check_g.png'
@@ -27,15 +27,35 @@ export default class ResultPage extends Component {
     this.state = {
       carInfo: {}
     };
+    this.inputValue = '';
   }
 
   componentDidMount = async () => {
-    await this.setState({ carInfo: getCar().Found })
+    await this.setState({
+      carInfo: getCar().Found
+    });
+
+    if (JSON.parse(localStorage.getItem('avto-test-car')) === undefined) {
+      alert('Ошибка поиска по введенным данным');
+      window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${this.inputValue}`, '_blanc');
+    } else if (
+      JSON.parse(localStorage.getItem('avto-test-car')) &&
+      JSON.parse(localStorage.getItem('avto-test-car'))[0] &&
+      JSON.parse(localStorage.getItem('avto-test-car'))[0]['search_filed.required'] === "Bad request!"
+    ) {
+      window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${this.inputValue}`, '_blanc');
+    }
+  }
+
+  componentWillMount() {
+    this.inputValue = this.props.inputValue;
   }
 
   render() {
+    const inputValue = this.inputValue;
     const text = this.props.langData;
     const car = this.state.carInfo;
+    // console.log(car);
 
     return (
       <div className="result-page">
@@ -112,30 +132,24 @@ export default class ResultPage extends Component {
                   <div className="col-2">
                     <img width={28} src={ReportImg} alt="" className="" /></div>
                   <div className="col-10 p-0 m-0 py-2">
-                    <div className="btn p-0 pl-2">
-                      <span className="float-left font-weight-bold question-sign"
-                        title="Дата последней регистрации" >
-                        {car.date}</span>
+                    <div className="btn p-0">
+                      {!car.reg_object.date ?
+                        '' :
+                        car.reg_object.map((reg, ind) => {
+                          return <span className="float-left font-weight-bold question-sign pl-2"
+                            title={`code: ${reg.code}, number: ${reg.number}`} >
+                            {reg.date}</span>
+                        })}
                     </div>
                     <div className=" btn p-0 pl-2 ">
-                      <span className="float-left font-weight-bold question-sign"
-                        title={`${car.region}, ${car.place}`} > | &nbsp;
+                      <span className="float-left font-weight-bold">
                         {car.dep}</span>
                     </div>
                     <div className=" btn p-0 pl-2">
                       <span className="float-left font-weight-bold question-sign"
-                        title={`${car.registration_code} - ${car.registration}`} > | &nbsp;
+                        title={`${car.registration}`} > | &nbsp;
                         {car.registration_code}</span>
                     </div>
-                  </div>
-                </div>
-                <div className="row py-2 green-border">
-                  <div className="col-2">
-                    <img width={25} src={PlaceImg} alt="" />
-                  </div>
-                  <div className="col-10 btn p-0 pl-2">
-                    <span className="float-left font-weight-bold">{car.region}, </span>
-                    <span className="float-left font-weight-bold">&nbsp; {car.place}</span>
                   </div>
                 </div>
               </div>
@@ -146,53 +160,59 @@ export default class ResultPage extends Component {
                     <img width={28} src={WheelImg} alt="" />
                   </div>
                   <div className="col-10 btn p-0 pl-2">
-                    <span title="Всего похожих предложений"
-                      className="float-left font-weight-bold question-sign">
-                      {car.count}</span>
-                    <span title="Выставлено на прошлой неделе"
-                      className="ml-2 float-left font-weight-bold question-sign">
-                      | &nbsp; {car.count}</span>
-                    <span title="Выставлено за сутки"
-                      className="ml-2 float-left font-weight-bold question-sign">
-                      | &nbsp; {car.count} на auto.ria</span>
+                    <a target="_blank" rel="noopener noreferrer" href={car.count_site} title="Всего похожих предложений"
+                      className="pl-0 float-left font-weight-bold question-sign text-dark btn">
+                      {car.count}</a>
+                    <a target="_blank" rel="noopener noreferrer" href={car.count_site_month} title="Выставлено в прошлом месяце"
+                      className="pl-0 float-left font-weight-bold question-sign text-dark btn">
+                      | &nbsp; {car.count_month}</a>
+                    <a target="_blank" rel="noopener noreferrer" href={car.count_site_week} title="Выставлено на прошлой неделе"
+                      className="pl-0 float-left font-weight-bold question-sign text-dark btn">
+                      | &nbsp; {car.count_week} на auto.ria</a>
                   </div>
                 </div>
                 <div className="row py-2 green-border">
                   <div className="col-2">
                     <img width={28} src={MegaphoneImg} alt="" /></div>
                   <div className="col-10 d-flex pl-0">
-                    <a href={car.drorm} className="btn p-0 pl-2 font-weight-bold text-dark"
+                    <a href={car.drorm} className="p-0 pl-2 font-weight-bold text-dark question-sign"
                       title="ДЕРЖАВНИЙ РЕЄСТР ОБТЯЖЕНЬ РУХОМОГО МАЙНА" target="_blank" rel="noopener noreferrer">
-                      {car.drorm}</a>
+                      <u>{car.drorm}</u></a>
                   </div>
                 </div>
-                <div className="row py-2 green-border">
+                {/* <div className="row py-2 green-border">
                   <div className="col-2">
                     <img width={30} src={MotorImg} alt="" /></div>
                   <div className="col-10 btn p-0 pl-2">
                     <span className="float-left font-weight-bold">{car.fuel_count_parameter} имеют такой же мотор</span>
                   </div>
-                </div>
+                </div> */}
                 <div className="row py-2 green-border">
                   <div className="col-2">
                     <img width={30} src={CoinsImg} alt="" /></div>
                   <div className="col-10 pl-0">
-                    <span className="btn p-0 pl-2 float-left font-weight-bold">{car.arithmeticMean} USD</span>
-                    <span className="sbtn p-0 pl-2 float-left font-weight-bold">{car.interQuartileMean} USD</span>
+                    <span className="btn p-0 pl-2 float-left font-weight-bold question-sign"
+                      title="arithmeticMean" >
+                      {car.arithmeticMean} USD</span>
+                    <span className="sbtn p-0 pl-2 float-left font-weight-bold question-sign"
+                      title="interQuartileMean" >
+                      {car.interQuartileMean} USD</span>
                   </div>
                 </div>
-                <div className="row py-2 green-border">
+                {/* <div className="row py-2 green-border">
                   <div className="col-2">
                     <img width={28} src={WalletImg} alt="" /></div>
                   <div className="col-10 btn p-0 pl-2">
                     <span className="float-left font-weight-bold">... USD стоимость новой</span>
                   </div>
-                </div>
+                </div> */}
                 <div className="row py-2 green-border">
                   <div className="col-2">
                     <img width={28} src={GlobeImg} alt="" /></div>
                   <div className="col-10 btn p-0 pl-2">
-                    <span className="float-left font-weight-bold">{car.outbid}</span>
+                    <span className="float-left font-weight-bold question-sign"
+                      title="Перекуп / владелец" >
+                      {car.outbid}</span>
                   </div>
                 </div>
                 <div className="row py-2 green-border">
@@ -209,14 +229,25 @@ export default class ResultPage extends Component {
                     <a href={car.insurance}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="float-left font-weight-bold text-dark">
-                      {car.insurance}</a>
+                      className="float-left font-weight-bold text-dark"
+                      title="Загальнодержавний сервіс* оформлення електронних полісів автоцивілки" >
+                      <u>БАЗA ЗАЛОГОВ</u></a>
+                  </div>
+                </div>
+                <div className="row py-2 green-border">
+                  <div className="col-2">
+                    <img width={25} src={PlaceImg} alt="" />
+                  </div>
+                  <div className="col-10 btn p-0 pl-2">
+                    <span className="float-left font-weight-bold">{car.person}&nbsp;|</span>
+                    <span className="float-left font-weight-bold question-sign"
+                      title={`${car.place}, ${car.region}`} >&nbsp;{car.reg_addr_koatuu}</span>
                   </div>
                 </div>
               </div>
 
               <div className="col-12 pt-4 pb-4">
-                <p className="px-lg-5 px-md-2 px-sm-0 m-auto text-success text-center">{car.rank_category}, {car.registration}</p>
+                <p className="px-lg-5 px-md-2 px-sm-0 m-auto text-success text-center">{car.rank_category}</p>
               </div>
             </div>
 
@@ -227,7 +258,13 @@ export default class ResultPage extends Component {
           :
           <div className="py-5 px-3 text-center">
             <div className="d-inline-block alert alert-danger" role="alert">
-              {text.error_message}
+              <p>{text.error_message}</p>
+              <p>
+                <a href={`${text.error_link}${inputValue}`} target="_blank" rel="noopener noreferrer" >
+                  <span className="text-dark">{text.error_submessage}</span><br />
+                  {`${text.error_link}${inputValue}`}
+                </a>
+              </p>
             </div>
           </div>}
 
@@ -249,7 +286,6 @@ export default class ResultPage extends Component {
           </p>
 
           <div className="card-holder row container-fluid m-0 px-3">
-
             <div className="col-md-4 col-sm-12 px-2">
               <div className="card car-card mb-4 p-3" >
                 <div className="">
