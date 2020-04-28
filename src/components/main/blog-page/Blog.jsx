@@ -9,6 +9,7 @@ export default class Blog extends Component {
     super(props);
     this.state = {
       addLoading: false,
+      changeLoading: false,
       posts: [],
       postId: '',
       post: {},
@@ -33,9 +34,11 @@ export default class Blog extends Component {
 
   componentDidMount = async () => {
     const res = await blogService.getAllPosts();
-    this.setState({
-      posts: res.posts
-    });
+    if (res && res.posts && res.posts.length) {
+      this.setState({
+        posts: res.posts
+      });
+    }
     $('.change-post').hide();
   }
 
@@ -51,6 +54,24 @@ export default class Blog extends Component {
     }
   }
 
+  uploadPostImage = e => {
+    this.setState({
+      addingPost: {
+        ...this.state.addingPost,
+        image: e.target.files[0]
+      }
+    })
+  }
+
+  uploadChangedPostImage = e => {
+    this.setState({
+      changingPost: {
+        ...this.state.changingPost,
+        image: e.target.files[0]
+      }
+    })
+  }
+
   addPost = async e => {
     e.preventDefault();
     const user = authHeader().Authorization;
@@ -59,7 +80,8 @@ export default class Blog extends Component {
       this.state.addingPost.description.trim().length > 19 && this.state.addingPost.description.trim().length < 101 &&
       this.state.addingPost.post.trim().length
     ) {
-      this.setState({ addLoading: true });
+      await this.setState({ addLoading: true });
+
       await blogService.addPost(
         user.token,
         user.token_type,
@@ -77,9 +99,11 @@ export default class Blog extends Component {
         }
       });
       const res = await blogService.getAllPosts();
-      this.setState({
-        posts: res.posts
-      });
+      if (res && res.posts && res.posts.length) {
+        this.setState({
+          posts: res.posts
+        });
+      }
       this.setState({ addLoading: false });
       $('.change-post').hide();
     } else {
@@ -93,6 +117,7 @@ export default class Blog extends Component {
 
   changePost = async (e, id, header, image, post, description) => {
     e.preventDefault();
+    await this.setState({ changeLoading: true });
     const user = await authHeader().Authorization;
 
     const postHeader = await (this.state.changingPost.header.trim().length)
@@ -109,15 +134,15 @@ export default class Blog extends Component {
       : description;
 
     await blogService.changePost(
-      user.token,
       user.token_type,
+      user.token,
       id,
       postHeader,
       postDescription,
       postPost,
       postImage
     );
-    this.setState({
+    await this.setState({
       changingPost: {
         header: '',
         description: '',
@@ -125,7 +150,15 @@ export default class Blog extends Component {
         image: '',
         id: ''
       }
-    })
+    });
+    const res = await blogService.getAllPosts();
+    if (res && res.posts && res.posts.length) {
+      this.setState({
+        posts: res.posts
+      });
+    }
+    await this.setState({ changeLoading: false });
+    $(`.change-post${id}`).slideUp();
   }
 
   removePost = async id => {
@@ -137,18 +170,28 @@ export default class Blog extends Component {
       id
     );
     const res = await blogService.getAllPosts();
-    this.setState({
-      posts: res.posts
-    });
+    if (res && res.posts && res.posts.length) {
+      this.setState({
+        posts: res.posts
+      });
+    }
+  }
+
+  moveToTop() {
+    $('html, body').animate({ scrollTop: 0 }, 'slow');
   }
 
   render() {
     const user = authHeader().Authorization;
-    const posts = this.state.posts.reverse();
-    console.log(posts);
+    const posts = this.state.posts.sort((a, b) => +b.id - +a.id);
+    // console.log(posts);
 
     return (
       <div style={{ minHeight: '100vh' }} className="blog" >
+        <span className="btn move-to-top"
+          onClick={this.moveToTop} >
+          <span>&#171;</span></span>
+
         <h1 className="text-center py-5">Блог</h1>
 
         <div>
@@ -156,7 +199,8 @@ export default class Blog extends Component {
             <div>
               <div className="text-center container py-2">
                 <h6>добавить пост</h6>
-                <form className="post-form rounded">
+                <form encType="multipart/form-data"
+                  className="post-form rounded">
                   <label className="form-group">
                     <input type="text" required
                       onChange={e => this.setState({
@@ -206,15 +250,7 @@ export default class Blog extends Component {
                       }} className="btn btn-info" />
                       <input type="file" id="file"
                         style={{ display: 'none' }}
-                        onChange={e => this.setState({
-                          addingPost: {
-                            ...this.state.addingPost,
-                            image: e.target.value
-                          }
-                        })}
-                        value={this.state.addingPost.image.length
-                          ? this.state.addingPost.image
-                          : ''} />
+                        onChange={e => this.uploadPostImage(e)} />
                     </label>
                     {this.state.addLoading ?
                       <div className="ml-3 spinner-border text-primary" role="status">
@@ -228,40 +264,6 @@ export default class Blog extends Component {
                   </div>
                 </form>
               </div>
-
-              {/* <div className="search-form text-center container py-2">
-                <h6>найти пост</h6>
-                <form className="">
-                  <input type="number"
-                    className="form-control mb-3"
-                    onChange={e => this.setState({ postId: e.target.value })}
-                    value={this.state.postId}
-                    placeholder="post id" />
-                  <button
-                    className="btn btn-primary ml-lg-2 ml-md-0 mb-3"
-                    onClick={e => this.getOnePost(e)}>
-                    Get Post
-                  </button>
-                </form>
-                <div>
-                  <div className="">
-                    {this.state.post && this.state.post.header ?
-                      <div className="mt-4 alert alert-success">
-                        <h5>Пост с id {this.state.post.id}</h5>
-                        <div>{this.state.post.header}</div>
-                        <div>{this.state.post.description}</div>
-                        <div>{this.state.post.post}</div>
-                        <div>
-                          <img src={this.state.post.image}
-                            alt={this.state.post.post} />
-                        </div>
-                      </div>
-                      :
-                      <div className="mt-3 font-weight-bold text-danger">{this.state.post.error}</div>
-                    }
-                  </div>
-                </div>
-              </div> */}
             </div>
             : null}
         </div>
@@ -274,7 +276,7 @@ export default class Blog extends Component {
                 return (
                   <li key={ind} className={`list-group-item post post${post.id}`}>
                     {authHeader().Authorization && authHeader().Authorization.is_admin === 1 ?
-                      <div>
+                      <div className="">
                         <button
                           onClick={() => this.openChangePost(post.id)}
                           className="btn btn-secondary mr-3"
@@ -286,19 +288,21 @@ export default class Blog extends Component {
                       </div>
                       : null}
                     {/* 🗑️ */}
-                    <span className="post-id">{post.id}. </span>
-                    <span className="post-header"> {post.header}</span>
+
+                    <h2 className="post-header"> {post.header}</h2>
                     <div className="post-image">
-                      <img src={post.image} alt={post.post} />
+                      <img src={post.image} alt={post.post} className="w-100" />
                     </div>
-                    <div className="post-description">
-                      <p>{post.description}</p>
+                    <div className="px-3 post-text">
+                      <h5 className="text-center">{post.description}</h5>
+                      <p>{post.post}</p>
                     </div>
 
                     <div className={`change-post change-post${post.id}`}>
                       <h6>изменить пост</h6>
-                      <form className="post-form rounded">
-                        <label className="form-group">
+                      <form encType="multipart/form-data"
+                        className="change-form rounded" >
+                        <label className="form-group" >
                           <input type="text"
                             onChange={e => this.setState({
                               changingPost: {
@@ -308,8 +312,8 @@ export default class Blog extends Component {
                             })}
                             value={this.state.changingPost.header.length
                               ? this.state.changingPost.header
-                              : ''}
-                            placeholder="заголовок поста"
+                              : post.header}
+                            placeholder="заголовок поста (3 - 20 символов)"
                             className="form-control" />
                         </label>
                         <label className="form-group">
@@ -322,8 +326,8 @@ export default class Blog extends Component {
                             })}
                             value={this.state.changingPost.description.length
                               ? this.state.changingPost.description
-                              : ''}
-                            placeholder="описание поста"
+                              : post.description}
+                            placeholder="описание поста (20 - 100 символов)"
                             className="form-control" />
                         </label>
                         <label className="form-group">
@@ -336,26 +340,18 @@ export default class Blog extends Component {
                             })}
                             value={this.state.changingPost.post.length
                               ? this.state.changingPost.post
-                              : ''}
+                              : post.post}
                             placeholder="текст поста"
                             className="form-control" />
                         </label>
                         <div>
                           <label className="form-group">
-                            <input type="button" value="Выберите файл" onClick={() => {
+                            <input type="button" value="Картинка" onClick={() => {
                               $('#change').click();
                             }} className="btn btn-info mr-2" />
                             <input type="file" id="change"
                               style={{ display: 'none' }}
-                              onChange={e => this.setState({
-                                changingPost: {
-                                  ...this.state.changingPost,
-                                  image: e.target.value
-                                }
-                              })}
-                              value={this.state.changingPost.image.length
-                                ? this.state.changingPost.image
-                                : ''} />
+                              onChange={e => this.uploadChangedPostImage(e)} />
                           </label>
                           <button
                             onClick={e => this.changePost(e, post.id, post.header, post.image, post.post, post.description)}
@@ -366,7 +362,9 @@ export default class Blog extends Component {
                   </li>
                 )
               })
-              : <h5 className="text-center">Постов пока нет...</h5>
+              : <div>
+                <h5 className="text-center py-5">Постов пока нет...</h5>
+              </div>
             }
           </ul>
         </div>

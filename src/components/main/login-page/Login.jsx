@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import { Link, Route } from 'react-router-dom'
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm';
@@ -124,3 +125,6 @@ export default class Login extends Component {
   }
 }
 
+Login.propTypes = {
+  langData: PropTypes.object
+}

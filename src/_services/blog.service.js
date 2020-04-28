@@ -40,44 +40,48 @@ async function getOnePost(id) {
 }
 
 async function addPost(token, token_type, header, description, post, image) {
+
+  const formData = new FormData();
+
+  formData.append('header', header);
+  formData.append('description', description);
+  formData.append('post', post);
+  formData.append('image', image);
+
   return await fetch(`https://strateg.link/public/api/blog/post/add`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8',
       'Authorization': `${token_type} ${token}`
     },
-    body: JSON.stringify({
-      header,
-      description,
-      post,
-      image
-    })
+    body: formData
   })
     .then(async (response) => {
-
+      // console.log(response);
+      // console.log(response.json());
     })
     .catch(error => console.error(error));
 }
 
 async function changePost(token_type, token, id, header, description, post, image) {
-  const newPost = { token_type, token, id, header, description, post, image };
-  console.log(newPost);
+  // console.log(id, header, description, post, image);
 
-  return await fetch(`https://strateg.link/public/api/blog/update/${id}`, {
+  const formData = new FormData();
+
+  formData.append('id', id);
+  formData.append('header', header);
+  formData.append('description', description);
+  formData.append('post', post);
+  formData.append('image', image);
+
+  return await fetch(`https://strateg.link/public/api/blog/post/update/${id}`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8',
       'Authorization': `${token_type} ${token}`
     },
-    body: JSON.stringify({
-      header,
-      description,
-      post,
-      image
-    })
+    body: formData
   })
     .then(async (response) => {
-      console.log(response);
+      // console.log(response);
     })
     .catch(error => console.error(error));
 }

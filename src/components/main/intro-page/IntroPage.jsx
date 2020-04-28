@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types';
 import './intro.scss'
 import SearchIcon from './image/search-icon.png'
 import ArrowRight from './image/arrow-right.png'
@@ -97,12 +98,12 @@ export default class IntroPage extends Component {
                 <div>
                   {
                     !this.state.loading ?
-                      <div className="btn check-car-btn w-100 d-flex justify-content-center align-items-center">
+                      <button className="btn check-car-btn w-100 d-flex justify-content-center align-items-center"
+                        onClick={this.sendValue} >
                         <input type="submit" className="pr-3"
-                          value={text.intro_header_btn_check}
-                          onClick={this.sendValue} />
-                        <img src={ArrowRight} alt="" />
-                      </div>
+                          value={text.intro_header_btn_check} />
+                        <img src={ArrowRight} alt="&#x2192;" />
+                      </button>
                       :
                       <div className="spinner-border text-danger" role="status">
                         <span className="sr-only">Loading...</span>
@@ -281,4 +282,10 @@ export default class IntroPage extends Component {
       </div>
     )
   }
+}
+
+IntroPage.propTypes = {
+  setValue: PropTypes.func,
+  langData: PropTypes.object,
+  scrollValue: PropTypes.string
 }

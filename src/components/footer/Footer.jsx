@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import s from './footer.module.scss'
 import ArrowRight from '../main/intro-page/image/arrow-right.png'
 import { Link } from 'react-router-dom'
@@ -53,4 +54,8 @@ export default class Footer extends Component {
       </footer>
     )
   }
+}
+
+Footer.propTypes = {
+  langData: PropTypes.object
 }

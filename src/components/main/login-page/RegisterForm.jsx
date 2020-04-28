@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import { Form, Button } from 'react-bootstrap'
 
 
@@ -42,4 +43,14 @@ export default class RegisterForm extends React.Component {
       </div >
     )
   }
+}
+
+RegisterForm.propTypes = {
+  email: PropTypes.string,
+  name: PropTypes.string,
+  password: PropTypes.string,
+  loginInput: PropTypes.func,
+  passwordInput: PropTypes.func,
+  registerHandler: PropTypes.func,
+  langData: PropTypes.object
 }

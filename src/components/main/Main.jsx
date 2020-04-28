@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import IntroPage from './intro-page/IntroPage'
 import ResultPage from './result-page/ResultPage'
 import { Route, Switch } from 'react-router-dom';
@@ -80,4 +81,9 @@ export default class Main extends Component {
       </div>
     )
   }
+}
+
+Main.propTypes = {
+  langData: PropTypes.object,
+  onSetLanguage: PropTypes.func
 }

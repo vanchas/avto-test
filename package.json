@@ -2,10 +2,12 @@
 	"name": "auto-test",
 	"version": "0.1.0",
 	"private": true,
+	"homepage": "http://gitname.github.io/avto-test/",
 	"dependencies": {
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.5.0",
 		"@testing-library/user-event": "^7.2.1",
+		"axios": "^0.19.2",
 		"bootstrap": "^4.4.1",
 		"history": "^4.10.1",
 		"jquery": "^3.4.1",
@@ -26,10 +28,8 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"postbuild": "react-snap"
-	},
-	"reactSnap": {
-		"skipThirdPartyRequests": true
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
@@ -47,6 +47,7 @@
 		]
 	},
 	"devDependencies": {
+		"gh-pages": "^2.2.0",
 		"react-snap": "^1.23.0"
 	}
 }

@@ -1,8 +1,40 @@
 .blog {
-  max-width: 1200px;
-  margin: 0 auto;
+	max-width: 1200px;
+	margin: 0 auto;
+	position: relative;
+	.move-to-top {
+		position: fixed;
+		top: .8em;
+		right: 1em;
+		display: flex;
+		justify-content: center;
+		align-content: center;
+		height: 50px;
+		width: 50px;
+		border-radius: 50%;
+		font-size: 3em;
+		transform: rotate(90deg);
+		border: none;
+		background: rgba(0, 0, 0, 0.2);
+		color: #fff;
+
+		&:hover {
+			transition: .3s;
+			background: none;
+			color: #999;
+			box-shadow: 0 0 5px 5px #eee;
+		}
+		span {
+			font-weight: 700;
+			width: fit-content;
+			transform: translate(-50%, -55%);
+			position: absolute;
+			top: 50%;
+			left: 50%;
+		}
+	}
 	h6 {
-    margin-bottom: 1em;
+		margin-bottom: 1em;
 	}
 	.post-form {
 		max-width: 700px;
@@ -11,41 +43,63 @@
 		display: grid;
 		box-shadow: -5px -5px 15px 5px #fafafa, 5px 5px 15px 5px #eee;
 	}
+	.change-form {
+		display: grid;
+	}
 	.search-form {
 		max-width: 700px;
-    margin: 0 auto;
-    form {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-    }
-  }
-  .posts-wrapper {
-    h3 {
-      margin-bottom: 1em;
-    }
-  }
-  .posts-list {
-
-  }
-  .post {
-    margin-bottom: 2em;
-    border: none;
-    box-shadow: -5px -5px 15px 5px #fafafa, 5px 5px 15px 5px #eee;
-    .wastebasket {
-      font-size: 1.5em;
-      padding: 0 .5em;
-    }
-  }
+		margin: 0 auto;
+		form {
+			display: grid;
+			grid-template-columns: 2fr 1fr;
+		}
+	}
+	.posts-wrapper {
+		h3 {
+			margin-bottom: 1em;
+		}
+	}
+	.posts-list {
+	}
+	.post {
+		display: grid;
+		align-content: center;
+		align-items: center;
+		grid-template-columns: 1fr 1fr;
+		margin-bottom: 5em;
+		border: none;
+		box-shadow: -5px -5px 15px 5px #fafafa, 5px 5px 15px 5px #eee;
+		&:nth-child(odd) {
+			.post-image {
+				order: 1;
+			}
+		}
+		.post-header {
+			grid-column: span 2;
+			text-align: center;
+		}
+		.change-post {
+			order: 10;
+			grid-column: span 2;
+		}
+		.post-text {
+			// grid-column: span 2;
+		}
+		.wastebasket {
+			font-size: 1.5em;
+			padding: 0 .5em;
+		}
+	}
 }
 
 @media (max-width: 768px) {
 	.blog {
 		.post-form {
-    }
-    .search-form {
-      form {
-        grid-template-columns: 1fr;
-      }
-    }
+		}
+		.search-form {
+			form {
+				grid-template-columns: 1fr;
+			}
+		}
 	}
 }

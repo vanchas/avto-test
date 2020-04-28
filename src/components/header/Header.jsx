@@ -6,6 +6,7 @@ import ArrowDown from './image/arrow-down.png'
 import Phone from './image/phone.png'
 import Enter from './image/enter.png'
 import $ from 'jquery'
+import PropTypes from 'prop-types';
 import { userService } from '../../_services/user.service'
 import {
   MDBNavbar,
@@ -144,3 +145,7 @@ export default class Header extends Component {
     )
   }
 }
+
+Header.propTypes = {
+  langData: PropTypes.object
+};

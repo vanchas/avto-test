@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import { Form, Button } from 'react-bootstrap'
 
 
@@ -34,4 +35,13 @@ export default class LoginForm extends React.Component {
       </div>
     )
   }
+}
+
+LoginForm.propTypes = {
+  email: PropTypes.string,
+  password: PropTypes.string,
+  emailInput: PropTypes.func,
+  passwordInput: PropTypes.func,
+  loginHandler: PropTypes.func,
+  langData: PropTypes.object
 }

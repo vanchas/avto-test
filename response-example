@@ -56,3 +56,10 @@
   "region": "КИЇВ",
   "place": "ДНІПРОВСЬКИЙ"
 }
+
+react snap
+
+	"postbuild": "react-snap"
+  "reactSnap": {
+		"skipThirdPartyRequests": true
+	},
