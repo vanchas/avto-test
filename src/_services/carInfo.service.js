@@ -16,12 +16,17 @@ async function getCarInfo(value) {
     })
   })
     .then((res) => {
-      if (res.status === 500) {
-        alert('Ошибка поиска по введенным данным');
-        window.location.reload(true);
+      if (res.status === 500 || res.status === 404 || res.status === 400) {
+        window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${value}`, '_blanc');
+        
+        localStorage.setItem('avto-test-error', JSON.stringify(car))
+        // alert('Ошибка поиска по введенным данным');
+        // window.location.reload(true);
+      } else if (res.status === 429) {
+        alert('poshol nahuy, 3 raza');
       } else {
         const data = res.json();
-        // console.log('res data',data);
+        console.log('res data',data);
         
 
         data.then(async carData => {

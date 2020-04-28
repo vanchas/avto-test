@@ -35,16 +35,17 @@ export default class ResultPage extends Component {
       carInfo: getCar().Found
     });
 
-    if (JSON.parse(localStorage.getItem('avto-test-car')) === undefined) {
-      alert('Ошибка поиска по введенным данным');
-      window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${this.inputValue}`, '_blanc');
-    } else if (
-      JSON.parse(localStorage.getItem('avto-test-car')) &&
-      JSON.parse(localStorage.getItem('avto-test-car'))[0] &&
-      JSON.parse(localStorage.getItem('avto-test-car'))[0]['search_filed.required'] === "Bad request!"
-    ) {
-      window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${this.inputValue}`, '_blanc');
-    }
+    // if (JSON.parse(localStorage.getItem('avto-test-car')) === undefined) {
+    //   alert('Ошибка поиска по введенным данным');
+    //   window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${this.inputValue}`, '_blanc');
+    // } else if (
+    //   JSON.parse(localStorage.getItem('avto-test-car')) &&
+    //   JSON.parse(localStorage.getItem('avto-test-car'))[0] &&
+    //   JSON.parse(localStorage.getItem('avto-test-car'))[0]['search_filed.required'] === "Bad request!" ||
+    //   JSON.parse(localStorage.getItem('avto-test-car'))[0] === '404 Not found'
+    // ) {
+    //   window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${this.inputValue}`, '_blanc');
+    // }
   }
 
   componentWillMount() {

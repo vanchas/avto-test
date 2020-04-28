@@ -290,6 +290,7 @@ export default class Blog extends Component {
                     {/* 🗑️ */}
 
                     <h2 className="post-header"> {post.header}</h2>
+                    {post && post.image}
                     <div className="post-image">
                       <img src={post.image} alt={post.post} className="w-100" />
                     </div>
