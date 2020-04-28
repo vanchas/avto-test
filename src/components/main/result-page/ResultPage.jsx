@@ -34,18 +34,6 @@ export default class ResultPage extends Component {
     await this.setState({
       carInfo: getCar().Found
     });
-
-    // if (JSON.parse(localStorage.getItem('avto-test-car')) === undefined) {
-    //   alert('Ошибка поиска по введенным данным');
-    //   window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${this.inputValue}`, '_blanc');
-    // } else if (
-    //   JSON.parse(localStorage.getItem('avto-test-car')) &&
-    //   JSON.parse(localStorage.getItem('avto-test-car'))[0] &&
-    //   JSON.parse(localStorage.getItem('avto-test-car'))[0]['search_filed.required'] === "Bad request!" ||
-    //   JSON.parse(localStorage.getItem('avto-test-car'))[0] === '404 Not found'
-    // ) {
-    //   window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${this.inputValue}`, '_blanc');
-    // }
   }
 
   componentWillMount() {
@@ -79,28 +67,28 @@ export default class ResultPage extends Component {
                       }}
                     >VIN</span>
                   </div>
-                  <div className="col-10 btn p-0 pl-2">
+                  <div className="col-10 p-0 pl-2">
                     <span className="float-left font-weight-bold">{car.vin}</span>
                   </div>
                 </div>
                 <div className="row py-2 green-border">
                   <div className="col-2">
                     <img width={32} src={NumberImg} alt="" className="" /></div>
-                  <div className="col-10 btn p-0 pl-2">
+                  <div className="col-10 p-0 pl-2">
                     <span className="float-left font-weight-bold">{car.number}, {car.code}</span>
                   </div>
                 </div>
                 <div className="row py-2 green-border">
                   <div className="col-2">
                     <img width={30} src={CarImg} alt="" /></div>
-                  <div className="col-10 btn p-0 pl-2">
+                  <div className="col-10 p-0 pl-2">
                     <span className="float-left font-weight-bold">{car.brand} {car.model} {car.year}</span>
                   </div>
                 </div>
                 <div className="row py-2 green-border">
                   <div className="col-2">
                     <img width={30} src={CarSearchImg} alt="" /></div>
-                  <div className="col-10 btn p-0 pl-2">
+                  <div className="col-10 p-0 pl-2">
                     <span className="float-left font-weight-bold">
                       <span>{car.kind} | </span>
                       <span>{car.color} | </span>
@@ -111,14 +99,14 @@ export default class ResultPage extends Component {
                 <div className="row py-2 green-border">
                   <div className="col-2">
                     <img width={25} src={PetrolImg} alt="" /></div>
-                  <div className="col-10 btn p-0 pl-2">
+                  <div className="col-10 p-0 pl-2">
                     <span className="float-left font-weight-bold">{car.fuel}, {car.capacity} см</span>
                   </div>
                 </div>
                 <div className="row py-2 green-border">
                   <div className="col-2">
                     <img width={30} src={KgImg} alt="" /></div>
-                  <div className="col-10 btn p-0 pl-2">
+                  <div className="col-10 p-0 pl-2">
                     <span className="float-left font-weight-bold"
                       title="общий вес">
                       {car.total_weight} кг
@@ -133,7 +121,7 @@ export default class ResultPage extends Component {
                   <div className="col-2">
                     <img width={28} src={ReportImg} alt="" className="" /></div>
                   <div className="col-10 p-0 m-0 py-2">
-                    <div className="btn p-0">
+                    <div className=" p-0">
                       {!car.reg_object.date ?
                         '' :
                         car.reg_object.map((reg, ind) => {
@@ -160,7 +148,7 @@ export default class ResultPage extends Component {
                   <div className="col-2">
                     <img width={28} src={WheelImg} alt="" />
                   </div>
-                  <div className="col-10 btn p-0 pl-2">
+                  <div className="col-10 p-0 pl-2">
                     <a target="_blank" rel="noopener noreferrer" href={car.count_site} title="Всего похожих предложений"
                       className="pl-0 float-left font-weight-bold question-sign text-dark btn">
                       {car.count}</a>
@@ -181,36 +169,22 @@ export default class ResultPage extends Component {
                       <u>{car.drorm}</u></a>
                   </div>
                 </div>
-                {/* <div className="row py-2 green-border">
-                  <div className="col-2">
-                    <img width={30} src={MotorImg} alt="" /></div>
-                  <div className="col-10 btn p-0 pl-2">
-                    <span className="float-left font-weight-bold">{car.fuel_count_parameter} имеют такой же мотор</span>
-                  </div>
-                </div> */}
                 <div className="row py-2 green-border">
                   <div className="col-2">
                     <img width={30} src={CoinsImg} alt="" /></div>
                   <div className="col-10 pl-0">
-                    <span className="btn p-0 pl-2 float-left font-weight-bold question-sign"
+                    <span className=" p-0 pl-2 float-left font-weight-bold question-sign"
                       title="arithmeticMean" >
                       {car.arithmeticMean} USD</span>
-                    <span className="sbtn p-0 pl-2 float-left font-weight-bold question-sign"
+                    <span className=" p-0 pl-2 float-left font-weight-bold question-sign"
                       title="interQuartileMean" >
                       {car.interQuartileMean} USD</span>
                   </div>
                 </div>
-                {/* <div className="row py-2 green-border">
-                  <div className="col-2">
-                    <img width={28} src={WalletImg} alt="" /></div>
-                  <div className="col-10 btn p-0 pl-2">
-                    <span className="float-left font-weight-bold">... USD стоимость новой</span>
-                  </div>
-                </div> */}
                 <div className="row py-2 green-border">
                   <div className="col-2">
                     <img width={28} src={GlobeImg} alt="" /></div>
-                  <div className="col-10 btn p-0 pl-2">
+                  <div className="col-10 p-0 pl-2">
                     <span className="float-left font-weight-bold question-sign"
                       title="Перекуп / владелец" >
                       {car.outbid}</span>
@@ -219,14 +193,14 @@ export default class ResultPage extends Component {
                 <div className="row py-2 green-border">
                   <div className="col-2">
                     <img width={30} src={CustomsImg} alt="" /></div>
-                  <div className="col-10 btn p-0 pl-2">
+                  <div className="col-10 p-0 pl-2">
                     <span className="float-left font-weight-bold">{car.status}</span>
                   </div>
                 </div>
                 <div className="row py-2 green-border">
                   <div className="col-2">
                     <img width={30} src={CheckImg} alt="" /></div>
-                  <div className="col-10 btn p-0 pl-2">
+                  <div className="col-10 p-0 pl-2">
                     <a href={car.insurance}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -239,7 +213,7 @@ export default class ResultPage extends Component {
                   <div className="col-2">
                     <img width={25} src={PlaceImg} alt="" />
                   </div>
-                  <div className="col-10 btn p-0 pl-2">
+                  <div className="col-10 p-0 pl-2">
                     <span className="float-left font-weight-bold">{car.person}&nbsp;|</span>
                     <span className="float-left font-weight-bold question-sign"
                       title={`${car.place}, ${car.region}`} >&nbsp;{car.reg_addr_koatuu}</span>

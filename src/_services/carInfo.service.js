@@ -17,13 +17,14 @@ async function getCarInfo(value) {
   })
     .then((res) => {
       if (res.status === 500 || res.status === 404 || res.status === 400) {
+        localStorage.removeItem('avto-test-car');
         window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${value}`, '_blanc');
-        
-        localStorage.setItem('avto-test-error', JSON.stringify(car))
-        // alert('Ошибка поиска по введенным данным');
-        // window.location.reload(true);
+        history.push('/result');
+
       } else if (res.status === 429) {
-        alert('poshol nahuy, 3 raza');
+        // localStorage.removeItem('avto-test-car');
+        alert('Вы исчерпали лимит бесплатных проверок в сутки (3 раза). Для того чтобы увеличить лимит до 30 проверок зарегистрируйтесь, это займет не более двух минут.');
+        history.push('/login/sign-in');
       } else {
         const data = res.json();
         console.log('res data',data);
