@@ -8,7 +8,7 @@ export const carInfoService = {
 async function getCarInfo(value) {
   return await fetch('https://strateg.link/public/api/search', {
     method: 'POST',
-    mode: 'no-cors',
+    // mode: 'no-cors',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
     },

@@ -16,6 +16,8 @@ import Hands from './image/hands.png'
 import CheckSign from './image/check-sign.png'
 import Woman from './image/woman.png'
 import { carInfoService } from '../../../_services/carInfo.service'
+import { history } from '../../../_helpers/history';
+import { getCar } from '../../../_helpers/get-car';
 
 
 export default class IntroPage extends Component {
@@ -71,25 +73,35 @@ export default class IntroPage extends Component {
   }
 
   sendValue() {
+    localStorage.removeItem('avto-test-car');
     if (this.state.value.toString().trim().length) {
       this.setState({ loading: true });
       carInfoService.getCarInfo(this.state.value);
 
       setTimeout(() => {
-        this.setState({ waitMessage: " Шукаемо по класифікатору об'єктів адміністративно-територіального устрою України..." })
+        this.setState({ waitMessage: "Шукаемо по класифікатору об'єктів адміністративно-територіального устрою України..." })
       }, 1000);
 
       setTimeout(() => {
-        this.setState({ waitMessage: " Шукаемо по державному реєстру обтяжень рухомого майна..." })
+        this.setState({ waitMessage: "Шукаемо по державному реєстру обтяжень рухомого майна..." })
       }, 2000);
 
       setTimeout(() => {
-        this.setState({ waitMessage: " Шукаемо по базi выкрадень та залогiв ..." })
+        this.setState({ waitMessage: "Шукаемо по базi выкрадень та залогiв ..." })
       }, 3000);
 
       setTimeout(() => {
-        this.setState({ waitMessage: " Шукаемо по базi даних технічного обслуговування автомобіля..." })
+        this.setState({ waitMessage: "Шукаемо по базi даних технічного обслуговування автомобіля..." })
       }, 4000);
+
+      // setTimeout(() => {
+      //   if (getCar().Found && getCar().Found.brand) {
+      //     return;
+      //   } else {
+      //     window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${this.state.value}`, '_blanc');
+      //     history.push('/result');
+      //   }
+      // }, 10000);
 
     } else {
       alert('Полe должно быть корректно заполнено')
