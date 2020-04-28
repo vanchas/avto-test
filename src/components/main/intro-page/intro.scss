@@ -2,6 +2,46 @@
 	display: grid;
 	justify-content: center;
 
+	// ==================================
+	.wait-anime {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		font-weight: 700;
+	}
+	.load-wrapp {
+		float: left;
+	}
+	.bar {
+		float: left;
+		width: 15px;
+		height: 6px;
+		border-radius: 2px;
+		background-color: red;
+	}
+	.load-10 .bar {
+		animation: loadingJ 1.5s cubic-bezier(.17, .37, .43, .67) infinite;
+	}
+	@keyframes loadingJ {
+		0%,
+		100% {
+			transform: translate(0, 0);
+		}
+
+		50% {
+			transform: translate(200px, 0);
+			background-color: #f5634a;
+			width: 25px;
+		}
+	}
+	@media (max-width: 767px) {
+		.wait-anime {
+			top: 80%;
+			transform: translateY(0%);
+		}
+	}
+	// ================================
+
 	.search-icon {
 		position: absolute;
 		width: 2.5em;

@@ -22,6 +22,7 @@ export default class IntroPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      waitMessage: 'Шукаемо по базi даних технічного обслуговування автомобіля...',
       value: '',
       carInfo: {},
       loading: false
@@ -73,6 +74,23 @@ export default class IntroPage extends Component {
     if (this.state.value.toString().trim().length) {
       this.setState({ loading: true });
       carInfoService.getCarInfo(this.state.value);
+
+      setTimeout(() => {
+        this.setState({ waitMessage: " Шукаемо по класифікатору об'єктів адміністративно-територіального устрою України..." })
+      }, 1000);
+
+      setTimeout(() => {
+        this.setState({ waitMessage: " Шукаемо по державному реєстру обтяжень рухомого майна..." })
+      }, 2000);
+
+      setTimeout(() => {
+        this.setState({ waitMessage: " Шукаемо по базi выкрадень..." })
+      }, 3000);
+
+      setTimeout(() => {
+        this.setState({ waitMessage: " Шукаемо по базi даних технічного обслуговування автомобіля..." })
+      }, 4000);
+
     } else {
       alert('Полe должно быть корректно заполнено')
     }
@@ -105,8 +123,18 @@ export default class IntroPage extends Component {
                         <img src={ArrowRight} alt="&#x2192;" />
                       </button>
                       :
-                      <div className="spinner-border text-danger" role="status">
-                        <span className="sr-only">Loading...</span>
+                      <div className="pl-3 wait-anime">
+                        {/* <div className="spinner-border text-danger" role="status">
+                          <span className="sr-only">Loading...</span>
+                        </div> */}
+                        <div>
+                          <p>{this.state.waitMessage}</p>
+                          <div className="load-wrapp">
+                            <div className="load-10">
+                              <div className="bar" />
+                            </div>
+                          </div>
+                        </div>
                       </div>
                   }
                 </div>
@@ -143,38 +171,7 @@ export default class IntroPage extends Component {
             </div>
           </div>
         </header>
-        {/* 
-        <section className="order-form-section font-weight-bolder">
-          <h3 className="h2 font-weight-bolder">Не знаешь VIN код? <img src={RedArrow} alt="arrow" /></h3>
-          <div className="order-form container">
-            <h4 className="text-center m-auto">Замов перевірку авто за посиланням на оголошення або реєстраційним номером авто</h4>
-            <form className="container form-group py-4 row d-flex justify-content-around" action="#">
-              <input className="form-control col-md-5 col-sm-12 my-2"
-                type="text"
-                onChange={e => this.onLinkInput(e.target.value)}
-                placeholder="Введіть посилання на " />
-              <input className="form-control col-md-5 col-sm-12 my-2"
-                type="text"
-                onChange={e => this.onNumberInput(e.target.value)}
-                placeholder="Введіть номерний знак" />
-              <input className="form-control col-md-5 col-sm-12 my-2"
-                type="text"
-                onChange={e => this.onNameInput(e.target.value)}
-                placeholder="Ваше ім’я" />
-              <input className="form-control col-md-5 col-sm-12 my-2"
-                type="text"
-                onChange={e => this.onPhoneInput(e.target.value)}
-                placeholder="Ваш телефон" />
-              <div className="col-12 d-flex justify-content-center">
-                <button className="btn check-car-btn px-4 mt-3"
-                  onClick={this.sendUserData} >
-                  Замовити перевірку
-                  <img src={ArrowRight} alt="arrow" />
-                </button>
-              </div>
-            </form>
-          </div>
-        </section> */}
+
 
         <section ref={this.Overview} className="price-block text-center container-fluid pt-2 pb-5 bg-light font-weight-bolder">
           <h2 className="h1 font-weight-bolder">{text.price_block_header}</h2>
@@ -289,3 +286,37 @@ IntroPage.propTypes = {
   langData: PropTypes.object,
   scrollValue: PropTypes.string
 }
+
+
+
+        // <section className="order-form-section font-weight-bolder">
+        //   <h3 className="h2 font-weight-bolder">Не знаешь VIN код? <img src={RedArrow} alt="arrow" /></h3>
+        //   <div className="order-form container">
+        //     <h4 className="text-center m-auto">Замов перевірку авто за посиланням на оголошення або реєстраційним номером авто</h4>
+        //     <form className="container form-group py-4 row d-flex justify-content-around" action="#">
+        //       <input className="form-control col-md-5 col-sm-12 my-2"
+        //         type="text"
+        //         onChange={e => this.onLinkInput(e.target.value)}
+        //         placeholder="Введіть посилання на " />
+        //       <input className="form-control col-md-5 col-sm-12 my-2"
+        //         type="text"
+        //         onChange={e => this.onNumberInput(e.target.value)}
+        //         placeholder="Введіть номерний знак" />
+        //       <input className="form-control col-md-5 col-sm-12 my-2"
+        //         type="text"
+        //         onChange={e => this.onNameInput(e.target.value)}
+        //         placeholder="Ваше ім’я" />
+        //       <input className="form-control col-md-5 col-sm-12 my-2"
+        //         type="text"
+        //         onChange={e => this.onPhoneInput(e.target.value)}
+        //         placeholder="Ваш телефон" />
+        //       <div className="col-12 d-flex justify-content-center">
+        //         <button className="btn check-car-btn px-4 mt-3"
+        //           onClick={this.sendUserData} >
+        //           Замовити перевірку
+        //           <img src={ArrowRight} alt="arrow" />
+        //         </button>
+        //       </div>
+        //     </form>
+        //   </div>
+        // </section>

@@ -16,6 +16,8 @@ async function getCarInfo(value) {
     })
   })
     .then((res) => {
+      // console.log('res',res);
+
       if (res.status === 500 || res.status === 404 || res.status === 400) {
         localStorage.removeItem('avto-test-car');
         window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${value}`, '_blanc');
@@ -28,7 +30,7 @@ async function getCarInfo(value) {
       } else {
         const data = res.json();
         console.log('res data',data);
-        
+
 
         data.then(async carData => {
           let car = await carData;

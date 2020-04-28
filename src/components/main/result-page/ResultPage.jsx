@@ -122,12 +122,15 @@ export default class ResultPage extends Component {
                     <img width={28} src={ReportImg} alt="" className="" /></div>
                   <div className="col-10 p-0 m-0 py-2">
                     <div className=" p-0">
-                      {!car.reg_object.date ?
+                      {!car.reg_object[0].date ?
                         '' :
                         car.reg_object.map((reg, ind) => {
-                          return <span className="float-left font-weight-bold question-sign pl-2"
-                            title={`code: ${reg.code}, number: ${reg.number}`} >
-                            {reg.date}</span>
+                          return <span key={ind} className="float-left  pl-2 font-weight-bold d-flex">
+                            <span
+                              className=" question-sign"
+                              title={`code: ${reg.code}, number: ${reg.number}`} >
+                              {reg.date}
+                            </span>&nbsp; |</span>
                         })}
                     </div>
                     <div className=" btn p-0 pl-2 ">
@@ -194,7 +197,9 @@ export default class ResultPage extends Component {
                   <div className="col-2">
                     <img width={30} src={CustomsImg} alt="" /></div>
                   <div className="col-10 p-0 pl-2">
-                    <span className="float-left font-weight-bold">{car.status}</span>
+                    <span className="float-left font-weight-bold question-sign"
+                      title="Информация по базе угонов" >
+                      {car.status}</span>
                   </div>
                 </div>
                 <div className="row py-2 green-border">
