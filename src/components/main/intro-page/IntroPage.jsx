@@ -16,9 +16,6 @@ import Hands from './image/hands.png'
 import CheckSign from './image/check-sign.png'
 import Woman from './image/woman.png'
 import { carInfoService } from '../../../_services/carInfo.service'
-import { history } from '../../../_helpers/history';
-import { getCar } from '../../../_helpers/get-car';
-
 
 export default class IntroPage extends Component {
   constructor(props) {
