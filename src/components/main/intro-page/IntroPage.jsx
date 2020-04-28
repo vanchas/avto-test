@@ -84,7 +84,7 @@ export default class IntroPage extends Component {
       }, 2000);
 
       setTimeout(() => {
-        this.setState({ waitMessage: " Шукаемо по базi выкрадень..." })
+        this.setState({ waitMessage: " Шукаемо по базi выкрадень та залогiв ..." })
       }, 3000);
 
       setTimeout(() => {
@@ -128,7 +128,7 @@ export default class IntroPage extends Component {
                           <span className="sr-only">Loading...</span>
                         </div> */}
                         <div>
-                          <p>{this.state.waitMessage}</p>
+                          <p className="pl-1 text-center w-100" >{this.state.waitMessage}</p>
                           <div className="load-wrapp">
                             <div className="load-10">
                               <div className="bar" />
