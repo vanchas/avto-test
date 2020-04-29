@@ -7,29 +7,10 @@ export class HomePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            message: '',
-            user: {},
             showDetails: false
         };
-        this.user = {};
         this.logout = this.logout.bind(this);
         this.getUserDetails = this.getUserDetails.bind(this);
-    }
-
-    componentDidMount() {
-        // console.log('home user: ', this.props.user);
-        this.setState({ user: this.user });
-    }
-
-    componentWillMount() {
-        if (authHeader().Authorization) {
-            const user = authHeader().Authorization;
-            this.user = user;
-
-            this.props.setCurrentUser(user);
-        } else {
-            history.push('/login/sign-in');
-        }
     }
 
     logout() {
@@ -48,11 +29,11 @@ export class HomePage extends React.Component {
     }
 
     render() {
-        const user = this.user;
+        const user = authHeader().Authorization;
 
         return (
             <div style={{ minHeight: '100vh' }}
-                className="col-md-6 col-md-offset-3">
+                className="mx-auto">
                 <h1 className="text-center py-5">Hi, {user.name}, at Home page!</h1>
                 <p className="text-center">
                     <button
@@ -61,10 +42,17 @@ export class HomePage extends React.Component {
                         Logout
                     </button>
                     <button
-                        className="btn btn-info"
+                        className="btn btn-info mr-2"
                         onClick={this.getUserDetails}>
                         User Details
                     </button>
+                    {user && user.is_admin === 1 ?
+                        <button
+                            onClick={this.goToAdminPage}
+                            className="btn btn-warning">
+                            To Admin Page
+                        </button>
+                        : null}
                 </p>
                 {this.state.showDetails && this.state.user && this.state.user.email ?
                     <div>

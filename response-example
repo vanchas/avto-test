@@ -6,6 +6,25 @@
   "color": "СІРИЙ",
   "first_reg_date": "2020-02-18",
   "date": "2020-02-18",
+
+  reg_object: [
+    {
+      "date": "2020-02-29",
+      "code": "CXE947151",
+      "number": "AX0650HX"
+    },
+    {
+      "date": "2018-12-22",
+      "code": "CXI563631",
+      "number": "AB7577AE"
+    },
+    {
+       "date": "2018-02-23",
+       "code": "CXK382002",
+       "number": "KA0004EE"
+    }
+  ]
+
   "fuel": "БЕНЗИН",
   "kind": "ЛЕГКОВИЙ СЕДАН-B",
   "year": 2016,
@@ -37,3 +56,10 @@
   "region": "КИЇВ",
   "place": "ДНІПРОВСЬКИЙ"
 }
+
+react snap
+
+	"postbuild": "react-snap"
+  "reactSnap": {
+		"skipThirdPartyRequests": true
+	},

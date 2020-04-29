@@ -1,12 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import { Form, Button } from 'react-bootstrap'
 
 
 export default class RegisterForm extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const text = this.props.langData;
     
@@ -15,8 +12,8 @@ export default class RegisterForm extends React.Component {
         <Form className="mx-auto" style={{ maxWidth: '700px' }}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>{text.email_label}</Form.Label>
-            <Form.Control autoComplete="false"
-              type="email" placeholder=""
+            <Form.Control
+              type="email" placeholder="example@email.com"
               value={this.props.email}
               onChange={e => this.props.emailInput(e.target.value)} />
             <Form.Text className="text-muted">
@@ -25,15 +22,15 @@ export default class RegisterForm extends React.Component {
           </Form.Group>
           <Form.Group controlId="formBasicLogin">
             <Form.Label>{text.login_label}</Form.Label>
-            <Form.Control autoComplete="false"
-              type="text" placeholder=""
+            <Form.Control
+              type="text" placeholder="От 3 символов"
               value={this.props.name}
               onChange={e => this.props.loginInput(e.target.value)} />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>{text.password_label}</Form.Label>
             <Form.Control type="password"
-              placeholder=""
+              placeholder="От 6 символов"
               value={this.props.password}
               onChange={e => this.props.passwordInput(e.target.value)} />
           </Form.Group>
@@ -46,4 +43,14 @@ export default class RegisterForm extends React.Component {
       </div >
     )
   }
+}
+
+RegisterForm.propTypes = {
+  email: PropTypes.string,
+  name: PropTypes.string,
+  password: PropTypes.string,
+  loginInput: PropTypes.func,
+  passwordInput: PropTypes.func,
+  registerHandler: PropTypes.func,
+  langData: PropTypes.object
 }

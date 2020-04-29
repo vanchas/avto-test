@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import s from './footer.module.scss'
 import ArrowRight from '../main/intro-page/image/arrow-right.png'
 import { Link } from 'react-router-dom'
 import Logo from './image/footer-logo.png'
+import { history } from '../../_helpers/history';
 
 export default class Footer extends Component {
   constructor(props) {
@@ -23,15 +25,39 @@ export default class Footer extends Component {
           <div className={`${s.btn_block}`}>
             <button className={`${s.btn} btn px-4`}
               onClick={this.requestConsultation} >
-              {text.footer_btn}
+              {text.footer_btn} &nbsp;
               <img src={ArrowRight} alt="arrow" />
             </button>
           </div>
           <div className={`${s.info_block}`}>
-            <div>{text.footer_list_item_1}</div>
-            <div>{text.footer_list_item_2}</div>
-            <div>{text.footer_list_item_3}</div>
-            <div>{text.footer_list_item_4}</div>
+            <div className={s.info_block_item}>
+              <span className="btn nav-link h5 mb-0"
+                onClick={async () => {
+                  await history.push('/');
+                  // this.props.footerScrollFunc('vin');
+                }} >{text.footer_list_item_1}</span>
+            </div>
+            <div className={s.info_block_item}>
+              <span className="btn nav-link h5 mb-0"
+                onClick={async () => {
+                  await history.push('/');
+                  // this.props.footerScrollFunc('vin');
+                }} >{text.footer_list_item_2}</span>
+            </div>
+            <div className={s.info_block_item}>
+              <span className="btn nav-link h5 mb-0"
+                onClick={async () => {
+                  await history.push('/');
+                  // this.props.footerScrollFunc('overview');
+                }} >{text.footer_list_item_3}</span>
+            </div>
+            <div className={s.info_block_item}>
+              <span className="btn nav-link h5 mb-0"
+                onClick={async () => {
+                  await history.push('/');
+                  // this.props.footerScrollFunc('full selection');
+                }} >{text.footer_list_item_4}</span>
+            </div>
           </div>
 
           <div className={`${s.text_block}`}>
@@ -53,4 +79,8 @@ export default class Footer extends Component {
       </footer>
     )
   }
+}
+
+Footer.propTypes = {
+  langData: PropTypes.object
 }

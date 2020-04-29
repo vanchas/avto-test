@@ -1,12 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import { Form, Button } from 'react-bootstrap'
 
 
 export default class LoginForm extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const text = this.props.langData;
 
@@ -14,7 +11,7 @@ export default class LoginForm extends React.Component {
       <div>
         <Form onSubmit={e => this.props.loginHandler(e)} className="mx-auto" style={{ maxWidth: '700px' }}>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>{text.nav_item_sign_in}</Form.Label>
+            <Form.Label>{text.login_label}</Form.Label>
             <Form.Control autoComplete="true"
               type="email" placeholder=""
               value={this.props.email}
@@ -38,4 +35,13 @@ export default class LoginForm extends React.Component {
       </div>
     )
   }
+}
+
+LoginForm.propTypes = {
+  email: PropTypes.string,
+  password: PropTypes.string,
+  emailInput: PropTypes.func,
+  passwordInput: PropTypes.func,
+  loginHandler: PropTypes.func,
+  langData: PropTypes.object
 }

@@ -3,6 +3,9 @@ import LocalizedStrings from 'react-localization';
 export let strings = new LocalizedStrings({
   EN: {
     intro_page: {
+      complete_field_warning: 'The field must be filled correctly',
+      limit_warning_unauthorized: 'You have exhausted the limit of free checks per day (3 times). In order to increase the limit to 30 checks register or log in, it will take no more than a minute.',
+      limit_warning_authorized: 'You have exhausted the limit of free checks per day (30 times).',
       intro_header: "Where to start a used car search?",
       intro_subheader: "Checking the car with the vin code is the first step when buying",
       intro_header__input_placeholder: "Enter VIN code",
@@ -48,18 +51,22 @@ export let strings = new LocalizedStrings({
       header_reviews_item: "Car review",
       header_full_constructor_item: "Full construction",
       header_blog_item: "Blog",
-      header_enter_item: "Enter",
+      header_enter_item: "Sign In",
+      header_exit_item: "Sign Out",
+      header_home_item: "Profile",
       header_btn_call: "Order a call"
     },
     form_login: {
       nav_item_sign_in: "Sign In",
-      nav_item_sign_up: "Registration",
+      nav_item_sign_up: "Sign Up",
       email_label: "Email",
       password_label: "Password",
       login_label: "Login",
       email_sublabel: "We'll never share your email with anyone else."
     },
     result_page: {
+      error_submessage: "Search for your request",
+      error_link: "https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=",
       error_message: "Unfortunately, your data did not match any of the options.",
       result_page_header: "That's what we found by VIN",
       result_page_cards_block_header: "Get a detailed report and find out the truth",
@@ -69,11 +76,27 @@ export let strings = new LocalizedStrings({
       price_block_card_3_base: "Base of the Ministry of Internal Affairs",
       price_block_card_currency: "UAH",
       price_block_card_report_link: "What does the report look like?",
-      price_block_card_btn_buy: "Buy"
+      price_block_card_btn_buy: "Buy",
+      title_total_weight: "total weight",
+      title_own_weight: "own weight",
+      title_car_code: 'code',
+      title_car_number: 'number',
+      title_all_similar_offers: 'Total similar offers',
+      title_month_similar_offers: 'Exposed Last Month',
+      title_week_similar_offers: 'Exposed Last Week',
+      title_state_register: 'STATE REGISTER OF MOVABLE PROPERTY Burden',
+      title_arithmetic_mean: 'arithmetic mean',
+      title_inter_quartile_mean: 'inter quartile mean',
+      title_outbid_owner: 'Outbid / Owner',
+      title_theft_database: 'Information on the theft database',
+      title_registration_policies: 'National service * registration of electronic motor-car policies'
     }
   },
   UA: {
     intro_page: {
+      complete_field_warning: 'Полe має бути коректно заповнене',
+      limit_warning_unauthorized: 'Ви вичерпали ліміт безкоштовних перевірок на добу (3 рази). Для того щоб збільшити ліміт до 30 перевірок зареєструйтесь або увійдіть, це займе не більше хвилини.',
+      limit_warning_authorized: 'Ви вичерпали ліміт безкоштовних перевірок на добу (30 разів).',
       intro_header: "З чого почати пошук б/у авто?",
       intro_subheader: "Перевірка авто по vin коду — це перший крок при купівлі",
       intro_header__input_placeholder: "Уведіть VIN код",
@@ -120,6 +143,8 @@ export let strings = new LocalizedStrings({
       header_full_constructor_item: "Авто «під ключ»",
       header_blog_item: "Блог",
       header_enter_item: "Вхід",
+      header_exit_item: "Вихід",
+      header_home_item: "Профіль",
       header_btn_call: "Замовити дзвінок"
     },
     form_login: {
@@ -131,6 +156,8 @@ export let strings = new LocalizedStrings({
       email_sublabel: "Ми ніколи не поділимося вашим електронним листом ні з ким іншим."
     },
     result_page: {
+      error_submessage: "Пошук по вашому запиту",
+      error_link: "https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=",
       error_message: "На жаль ваші дані не збіглися з жодним з можливих варіантів.",
       result_page_header: "Ось що ми знайшли по VIN",
       result_page_cards_block_header: "Придбайте докладний звіт і дізнайтеся всю правду",
@@ -140,11 +167,26 @@ export let strings = new LocalizedStrings({
       price_block_card_3_base: "База МВC",
       price_block_card_currency: "грн",
       price_block_card_report_link: "Як виглядає звіт?",
-      price_block_card_btn_buy: "Купити"
+      price_block_card_btn_buy: "Купити",
+      title_total_weight: "Загальна вага",
+      title_own_weight: "власна вага",
+      title_car_code: 'код',
+      title_car_number: 'номер',
+      title_all_similar_offers: 'Всього схожих пропозицій',
+      title_month_similar_offers: 'Виставлено минулого місяця',
+      title_week_similar_offers: 'Виставлено на минулим тижнем',
+      title_state_register: 'ДЕРЖАВНИЙ РЕЄСТР ОБТЯЖЕНЬ РУХОМОГО МАЙНА',
+      title_arithmetic_mean: 'середнє арифметичне',
+      title_inter_quartile_mean: 'міжквартильне середнє',
+      title_outbid_owner: 'Перекупка / власник',title_theft_database: 'Інформація по базі викрадень',
+      title_registration_policies: 'Загальнодержавний сервіс* оформлення електронних полісів автоцивілки'
     }
   },
   RU: {
     intro_page: {
+      complete_field_warning: 'Полe должно быть корректно заполнено',
+      limit_warning_unauthorized: 'Вы исчерпали лимит бесплатных проверок в сутки (3 раза). Для того чтобы увеличить лимит до 30 проверок зарегистрируйтесь или войдите, это займет не более минуты.',
+      limit_warning_authorized: 'Вы исчерпали лимит бесплатных проверок в сутки (30 раз).',
       intro_header: "С чего начать поиск б / у авто?",
       intro_subheader: "Проверка авто по vin коду - это первый шаг при покупке",
       intro_header__input_placeholder: "Введите VIN код",
@@ -191,6 +233,8 @@ export let strings = new LocalizedStrings({
       header_full_constructor_item: "Авто «под ключ»",
       header_blog_item: "Блог",
       header_enter_item: "Вход",
+      header_exit_item: "Выхoд",
+      header_home_item: "Профиль",
       header_btn_call: "Заказать дзвонок"
     },
     form_login: {
@@ -202,6 +246,8 @@ export let strings = new LocalizedStrings({
       email_sublabel: "Мы никогда не передадим вашу электронную почту кому-либо еще."
     },
     result_page: {
+      error_submessage: "Поиск по вашему запросу",
+      error_link: "https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=",
       error_message: "К сожалению ваши данные не совпали ни с одним из возможных вариантов.",
       result_page_header: "Вот что мы нашли по VIN",
       result_page_cards_block_header: "Приобретите подробный отчет и узнайте всю правду",
@@ -211,7 +257,20 @@ export let strings = new LocalizedStrings({
       price_block_card_3_base: "База МВД",
       price_block_card_currency: "грн",
       price_block_card_report_link: "Как выглядит отчет?",
-      price_block_card_btn_buy: "Купить"
+      price_block_card_btn_buy: "Купить",
+      title_total_weight: "общий вес",
+      title_own_weight: "собственный вес",
+      title_car_code: 'код',
+      title_car_number: 'номер',
+      title_all_similar_offers: 'Всего похожих предложений',
+      title_month_similar_offers: 'Выставлено в прошлом месяце',
+      title_week_similar_offers: 'Выставлено на прошлой неделей',
+      title_state_register: 'Государственный реестр обременений движимого имущества',
+      title_arithmetic_mean: 'среднее арифметическое',
+      title_inter_quartile_mean: 'среднее за квартиль',
+      title_outbid_owner: 'Перекуп / владелец',
+      title_theft_database: 'Информация по базе угонов',
+      title_registration_policies: 'Общегосударственный сервис * оформление электронных полисов автогражданки'
     }
   }
 });

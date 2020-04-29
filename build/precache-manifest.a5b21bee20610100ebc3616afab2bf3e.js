@@ -1,31 +1,31 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8ea347a2a51d92f7d08c1f9ce627f8fc",
+    "revision": "5e96dda66184ce6f6d6bbe844c48cc5c",
     "url": "/avto-test/index.html"
   },
   {
-    "revision": "5bf501d0d2bc30f90c45",
-    "url": "/avto-test/static/css/2.de424728.chunk.css"
+    "revision": "8540004e9af4fae2707e",
+    "url": "/avto-test/static/css/2.69121389.chunk.css"
   },
   {
-    "revision": "1f58640fd4a9efaa497a",
-    "url": "/avto-test/static/css/main.a583b6e0.chunk.css"
+    "revision": "27df046f16bfda404b9c",
+    "url": "/avto-test/static/css/main.79ddc71b.chunk.css"
   },
   {
-    "revision": "5bf501d0d2bc30f90c45",
-    "url": "/avto-test/static/js/2.3447ff51.chunk.js"
+    "revision": "8540004e9af4fae2707e",
+    "url": "/avto-test/static/js/2.8dc96ee1.chunk.js"
   },
   {
-    "revision": "43c730fd84cedfd1d1b86e985bc4eb2e",
-    "url": "/avto-test/static/js/2.3447ff51.chunk.js.LICENSE.txt"
+    "revision": "6286fcfb33c94e45e76e825aa6a19497",
+    "url": "/avto-test/static/js/2.8dc96ee1.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "1f58640fd4a9efaa497a",
-    "url": "/avto-test/static/js/main.d58d3e59.chunk.js"
+    "revision": "27df046f16bfda404b9c",
+    "url": "/avto-test/static/js/main.8fd50c3a.chunk.js"
   },
   {
-    "revision": "c0fbb1f5e4121a97be4f",
-    "url": "/avto-test/static/js/runtime-main.a89c1ee2.js"
+    "revision": "609d45976c338235ea42",
+    "url": "/avto-test/static/js/runtime-main.9b7df074.js"
   },
   {
     "revision": "afe760ffd0c1944072ba8f7c3f47b4d5",
@@ -58,6 +58,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "449004b47b37bc947a3f04532feaa81a",
     "url": "/avto-test/static/media/kg_g.449004b4.png"
+  },
+  {
+    "revision": "f2fed888ae16b12bc503d26a8fffa7b4",
+    "url": "/avto-test/static/media/question.f2fed888.png"
   },
   {
     "revision": "fdf14f71c346043058361cf8d4c53317",

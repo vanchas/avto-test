@@ -1,6 +1,26 @@
 .result-page {
 	max-width: 1300px;
 	margin: 0 auto;
+	
+	.question-sign {
+		position: relative;
+		display: flex;
+		align-items: flex-start;
+		align-content: flex-start;
+		margin-right: .8em;
+		&::after {
+			position: absolute;
+			right: 0;
+			top: 0;
+			transform: translate(110%, 0);
+			content: '';
+			background: url('./image/question.png') center center / cover no-repeat;
+			margin-left: .2em;
+			height: 1.5em;
+			width: 1.5em;
+			font-size: .5em;
+		}
+	}
 
 	.spinner-border {
 		margin: 10% auto;

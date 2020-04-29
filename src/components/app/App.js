@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.scss';
 import Main from '../main/Main';
-import Footer from '../footer/Footer';
 import { Router } from 'react-router-dom';
 import { history } from '../../_helpers/history';
 import { strings } from '../../localisation/localisation';
@@ -11,13 +10,18 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: this.props.user || {},
             lang: 'UA',
-            langData: strings._props.UA
+            langData: strings._props.UA,
+            user: {}
         }
-        this.user = {};
-        this.setCurrentUser = this.setCurrentUser.bind(this);
         this.onSetLanguage = this.onSetLanguage.bind(this);
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        if (authHeader().Authorization) {
+            return { user: authHeader().Authorization };
+        }
+        return null;
     }
 
     onSetLanguage = (lang) => {
@@ -32,19 +36,15 @@ class App extends React.Component {
         }
     }
 
-    setCurrentUser = (user) => {
-        // console.log('current user: ', user);
-        this.user = user;
-    }
+    // componentDidMount() {
+    //     const lang = JSON.parse(localStorage.getItem('avto-test-lang'));
 
-    componentDidMount() {
-        let user = authHeader().Authorization;
-        this.setState({
-            langData: strings._props.UA,
-            user
-        });
-        // history.push('/');
-    }
+    //     if (lang !== null && lang !== undefined) {
+    //         this.onSetLanguage(lang);
+    //     } else {
+    //         localStorage.setItem('avto-test-lang', 'UA');
+    //     }
+    // }
 
     render() {
         return (
@@ -54,10 +54,6 @@ class App extends React.Component {
                         user={this.state.user}
                         langData={this.state.langData}
                         onSetLanguage={this.onSetLanguage}
-                        setCurrentUser={this.setCurrentUser}
-                    />
-                    <Footer
-                        langData={this.state.langData.footer}
                     />
                 </div>
             </Router>
