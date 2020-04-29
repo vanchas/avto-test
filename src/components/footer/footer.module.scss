@@ -25,6 +25,14 @@
       grid-row: span 2;
     }
 
+    .info_block {
+      .info_block_item {
+        * {
+          font-weight: 700;
+        } 
+      }
+    }
+
     .btn {
       grid-column: span 2;
       background-color: #df4d5a;

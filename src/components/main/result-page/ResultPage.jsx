@@ -44,7 +44,6 @@ export default class ResultPage extends Component {
     const inputValue = this.inputValue;
     const text = this.props.langData;
     const car = this.state.carInfo;
-    // console.log(car);
 
     return (
       <div className="result-page">
@@ -108,12 +107,12 @@ export default class ResultPage extends Component {
                     <img width={30} src={KgImg} alt="" /></div>
                   <div className="col-10 p-0 pl-2">
                     <span className="float-left font-weight-bold"
-                      title="общий вес">
+                      title={text.title_total_weight}>
                       {car.total_weight} кг
                     <span className="mx-2">|</span>
                     </span>
                     <span className="float-left font-weight-bold"
-                      title="собственный вес">
+                      title={text.title_own_weight}>
                       {car.own_weight} кг</span>
                   </div>
                 </div>
@@ -128,7 +127,7 @@ export default class ResultPage extends Component {
                           return <span key={ind} className="float-left  pl-2 font-weight-bold d-flex">
                             <span
                               className=" question-sign"
-                              title={`code: ${reg.code}, number: ${reg.number}`} >
+                              title={`${text.title_car_code}: ${reg.code}, ${text.title_car_number}: ${reg.number}`} >
                               {reg.date}
                             </span>&nbsp; |</span>
                         })}
@@ -152,13 +151,13 @@ export default class ResultPage extends Component {
                     <img width={28} src={WheelImg} alt="" />
                   </div>
                   <div className="col-10 p-0 pl-2">
-                    <a target="_blank" rel="noopener noreferrer" href={car.count_site} title="Всего похожих предложений"
+                    <a target="_blank" rel="noopener noreferrer" href={car.count_site} title={text.title_all_similar_offers}
                       className="pl-0 float-left font-weight-bold question-sign text-dark btn">
                       {car.count}</a>
-                    <a target="_blank" rel="noopener noreferrer" href={car.count_site_month} title="Выставлено в прошлом месяце"
+                    <a target="_blank" rel="noopener noreferrer" href={car.count_site_month} title={text.title_month_similar_offers}
                       className="pl-0 float-left font-weight-bold question-sign text-dark btn">
                       | &nbsp; {car.count_month}</a>
-                    <a target="_blank" rel="noopener noreferrer" href={car.count_site_week} title="Выставлено на прошлой неделе"
+                    <a target="_blank" rel="noopener noreferrer" href={car.count_site_week} title={text.title_week_similar_offers}
                       className="pl-0 float-left font-weight-bold question-sign text-dark btn">
                       | &nbsp; {car.count_week} на auto.ria</a>
                   </div>
@@ -168,7 +167,7 @@ export default class ResultPage extends Component {
                     <img width={28} src={MegaphoneImg} alt="" /></div>
                   <div className="col-10 d-flex pl-0">
                     <a href={car.drorm} className="p-0 pl-2 font-weight-bold text-dark question-sign"
-                      title="ДЕРЖАВНИЙ РЕЄСТР ОБТЯЖЕНЬ РУХОМОГО МАЙНА" target="_blank" rel="noopener noreferrer">
+                      title={text.title_state_register} target="_blank" rel="noopener noreferrer">
                       <u>{car.drorm}</u></a>
                   </div>
                 </div>
@@ -177,10 +176,10 @@ export default class ResultPage extends Component {
                     <img width={30} src={CoinsImg} alt="" /></div>
                   <div className="col-10 pl-0">
                     <span className=" p-0 pl-2 float-left font-weight-bold question-sign"
-                      title="arithmeticMean" >
+                      title={text.title_arithmetic_mean} >
                       {car.arithmeticMean} USD</span>
                     <span className=" p-0 pl-2 float-left font-weight-bold question-sign"
-                      title="interQuartileMean" >
+                      title={text.title_inter_quartile_mean}>
                       {car.interQuartileMean} USD</span>
                   </div>
                 </div>
@@ -189,11 +188,11 @@ export default class ResultPage extends Component {
                     <img width={28} src={GlobeImg} alt="" /></div>
                   <div className="col-10 p-0 pl-2">
                     <span className="float-left font-weight-bold question-sign"
-                      title="Перекуп / владелец" >
+                      title={text.title_outbid_owner} >
                       {car.outbid}</span>
                   </div>
                 </div>
-                <div className="row py-2 green-border">
+                <div className="row py-2 green-border"> 
                   <div className="col-2">
                     <img width={30} src={CustomsImg} alt="" /></div>
                   <div className="col-10 p-0 pl-2">
@@ -210,7 +209,7 @@ export default class ResultPage extends Component {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="float-left font-weight-bold text-dark"
-                      title="Загальнодержавний сервіс* оформлення електронних полісів автоцивілки" >
+                      title={text.title_registration_policies} >
                       <u>БАЗA ЗАЛОГОВ</u></a>
                   </div>
                 </div>

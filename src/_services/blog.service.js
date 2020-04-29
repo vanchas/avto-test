@@ -11,11 +11,14 @@ async function getAllPosts() {
   return await fetch('https://strateg.link/public/api/blog/posts', {
     method: 'GET',
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json;charset=utf-8'
     }
   })
     .then(async (response) => {
       const res = await response.json();
+      // console.log(res);
+      
       return res;
     })
     .catch(error => console.error(error));
@@ -25,6 +28,7 @@ async function getOnePost(id) {
   return await fetch(`https://strateg.link/public/api/blog/post/${id}`, {
     method: 'GET',
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json;charset=utf-8'
     }
   })
@@ -51,6 +55,7 @@ async function addPost(token, token_type, header, description, post, image) {
   return await fetch(`https://strateg.link/public/api/blog/post/add`, {
     method: 'POST',
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Authorization': `${token_type} ${token}`
     },
     body: formData
@@ -76,6 +81,7 @@ async function changePost(token_type, token, id, header, description, post, imag
   return await fetch(`https://strateg.link/public/api/blog/post/update/${id}`, {
     method: 'POST',
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Authorization': `${token_type} ${token}`
     },
     body: formData
@@ -91,7 +97,8 @@ function removePost(token_type, token, id) {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
-      'Authorization': `${token_type} ${token}`
+      'Authorization': `${token_type} ${token}`,
+      'Access-Control-Allow-Origin': '*',
     }
   })
     .then(async (response) => {

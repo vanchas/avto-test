@@ -9,6 +9,7 @@ async function getCarInfo(value) {
   return await fetch('https://strateg.link/public/api/search', {
     method: 'POST',
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json;charset=utf-8'
     },
     body: JSON.stringify({
@@ -23,13 +24,12 @@ async function getCarInfo(value) {
         window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${value}`, '_blanc');
         history.push('/result');
 
-      } else if (res.status === 429) {
-        // localStorage.removeItem('avto-test-car');
-        alert('Вы исчерпали лимит бесплатных проверок в сутки (3 раза). Для того чтобы увеличить лимит до 30 проверок зарегистрируйтесь, это займет не более двух минут.');
-        history.push('/login/sign-in');
+        // } else if (res.status === 429) {
+        //   alert('Вы исчерпали лимит бесплатных проверок в сутки (3 раза). Для того чтобы увеличить лимит до 30 проверок зарегистрируйтесь, это займет не более двух минут.');
+        //   history.push('/login/sign-in');
       } else {
         const data = res.json();
-        console.log('res data',data);
+        // console.log('res data', data);
 
 
         data.then(async carData => {

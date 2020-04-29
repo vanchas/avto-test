@@ -25,7 +25,7 @@ export default class Login extends Component {
     this.emailInput = this.emailInput.bind(this);
     this.passwordInput = this.passwordInput.bind(this);
   }
-  
+
   componentWillUnmount() {
     this.setState({ loading: false });
   }
@@ -49,6 +49,7 @@ export default class Login extends Component {
       this.state.email.toString().trim().length &&
       this.state.password.toString().trim().length
     ) {
+      localStorage.removeItem('avto-test-car');
       this.setState({ loading: true });
       userService.registration(
         this.state.name,

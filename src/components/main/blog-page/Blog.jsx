@@ -185,6 +185,7 @@ export default class Blog extends Component {
     const user = authHeader().Authorization;
     const posts = this.state.posts.sort((a, b) => +b.id - +a.id);
     // console.log(posts);
+    
 
     return (
       <div style={{ minHeight: '100vh' }} className="blog" >
@@ -274,9 +275,9 @@ export default class Blog extends Component {
             {posts.length ?
               posts.map((post, ind) => {
                 return (
-                  <li key={ind} className={`list-group-item post post${post.id}`}>
+                  <li key={ind} className={`list-group-item post text-center post${post.id}`}>
                     {authHeader().Authorization && authHeader().Authorization.is_admin === 1 ?
-                      <div className="">
+                      <div>
                         <button
                           onClick={() => this.openChangePost(post.id)}
                           className="btn btn-secondary mr-3"
@@ -289,11 +290,12 @@ export default class Blog extends Component {
                       : null}
                     {/* 🗑️ */}
 
-                    <h2 className="post-header"> {post.header}</h2>
-                    {post && post.image}
-                    <div className="post-image">
-                      <img src={post.image} alt={post.post} className="w-100" />
-                    </div>
+                    <h2 className="post-header w-100"> {post.header}</h2>
+                    {(post.image)
+                      ? <div className="post-image">
+                        <img src={post.image} alt="" className="" />
+                      </div>
+                      : null}
                     <div className="px-3 post-text">
                       <h5 className="text-center">{post.description}</h5>
                       <p>{post.post}</p>
@@ -348,9 +350,9 @@ export default class Blog extends Component {
                         <div>
                           <label className="form-group">
                             <input type="button" value="Картинка" onClick={() => {
-                              $('#change').click();
+                              $(`.change`).click();
                             }} className="btn btn-info mr-2" />
-                            <input type="file" id="change"
+                            <input type="file" className="change"
                               style={{ display: 'none' }}
                               onChange={e => this.uploadChangedPostImage(e)} />
                           </label>

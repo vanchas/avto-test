@@ -17,6 +17,7 @@ import {
   MDBCollapse
 } from 'mdbreact';
 import { authHeader } from '../../_helpers/auth-header'
+import { history } from '../../_helpers/history'
 
 
 export default class Header extends Component {
@@ -24,8 +25,7 @@ export default class Header extends Component {
     super(props);
     this.state = {
       isOpen: false,
-      lang: 'RU',
-      user: {}
+      lang: 'RU'
     };
     this.logOut = this.logOut.bind(this);
   }
@@ -52,7 +52,6 @@ export default class Header extends Component {
   }
 
   render() {
-    // const user = this.props.user;
     const text = this.props.langData;
 
     return (
@@ -61,7 +60,8 @@ export default class Header extends Component {
           <MDBNavbar color='indigo' dark expand='xl'
             className="navbar py-0">
             <MDBNavbarBrand>
-              <Link className="navbar-brand d-flex flex-column text-white justify-content-center" to="/">
+              <Link className="navbar-brand d-flex flex-column text-white justify-content-center" to="/"
+                onClick={() => this.setState({ isOpen: false })} >
                 <img src={Logo} alt="logo" className="m-auto" />
                 <h2 className="h5"><b>Avto</b>Test</h2>
               </Link>
@@ -73,33 +73,35 @@ export default class Header extends Component {
               <MDBNavbarNav left className="justify-content-around pr-3 w-100">
 
                 <MDBNavItem>
-                  <Link to="/" className="btn nav-link h5 font-weight-light mb-0"
+                  <span className="btn nav-link h5 font-weight-light mb-0"
                     onClick={async () => {
+                      $('.navbar-toggler').click();
+                      await history.push('/');
                       this.props.scrollFunc('vin');
-                      $('.navbar-toggler').click();
-                    }} >{text.header_vin_item}</Link>
+                    }} >{text.header_vin_item}</span>
                 </MDBNavItem>
 
                 <MDBNavItem>
-                  <Link to="/" className="btn nav-link h5 font-weight-light mb-0"
-                    onClick={() => {
+                  <span className="btn nav-link h5 font-weight-light mb-0"
+                    onClick={async () => {
+                      $('.navbar-toggler').click();
+                      await history.push('/');
                       this.props.scrollFunc('overview');
-                      $('.navbar-toggler').click();
-                    }} >{text.header_reviews_item}</Link>
+                    }} >{text.header_reviews_item}</span>
                 </MDBNavItem>
 
                 <MDBNavItem>
-                  <Link to="/" className="btn nav-link h5 font-weight-light mb-0"
-                    onClick={() => {
-                      this.props.scrollFunc('full selection');
+                  <span className="btn nav-link h5 font-weight-light mb-0"
+                    onClick={async () => {
                       $('.navbar-toggler').click();
-                    }} >{text.header_full_constructor_item}</Link>
+                      await history.push('/');
+                      this.props.scrollFunc('full selection');
+                    }} >{text.header_full_constructor_item}</span>
                 </MDBNavItem>
 
                 <MDBNavItem>
                   <Link to="/blog" className="btn nav-link h5 font-weight-light mb-0"
                     onClick={() => {
-
                       $('.navbar-toggler').click();
                     }} >{text.header_blog_item}</Link>
                 </MDBNavItem>
@@ -122,12 +124,15 @@ export default class Header extends Component {
                 </MDBNavItem>
 
                 <MDBNavItem className="nav-item-select">
-                  <select className="browser-default custom-select language-select text-white" defaultValue={this.state.language} onChange={e => this.onSelectLanguage(e.target.value)}>
+                  <select className="browser-default custom-select language-select text-white"
+                    defaultValue={this.state.language}
+                    onClick={() => $('.select-img').toggleClass('img-reverse')}
+                    onChange={e => this.onSelectLanguage(e.target.value)}>
                     <option className="" value="UA">UA</option>
                     <option className="" value="RU">RU</option>
                     <option className="" value="EN">EN</option>
                   </select>
-                  <img src={ArrowDown} alt="" />
+                  <img className="select-img" src={ArrowDown} alt="" />
                 </MDBNavItem>
 
               </MDBNavbarNav>

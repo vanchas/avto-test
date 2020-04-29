@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 import { PrivateRoute } from '../../_services/PrivatRoute';
 import { HomePage } from '../main/home-page/HomePage';
 import Header from '../header/Header';
+import Footer from '../footer/Footer';
 import Login from './login-page/Login';
 import Blog from './blog-page/Blog';
 import { AdminPage } from './admin-page/AdminPage';
@@ -17,20 +18,22 @@ export default class Main extends Component {
     this.state = {
       carInfo: {},
       scrollValue: '',
+      footerScrollValue: '',
       inputValue: ''
     };
     this.scrollFunc = this.scrollFunc.bind(this);
     this.setValue = this.setValue.bind(this);
+    // this.footerScrollFunc = this.footerScrollFunc.bind(this);
   }
 
-  scrollFunc(scrollValue) {
-    new Promise(res => {
-      this.setState({ scrollValue });
-      res();
-    }).then(() => {
-      this.setState({ scrollValue: '' });
-    })
+  scrollFunc = async (scrollValue) => {
+    await this.setState({ scrollValue });
+    this.setState({ scrollValue: '' });
   }
+
+  // footerScrollFunc(footerScrollValue) {
+  //   this.setState({ footerScrollValue });
+  // }
 
   setValue(inputValue) {
     this.setState({ inputValue });
@@ -69,6 +72,7 @@ export default class Main extends Component {
               setValue={this.setValue}
               langData={this.props.langData.intro_page}
               scrollValue={this.state.scrollValue}
+            // footerScrollValue={this.state.footerScrollValue}
             />} />
 
             <Route path="/result" render={() => <ResultPage
@@ -78,6 +82,12 @@ export default class Main extends Component {
             />} />
           </Switch>
         </main>
+
+        <Footer
+          langData={this.props.langData.footer}
+          scrollFunc={this.scrollFunc}
+        // footerScrollFunc={this.footerScrollFunc}
+        />
       </div>
     )
   }

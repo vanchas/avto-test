@@ -13,7 +13,7 @@ export default class RegisterForm extends React.Component {
           <Form.Group controlId="formBasicEmail">
             <Form.Label>{text.email_label}</Form.Label>
             <Form.Control
-              type="email" placeholder=""
+              type="email" placeholder="example@email.com"
               value={this.props.email}
               onChange={e => this.props.emailInput(e.target.value)} />
             <Form.Text className="text-muted">
@@ -23,14 +23,14 @@ export default class RegisterForm extends React.Component {
           <Form.Group controlId="formBasicLogin">
             <Form.Label>{text.login_label}</Form.Label>
             <Form.Control
-              type="text" placeholder=""
+              type="text" placeholder="От 3 символов"
               value={this.props.name}
               onChange={e => this.props.loginInput(e.target.value)} />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>{text.password_label}</Form.Label>
             <Form.Control type="password"
-              placeholder=""
+              placeholder="От 6 символов"
               value={this.props.password}
               onChange={e => this.props.passwordInput(e.target.value)} />
           </Form.Group>

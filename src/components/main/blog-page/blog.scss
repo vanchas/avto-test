@@ -61,11 +61,14 @@
 	}
 	.posts-list {
 	}
+	// .post.post-image .post-text {
+	// 	grid-column: span 2;
+	// }
 	.post {
 		display: grid;
 		align-content: center;
 		align-items: center;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: auto auto;
 		margin-bottom: 5em;
 		border: none;
 		box-shadow: -5px -5px 15px 5px #fafafa, 5px 5px 15px 5px #eee;
@@ -85,6 +88,11 @@
 		.post-text {
 			// grid-column: span 2;
 		}
+		.post-image {
+			img {
+				max-width: 100%;
+			}
+		}
 		.wastebasket {
 			font-size: 1.5em;
 			padding: 0 .5em;
@@ -95,6 +103,19 @@
 @media (max-width: 768px) {
 	.blog {
 		.post-form {
+		}
+		.post {
+			overflow: hidden;
+			display: grid;
+			justify-content: center;
+			text-align: center;
+			grid-template-columns: 1fr;
+			.post-header {
+				grid-column: span 1;
+			}
+			.change-post {
+				grid-column: span 1;
+			}
 		}
 		.search-form {
 			form {

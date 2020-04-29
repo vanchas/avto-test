@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import moment from 'moment'
 import PropTypes from 'prop-types';
 import './intro.scss'
 import SearchIcon from './image/search-icon.png'
@@ -16,6 +17,8 @@ import Hands from './image/hands.png'
 import CheckSign from './image/check-sign.png'
 import Woman from './image/woman.png'
 import { carInfoService } from '../../../_services/carInfo.service'
+import { history } from '../../../_helpers/history';
+import { authHeader } from '../../../_helpers/auth-header';
 
 export default class IntroPage extends Component {
   constructor(props) {
@@ -38,10 +41,14 @@ export default class IntroPage extends Component {
     if (this.props.scrollValue.length) {
       this.scrollToElement(this.props.scrollValue);
     }
+    // if (this.props.footerScrollValue.length) {
+    //   this.footerScrollToElement(this.props.footerScrollValue);
+    // }
   }
 
   scrollToElement(ref) {
     let elementClick;
+
     if (ref === 'vin') {
       elementClick = this.Vin;
     } else if (ref === 'overview') {
@@ -49,7 +56,9 @@ export default class IntroPage extends Component {
     } else if (ref === 'full selection') {
       elementClick = this.FullSelection;
     }
+
     let destination;
+
     if (window.innerWidth > 1200) {
       destination = ReactDOM.findDOMNode(elementClick.current).getBoundingClientRect().top + 50;
     } else if (window.innerWidth <= 1200) {
@@ -63,45 +72,153 @@ export default class IntroPage extends Component {
     return false;
   }
 
+  // footerScrollToElement(ref) {
+  //   let elementClick;
+
+  //   if (ref === 'vin') {
+  //     elementClick = this.Vin;
+  //   } else if (ref === 'overview') {
+  //     elementClick = this.Overview;
+  //   } else if (ref === 'full selection') {
+  //     elementClick = this.FullSelection;
+  //   }
+
+  //   let destination;
+
+  //   if (window.innerWidth > 1200) {
+  //     destination = ReactDOM.findDOMNode(elementClick.current).getBoundingClientRect().top + 1350;
+  //   } else if (window.innerWidth <= 1200) {
+  //     destination = ReactDOM.findDOMNode(elementClick.current).getBoundingClientRect().top + 2420;
+  //   }
+
+  //   window.scroll({
+  //     top: destination,
+  //     behavior: 'smooth'
+  //   });
+  //   return false;
+  // }
+
   onValueInput(e) {
     e.preventDefault();
     this.props.setValue(e.target.value);
     this.setState({ value: e.target.value });
   }
 
-  sendValue() {
-    localStorage.removeItem('avto-test-car');
+  sendValue = async () => {
+    await localStorage.removeItem('avto-test-car');
+
+    const user = await authHeader().Authorization;
+    const checkLimiter = await JSON.parse(
+      localStorage.getItem('avto-test-limit'));
+
     if (this.state.value.toString().trim().length) {
-      this.setState({ loading: true });
-      carInfoService.getCarInfo(this.state.value);
 
-      setTimeout(() => {
-        this.setState({ waitMessage: "Шукаемо по класифікатору об'єктів адміністративно-територіального устрою України..." })
-      }, 1000);
+      if (checkLimiter && checkLimiter.date) {
 
-      setTimeout(() => {
-        this.setState({ waitMessage: "Шукаемо по державному реєстру обтяжень рухомого майна..." })
-      }, 2000);
+        if (!user || user === null || user === undefined) {
 
-      setTimeout(() => {
-        this.setState({ waitMessage: "Шукаемо по базi выкрадень та залогiв ..." })
-      }, 3000);
+          if (moment(checkLimiter.date).isSame(
+            moment(new Date().toString()).format('L'))
+            && checkLimiter.count < 3) {
 
-      setTimeout(() => {
-        this.setState({ waitMessage: "Шукаемо по базi даних технічного обслуговування автомобіля..." })
-      }, 4000);
 
-      // setTimeout(() => {
-      //   if (getCar().Found && getCar().Found.brand) {
-      //     return;
-      //   } else {
-      //     window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${this.state.value}`, '_blanc');
-      //     history.push('/result');
-      //   }
-      // }, 10000);
+            await this.setState({ loading: true });
 
+            await localStorage.setItem('avto-test-limit',
+              JSON.stringify({
+                date: moment(new Date().toString()).format('L'),
+                count: ++checkLimiter.count
+              }));
+            carInfoService.getCarInfo(this.state.value);
+
+            setTimeout(() => {
+              this.setState({ waitMessage: "Шукаемо по класифікатору об'єктів адміністративно-територіального устрою України..." })
+            }, 1000);
+            setTimeout(() => {
+              this.setState({ waitMessage: "Шукаемо по державному реєстру обтяжень рухомого майна..." })
+            }, 2000);
+            setTimeout(() => {
+              this.setState({ waitMessage: "Шукаемо по базi выкрадень та залогiв ..." })
+            }, 3000);
+            setTimeout(() => {
+              this.setState({ waitMessage: "Шукаемо по базi даних технічного обслуговування автомобіля..." })
+            }, 4000);
+
+
+
+          } else {
+            alert(this.props.langData.limit_warning_unauthorized);
+
+            history.push('/login/sign-in');
+          }
+        } else {
+
+          if (moment(checkLimiter.date).isSame(
+            moment(new Date().toString()).format('L')) &&
+            checkLimiter.count < 30) {
+
+            if (this.state.value.toString().trim().length) {
+              await this.setState({ loading: true });
+
+              await localStorage.setItem('avto-test-limit',
+                JSON.stringify({
+                  date: moment(new Date().toString()).format('L'),
+                  count: ++checkLimiter.count
+                }));
+              carInfoService.getCarInfo(this.state.value);
+
+              setTimeout(() => {
+                this.setState({ waitMessage: "Шукаемо по класифікатору об'єктів адміністративно-територіального устрою України..." })
+              }, 1000);
+              setTimeout(() => {
+                this.setState({ waitMessage: "Шукаемо по державному реєстру обтяжень рухомого майна..." })
+              }, 2000);
+              setTimeout(() => {
+                this.setState({ waitMessage: "Шукаемо по базi выкрадень та залогiв ..." })
+              }, 3000);
+              setTimeout(() => {
+                this.setState({ waitMessage: "Шукаемо по базi даних технічного обслуговування автомобіля..." })
+              }, 4000);
+
+            } else {
+              alert(this.props.langData.limit_warning_authorized);
+            }
+
+          } else {
+            alert(this.props.langData.limit_warning_authorized);
+          }
+        }
+      } else {
+
+        if (this.state.value.toString().trim().length) {
+          await this.setState({ loading: true });
+
+          await localStorage.setItem('avto-test-limit',
+            JSON.stringify({
+              date: moment(new Date().toString()).format('L'),
+              count: 1
+            }));
+          carInfoService.getCarInfo(this.state.value);
+
+          setTimeout(() => {
+            this.setState({ waitMessage: "Шукаемо по класифікатору об'єктів адміністративно-територіального устрою України..." })
+          }, 1000);
+          setTimeout(() => {
+            this.setState({ waitMessage: "Шукаемо по державному реєстру обтяжень рухомого майна..." })
+          }, 2000);
+          setTimeout(() => {
+            this.setState({ waitMessage: "Шукаемо по базi выкрадень та залогiв ..." })
+          }, 3000);
+          setTimeout(() => {
+            this.setState({ waitMessage: "Шукаемо по базi даних технічного обслуговування автомобіля..." })
+          }, 4000);
+
+        } else {
+          alert(this.props.langData.complete_field_warning)
+        }
+      }
     } else {
-      alert('Полe должно быть корректно заполнено')
+      alert(this.props.langData.complete_field_warning);
     }
   }
 
@@ -125,17 +242,14 @@ export default class IntroPage extends Component {
                 <div>
                   {
                     !this.state.loading ?
-                      <button className="btn check-car-btn w-100 d-flex justify-content-center align-items-center"
+                      <span className="btn check-car-btn w-100 d-flex justify-content-center align-items-center"
                         onClick={this.sendValue} >
                         <input type="submit" className="pr-3"
                           value={text.intro_header_btn_check} />
                         <img src={ArrowRight} alt="&#x2192;" />
-                      </button>
+                      </span>
                       :
                       <div className="pl-3 wait-anime">
-                        {/* <div className="spinner-border text-danger" role="status">
-                          <span className="sr-only">Loading...</span>
-                        </div> */}
                         <div>
                           <p className="pl-1 text-center w-100" >{this.state.waitMessage}</p>
                           <div className="load-wrapp">

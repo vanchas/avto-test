@@ -13,6 +13,7 @@ function login(email, password) {
   return fetch('https://strateg.link/public/api/login', {
     method: 'POST',
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json;charset=utf-8'
     },
     body: JSON.stringify({
@@ -48,6 +49,7 @@ function logout() {
   fetch('https://strateg.link/public/api/logout', {
     method: 'GET',
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json;charset=utf-8'
     }
   })
@@ -61,6 +63,7 @@ function registration(name, email, password) {
   fetch('https://strateg.link/public/api/register', {
     method: 'POST',
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json;charset=utf-8'
     },
     body: JSON.stringify({

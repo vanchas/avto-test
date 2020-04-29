@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.scss';
 import Main from '../main/Main';
-import Footer from '../footer/Footer';
 import { Router } from 'react-router-dom';
 import { history } from '../../_helpers/history';
 import { strings } from '../../localisation/localisation';
@@ -37,6 +36,16 @@ class App extends React.Component {
         }
     }
 
+    // componentDidMount() {
+    //     const lang = JSON.parse(localStorage.getItem('avto-test-lang'));
+
+    //     if (lang !== null && lang !== undefined) {
+    //         this.onSetLanguage(lang);
+    //     } else {
+    //         localStorage.setItem('avto-test-lang', 'UA');
+    //     }
+    // }
+
     render() {
         return (
             <Router history={history} >
@@ -45,9 +54,6 @@ class App extends React.Component {
                         user={this.state.user}
                         langData={this.state.langData}
                         onSetLanguage={this.onSetLanguage}
-                    />
-                    <Footer
-                        langData={this.state.langData.footer}
                     />
                 </div>
             </Router>
