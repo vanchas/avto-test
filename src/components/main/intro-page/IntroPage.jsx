@@ -35,15 +35,13 @@ export default class IntroPage extends Component {
     this.Overview = React.createRef();
     this.FullSelection = React.createRef();
     this.scrollToElement = this.scrollToElement.bind(this);
+    this.searchAnimation = this.searchAnimation.bind(this);
   }
 
   componentDidUpdate() {
     if (this.props.scrollValue.length) {
       this.scrollToElement(this.props.scrollValue);
     }
-    // if (this.props.footerScrollValue.length) {
-    //   this.footerScrollToElement(this.props.footerScrollValue);
-    // }
   }
 
   scrollToElement(ref) {
@@ -72,36 +70,26 @@ export default class IntroPage extends Component {
     return false;
   }
 
-  // footerScrollToElement(ref) {
-  //   let elementClick;
-
-  //   if (ref === 'vin') {
-  //     elementClick = this.Vin;
-  //   } else if (ref === 'overview') {
-  //     elementClick = this.Overview;
-  //   } else if (ref === 'full selection') {
-  //     elementClick = this.FullSelection;
-  //   }
-
-  //   let destination;
-
-  //   if (window.innerWidth > 1200) {
-  //     destination = ReactDOM.findDOMNode(elementClick.current).getBoundingClientRect().top + 1350;
-  //   } else if (window.innerWidth <= 1200) {
-  //     destination = ReactDOM.findDOMNode(elementClick.current).getBoundingClientRect().top + 2420;
-  //   }
-
-  //   window.scroll({
-  //     top: destination,
-  //     behavior: 'smooth'
-  //   });
-  //   return false;
-  // }
 
   onValueInput(e) {
     e.preventDefault();
     this.props.setValue(e.target.value);
     this.setState({ value: e.target.value });
+  }
+
+  searchAnimation() {
+    setTimeout(() => {
+      this.setState({ waitMessage: "Шукаемо по класифікатору об'єктів адміністративно-територіального устрою України..." })
+    }, 1000);
+    setTimeout(() => {
+      this.setState({ waitMessage: "Шукаемо по державному реєстру обтяжень рухомого майна..." })
+    }, 2000);
+    setTimeout(() => {
+      this.setState({ waitMessage: "Шукаемо по базi выкрадень та залогiв ..." })
+    }, 3000);
+    setTimeout(() => {
+      this.setState({ waitMessage: "Шукаемо по базi даних технічного обслуговування автомобіля..." })
+    }, 4000);
   }
 
   sendValue = async () => {
@@ -121,6 +109,47 @@ export default class IntroPage extends Component {
             moment(new Date().toString()).format('L'))
             && checkLimiter.count < 3) {
 
+            await this.setState({ loading: true });
+
+            await localStorage.setItem('avto-test-limit',
+              JSON.stringify({
+                date: moment(new Date().toString()).format('L'),
+                count: ++checkLimiter.count
+              }));
+            carInfoService.getCarInfo(this.state.value);
+
+            this.searchAnimation();
+
+          } else if (!moment(checkLimiter.date).isSame(
+            moment(new Date().toString()).format('L'))) {
+
+            await localStorage.removeItem('avto-test-limit');
+
+            await this.setState({ loading: true });
+
+            await localStorage.setItem('avto-test-limit',
+              JSON.stringify({
+                date: moment(new Date().toString()).format('L'),
+                count: 1
+              }));
+            carInfoService.getCarInfo(this.state.value);
+
+            this.searchAnimation();
+
+          } else if (moment(checkLimiter.date).isSame(
+            moment(new Date().toString()).format('L'))
+            && checkLimiter.count >= 3) {
+
+            alert(this.props.langData.limit_warning_unauthorized);
+
+            history.push('/login/sign-in');
+          }
+
+        } else {
+
+          if (moment(checkLimiter.date).isSame(
+            moment(new Date().toString()).format('L')) &&
+            checkLimiter.count < 30) {
 
             await this.setState({ loading: true });
 
@@ -131,91 +160,39 @@ export default class IntroPage extends Component {
               }));
             carInfoService.getCarInfo(this.state.value);
 
-            setTimeout(() => {
-              this.setState({ waitMessage: "Шукаемо по класифікатору об'єктів адміністративно-територіального устрою України..." })
-            }, 1000);
-            setTimeout(() => {
-              this.setState({ waitMessage: "Шукаемо по державному реєстру обтяжень рухомого майна..." })
-            }, 2000);
-            setTimeout(() => {
-              this.setState({ waitMessage: "Шукаемо по базi выкрадень та залогiв ..." })
-            }, 3000);
-            setTimeout(() => {
-              this.setState({ waitMessage: "Шукаемо по базi даних технічного обслуговування автомобіля..." })
-            }, 4000);
+            this.searchAnimation();
+            
+          } else if (!moment(checkLimiter.date).isSame(
+            moment(new Date().toString()).format('L'))) {
 
-
-
-          } else {
-            alert(this.props.langData.limit_warning_unauthorized);
-
-            history.push('/login/sign-in');
-          }
-        } else {
-
-          if (moment(checkLimiter.date).isSame(
-            moment(new Date().toString()).format('L')) &&
-            checkLimiter.count < 30) {
-
-            if (this.state.value.toString().trim().length) {
               await this.setState({ loading: true });
 
-              await localStorage.setItem('avto-test-limit',
-                JSON.stringify({
-                  date: moment(new Date().toString()).format('L'),
-                  count: ++checkLimiter.count
-                }));
-              carInfoService.getCarInfo(this.state.value);
+            await localStorage.setItem('avto-test-limit',
+              JSON.stringify({
+                date: moment(new Date().toString()).format('L'),
+                count: 1
+              }));
+            carInfoService.getCarInfo(this.state.value);
 
-              setTimeout(() => {
-                this.setState({ waitMessage: "Шукаемо по класифікатору об'єктів адміністративно-територіального устрою України..." })
-              }, 1000);
-              setTimeout(() => {
-                this.setState({ waitMessage: "Шукаемо по державному реєстру обтяжень рухомого майна..." })
-              }, 2000);
-              setTimeout(() => {
-                this.setState({ waitMessage: "Шукаемо по базi выкрадень та залогiв ..." })
-              }, 3000);
-              setTimeout(() => {
-                this.setState({ waitMessage: "Шукаемо по базi даних технічного обслуговування автомобіля..." })
-              }, 4000);
-
-            } else {
-              alert(this.props.langData.limit_warning_authorized);
-            }
+            this.searchAnimation();
 
           } else {
             alert(this.props.langData.limit_warning_authorized);
           }
         }
+        
       } else {
 
-        if (this.state.value.toString().trim().length) {
-          await this.setState({ loading: true });
+        await this.setState({ loading: true });
 
-          await localStorage.setItem('avto-test-limit',
-            JSON.stringify({
-              date: moment(new Date().toString()).format('L'),
-              count: 1
-            }));
-          carInfoService.getCarInfo(this.state.value);
+        await localStorage.setItem('avto-test-limit',
+          JSON.stringify({
+            date: moment(new Date().toString()).format('L'),
+            count: 1
+          }));
+        carInfoService.getCarInfo(this.state.value);
 
-          setTimeout(() => {
-            this.setState({ waitMessage: "Шукаемо по класифікатору об'єктів адміністративно-територіального устрою України..." })
-          }, 1000);
-          setTimeout(() => {
-            this.setState({ waitMessage: "Шукаемо по державному реєстру обтяжень рухомого майна..." })
-          }, 2000);
-          setTimeout(() => {
-            this.setState({ waitMessage: "Шукаемо по базi выкрадень та залогiв ..." })
-          }, 3000);
-          setTimeout(() => {
-            this.setState({ waitMessage: "Шукаемо по базi даних технічного обслуговування автомобіля..." })
-          }, 4000);
-
-        } else {
-          alert(this.props.langData.complete_field_warning)
-        }
+        this.searchAnimation();
       }
     } else {
       alert(this.props.langData.complete_field_warning);
@@ -224,6 +201,10 @@ export default class IntroPage extends Component {
 
   render() {
     let text = this.props.langData;
+    // console.log(!moment(JSON.parse(
+    // localStorage.getItem('avto-test-limit')).date).isSame(
+    // moment(new Date().toString()).format('L')));
+
 
     return (
       <div className="intro-page container-fluid overflow-hidden">
