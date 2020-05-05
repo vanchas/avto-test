@@ -20,13 +20,13 @@ export default class RegisterForm extends React.Component {
               {text.email_sublabel}
             </Form.Text>
           </Form.Group>
-          <Form.Group controlId="formBasicLogin">
+          {/* <Form.Group controlId="formBasicLogin">
             <Form.Label>{text.login_label}</Form.Label>
             <Form.Control
               type="text" placeholder="От 3 символов"
               value={this.props.name}
               onChange={e => this.props.loginInput(e.target.value)} />
-          </Form.Group>
+          </Form.Group> */}
           <Form.Group controlId="formBasicPassword">
             <Form.Label>{text.password_label}</Form.Label>
             <Form.Control type="password"

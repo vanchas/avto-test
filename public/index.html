@@ -2,6 +2,17 @@
 <html lang="en">
 
 <head>
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-5V6X2HP');</script>
+  <!-- End Google Tag Manager -->
+
   <meta charset="utf-8" />
   <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,6 +22,7 @@
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
   <title>AutoTest</title>
+  
   <!-- bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -27,15 +39,29 @@
 </head>
 
 <body>
-  <!-- <noscript>You need to enable JavaScript to run this app.</noscript> -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5V6X2HP" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <div id="root"></div>
 
-  <script crossorigin>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151546830-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-151546830-1');
+  </script>
+
+  <!-- <script crossorigin>
     (function (w, d, u) {
       var s = d.createElement('script'); s.async = true; s.src = u + '?' + (Date.now() / 60000 | 0);
       var h = d.getElementsByTagName('script')[0]; h.parentNode.insertBefore(s, h);
     })(window, document, 'https://cdn.bitrix24.ua/b13771627/crm/site_button/loader_3_o6vai7.js');
-  </script>
+  </script> -->
 
 </body>
 

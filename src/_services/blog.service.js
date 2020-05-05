@@ -8,7 +8,7 @@ export const blogService = {
 
 
 async function getAllPosts() {
-  return await fetch('https://strateg.link/public/api/blog/posts', {
+  return await fetch('/api/blog/posts', {
     method: 'GET',
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -25,7 +25,7 @@ async function getAllPosts() {
 }
 
 async function getOnePost(id) {
-  return await fetch(`https://strateg.link/public/api/blog/post/${id}`, {
+  return await fetch(`/api/blog/post/${id}`, {
     method: 'GET',
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -52,7 +52,7 @@ async function addPost(token, token_type, header, description, post, image) {
   formData.append('post', post);
   formData.append('image', image);
 
-  return await fetch(`https://strateg.link/public/api/blog/post/add`, {
+  return await fetch(`/api/blog/post/add`, {
     method: 'POST',
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -78,7 +78,7 @@ async function changePost(token_type, token, id, header, description, post, imag
   formData.append('post', post);
   formData.append('image', image);
 
-  return await fetch(`https://strateg.link/public/api/blog/post/update/${id}`, {
+  return await fetch(`/api/blog/post/update/${id}`, {
     method: 'POST',
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -93,7 +93,7 @@ async function changePost(token_type, token, id, header, description, post, imag
 }
 
 function removePost(token_type, token, id) {
-  return fetch(`https://strateg.link/public/api/blog/post/${id}`, {
+  return fetch(`/api/blog/post/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',

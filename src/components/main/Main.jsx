@@ -18,22 +18,16 @@ export default class Main extends Component {
     this.state = {
       carInfo: {},
       scrollValue: '',
-      footerScrollValue: '',
       inputValue: ''
     };
     this.scrollFunc = this.scrollFunc.bind(this);
     this.setValue = this.setValue.bind(this);
-    // this.footerScrollFunc = this.footerScrollFunc.bind(this);
   }
 
   scrollFunc = async (scrollValue) => {
     await this.setState({ scrollValue });
     this.setState({ scrollValue: '' });
   }
-
-  // footerScrollFunc(footerScrollValue) {
-  //   this.setState({ footerScrollValue });
-  // }
 
   setValue(inputValue) {
     this.setState({ inputValue });
@@ -43,7 +37,7 @@ export default class Main extends Component {
     return (
       <div>
         <Header
-          langData={this.props.langData.header}
+          langData={this.props.langData}
           onSetLanguage={this.props.onSetLanguage}
           scrollFunc={this.scrollFunc}
         />
@@ -56,13 +50,16 @@ export default class Main extends Component {
 
             <PrivateRoute path="/admin"
               component={props => {
-                return <AdminPage
-                  {...props} />
+                return <AdminPage {...props}
+                  onSetLanguage={this.props.onSetLanguage}
+                  changeKeyText={this.props.changeKeyText}
+                  langData={this.props.langData}
+                />
               }} />
 
             <Route path="/login"
               render={() => <Login
-                langData={this.props.langData.form_login}
+                langData={this.props.langData}
               />} />
 
             <Route path="/blog"
@@ -70,23 +67,21 @@ export default class Main extends Component {
 
             <Route exact path="/" render={() => <IntroPage
               setValue={this.setValue}
-              langData={this.props.langData.intro_page}
+              langData={this.props.langData}
               scrollValue={this.state.scrollValue}
-            // footerScrollValue={this.state.footerScrollValue}
             />} />
 
             <Route path="/result" render={() => <ResultPage
               inputValue={this.state.inputValue}
               carInfo={this.state.carInfo}
-              langData={this.props.langData.result_page}
+              langData={this.props.langData}
             />} />
           </Switch>
         </main>
 
         <Footer
-          langData={this.props.langData.footer}
+          langData={this.props.langData}
           scrollFunc={this.scrollFunc}
-        // footerScrollFunc={this.footerScrollFunc}
         />
       </div>
     )

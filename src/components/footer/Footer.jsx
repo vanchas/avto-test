@@ -22,37 +22,37 @@ export default class Footer extends Component {
     return (
       <footer className={`${s.footer} py-2`}>
         <div className={`${s.footer_content} container`}>
-          <div className={`${s.btn_block}`}>
+          {/* <div className={`${s.btn_block}`}>
             <button className={`${s.btn} btn px-4`}
               onClick={this.requestConsultation} >
               {text.footer_btn} &nbsp;
               <img src={ArrowRight} alt="arrow" />
             </button>
-          </div>
+          </div> */}
           <div className={`${s.info_block}`}>
             <div className={s.info_block_item}>
-              <span className="btn nav-link h5 mb-0"
+              <span className="btn nav-link h5 px-0 mb-0"
                 onClick={async () => {
                   await history.push('/');
                   // this.props.footerScrollFunc('vin');
                 }} >{text.footer_list_item_1}</span>
             </div>
             <div className={s.info_block_item}>
-              <span className="btn nav-link h5 mb-0"
+              <span className="btn nav-link h5 px-0 mb-0"
                 onClick={async () => {
                   await history.push('/');
                   // this.props.footerScrollFunc('vin');
                 }} >{text.footer_list_item_2}</span>
             </div>
             <div className={s.info_block_item}>
-              <span className="btn nav-link h5 mb-0"
+              <span className="btn nav-link h5 px-0 mb-0"
                 onClick={async () => {
                   await history.push('/');
                   // this.props.footerScrollFunc('overview');
                 }} >{text.footer_list_item_3}</span>
             </div>
             <div className={s.info_block_item}>
-              <span className="btn nav-link h5 mb-0"
+              <span className="btn nav-link h5 px-0 mb-0"
                 onClick={async () => {
                   await history.push('/');
                   // this.props.footerScrollFunc('full selection');

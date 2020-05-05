@@ -18,6 +18,8 @@ import {
 } from 'mdbreact';
 import { authHeader } from '../../_helpers/auth-header'
 import { history } from '../../_helpers/history'
+import { OrderForm } from '../main/result-page/ModalForm'
+import { OrderCall } from './ModalForm'
 
 
 export default class Header extends Component {
@@ -128,9 +130,9 @@ export default class Header extends Component {
                     defaultValue={this.state.language}
                     onClick={() => $('.select-img').toggleClass('img-reverse')}
                     onChange={e => this.onSelectLanguage(e.target.value)}>
-                    <option className="" value="UA">UA</option>
-                    <option className="" value="RU">RU</option>
-                    <option className="" value="EN">EN</option>
+                    <option className="" value="ua">UA</option>
+                    <option className="" value="ru">RU</option>
+                    <option className="" value="en">EN</option>
                   </select>
                   <img className="select-img" src={ArrowDown} alt="" />
                 </MDBNavItem>
@@ -138,11 +140,13 @@ export default class Header extends Component {
               </MDBNavbarNav>
             </MDBCollapse>
             <div className="call-info-block">
-              <span className="text-white number">
+              <a href="tel:+380964702700" className="text-white number">
                 <img src={Phone} alt="phone" className="mr-2 mb-1" />
-              +38096 470 27 00</span>
-              <a href="tel:+380964702700" className="order-call-btn bg-transparent py-1 px-3"
-                onClick={this.requestCall} >{text.header_btn_call}</a>
+              +38096 470 27 00</a>
+              <OrderCall
+                langData={this.props.langData}
+                header_btn_call={text.header_btn_call}>
+              </OrderCall>
             </div>
           </MDBNavbar>
         </>

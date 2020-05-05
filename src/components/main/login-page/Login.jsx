@@ -11,11 +11,9 @@ export default class Login extends Component {
     this.state = {
       loading: false,
       user: {},
-      name: '',
+      // name: '',
       email: '',
       password: '',
-      token_type: '',
-      token: '',
       message: '',
       status: 200
     };
@@ -45,14 +43,14 @@ export default class Login extends Component {
   registerHandler(e) {
     e.preventDefault();
     if (
-      this.state.name.toString().trim().length &&
+      // this.state.name.toString().trim().length &&
       this.state.email.toString().trim().length &&
       this.state.password.toString().trim().length
     ) {
       localStorage.removeItem('avto-test-car');
       this.setState({ loading: true });
       userService.registration(
-        this.state.name,
+        // this.state.name,
         this.state.email,
         this.state.password
       );

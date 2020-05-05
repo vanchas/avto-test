@@ -1,6 +1,8 @@
-import LocalizedStrings from 'react-localization';
+// import LocalizedStrings from 'react-localization';
 
-export let strings = new LocalizedStrings({
+export let strings = {
+
+// export let strings = new LocalizedStrings({
   EN: {
     intro_page: {
       complete_field_warning: 'The field must be filled correctly',
@@ -8,7 +10,7 @@ export let strings = new LocalizedStrings({
       limit_warning_authorized: 'You have exhausted the limit of free checks per day (30 times).',
       intro_header: "Where to start a used car search?",
       intro_subheader: "Checking the car with the vin code is the first step when buying",
-      intro_header__input_placeholder: "Enter VIN code",
+      intro_header__input_placeholder: "Enter your VIN / car number / link on AUTO.RIA",
       intro_header__input_substring: "The vin code will be checked on the partner's website",
       intro_header_btn_check: "Check car",
       intro_header_desc_item_1: "Enter VIN code",
@@ -77,6 +79,8 @@ export let strings = new LocalizedStrings({
       price_block_card_currency: "UAH",
       price_block_card_report_link: "What does the report look like?",
       price_block_card_btn_buy: "Buy",
+      price_block_card_3_btn_buy: "Order",
+      price_block_card_3_report_link: "See more",
       title_total_weight: "total weight",
       title_own_weight: "own weight",
       title_car_code: 'code',
@@ -89,7 +93,8 @@ export let strings = new LocalizedStrings({
       title_inter_quartile_mean: 'inter quartile mean',
       title_outbid_owner: 'Outbid / Owner',
       title_theft_database: 'Information on the theft database',
-      title_registration_policies: 'National service * registration of electronic motor-car policies'
+      title_registration_policies: 'National service * registration of electronic motor-car policies',
+      title_contact_soon_form: "Write your number and name and we will contact you soon."
     }
   },
   UA: {
@@ -99,7 +104,7 @@ export let strings = new LocalizedStrings({
       limit_warning_authorized: 'Ви вичерпали ліміт безкоштовних перевірок на добу (30 разів).',
       intro_header: "З чого почати пошук б/у авто?",
       intro_subheader: "Перевірка авто по vin коду — це перший крок при купівлі",
-      intro_header__input_placeholder: "Уведіть VIN код",
+      intro_header__input_placeholder: "Bведіть VIN / номер авто / оголошення на AUTO.RIA",
       intro_header__input_substring: "Перевірка vin коду відбуватиметься на сайті партнера",
       intro_header_btn_check: "Перевірити авто",
       intro_header_desc_item_1: "Уведіть VIN код",
@@ -167,7 +172,9 @@ export let strings = new LocalizedStrings({
       price_block_card_3_base: "База МВC",
       price_block_card_currency: "грн",
       price_block_card_report_link: "Як виглядає звіт?",
+      price_block_card_3_report_link: "Дізнатися більше",
       price_block_card_btn_buy: "Купити",
+      price_block_card_3_btn_buy: "Оформити",
       title_total_weight: "Загальна вага",
       title_own_weight: "власна вага",
       title_car_code: 'код',
@@ -179,7 +186,8 @@ export let strings = new LocalizedStrings({
       title_arithmetic_mean: 'середнє арифметичне',
       title_inter_quartile_mean: 'міжквартильне середнє',
       title_outbid_owner: 'Перекупка / власник',title_theft_database: 'Інформація по базі викрадень',
-      title_registration_policies: 'Загальнодержавний сервіс* оформлення електронних полісів автоцивілки'
+      title_registration_policies: 'Загальнодержавний сервіс* оформлення електронних полісів автоцивілки',
+      title_contact_soon_form: "Напишіть свій номер та ім'я, і незабаром ми з вами зв'яжемося."
     }
   },
   RU: {
@@ -189,7 +197,7 @@ export let strings = new LocalizedStrings({
       limit_warning_authorized: 'Вы исчерпали лимит бесплатных проверок в сутки (30 раз).',
       intro_header: "С чего начать поиск б / у авто?",
       intro_subheader: "Проверка авто по vin коду - это первый шаг при покупке",
-      intro_header__input_placeholder: "Введите VIN код",
+      intro_header__input_placeholder: "Введите VIN / номер авто / объявления на AUTO.RIA",
       intro_header__input_substring: "Проверка vin кода будет происходить на сайте партнера",
       intro_header_btn_check: "Проверка авто",
       intro_header_desc_item_1: "Введите VIN код",
@@ -257,7 +265,9 @@ export let strings = new LocalizedStrings({
       price_block_card_3_base: "База МВД",
       price_block_card_currency: "грн",
       price_block_card_report_link: "Как выглядит отчет?",
+      price_block_card_3_report_link: "Узнать бoльше",
       price_block_card_btn_buy: "Купить",
+      price_block_card_3_btn_buy: "Оформить",
       title_total_weight: "общий вес",
       title_own_weight: "собственный вес",
       title_car_code: 'код',
@@ -270,7 +280,8 @@ export let strings = new LocalizedStrings({
       title_inter_quartile_mean: 'среднее за квартиль',
       title_outbid_owner: 'Перекуп / владелец',
       title_theft_database: 'Информация по базе угонов',
-      title_registration_policies: 'Общегосударственный сервис * оформление электронных полисов автогражданки'
+      title_registration_policies: 'Общегосударственный сервис * оформление электронных полисов автогражданки',
+      title_contact_soon_form: "Напишите свой номер и имя, в ближайшее время мы с Вами свяжемся."
     }
   }
-});
+};

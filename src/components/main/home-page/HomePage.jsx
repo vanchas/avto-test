@@ -34,7 +34,7 @@ export class HomePage extends React.Component {
         return (
             <div style={{ minHeight: '100vh' }}
                 className="mx-auto">
-                <h1 className="text-center py-5">Hi, {user.name}, at Home page!</h1>
+                <h1 className="text-center py-5">Hi, {user.email}, at Home page!</h1>
                 <p className="text-center">
                     <button
                         className="btn btn-danger mr-2"
@@ -56,7 +56,6 @@ export class HomePage extends React.Component {
                 </p>
                 {this.state.showDetails && this.state.user && this.state.user.email ?
                     <div>
-                        <h3>{this.state.user.name}</h3>
                         <div>created at: {this.state.user.created_at}</div>
                         <div>email: {this.state.user.email}</div>
                         <div>is admin: {this.state.user.is_admin}</div>

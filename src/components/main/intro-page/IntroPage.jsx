@@ -19,6 +19,7 @@ import Woman from './image/woman.png'
 import { carInfoService } from '../../../_services/carInfo.service'
 import { history } from '../../../_helpers/history';
 import { authHeader } from '../../../_helpers/auth-header';
+import { OrderForm } from '../result-page/ModalForm';
 
 export default class IntroPage extends Component {
   constructor(props) {
@@ -79,16 +80,16 @@ export default class IntroPage extends Component {
 
   searchAnimation() {
     setTimeout(() => {
-      this.setState({ waitMessage: "Шукаемо по класифікатору об'єктів адміністративно-територіального устрою України..." })
+      this.setState({ waitMessage: "Шукаємо по класифікатору об'єктів адміністративно-територіального устрою України..." })
     }, 1000);
     setTimeout(() => {
-      this.setState({ waitMessage: "Шукаемо по державному реєстру обтяжень рухомого майна..." })
+      this.setState({ waitMessage: "Шукаємо по державному реєстру обтяжень рухомого майна..." })
     }, 2000);
     setTimeout(() => {
-      this.setState({ waitMessage: "Шукаемо по базi выкрадень та залогiв ..." })
+      this.setState({ waitMessage: "Шукаємо по базi выкрадень та залогiв ..." })
     }, 3000);
     setTimeout(() => {
-      this.setState({ waitMessage: "Шукаемо по базi даних технічного обслуговування автомобіля..." })
+      this.setState({ waitMessage: "Шукаємо по базi даних технічного обслуговування автомобіля..." })
     }, 4000);
   }
 
@@ -149,7 +150,7 @@ export default class IntroPage extends Component {
 
           if (moment(checkLimiter.date).isSame(
             moment(new Date().toString()).format('L')) &&
-            checkLimiter.count < 30) {
+            checkLimiter.count < 7) {
 
             await this.setState({ loading: true });
 
@@ -161,11 +162,11 @@ export default class IntroPage extends Component {
             carInfoService.getCarInfo(this.state.value);
 
             this.searchAnimation();
-            
+
           } else if (!moment(checkLimiter.date).isSame(
             moment(new Date().toString()).format('L'))) {
 
-              await this.setState({ loading: true });
+            await this.setState({ loading: true });
 
             await localStorage.setItem('avto-test-limit',
               JSON.stringify({
@@ -180,7 +181,7 @@ export default class IntroPage extends Component {
             alert(this.props.langData.limit_warning_authorized);
           }
         }
-        
+
       } else {
 
         await this.setState({ loading: true });
@@ -201,10 +202,6 @@ export default class IntroPage extends Component {
 
   render() {
     let text = this.props.langData;
-    // console.log(!moment(JSON.parse(
-    // localStorage.getItem('avto-test-limit')).date).isSame(
-    // moment(new Date().toString()).format('L')));
-
 
     return (
       <div className="intro-page container-fluid overflow-hidden">
@@ -225,8 +222,9 @@ export default class IntroPage extends Component {
                     !this.state.loading ?
                       <span className="btn check-car-btn w-100 d-flex justify-content-center align-items-center"
                         onClick={this.sendValue} >
-                        <input type="submit" className="pr-3"
-                          value={text.intro_header_btn_check} />
+                        <button className="btn text-white p-0 pr-3">
+                          {text.intro_header_btn_check}
+                        </button>
                         <img src={ArrowRight} alt="&#x2192;" />
                       </span>
                       :
@@ -301,11 +299,10 @@ export default class IntroPage extends Component {
                   <span className="price font-weight-bold">399 {text.price_block_card_currency}</span>
                 </div>
               </div>
-              <button className="btn check-car-btn px-4"
-                onClick={this.requestConsultation} >
-                {text.price_block_card_btn}
-                <img src={ArrowRight} alt="arrow" />
-              </button>
+              <OrderForm
+                langData={this.props.langData}
+                price_block_card_btn_buy={text.price_block_card_btn}>
+              </OrderForm>
             </div>
 
             <div className="price-card col-lg-4 col-md-12">
@@ -328,11 +325,10 @@ export default class IntroPage extends Component {
                   <span className="price font-weight-bold">999 {text.price_block_card_currency}</span>
                 </div>
               </div>
-              <button className="btn check-car-btn px-4"
-                onClick={this.requestConsultation}>
-                {text.price_block_card_btn}
-                <img src={ArrowRight} alt="." />
-              </button>
+              <OrderForm
+                langData={this.props.langData}
+                price_block_card_btn_buy={text.price_block_card_btn}>
+              </OrderForm>
             </div>
 
             <div className="price-card col-lg-4 col-md-12">
@@ -355,16 +351,15 @@ export default class IntroPage extends Component {
                   <span className="price font-weight-bold">1399 {text.price_block_card_currency}</span>
                 </div>
               </div>
-              <button className="btn check-car-btn px-4"
-                onClick={this.requestConsultation}>
-                {text.price_block_card_btn}
-                <img src={ArrowRight} alt="." />
-              </button>
+              <OrderForm
+                langData={this.props.langData}
+                price_block_card_btn_buy={text.price_block_card_btn}>
+              </OrderForm>
             </div>
           </div>
         </section>
 
-        <section ref={this.FullSelection} className="consultation-block d-flex flex-md-row flex-sm-column row py-5 my-0 mx-0">
+        <section ref={this.FullSelection} className="consultation-block d-flex flex-md-row flex-sm-column row py-5 my-0 mx-auto">
           <div className="col-md-6 col-sm-12 img-holder-block">
             <img src={Woman} alt="woman" className="w-100" />
           </div>
@@ -373,11 +368,10 @@ export default class IntroPage extends Component {
             <h2 className="h1 font-weight-bolder">{text.consultation_block_header}</h2>
             <p className="h5">{text.consultation_block_subheader}</p>
 
-            <button className="btn px-4 mt-3"
-              onClick={this.requestConsultation}>
-              {text.consultation_block_btn}
-              <img src={ArrowRight} alt="arrow" />
-            </button>
+            <OrderForm
+              langData={this.props.langData}
+              price_block_card_btn_buy={text.consultation_block_btn}>
+            </OrderForm>
           </div>
         </section>
       </div>

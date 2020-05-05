@@ -6,7 +6,7 @@ export const carInfoService = {
 
 
 async function getCarInfo(value) {
-  return await fetch('https://strateg.link/public/api/search', {
+  return await fetch('/api/search', {
     method: 'POST',
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -17,20 +17,16 @@ async function getCarInfo(value) {
     })
   })
     .then((res) => {
-      // console.log('res',res);
 
       if (res.status === 500 || res.status === 404 || res.status === 400) {
+        
         localStorage.removeItem('avto-test-car');
+
         window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${value}`, '_blanc');
         history.push('/result');
 
-        // } else if (res.status === 429) {
-        //   alert('Вы исчерпали лимит бесплатных проверок в сутки (3 раза). Для того чтобы увеличить лимит до 30 проверок зарегистрируйтесь, это займет не более двух минут.');
-        //   history.push('/login/sign-in');
       } else {
         const data = res.json();
-        // console.log('res data', data);
-
 
         data.then(async carData => {
           let car = await carData;

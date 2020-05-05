@@ -9,9 +9,8 @@
     justify-content: center;
     justify-items: center;
     align-items: center;
-    grid-column-gap: 4em;
-    grid-template-columns: 2fr 1fr 2fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-column-gap: 3em;
+    grid-template-columns: 2fr 1fr 2fr 2fr;
     font-weight: 600;
 
     b {
@@ -19,11 +18,14 @@
       font-weight: 900;
     }
 
-    .info_block,
-    .text_block,
-    .logo_block {
-      grid-row: span 2;
+    .foot_block {
+      order: -1
     }
+
+    // .info_block,
+    // .text_block,
+    // .logo_block {
+    // }
 
     .info_block {
       .info_block_item {
@@ -51,7 +53,7 @@
     padding: 1em 1em;
     grid-column-gap: 1em;
     grid-template-columns: 3fr 1fr;
-    grid-template-rows: 3fr 1fr 1fr 1fr;
+    grid-template-rows: 3fr 1fr 1fr;
     
     .info_block {
       grid-column: span 2;

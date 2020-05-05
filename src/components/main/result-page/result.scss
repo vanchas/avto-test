@@ -2,6 +2,12 @@
 	max-width: 1300px;
 	margin: 0 auto;
 	
+	.count-link {
+		span {
+			text-align: center;
+			text-decoration: underline;
+		}
+	}
 	.question-sign {
 		position: relative;
 		display: flex;
@@ -57,6 +63,16 @@
 	}
 }
 @media (max-width: 768px) {
+	.result-page {
+		.question-sign {
+			&::after {
+				display: none	;
+			}
+		}
+		.car-vin {
+			font-size: 1.8em;
+		}
+	}
 	.what-we-found-description {
 		border-radius: 1.5em;
 		.green-border {
