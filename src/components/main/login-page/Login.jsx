@@ -11,11 +11,13 @@ export default class Login extends Component {
     this.state = {
       loading: false,
       user: {},
-      // name: '',
       email: '',
       password: '',
       message: '',
-      status: 200
+      status: 200,
+      registerMessage: '',
+      registedEmail: '',
+      registedPassword: ''
     };
     this.loginHandler = this.loginHandler.bind(this);
     this.registerHandler = this.registerHandler.bind(this);
@@ -25,16 +27,40 @@ export default class Login extends Component {
   }
 
   componentWillUnmount() {
-    this.setState({ loading: false });
+    this.setState({
+      loading: false,
+      registerMessage: ''
+    })
   }
 
   loginHandler(e) {
     e.preventDefault();
-    if (this.state.email.toString().trim().length &&
-      this.state.password.toString().trim().length) {
+    if (
+      (this.state.email.trim().length &&
+      this.state.password.toString().trim().length) ||
+      (this.state.registedEmail.trim().length &&
+      this.state.registedPassword.toString().trim().length)
+    ) {
+      new Promise(res => {
+        const email = this.state.registedEmail.length ? this.state.registedEmail : this.state.email;
+        const password = this.state.registedPassword.length ? this.state.registedPassword : this.state.password;
 
-      this.setState({ loading: true });
-      userService.login(this.state.email, this.state.password);
+        this.setState({ loading: true });
+
+        userService.login(email, password);
+        res();
+      })
+        .then(() => {
+          setTimeout(() => {
+            this.setState({
+              email: '',
+              password: ''
+            });
+          }, 500);
+        })
+        .catch(err => {
+          console.log('Error: ', err);
+        })
     } else {
       alert('Все поля должны быть корректно заполнены.')
     }
@@ -43,17 +69,35 @@ export default class Login extends Component {
   registerHandler(e) {
     e.preventDefault();
     if (
-      // this.state.name.toString().trim().length &&
-      this.state.email.toString().trim().length &&
+      this.state.email.trim().length &&
       this.state.password.toString().trim().length
     ) {
-      localStorage.removeItem('avto-test-car');
-      this.setState({ loading: true });
-      userService.registration(
-        // this.state.name,
-        this.state.email,
-        this.state.password
-      );
+      new Promise(res => {
+        localStorage.removeItem('avto-test-car');
+        this.setState({
+          registedEmail: this.state.email,
+          registedPassword: this.state.password,
+          loading: true,
+          registerMessage: 'Для того щоб зареєструватися, натисніть на  підтвердження, яке ми відправили вам на електронну адресу.'
+        });
+        userService.registration(
+          this.state.email,
+          this.state.password
+        );
+        res();
+      })
+        .then(() => {
+
+          setTimeout(() => {
+            this.setState({
+              email: '',
+              password: ''
+            });
+          }, 500);
+        })
+        .catch(err => {
+          console.log('Error: ', err);
+        })
     } else {
       alert('Все поля должны быть корректно заполнены.')
     }
@@ -89,6 +133,9 @@ export default class Login extends Component {
           </nav>
 
           <Route path="/login/sign-in" render={props => <LoginForm
+            registedEmail={this.state.registedEmail}
+            registedPassword={this.state.registedPassword}
+            loading={this.state.loading}
             email={this.state.email}
             password={this.state.password}
             emailInput={this.emailInput}
@@ -98,6 +145,8 @@ export default class Login extends Component {
             {...props} />} />
 
           <Route path="/login/sign-up" render={props => <RegisterForm
+            registerMessage={this.state.registerMessage}
+            loading={this.state.loading}
             email={this.state.email}
             name={this.state.name}
             password={this.state.password}
@@ -107,17 +156,6 @@ export default class Login extends Component {
             registerHandler={this.registerHandler}
             langData={this.props.langData}
             {...props} />} />
-
-          <div>
-            <div className="w-100 text-center pb-3">
-              {this.state.loading ?
-                <div className="spinner-border text-success" role="status">
-                  <span className="sr-only">Loading...</span>
-                </div>
-                : null}
-            </div>
-          </div>
-
         </div>
       </div>
     )

@@ -1,3 +1,13 @@
+.btn-danger-modal {
+	position: relative
+}
+.btn-danger-modal::after {
+	content: '\2192';
+	margin-left: .2em;
+	font-size: 1.8em;
+	line-height: 1em;
+}
+
 .intro-page {
 	display: grid;
 	justify-content: center;

@@ -384,37 +384,3 @@ IntroPage.propTypes = {
   langData: PropTypes.object,
   scrollValue: PropTypes.string
 }
-
-
-
-        // <section className="order-form-section font-weight-bolder">
-        //   <h3 className="h2 font-weight-bolder">Не знаешь VIN код? <img src={RedArrow} alt="arrow" /></h3>
-        //   <div className="order-form container">
-        //     <h4 className="text-center m-auto">Замов перевірку авто за посиланням на оголошення або реєстраційним номером авто</h4>
-        //     <form className="container form-group py-4 row d-flex justify-content-around" action="#">
-        //       <input className="form-control col-md-5 col-sm-12 my-2"
-        //         type="text"
-        //         onChange={e => this.onLinkInput(e.target.value)}
-        //         placeholder="Введіть посилання на " />
-        //       <input className="form-control col-md-5 col-sm-12 my-2"
-        //         type="text"
-        //         onChange={e => this.onNumberInput(e.target.value)}
-        //         placeholder="Введіть номерний знак" />
-        //       <input className="form-control col-md-5 col-sm-12 my-2"
-        //         type="text"
-        //         onChange={e => this.onNameInput(e.target.value)}
-        //         placeholder="Ваше ім’я" />
-        //       <input className="form-control col-md-5 col-sm-12 my-2"
-        //         type="text"
-        //         onChange={e => this.onPhoneInput(e.target.value)}
-        //         placeholder="Ваш телефон" />
-        //       <div className="col-12 d-flex justify-content-center">
-        //         <button className="btn check-car-btn px-4 mt-3"
-        //           onClick={this.sendUserData} >
-        //           Замовити перевірку
-        //           <img src={ArrowRight} alt="arrow" />
-        //         </button>
-        //       </div>
-        //     </form>
-        //   </div>
-        // </section>

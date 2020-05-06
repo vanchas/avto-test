@@ -68,27 +68,30 @@ function registration(email, password) {
       'Content-Type': 'application/json;charset=utf-8'
     },
     body: JSON.stringify({
-      // name,
       email,
       password
     })
   })
     .then((res) => {
-      if (res.status === 200) {
-        console.log(res);
+      console.log(res);
 
+      if (res.status === 201 || res.status === 200) {
 
-        const result = res.json();
-        result.then(data => {
-          console.log(data);
+        // const result = res.json();
+        // result.then(data => {
+        //   console.log(data);
 
-
-          localStorage.setItem('avto-test-user', JSON.stringify(data.user));
-        })
-          .then(() => history.push('/home'))
-          .catch(err => console.log(err));
+        //   localStorage.setItem('avto-test-user', JSON.stringify(data.user));
+        // })
+        // .then(() => {
+        // window.open(`${email}`, '_blanc');
+        // }).then(() => {
+        history.push('/login/sign-in');
+        // window.location.reload(true);
+        // })
+        // .catch(err => console.log(err));
       } else {
-        alert('Все поля должны быть корректно заполнены.');
+        alert('Не вдалося зареєструватися')
       }
     })
     .catch(error => {

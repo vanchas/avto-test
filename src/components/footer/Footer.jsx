@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import s from './footer.module.scss'
-import ArrowRight from '../main/intro-page/image/arrow-right.png'
+// import ArrowRight from '../main/intro-page/image/arrow-right.png'
 import { Link } from 'react-router-dom'
 import Logo from './image/footer-logo.png'
 import { history } from '../../_helpers/history';

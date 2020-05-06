@@ -18,7 +18,6 @@ import {
 } from 'mdbreact';
 import { authHeader } from '../../_helpers/auth-header'
 import { history } from '../../_helpers/history'
-import { OrderForm } from '../main/result-page/ModalForm'
 import { OrderCall } from './ModalForm'
 
 

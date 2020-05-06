@@ -2,6 +2,15 @@
 	max-width: 1200px;
 	margin: 0 auto;
 	position: relative;
+
+	.blog-bg-img {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: -1;
+	}
+
 	.move-to-top {
 		position: fixed;
 		top: .8em;
@@ -15,7 +24,7 @@
 		font-size: 3em;
 		transform: rotate(90deg);
 		border: none;
-		background: rgba(0, 0, 0, 0.2);
+		background: rgba(0, 0, 0, 0.1);
 		color: #fff;
 
 		&:hover {
@@ -40,8 +49,17 @@
 		max-width: 700px;
 		margin: 0 auto 1em auto;
 		padding: 1em;
+		background-color: #fff;
 		display: grid;
-		box-shadow: -5px -5px 15px 5px #fafafa, 5px 5px 15px 5px #eee;
+		box-shadow: -5px -5px 15px 5px rgba(250, 250, 250, 0.2), 5px 5px 15px 5px rgba(238, 238, 238, 0.2);
+		input,
+		textarea {
+			background: #fff;
+			color: #fff;
+		}
+		.btn-picture {
+			background-color: #17a2b8;
+		}
 	}
 	.change-form {
 		display: grid;
@@ -61,32 +79,34 @@
 	}
 	.posts-list {
 	}
-	// .post.post-image .post-text {
-	// 	grid-column: span 2;
-	// }
+
 	.post {
 		display: grid;
 		align-content: center;
 		align-items: center;
-		grid-template-columns: auto auto;
 		margin-bottom: 5em;
 		border: none;
-		box-shadow: -5px -5px 15px 5px #fafafa, 5px 5px 15px 5px #eee;
+		// box-shadow: -5px -5px 15px 5px #fafafa, 5px 5px 15px 5px #eee;
+		// box-shadow: -5px -5px 25px 5px rgba(0, 0, 0, 0.2), 5px 5px 25px 5px rgba(0, 0, 0, 0.4);
+
+		.post-content {
+			display: flex;
+			.post-text {
+				min-width: 50%;
+			}
+		}
+
 		&:nth-child(odd) {
 			.post-image {
 				order: 1;
 			}
 		}
 		.post-header {
-			grid-column: span 2;
 			text-align: center;
 		}
 		.change-post {
-			order: 10;
-			grid-column: span 2;
 		}
 		.post-text {
-			// grid-column: span 2;
 		}
 		.post-image {
 			img {

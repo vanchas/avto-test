@@ -1,59 +1,42 @@
-
-
-{
-  "brand": "VOLKSWAGEN",
-  "capacity": 1798,
-  "color": "СІРИЙ",
-  "first_reg_date": "2020-02-18",
-  "date": "2020-02-18",
-  reg_object: [
-    {
-      "date": "2020-02-29",
-      "code": "CXE947151",
-      "number": "AX0650HX"
-    },
-    {
-      "date": "2018-12-22",
-      "code": "CXI563631",
-      "number": "AB7577AE"
-    },
-    {
-       "date": "2018-02-23",
-       "code": "CXK382002",
-       "number": "KA0004EE"
-    }
+arithmeticMean: 0
+brand: "MERCEDES-BENZ"
+capacity: 2987
+code: "CXK050616"
+color: "ЧОРНИЙ"
+count_site_top_0: "https://auto.ria.com..."
+count_site_top_4: "https://auto.ria.com..."
+count_site_top_5: "https://auto.ria.com..."
+count_top_0: 76
+count_top_4: 19
+count_top_5: 68
+date: "2017-11-29"
+dep: "ТСЦ 8047"
+dep_code: 8047
+drorm: "https://orm.minjust.gov.ua/#/"
+first_reg_date: "2017-11-10"
+fuel: "ДИЗЕЛЬНЕ ПАЛИВО"
+insurance: "https://polis.ua/"
+interQuartileMean: 0
+kind: "ЛЕГКОВИЙ КУПЕ-B"
+model: "GLE 350D"
+num_seating: 5
+number: "AA4444II"
+outbid: "Неизвестно"
+own_weight: 2370
+person: "Фізична особа"
+place: "ГОЛОСІЇВСЬКИЙ"
+rank_category: "B"
+reg_addr_koatuu: "8036100000"
+reg_object: [
+    {date: "2017-11-29", code: "CXK050616", number: "AA4444II"}
   ]
-  "fuel": "БЕНЗИН",
-  "kind": "ЛЕГКОВИЙ СЕДАН-B",
-  "year": 2016,
-  "model": "PASSAT",
-  "code": "CXE905866",
-  "number": "KA7135AC",
-  "num_seating": 5,
-  "own_weight": 1465,
-  "rank_category": "АВТОМОБІЛІ, ДОЗВОЛЕНА МАКСИМАЛЬНА МАСА ЯКИХ НЕ ПЕРЕВИЩУЄ 3500  КІЛОГРАМІВ (7700 ФУНТІВ), А КІЛЬКІСТЬ СИДЯЧИХ МІСЦЬ, КРІМ СИДІННЯ ВОДІЯ, - ВОСЬМИ",
-  "total_weight": 2050,
-  "vin": "1VWBT7A3XHC042264",
-  "registration": "РЕЄСТРАЦIЯ Б/В ТЗ ПРИВЕЗЕНОГО З-ЗА КОРДОНУ ПО ВМД",
-  "registration_code": 70,
-  "dep_code": 12294,
-  "dep": "ТСЦ 8045",
-  "person": "Фізична особа",
-  "reg_addr_koatuu": "8036600000",
-  "count": 5555,
-  "count_week": 1430,
-  "count_day": 270,
-  "fuel_count_parameter": 57,
-  "arithmeticMean": 11573,
-  "interQuartileMean": 8369,
-  "new_cars_count": 20,
-  "status": "Нет в базе угонов",
-  "insurance": "https://polis.ua/",
-  "outbid": "Перекуп (вероятно)",
-  "drorm": "https://orm.minjust.gov.ua/#/",
-  "region": "КИЇВ",
-  "place": "ДНІПРОВСЬКИЙ"
-}
+region: "КИЇВ"
+registration: "ПЕРЕРЕЄСТРАЦІЯ ПРИ ЗАМІНІ НОМЕРНОГО ЗНАКУ"
+registration_code: 410
+status: "Нет в базе угонов"
+total_weight: 2900
+vin: "WDC2923241A093223"
+year: 2017
 
 react snap
 

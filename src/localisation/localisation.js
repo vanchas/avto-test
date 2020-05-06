@@ -1,5 +1,7 @@
 // import LocalizedStrings from 'react-localization';
 
+// localization already moved to backend
+
 export let strings = {
 
 // export let strings = new LocalizedStrings({

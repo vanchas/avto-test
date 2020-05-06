@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { contactService } from '../../_services/contact.service';
 
 export const OrderCall = props => {
   const [show, setShow] = React.useState(false);
-  const [warningMessage, setWarningMessage] = React.useState('');
+  // const [warningMessage, setWarningMessage] = React.useState('');
   const [name, setName] = React.useState('');
   const [phone, setPhone] = React.useState('');
   const [loading, setLoading] = React.useState(false);
@@ -65,11 +65,11 @@ export const OrderCall = props => {
                 onChange={e => { setName(e.target.value) }}
                 className="form-control" />
             </label>
-            {warningMessage.length ?
+            {/* {warningMessage.length ?
               <div style={{ fontSize: '.8em' }}
                 className="alert alert-danger m-0 text-center" role="alert">
                 {warningMessage}
-              </div> : null}
+              </div> : null} */}
             <label className="mt-2">
               <input type="number"
                 value={phone}

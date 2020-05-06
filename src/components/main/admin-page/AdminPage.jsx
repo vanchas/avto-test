@@ -52,18 +52,16 @@ export class AdminPage extends React.Component {
     render() {
         const user = authHeader().Authorization;
         const text = this.props.langData;
-        // console.log(this.props.langData);
-
 
         return (
             <div style={{ minHeight: '100vh' }}
                 className="mx-auto">
-                <h1 className="text-center py-5">Hi, admin {user.email}, at Admin page!</h1>
+                <h3 className="text-center py-5">Привіт, адмін {user.email}, Bи ввійшли в систему!</h3>
                 <p className="text-center">
                     <button
                         className="btn btn-danger"
                         onClick={this.logout}>
-                        Logout
+                        Вийти
                     </button>
                 </p>
 

@@ -3,6 +3,7 @@ import './blog.scss'
 import { blogService } from '../../../_services/blog.service';
 import { authHeader } from '../../../_helpers/auth-header';
 import $ from 'jquery';
+import BlogBg from '../../header/image/head-bg.png';
 
 export default class Blog extends Component {
   constructor(props) {
@@ -184,8 +185,6 @@ export default class Blog extends Component {
   render() {
     const user = authHeader().Authorization;
     const posts = this.state.posts.sort((a, b) => +b.id - +a.id);
-    // console.log(posts);
-    
 
     return (
       <div style={{ minHeight: '100vh' }} className="blog" >
@@ -193,13 +192,17 @@ export default class Blog extends Component {
           onClick={this.moveToTop} >
           <span>&#171;</span></span>
 
-        <h1 className="text-center py-5">Блог</h1>
+        <div className="blog-bg-img">
+          <img src={BlogBg} />
+        </div>
+
+        <h1 className="text-center text-white py-5">Блог</h1>
 
         <div>
           {user && user.is_admin === 1 ?
             <div>
               <div className="text-center container py-2">
-                <h6>добавить пост</h6>
+                <h6 className="text-white">добавить пост</h6>
                 <form encType="multipart/form-data"
                   className="post-form rounded">
                   <label className="form-group">
@@ -248,7 +251,7 @@ export default class Blog extends Component {
                     <label className="form-group mr-2">
                       <input type="button" value="Картинка" onClick={() => {
                         $('#file').click();
-                      }} className="btn btn-info" />
+                      }} className="btn btn-picture btn-info" />
                       <input type="file" id="file"
                         style={{ display: 'none' }}
                         onChange={e => this.uploadPostImage(e)} />
@@ -270,7 +273,6 @@ export default class Blog extends Component {
         </div>
 
         <div className="mt-5 container posts-wrapper pt-3 pb-5">
-          <h3 className="text-center">Посты</h3>
           <ul className="list-group posts-list">
             {posts.length ?
               posts.map((post, ind) => {
@@ -290,15 +292,17 @@ export default class Blog extends Component {
                       : null}
                     {/* 🗑️ */}
 
-                    <h2 className="post-header w-100"> {post.header}</h2>
-                    {(post.image)
-                      ? <div className="post-image">
-                        <img src={post.image} alt="" className="" />
+                    <h2 className="post-header text-center w-100"> {post.header}</h2>
+                    <h5 className="w-100 text-center">{post.description}</h5>
+                    <div className="post-content">
+                      {(post.image)
+                        ? <div className="post-image">
+                          <img src={post.image} alt="" className="" />
+                        </div>
+                        : null}
+                      <div className="px-3 post-text">
+                        <p>{post.post}</p>
                       </div>
-                      : null}
-                    <div className="px-3 post-text">
-                      <h5 className="text-center">{post.description}</h5>
-                      <p>{post.post}</p>
                     </div>
 
                     <div className={`change-post change-post${post.id}`}>

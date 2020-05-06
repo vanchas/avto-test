@@ -7,7 +7,7 @@ import PetrolImg from './image/petrol_g.png'
 import KgImg from './image/kg_g.png'
 import ReportImg from './image/report_g.png'
 import Owner from './image/owner-g.png'
-import PlaceImg from './image/place_g.png'
+// import PlaceImg from './image/place_g.png'
 import WheelImg from './image/wheel_g.png'
 import MegaphoneImg from './image/rupport_g.png'
 import MreoGreen from './image/mreo-green.png'
@@ -18,7 +18,7 @@ import CustomsImg from './image/customs_g.png'
 import CheckImg from './image/car-check_g.png'
 import GreenArrow from './image/green-arrow.png'
 import CvLogo from './image/cv-logo.png'
-import CarfaxLogo from './image/carfax-logo.png'
+import AvtoTestLogo from '../../footer/image/footer-logo.png'
 import { getCar } from '../../../_helpers/get-car'
 import { OrderForm } from './ModalForm';
 // import $ from 'jquery'
@@ -259,8 +259,8 @@ export default class ResultPage extends Component {
                       <u className="pr-2">{this.state.carStatusText}</u>
                       {!this.state.statusLoading ?
                         ''
-                        : <div class="spinner-border m-0 text-success" role="status">
-                          <span class="sr-only">Loading...</span>
+                        : <div className="spinner-border m-0 text-success" role="status">
+                          <span className="sr-only">Loading...</span>
                         </div>}
                     </span>
                   </div>
@@ -286,7 +286,7 @@ export default class ResultPage extends Component {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="float-left font-weight-bold text-dark" >
-                      <u>СТРАХІВКА ОНЛАЙН</u></a>
+                      <u>СТРАХУВАННЯ ОНЛАЙН</u></a>
                   </div>
                 </div>
               </div>
@@ -340,9 +340,10 @@ export default class ResultPage extends Component {
             <div className="col-md-4 col-sm-12 px-2">
               <div className="card car-card mb-4 p-3" >
                 <div className="">
-                  <p className="card-heading px-1 card-text h4 font-weight-bold">{text.result_page_card_1_header}</p>
-                  <div className="">
-                    <img className="card-img-top w-50 m-auto" src={CvLogo} alt="Card cap" />
+                  <p style={{ lineHeight: '1.5em' }}
+                    className="card-heading px-1 card-text h5 font-weight-bold">{text.result_page_card_1_header}</p>
+                  <div className="pt-2">
+                    <img className="card-img-top m-auto" style={{ width: '44%' }} src={CvLogo} alt="Card cap" />
                     <h5 className="card-title font-weight-bold">carVertical</h5>
                   </div>
                 </div>
@@ -355,8 +356,6 @@ export default class ResultPage extends Component {
                       langData={this.props.langData}
                       price_block_card_btn_buy={text.price_block_card_btn_buy} >
                     </OrderForm>
-                    {/* <button className="mt-1 btn btn-danger px-5">
-                      {text.price_block_card_btn_buy}</button> */}
                   </div>
                 </div>
               </div>
@@ -364,10 +363,11 @@ export default class ResultPage extends Component {
             <div className="col-md-4 col-sm-12 px-2">
               <div className="card car-card mb-4 p-3" >
                 <div className="">
-                  <p className="card-heading px-1 card-text h4 font-weight-bold">{text.result_page_card_2_header}</p>
-                  <div className="">
-                    <img style={{ width: '43.5%' }} className=" card-img-top mx-auto" src={CarfaxLogo} alt="Card cap" />
-                    <h5 className="card-title mt-1 font-weight-bold">carFax</h5>
+                  <p style={{ lineHeight: '1.5em' }}
+                    className="card-heading px-1 card-text h5 font-weight-bold">{text.result_page_card_2_header}</p>
+                  <div className="pt-2">
+                    <img style={{ width: '38%' }} className=" card-img-top mx-auto" src={AvtoTestLogo} alt="Card cap" />
+                    <h5 className="card-title mt-1 font-weight-bold">AvtoTest</h5>
                   </div>
                 </div>
                 <div className="card-body pt-1">
@@ -379,8 +379,6 @@ export default class ResultPage extends Component {
                       langData={this.props.langData}
                       price_block_card_btn_buy={text.price_block_card_btn_buy} >
                     </OrderForm>
-                    {/* <button className="mt-1 btn btn-danger px-5">
-                      {text.price_block_card_btn_buy}</button> */}
                   </div>
                 </div>
               </div>
@@ -388,9 +386,10 @@ export default class ResultPage extends Component {
             <div className="col-md-4 col-sm-12 px-2">
               <div className="card car-card mb-4 p-3" >
                 <div className="">
-                  <p className="card-heading px-1 card-text h4 font-weight-bold d-flex justify-content-center align-items-center text-center mb-0">{text.result_page_card_3_header}</p>
-                  <div className="">
-                    <img style={{ width: '46%' }} className="py-4 card-img-top mx-auto" src={CheckImg} alt="Card cap" />
+                  <p style={{ lineHeight: '1.5em' }}
+                    className="card-heading px-1 card-text h5 font-weight-bold d-flex justify-content-center align-items-center text-center mb-0">{text.result_page_card_3_header}</p>
+                  <div className="pt-2">
+                    <img style={{ width: '52%' }} className="py-4 card-img-top mx-auto" src={CheckImg} alt="Card cap" />
                     <h5 className="card-title mt-1 font-weight-bold">{text.price_block_card_3_base}</h5>
                   </div>
                 </div>
@@ -399,12 +398,11 @@ export default class ResultPage extends Component {
                     49 {text.price_block_card_currency}</div>
                   <a href="https://polis.ua/" target="_blank" rel="noopener noreferrer" className="btn text-dark small font-weight-bold">{text.price_block_card_3_report_link}</a>
                   <div>
-                    <OrderForm
+                  <a href="https://avtotest.polis.ua/" target="_blank" rel="noopener noreferrer" className="mt-3 btn btn-danger px-5">{text.price_block_card_3_btn_buy}</a>
+                    {/* <OrderForm
                       langData={this.props.langData}
                       price_block_card_btn_buy={text.price_block_card_3_btn_buy} >
-                    </OrderForm>
-                    {/* <button className="mt-1 btn btn-danger px-5">
-                      {text.price_block_card_btn_buy}</button> */}
+                    </OrderForm> */}
                   </div>
                 </div>
               </div>

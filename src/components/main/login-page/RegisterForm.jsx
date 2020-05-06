@@ -6,9 +6,15 @@ import { Form, Button } from 'react-bootstrap'
 export default class RegisterForm extends React.Component {
   render() {
     const text = this.props.langData;
-    
+
     return (
       <div>
+        {this.props.registerMessage.length ?
+          <div style={{ maxWidth: '700px' }} className="mx-auto my-3 alert alert-info" role="alert">
+            {this.props.registerMessage}
+          </div>
+          : null}
+
         <Form className="mx-auto" style={{ maxWidth: '700px' }}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>{text.email_label}</Form.Label>
@@ -20,13 +26,6 @@ export default class RegisterForm extends React.Component {
               {text.email_sublabel}
             </Form.Text>
           </Form.Group>
-          {/* <Form.Group controlId="formBasicLogin">
-            <Form.Label>{text.login_label}</Form.Label>
-            <Form.Control
-              type="text" placeholder="От 3 символов"
-              value={this.props.name}
-              onChange={e => this.props.loginInput(e.target.value)} />
-          </Form.Group> */}
           <Form.Group controlId="formBasicPassword">
             <Form.Label>{text.password_label}</Form.Label>
             <Form.Control type="password"
@@ -34,11 +33,16 @@ export default class RegisterForm extends React.Component {
               value={this.props.password}
               onChange={e => this.props.passwordInput(e.target.value)} />
           </Form.Group>
+          {/* {this.props.loading ?
+            <div className="spinner-border text-primary" role="status">
+              <span className="sr-only">Loading...</span>
+            </div> : */}
           <Button variant="primary"
             onClick={e => this.props.registerHandler(e)}
             className="px-4" >
             {text.nav_item_sign_in}
           </Button>
+          {/* } */}
         </Form>
       </div >
     )

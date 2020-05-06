@@ -3,7 +3,6 @@ import './App.scss';
 import Main from '../main/Main';
 import { Router } from 'react-router-dom';
 import { history } from '../../_helpers/history';
-// import { strings } from '../../localisation/localisation';
 import { authHeader } from '../../_helpers/auth-header';
 import { languageService } from '../../_services/lang.service';
 import { getLang } from '../../_helpers/lang-helper';
@@ -13,7 +12,6 @@ class App extends React.Component {
         super(props);
         this.state = {
             langData: {},
-            // langData: strings.UA
             user: {}
         }
         this.onSetLanguage = this.onSetLanguage.bind(this);
@@ -35,16 +33,6 @@ class App extends React.Component {
                 langData: getLang()
             });
         }, 500);
-
-        // strings.setLanguage(lang);
-        // this.setState({ lang });
-        // if (lang === 'ru') {
-        //     this.setState({ langData: strings.RU });
-        // } else if (lang === 'ua') {
-        //     this.setState({ langData: strings.UA });
-        // } else if (lang === 'en') {
-        //     this.setState({ langData: strings.EN });
-        // }
     }
 
     changeKeyText(newKey, newKeyText, newKeyLang) {
@@ -78,7 +66,6 @@ class App extends React.Component {
                         <div className="mx-auto d-block spinner-border text-success" role="status">
                             <span className="sr-only">Loading...</span>
                         </div>
-                        {/* <h1 className="text-danger mx-auto"><b className="rounded pl-1 bg-danger text-white">Avto</b>Test</h1> */}
                     </div>
                 }
             </Router>
