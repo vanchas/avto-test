@@ -55,7 +55,7 @@
 		input,
 		textarea {
 			background: #fff;
-			color: #fff;
+			// color: #fff;
 		}
 		.btn-picture {
 			background-color: #17a2b8;
@@ -91,6 +91,7 @@
 
 		.post-content {
 			display: flex;
+			align-items: center;
 			.post-text {
 				min-width: 50%;
 			}
@@ -109,6 +110,7 @@
 		.post-text {
 		}
 		.post-image {
+			min-width: 50%;
 			img {
 				max-width: 100%;
 			}
@@ -130,6 +132,9 @@
 			justify-content: center;
 			text-align: center;
 			grid-template-columns: 1fr;
+			.post-content {
+				display: grid;
+			}
 			.post-header {
 				grid-column: span 1;
 			}
