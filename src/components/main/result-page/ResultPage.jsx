@@ -350,7 +350,7 @@ export default class ResultPage extends Component {
                 <div className="card-body">
                   <div className="text-danger h2 font-weight-bold">
                     249 {text.price_block_card_currency}</div>
-                  <a href="https://www.carvertical.com/ua/zrazok-zvitu?a=avtotest&b=f1781078&data1=zrazok" target="_blank" rel="noopener noreferrer" className="btn text-dark small font-weight-bold">{text.price_block_card_report_link}</a>
+                  <a href="https://www.carvertical.com/ua/zrazok-zvitu?a=avtotest&b=f1781078&data1=zrazok" target="_blank" rel="noopener noreferrer" className="btn text-dark small font-weight-bold"><u>{text.price_block_card_report_link}</u></a>
                   <div>
                     <OrderForm
                       langData={this.props.langData}
@@ -373,7 +373,7 @@ export default class ResultPage extends Component {
                 <div className="card-body pt-1">
                   <div className="text-danger h2 font-weight-bold">
                     49 {text.price_block_card_currency}</div>
-                  <a href="https://www.carvertical.com/ua/zrazok-zvitu?a=avtotest&b=f1781078&data1=zrazok" target="_blank" rel="noopener noreferrer" className="btn text-dark small font-weight-bold">{text.price_block_card_report_link}</a>
+                  <a href="https://www.carvertical.com/ua/zrazok-zvitu?a=avtotest&b=f1781078&data1=zrazok" target="_blank" rel="noopener noreferrer" className="btn text-dark small font-weight-bold"><u>{text.price_block_card_report_link}</u></a>
                   <div>
                     <OrderForm
                       langData={this.props.langData}
@@ -396,13 +396,9 @@ export default class ResultPage extends Component {
                 <div className="card-body pt-1">
                   <div className="text-danger h2 font-weight-bold">
                     49 {text.price_block_card_currency}</div>
-                  <a href="https://polis.ua/" target="_blank" rel="noopener noreferrer" className="btn text-dark small font-weight-bold">{text.price_block_card_3_report_link}</a>
+                  <a href="https://polis.ua/" target="_blank" rel="noopener noreferrer" className="btn text-dark small font-weight-bold"><u>{text.price_block_card_3_report_link}</u></a>
                   <div>
-                  <a href="https://avtotest.polis.ua/" target="_blank" rel="noopener noreferrer" className="mt-3 btn btn-danger px-5">{text.price_block_card_3_btn_buy}</a>
-                    {/* <OrderForm
-                      langData={this.props.langData}
-                      price_block_card_btn_buy={text.price_block_card_3_btn_buy} >
-                    </OrderForm> */}
+                    <a href="https://avtotest.polis.ua/" target="_blank" rel="noopener noreferrer" className="mt-3 btn btn-danger d-flex mx-auto link-order-danger px-5">{text.price_block_card_3_btn_buy}</a>
                   </div>
                 </div>
               </div>

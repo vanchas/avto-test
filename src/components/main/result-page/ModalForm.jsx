@@ -39,7 +39,7 @@ export const OrderForm = props => {
   return (
     <>
       <Button variant="info"
-        className="mt-3 btn btn-danger btn-danger-modal px-5"
+        className="mt-3 d-flex mx-auto btn btn-danger btn-danger-modal px-5"
         onClick={e => handleShow(e)}>
         {props.price_block_card_btn_buy}
       </Button>

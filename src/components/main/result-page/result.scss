@@ -1,7 +1,7 @@
 .result-page {
 	max-width: 1300px;
 	margin: 0 auto;
-	
+
 	.count-link {
 		span {
 			text-align: center;
@@ -46,6 +46,16 @@
 			.btn-danger {
 				border-radius: 3em;
 			}
+			.link-order-danger {
+				width: fit-content;
+			}
+			.link-order-danger::after {
+				content: '\2192';
+				margin-left: .2em;
+				font-size: 1.8em;
+				line-height: 1em;
+				transform: translateY(-.1em);
+			}
 		}
 	}
 }
@@ -66,7 +76,7 @@
 	.result-page {
 		.question-sign {
 			&::after {
-				display: none	;
+				display: none;
 			}
 		}
 		.car-vin {
