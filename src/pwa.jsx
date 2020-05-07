@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-
 const InstallPWA = () => {
   const [supportsPWA, setSupportsPWA] = useState(false);
   const [promptInstall, setPromptInstall] = useState(null);
@@ -28,7 +27,7 @@ const InstallPWA = () => {
     return null;
   }
   return (
-    <div style={{ background: '#4b4d4b' }} className="py-2 d-flex justify-content-center justify-items-center">
+    <div style={{ background: '#4b4d4b' }} className="py-2 d-flex justify-content-center justify-items-center ">
       <button
         className="link-button btn btn-light"
         id="setup_button"
@@ -37,7 +36,7 @@ const InstallPWA = () => {
         onClick={onClick}
       >
         Установить <b>Avto</b>Test на рабочий стол
-    </button>
+      </button>
     </div>
   );
 };
