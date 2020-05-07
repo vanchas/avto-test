@@ -2,7 +2,6 @@
 	"name": "auto-test",
 	"version": "0.1.0",
 	"private": true,
-	"proxy": "https://strateg.link/public",
 	"dependencies": {
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.5.0",
@@ -11,9 +10,9 @@
 		"@types/node": "^13.13.4",
 		"@types/react": "^16.9.34",
 		"@types/react-dom": "^16.9.7",
-		"axios": "^0.19.2",
 		"bootstrap": "^4.4.1",
 		"history": "^4.10.1",
+		"http-proxy-middleware": "^1.0.3",
 		"jquery": "^3.4.1",
 		"mdbreact": "^4.25.6",
 		"moment": "^2.24.0",
@@ -27,7 +26,6 @@
 		"react-router": "^5.1.2",
 		"react-router-dom": "^5.1.2",
 		"react-scripts": "3.4.1",
-		"reactstrap": "^8.4.1",
 		"typescript": "^3.8.3"
 	},
 	"scripts": {
@@ -52,9 +50,5 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
-	},
-	"devDependencies": {
-		"gh-pages": "^2.2.0",
-		"react-snap": "^1.23.0"
 	}
 }

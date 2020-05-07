@@ -11,29 +11,29 @@ import InstallPWA from './pwa';
 
 const root = document.getElementById("root");
 
-// if (root.hasChildNodes()) {
-//   ReactDOM.hydrate(
-//     <React.StrictMode>
-//       <PWAPrompt promptOnVisit={1} timesToShow={3} copyClosePrompt="Close" permanentlyHideOnDismiss={false} />
-//       <InstallPWA />
-
-//       <BrowserRouter>
-//         <App />
-//       </BrowserRouter>,
-//     </React.StrictMode>,
-//     root);
-// } else {
-ReactDOM.render(
-  // <React.StrictMode>
-  <BrowserRouter>
+if (root.hasChildNodes()) {
+  ReactDOM.hydrate(
+    // <React.StrictMode>
+    <BrowserRouter>
     <PWAPrompt promptOnVisit={1} timesToShow={3} copyClosePrompt="Close" permanentlyHideOnDismiss={false} />
     <InstallPWA />
 
-    <App />
-  </BrowserRouter>,
-  // </React.StrictMode>,
-  root);
-// }
+      <App />
+    </BrowserRouter>,
+    // </React.StrictMode>,
+    root);
+} else {
+  ReactDOM.render(
+    // <React.StrictMode>
+    <BrowserRouter>
+      <PWAPrompt promptOnVisit={1} timesToShow={3} copyClosePrompt="Close" permanentlyHideOnDismiss={false} />
+      <InstallPWA />
+
+      <App />
+    </BrowserRouter>,
+    // </React.StrictMode>,
+    root);
+}
 
 serviceWorker.register();
 

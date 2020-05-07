@@ -20,6 +20,8 @@ async function changeLanguage(value) {
       // console.log(res);
 
       res.json().then(data => {
+        // console.log(data);
+
         setLang(data);
       })
 
