@@ -35,7 +35,7 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"predeploy": "npm run build",
-		"deploy": "gh-pages -d build"
+		"postbuild": "node ftp.js"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
@@ -51,5 +51,8 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
+	},
+	"devDependencies": {
+		"ftp-deploy": "^2.3.7"
 	}
 }
