@@ -33,9 +33,7 @@
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject",
-		"predeploy": "npm run build",
-		"postbuild": "node ftp.js"
+		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
@@ -52,7 +50,5 @@
 			"last 1 safari version"
 		]
 	},
-	"devDependencies": {
-		"ftp-deploy": "^2.3.7"
-	}
+	"devDependencies": {}
 }
