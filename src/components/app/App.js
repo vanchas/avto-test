@@ -63,10 +63,9 @@ class App extends React.Component {
                         />
                     </div>
                     : <div className="pt-5 mt-3 d-flex">
-                        <img src="https://russian7.ru/wp-content/uploads/2018/05/55546.jpg" className="w-100" alt="" />
-                        {/* <div className="mx-auto d-block spinner-border text-success" role="status">
+                        <div className="mx-auto d-block spinner-border text-success" role="status">
                             <span className="sr-only">Loading...</span>
-                        </div> */}
+                        </div>
                     </div>
                 }
             </Router>
