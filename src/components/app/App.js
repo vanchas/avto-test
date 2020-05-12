@@ -45,7 +45,7 @@ class App extends React.Component {
             this.setState({
                 langData: getLang()
             });
-        }, 100);
+        }, 200);
     }
 
     render() {
