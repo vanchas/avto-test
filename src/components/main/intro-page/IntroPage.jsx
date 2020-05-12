@@ -205,7 +205,6 @@ export default class IntroPage extends Component {
 
     return (
       <div className="intro-page container-fluid overflow-hidden">
-        <img src="https://russian7.ru/wp-content/uploads/2018/05/55546.jpg" className="w-100" alt=""/>
         <header ref={this.Vin} className="text-center text-white py-2">
           <div className="header-content">
             <h1 className="mt-5 font-weight-bolder">{text.intro_header}</h1>
