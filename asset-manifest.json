@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/avto-test/static/css/main.e2daca19.chunk.css",
-    "main.js": "/avto-test/static/js/main.6ea5b211.chunk.js",
-    "main.js.map": "/avto-test/static/js/main.6ea5b211.chunk.js.map",
+    "main.css": "/avto-test/static/css/main.aca60644.chunk.css",
+    "main.js": "/avto-test/static/js/main.5eb7a57f.chunk.js",
+    "main.js.map": "/avto-test/static/js/main.5eb7a57f.chunk.js.map",
     "runtime-main.js": "/avto-test/static/js/runtime-main.9b7df074.js",
     "runtime-main.js.map": "/avto-test/static/js/runtime-main.9b7df074.js.map",
     "static/css/2.69121389.chunk.css": "/avto-test/static/css/2.69121389.chunk.css",
-    "static/js/2.8a4082a4.chunk.js": "/avto-test/static/js/2.8a4082a4.chunk.js",
-    "static/js/2.8a4082a4.chunk.js.map": "/avto-test/static/js/2.8a4082a4.chunk.js.map",
+    "static/js/2.7ebdf044.chunk.js": "/avto-test/static/js/2.7ebdf044.chunk.js",
+    "static/js/2.7ebdf044.chunk.js.map": "/avto-test/static/js/2.7ebdf044.chunk.js.map",
     "index.html": "/avto-test/index.html",
-    "precache-manifest.48e6047dcedcc009af7fe6ccd385c36f.js": "/avto-test/precache-manifest.48e6047dcedcc009af7fe6ccd385c36f.js",
+    "precache-manifest.53badb768b18aeed2e03816141f9346e.js": "/avto-test/precache-manifest.53badb768b18aeed2e03816141f9346e.js",
     "service-worker.js": "/avto-test/service-worker.js",
     "static/css/2.69121389.chunk.css.map": "/avto-test/static/css/2.69121389.chunk.css.map",
-    "static/css/main.e2daca19.chunk.css.map": "/avto-test/static/css/main.e2daca19.chunk.css.map",
-    "static/js/2.8a4082a4.chunk.js.LICENSE.txt": "/avto-test/static/js/2.8a4082a4.chunk.js.LICENSE.txt",
+    "static/css/main.aca60644.chunk.css.map": "/avto-test/static/css/main.aca60644.chunk.css.map",
+    "static/js/2.7ebdf044.chunk.js.LICENSE.txt": "/avto-test/static/js/2.7ebdf044.chunk.js.LICENSE.txt",
     "static/media/index.css": "/avto-test/static/media/HelveticaNeueCyr.afe760ff.ttf",
     "static/media/car-check_g.png": "/avto-test/static/media/car-check_g.e0384dc4.png",
     "static/media/car-search_g.png": "/avto-test/static/media/car-search_g.7e1aa228.png",
@@ -22,6 +22,7 @@
     "static/media/cv-logo.png": "/avto-test/static/media/cv-logo.93516264.png",
     "static/media/intro.scss": "/avto-test/static/media/head-bg.a0948c5f.png",
     "static/media/kg_g.png": "/avto-test/static/media/kg_g.449004b4.png",
+    "static/media/mreo-green.png": "/avto-test/static/media/mreo-green.ff11c03d.png",
     "static/media/result.scss": "/avto-test/static/media/question.f2fed888.png",
     "static/media/report_g.png": "/avto-test/static/media/report_g.fdf14f71.png",
     "static/media/wheel_g.png": "/avto-test/static/media/wheel_g.9db270c8.png",
@@ -30,8 +31,8 @@
   "entrypoints": [
     "static/js/runtime-main.9b7df074.js",
     "static/css/2.69121389.chunk.css",
-    "static/js/2.8a4082a4.chunk.js",
-    "static/css/main.e2daca19.chunk.css",
-    "static/js/main.6ea5b211.chunk.js"
+    "static/js/2.7ebdf044.chunk.js",
+    "static/css/main.aca60644.chunk.css",
+    "static/js/main.5eb7a57f.chunk.js"
   ]
 }
