@@ -1,6 +1,5 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-// const domen = `http://avtotest.org/public`;
 const domen = `https://strateg.link/public`;
 
 module.exports = function (app) {
