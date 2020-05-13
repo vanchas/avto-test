@@ -7,8 +7,9 @@ export const languageService = {
 
 
 async function changeLanguage(value) {
+	// "proxy": "https://strateg.link/public",
 
-  return await fetch('/api', {
+  return await fetch('https://strateg.link/public/api', {
     method: 'GET',
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -19,10 +20,10 @@ async function changeLanguage(value) {
     .then((res) => {
       // console.log(res);
 
-      res.json().then(data => {
+      return res.json().then(data => {
         // console.log(data);
 
-        setLang(data);
+        return setLang(data);
       })
 
     })
@@ -48,7 +49,7 @@ async function changeKeyText(key, text, lang) {
     .then((res) => {
       // console.log(res);
 
-      res.json().then(data => {
+      return res.json().then(data => {
         // console.log(data);
 
       })

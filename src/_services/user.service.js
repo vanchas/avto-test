@@ -25,7 +25,7 @@ function login(email, password) {
       const result = res.json();
       // console.log(res);
 
-      result.then(async data => {
+      return result.then(async data => {
         // console.log(data);
         const user = await data.user;
         user.token = await data.token;

@@ -16,7 +16,7 @@ async function sendEmail(name, phone) {
     .then((res) => {
       // console.log(res);
 
-      res.json().then(data => {
+      return res.json().then(data => {
         // console.log(data);
 
       })
