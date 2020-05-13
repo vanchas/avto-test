@@ -5,7 +5,7 @@ import { Router } from 'react-router-dom';
 import { history } from '../../_helpers/history';
 import { authHeader } from '../../_helpers/auth-header';
 import { languageService } from '../../_services/lang.service';
-import { getLang } from '../../_helpers/lang-helper';
+import { getLang, setLang } from '../../_helpers/lang-helper';
 
 class App extends React.Component {
     constructor(props) {
@@ -40,7 +40,28 @@ class App extends React.Component {
     }
 
     componentDidMount = async () => {
-        await languageService.changeLanguage('ua');
+        fetch('https://avtotest.org', {
+            method: 'GET',
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json;charset=utf-8',
+              'X-localization': 'ua',
+            }
+          })
+            .then((res) => {
+              // console.log(res);
+        
+              return res.json().then(data => {
+                // console.log(data);
+        
+                return setLang(data);
+              })
+        
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+        // await languageService.changeLanguage('ua');
         setTimeout(() => {
             this.setState({
                 langData: getLang()
