@@ -9,7 +9,7 @@ export const languageService = {
 async function changeLanguage(value) {
 	// "proxy": "https://strateg.link/public",
 
-  return await fetch('https://strateg.link/public/api', {
+  return await fetch('/api', {
     method: 'GET',
     headers: {
       'Access-Control-Allow-Origin': '*',
