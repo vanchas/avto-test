@@ -389,7 +389,7 @@ export default class ResultPage extends Component {
                   <p style={{ lineHeight: '1.5em' }}
                     className="card-heading px-1 card-text h5 font-weight-bold d-flex justify-content-center align-items-center text-center mb-0">{text.result_page_card_3_header}</p>
                   <div className="pt-2">
-                    <img style={{ width: '52%' }} className="py-4 card-img-top mx-auto" src={CheckImg} alt="Card cap" />
+                    <img style={{ width: '52%' }} className="py-1 card-img-top mx-auto" src={CheckImg} alt="Card cap" />
                     <h5 className="card-title mt-1 font-weight-bold">{text.price_block_card_3_base}</h5>
                   </div>
                 </div>
