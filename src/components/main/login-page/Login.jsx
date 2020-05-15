@@ -87,7 +87,6 @@ export default class Login extends Component {
         res();
       })
         .then(() => {
-
           setTimeout(() => {
             this.setState({
               email: '',

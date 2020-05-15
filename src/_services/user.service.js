@@ -25,15 +25,15 @@ function login(email, password) {
       const result = res.json();
       // console.log(res);
 
-      return result.then(async data => {
+      result.then(async data => {
         // console.log(data);
         const user = await data.user;
         user.token = await data.token;
         user.token_type = await data.token_type;
         localStorage.setItem('avto-test-user', JSON.stringify(user));
       })
-        .then(() => App.getDerivedStateFromProps())
         .then(() => history.push('/home'))
+        .then(() => App.getDerivedStateFromProps())
         .catch(err => console.log(err));
     } else {
       alert('Неверно введен логин или пароль.');
