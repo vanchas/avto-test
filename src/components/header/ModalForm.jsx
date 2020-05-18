@@ -61,7 +61,7 @@ export const OrderCall = props => {
             <label className="mt-3">
               <input type="text"
                 value={name}
-                placeholder="Имя"
+                placeholder="Ім’я"
                 onChange={e => { setName(e.target.value) }}
                 className="form-control" />
             </label>
@@ -89,13 +89,13 @@ export const OrderCall = props => {
               variant="info"
               className="btn text-white btn-send-email mx-auto d-block mt-3 mb-1 border-0 font-weight-bolder"
               onClick={e => fetchData(e)}>
-              Отправить
+              Надіслати
         </Button>
           }
           <Button variant=""
             className="m-0 border-0 text-success"
             onClick={handleClose}>
-            <u>Отмена</u>
+            <u>Скасувати</u>
           </Button>
         </Modal.Footer>
       </Modal>

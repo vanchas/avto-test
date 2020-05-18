@@ -120,6 +120,9 @@ export class AdminPage extends React.Component {
       intro_header_desc_item_4: ${text.intro_header_desc_item_4},
       price_block_header: ${text.price_block_header},
       price_block_subheader: ${text.price_block_subheader},
+      price_block_card_1_sum: ${text.price_block_card_1_sum},
+      price_block_card_2_sum: ${text.price_block_card_2_sum},
+      price_block_card_3_sum: ${text.price_block_card_3_sum},
       price_block_card_1_header: ${text.price_block_card_1_header},
       price_block_card_2_header: ${text.price_block_card_2_header},
       price_block_card_3_header: ${text.price_block_card_3_header},
@@ -169,9 +172,13 @@ export class AdminPage extends React.Component {
     СТРАНИЦА РЕЗУЛЬТАТА: {
       error_submessage: ${text.error_submessage},
       error_link: ${text.error_link},
+      error_link_btn_title: ${text.error_link_btn_title},
       error_message: ${text.error_message},
       result_page_header: ${text.result_page_header},
       result_page_cards_block_header: ${text.result_page_cards_block_header},
+      result_page_card_1_price: ${text.result_page_card_1_price}
+      result_page_card_2_price: ${text.result_page_card_2_price}
+      result_page_card_3_price: ${text.result_page_card_3_price}
       result_page_card_1_header: ${text.result_page_card_1_header},
       result_page_card_2_header: ${text.result_page_card_2_header},
       result_page_card_3_header: ${text.result_page_card_3_header},
@@ -193,7 +200,12 @@ export class AdminPage extends React.Component {
       title_theft_database: ${text.title_theft_database},
       title_registration_policies: ${text.title_registration_policies}
     },
-    СТРАНИЦА БЛОГА: {}
+    АНИМАЦИЯ ПРИ ПОИСКЕ: {
+        search_animation_text_1: ${text.search_animation_text_1},
+        search_animation_text_2: ${text.search_animation_text_2},
+        search_animation_text_3: ${text.search_animation_text_3},
+        search_animation_text_4: ${text.search_animation_text_4},
+      },
     `}</pre>
                 </div>
             </div>

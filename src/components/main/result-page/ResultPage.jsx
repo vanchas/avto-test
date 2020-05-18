@@ -50,15 +50,13 @@ export default class ResultPage extends Component {
 
   newWindowOpen() {
     const vin = getCar().Found.vin;
-    window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${vin}`, '_blanc');
+    window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=more&vin=${vin}`, '_blanc');
   }
 
   render() {
     const inputValue = this.inputValue;
     const text = this.props.langData;
     const car = this.state.carInfo;
-    // console.log(text.price_block_card_3_btn_buy);
-
 
     return (
       <div className="result-page">
@@ -171,7 +169,8 @@ export default class ResultPage extends Component {
                     </div> */}
                   </div>
                 </div>
-                <div className="row py-2 green-border">
+                <div className="row py-2 green-border"
+                  title={car.registration} >
                   <div className="col-2">
                     <img width={35} src={MreoGreen} alt="" /></div>
                   <div className="col-10 p-0 pl-2">
@@ -179,8 +178,8 @@ export default class ResultPage extends Component {
                       className="float-left font-weight-bold text-dark" >
                       {car.dep} &nbsp;</span>
                     <span
-                      className="float-left font-weight-bold text-dark" >
-                      |&nbsp; {car.code}</span>
+                      className="float-left font-weight-bold text-dark question-sign pr-1" >
+                      |&nbsp; {car.registration_code}</span>
                   </div>
                 </div>
               </div>
@@ -310,11 +309,14 @@ export default class ResultPage extends Component {
           <div className="py-5 px-3 text-center">
             <div className="d-inline-block alert alert-danger" role="alert">
               <p>{text.error_message}</p>
+              {/* <p className="m-0">{text.error_submessage}</p> */}
               <p>
-                <a href={`${text.error_link}${inputValue}`} target="_blank" rel="noopener noreferrer" >
-                  <span className="text-dark">{text.error_submessage}</span><br />
-                  {`${text.error_link}${inputValue}`}
-                </a>
+                <button className="btn text-primary" onClick={() => {
+                  window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=more&vin=${inputValue}`, '_blanc');
+                }}>
+                  <u>{text.error_link_btn_title}</u>
+                  {/* {`${text.error_link}${inputValue}`} */}
+                </button>
               </p>
             </div>
           </div>}
@@ -349,13 +351,16 @@ export default class ResultPage extends Component {
                 </div>
                 <div className="card-body">
                   <div className="text-danger h2 font-weight-bold">
-                    249 {text.price_block_card_currency}</div>
+                    {/* 249 */}
+                    {text.result_page_card_1_price}
+                    {text.price_block_card_currency}</div>
                   <a href="https://www.carvertical.com/ua/zrazok-zvitu?a=avtotest&b=f1781078&data1=zrazok" target="_blank" rel="noopener noreferrer" className="btn text-dark small font-weight-bold"><u>{text.price_block_card_report_link}</u></a>
                   <div>
-                    <OrderForm
-                      langData={this.props.langData}
-                      price_block_card_btn_buy={text.price_block_card_btn_buy} >
-                    </OrderForm>
+                    <button
+                      className="mt-3 d-flex mx-auto btn btn-danger btn-danger-modal px-5"
+                      onClick={this.newWindowOpen}>
+                      {text.price_block_card_btn_buy}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -372,7 +377,9 @@ export default class ResultPage extends Component {
                 </div>
                 <div className="card-body pt-1">
                   <div className="text-danger h2 font-weight-bold">
-                    49 {text.price_block_card_currency}</div>
+                    {/* 49 */}
+                    {text.result_page_card_2_price}
+                    {text.price_block_card_currency}</div>
                   <a href="https://www.carvertical.com/ua/zrazok-zvitu?a=avtotest&b=f1781078&data1=zrazok" target="_blank" rel="noopener noreferrer" className="btn text-dark small font-weight-bold"><u>{text.price_block_card_report_link}</u></a>
                   <div>
                     <OrderForm
@@ -389,14 +396,16 @@ export default class ResultPage extends Component {
                   <p style={{ lineHeight: '1.5em' }}
                     className="card-heading px-1 card-text h5 font-weight-bold d-flex justify-content-center align-items-center text-center mb-0">{text.result_page_card_3_header}</p>
                   <div className="pt-2">
-                    <img style={{ width: '52%' }} className="py-1 card-img-top mx-auto" src={CheckImg} alt="Card cap" />
+                    <img style={{ width: '55%' }} className="py-1 card-img-top mx-auto" src={CheckImg} alt="Card cap" />
                     <h5 className="card-title mt-1 font-weight-bold">{text.price_block_card_3_base}</h5>
                   </div>
                 </div>
                 <div className="card-body pt-1">
                   <div className="text-danger h2 font-weight-bold">
-                    49 {text.price_block_card_currency}</div>
-                  <a href="https://polis.ua/" target="_blank" rel="noopener noreferrer" className="btn text-dark small font-weight-bold"><u>{text.price_block_card_3_report_link}</u></a>
+                    {/* 49 */}
+                    {text.result_page_card_3_price}
+                    {text.price_block_card_currency}</div>
+                  <a href="https://avtotest.polis.ua/" target="_blank" rel="noopener noreferrer" className="btn text-dark small font-weight-bold"><u>{text.price_block_card_3_report_link}</u></a>
                   <div>
                     <a href="https://avtotest.polis.ua/" target="_blank" rel="noopener noreferrer" className="mt-3 btn btn-danger d-flex mx-auto link-order-danger px-5">{text.price_block_card_3_btn_buy}</a>
                   </div>

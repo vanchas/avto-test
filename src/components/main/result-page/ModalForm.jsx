@@ -3,12 +3,14 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { contactService } from '../../../_services/contact.service';
 import './result.scss';
+import { getCar } from '../../../_helpers/get-car';
 
 export const OrderForm = props => {
   const [show, setShow] = React.useState(false);
   // const [warningMessage, setWarningMessage] = React.useState('');
   const [name, setName] = React.useState('');
   const [phone, setPhone] = React.useState('');
+  const [vin, setVin] = React.useState('');
   const [loading, setLoading] = React.useState(false);
 
 
@@ -23,15 +25,16 @@ export const OrderForm = props => {
 
   const fetchData = async e => {
     e.preventDefault();
+    const vinCode = (getCar().Found && getCar().Found.vin) ? getCar().Found.vin : vin;
 
     if (name.length && phone.length) {
       setLoading(true);
-      await contactService.sendEmail(name, phone);
+      await contactService.sendEmail(name, phone, vinCode);
       setName('');
       setPhone('');
       setLoading(false);
     } else {
-      alert('Поле "Имя" и "Телефон" должно быть заполнено');
+      alert('Поля "Ім`я" і "Телефон" мають бути заповнені');
     }
     handleClose();
   }
@@ -60,7 +63,7 @@ export const OrderForm = props => {
             <label className="mt-3">
               <input type="text"
                 value={name}
-                placeholder="Имя"
+                placeholder="Ім’я"
                 onChange={e => { setName(e.target.value) }}
                 className="form-control" />
             </label>
@@ -76,25 +79,32 @@ export const OrderForm = props => {
                 onChange={e => { setPhone(e.target.value) }}
                 className="form-control" />
             </label>
+            <label className="mt-3">
+              <input type="text"
+                value={vin}
+                placeholder={(getCar().Found && getCar().Found.vin) ? getCar().Found.vin : "VIN"}
+                onChange={e => { setVin(e.target.value) }}
+                className="form-control" />
+            </label>
           </form>
         </Modal.Body>
         <Modal.Footer className="pt-0 bkg-light-info d-flex flex-column">
           {loading ?
             <div className="alert alert-success" role="alert">
-              Спасибо!
+              Дякуемо!
             </div>
             :
             <Button
               variant=""
               className="btn text-white mx-auto btn-send-email d-block mt-3 mb-1 border-0 font-weight-bolder"
               onClick={e => fetchData(e)}>
-              Отправить
+              Надіслати
         </Button>
           }
           <Button variant=""
             className="m-0 border-0 text-success"
             onClick={handleClose}>
-            <u>Отмена</u>
+            <u>Скасувати</u>
           </Button>
         </Modal.Footer>
       </Modal>

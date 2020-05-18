@@ -25,7 +25,7 @@ export default class IntroPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      waitMessage: 'Шукаемо по базi даних технічного обслуговування автомобіля...',
+      waitMessage: '',
       value: '',
       carInfo: {},
       loading: false
@@ -37,6 +37,12 @@ export default class IntroPage extends Component {
     this.FullSelection = React.createRef();
     this.scrollToElement = this.scrollToElement.bind(this);
     this.searchAnimation = this.searchAnimation.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({
+      waitMessage: this.props.langData.search_animation_text_1
+    })
   }
 
   componentDidUpdate() {
@@ -80,17 +86,14 @@ export default class IntroPage extends Component {
 
   searchAnimation() {
     setTimeout(() => {
-      this.setState({ waitMessage: "Шукаємо по класифікатору об'єктів адміністративно-територіального устрою України..." })
+      this.setState({ waitMessage: this.props.langData.search_animation_text_2 })
     }, 1000);
     setTimeout(() => {
-      this.setState({ waitMessage: "Шукаємо по державному реєстру обтяжень рухомого майна..." })
+      this.setState({ waitMessage: this.props.langData.search_animation_text_3 })
     }, 2000);
     setTimeout(() => {
-      this.setState({ waitMessage: "Шукаємо по базi выкрадень та залогiв ..." })
+      this.setState({ waitMessage: this.props.langData.search_animation_text_4 })
     }, 3000);
-    setTimeout(() => {
-      this.setState({ waitMessage: "Шукаємо по базi даних технічного обслуговування автомобіля..." })
-    }, 4000);
   }
 
   sendValue = async () => {
@@ -276,10 +279,10 @@ export default class IntroPage extends Component {
 
 
         <section ref={this.Overview} className="price-block text-center container-fluid pt-2 pb-5 bg-light font-weight-bolder">
-          <h2 className="h1 font-weight-bolder">{text.price_block_header}</h2>
+          <h2 style={{ fontSize: '2em' }} className="font-weight-bolder">{text.price_block_header}</h2>
           <h4>{text.price_block_subheader}</h4>
           <div className="prices-cards row d-md-flex justify-content-around justify-items-center">
-            <div className="price-card col-lg-4 col-md-12">
+            <div className="price-card col-lg-4 col-md-12 pb-3">
               <div className="price-description py-4 mx-1 row ">
                 <h5 className="text-center w-100">{text.price_block_card_1_header}</h5>
                 <span className="col-12">
@@ -296,13 +299,15 @@ export default class IntroPage extends Component {
                 </span>
                 <div className="image-container w-100">
                   <img className="card-image" src={Tablet} alt="" />
-                  <span className="price font-weight-bold">399 {text.price_block_card_currency}</span>
+                  <span className="price font-weight-bold">
+                    {/* 399 */}
+                    {text.price_block_card_1_sum}
+                    {text.price_block_card_currency}</span>
                 </div>
               </div>
-              <OrderForm
-                langData={this.props.langData}
-                price_block_card_btn_buy={text.price_block_card_btn}>
-              </OrderForm>
+              <a style={{ borderRadius: '2em', background: '#de4c59' }} href="https://www.carvertical.com/ua/landing/v3?a=avtotest&b=f1781078&data1=odM" target="_blank" rel="noopener noreferrer" className="mt-3 btn btn-danger-modal text-white px-5">
+                <span style={{ transform: 'translateY(-.3em)', display: 'inline-block' }}>{text.price_block_card_btn}</span>
+              </a>
             </div>
 
             <div className="price-card col-lg-4 col-md-12">
@@ -322,7 +327,10 @@ export default class IntroPage extends Component {
                 </span>
                 <div className="image-container w-100">
                   <img className="card-image" src={Hands} alt="." />
-                  <span className="price font-weight-bold">999 {text.price_block_card_currency}</span>
+                  <span className="price font-weight-bold">
+                    {/* 999 */}
+                    {text.price_block_card_2_sum}
+                    {text.price_block_card_currency}</span>
                 </div>
               </div>
               <OrderForm
@@ -348,13 +356,15 @@ export default class IntroPage extends Component {
                 </span>
                 <div className="image-container w-100">
                   <img className="card-image" src={Tools} alt="." />
-                  <span className="price font-weight-bold">1399 {text.price_block_card_currency}</span>
+                  <span className="price font-weight-bold">
+                    {/* 1399 */}
+                    {text.price_block_card_3_sum}
+                    {text.price_block_card_currency}</span>
                 </div>
               </div>
-              <OrderForm
-                langData={this.props.langData}
-                price_block_card_btn_buy={text.price_block_card_btn}>
-              </OrderForm>
+              <a style={{ borderRadius: '2em', background: '#de4c59' }} href="https://avtotest.polis.ua/" target="_blank" rel="noopener noreferrer" className="mt-3 btn btn-danger-modal text-white px-5">
+                <span style={{ transform: 'translateY(-.3em)', display: 'inline-block' }}>{text.price_block_card_btn}</span>
+              </a>
             </div>
           </div>
         </section>

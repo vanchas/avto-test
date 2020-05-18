@@ -2,7 +2,7 @@ export const contactService = {
   sendEmail
 };
 
-async function sendEmail(name, phone) {
+async function sendEmail(name, phone, vin) {
   return await fetch('/api/fb', {
     method: 'POST',
     headers: {
@@ -10,7 +10,7 @@ async function sendEmail(name, phone) {
       'Content-Type': 'application/json;charset=utf-8'
     },
     body: JSON.stringify({
-      name, phone
+      name, phone, vin
     })
   })
     .then((res) => {

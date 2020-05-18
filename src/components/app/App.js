@@ -6,6 +6,7 @@ import { history } from '../../_helpers/history';
 import { authHeader } from '../../_helpers/auth-header';
 import { languageService } from '../../_services/lang.service';
 import { getLang } from '../../_helpers/lang-helper';
+import GoogleTagManager from './GoogleTagManager';
 
 class App extends React.Component {
     constructor(props) {
@@ -51,6 +52,8 @@ class App extends React.Component {
     render() {
         return (
             <Router history={history} >
+                <GoogleTagManager gtmId='GTM-5V6X2HP' />
+
                 {this.state.langData
                     && this.state.langData.intro_header
                     ?

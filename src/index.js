@@ -8,6 +8,9 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import PWAPrompt from 'react-ios-pwa-prompt';
 import InstallPWA from './pwa';
+import { hotjar } from 'react-hotjar';
+
+hotjar.initialize(1577205, 6);
 
 const root = document.getElementById("root");
 

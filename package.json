@@ -23,6 +23,8 @@
 		"react": "^16.13.1",
 		"react-bootstrap": "^1.0.0",
 		"react-dom": "^16.13.1",
+		"react-google-tag-manager": "^2.2.1",
+		"react-hotjar": "^2.2.0",
 		"react-ios-pwa-prompt": "^1.7.0",
 		"react-localization": "^1.0.15",
 		"react-router": "^5.1.2",
@@ -40,8 +42,16 @@
 		"extends": "react-app"
 	},
 	"browserslist": {
-		"production": [ ">0.2%", "not dead", "not op_mini all" ],
-		"development": [ "last 1 chrome version", "last 1 firefox version", "last 1 safari version" ]
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
 	},
 	"devDependencies": {}
 }
