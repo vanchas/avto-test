@@ -375,7 +375,7 @@ export default class IntroPage extends Component {
           </div>
 
           <div className="col-md-6 col-sm-12 text-center d-flex flex-column justify-content-center font-weight-bolder">
-            <h2 className="h1 font-weight-bolder">{text.consultation_block_header}</h2>
+            <h2 className="h2 font-weight-bolder">{text.consultation_block_header}</h2>
             <p className="h5">{text.consultation_block_subheader}</p>
 
             <OrderForm
