@@ -217,7 +217,7 @@ export default class IntroPage extends Component {
                 <img src={SearchIcon} className="search-icon" alt="" />
                 <input type="text"
                   value={this.state.value}
-                  placeholder={text.intro_header__input_placeholder} className="form-control pl-5"
+                  placeholder={text.intro_header__input_placeholder} className="font-weight-bold search-input"
                   onChange={e => this.onValueInput(e)}
                 />
                 <div>
