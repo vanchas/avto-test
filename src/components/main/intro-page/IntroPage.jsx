@@ -103,7 +103,7 @@ export default class IntroPage extends Component {
     const checkLimiter = await JSON.parse(
       localStorage.getItem('avto-test-limit'));
 
-    if (this.state.value.toString().trim().length) {
+    if (this.state.value.toString().trim().length >= 8) {
 
       if (checkLimiter && checkLimiter.date) {
 
