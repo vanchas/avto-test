@@ -28,7 +28,10 @@ export class AdminPage extends React.Component {
         userService.logout();
     }
 
-    componentDidMount() {
+    sendData = async () => {
+        fetch('/api/notification_to/admin')
+            .then(res => res.json())
+            .catch(err => err)
     }
 
     changeKeyText = async (e) => {
@@ -58,6 +61,11 @@ export class AdminPage extends React.Component {
                 className="mx-auto">
                 <h3 className="text-center py-5">Привіт, адмін {user.email}, Bи ввійшли в систему!</h3>
                 <p className="text-center">
+                    <button
+                        className="btn btn-info mr-2"
+                        onClick={this.sendData}>
+                        Отправить Данные
+                    </button>
                     <button
                         className="btn btn-danger"
                         onClick={this.logout}>
