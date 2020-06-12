@@ -18,13 +18,23 @@ async function getCarInfo(value) {
   })
     .then((res) => {
 
-      if (res.status === 500 || res.status === 404 || res.status === 400) {
-        
+      if (res.status === 500 || res.status === 400) {
+
         localStorage.removeItem('avto-test-car');
 
         window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${value}`, '_blanc');
         history.push('/result');
+      } else if (res.status === 404) {
+        const data = res.json();
+        data.then(car => {
+          localStorage.setItem('avto-test-car', JSON.stringify(car.error.vehicle));
 
+          setTimeout(() => {
+            window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${value}`, '_blanc');
+
+            history.push('/result');
+          }, 1000);
+        })
       } else {
         const data = res.json();
 

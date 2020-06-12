@@ -38,9 +38,9 @@ export default class ResultPage extends Component {
     this.newWindowOpen = this.newWindowOpen.bind(this);
   }
 
-  componentDidMount = async () => {
-    await this.setState({
-      carInfo: getCar().Found
+  componentDidMount = () => {
+    this.setState({
+      carInfo: JSON.parse(localStorage.getItem('avto-test-car'))
     });
   }
 
@@ -310,6 +310,7 @@ export default class ResultPage extends Component {
             <div className="d-inline-block alert alert-danger" role="alert">
               <p>{text.error_message}</p>
               {/* <p className="m-0">{text.error_submessage}</p> */}
+              <p>Дані по авто {car.manufacturer}, що виготовлено для регіону: {car.region} ({car.country}) не доступні у відкритих реєстрах МВС України</p>
               <p>
                 <button className="btn text-primary" onClick={() => {
                   window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=more&vin=${inputValue}`, '_blanc');
