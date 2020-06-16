@@ -311,7 +311,7 @@ export default class ResultPage extends Component {
               <p>{text.error_message}</p>
               {/* <p className="m-0">{text.error_submessage}</p> */}
               {(car && car.manufacturer) ?
-                <p>Дані по авто {car.manufacturer}, що виготовлено для регіону: {car.region} ({car.country}) не доступні у відкритих реєстрах МВС України</p> : null}
+                <p>Дані по авто <b>{car.manufacturer}</b>, що виготовлено для регіону: <b>{car.region} ({car.country})</b> не доступні у відкритих реєстрах МВС України</p> : null}
               <p>
                 <button className="btn text-primary" onClick={() => {
                   window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=more&vin=${inputValue}`, '_blanc');

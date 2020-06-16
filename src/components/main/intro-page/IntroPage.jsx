@@ -96,8 +96,9 @@ export default class IntroPage extends Component {
     }, 3000);
   }
 
-  sendValue = async () => {
-    await localStorage.removeItem('avto-test-car');
+  sendValue = async e => {
+    e.preventDefault();
+    localStorage.removeItem('avto-test-car');
 
     const user = await authHeader().Authorization;
     const checkLimiter = await JSON.parse(
@@ -224,7 +225,7 @@ export default class IntroPage extends Component {
                   {
                     !this.state.loading ?
                       <span className="btn check-car-btn w-100 d-flex justify-content-center align-items-center"
-                        onClick={this.sendValue} >
+                        onClick={e => this.sendValue(e)} >
                         <button className="btn text-white p-0 pr-3">
                           {text.intro_header_btn_check}
                         </button>

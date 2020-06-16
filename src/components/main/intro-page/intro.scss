@@ -87,14 +87,19 @@
 	padding: 0;
 	.search-input {
 		padding: 0 0 0 2.6em;
-		line-height: 2em;
+		line-height: 2.5em;
 		width: calc(100% + 1em);
 		border-radius: 2em;
 		color: #000;
-		border: 1px solid #eee;
+		border:  none;
+		// border: 1px solid #eee;
 		&:hover {
+			outline: none;
 			transition: .3s;
-			box-shadow: inset 0 0 10px 5px #2c1818;
+			box-shadow: inset 0 0 10px 5px #9b9494;
+		}
+		&:focus {
+			outline: none;
 		}
 	}
 	.check-car-btn {
