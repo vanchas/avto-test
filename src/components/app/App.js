@@ -7,6 +7,8 @@ import { authHeader } from '../../_helpers/auth-header';
 import { languageService } from '../../_services/lang.service';
 import { getLang } from '../../_helpers/lang-helper';
 import GoogleTagManager from './GoogleTagManager';
+import { Provider } from 'react-redux';
+import { store } from '../../redux/store'
 
 class App extends React.Component {
     constructor(props) {
@@ -51,27 +53,29 @@ class App extends React.Component {
 
     render() {
         return (
-            <Router history={history} >
-                <GoogleTagManager gtmId='GTM-5V6X2HP' />
+            <Provider store={store}>
+                <Router history={history} >
+                    <GoogleTagManager gtmId='GTM-5V6X2HP' />
 
-                {this.state.langData
-                    && this.state.langData.intro_header
-                    ?
-                    <div className="App" >
-                        <Main
-                            user={this.state.user}
-                            langData={this.state.langData}
-                            onSetLanguage={this.onSetLanguage}
-                            changeKeyText={this.changeKeyText}
-                        />
-                    </div>
-                    : <div className="pt-5 mt-3 d-flex">
-                        <div className="mx-auto d-block spinner-border text-success" role="status">
-                            <span className="sr-only">Loading...</span>
+                    {this.state.langData
+                        && this.state.langData.intro_header
+                        ?
+                        <div className="App" >
+                            <Main
+                                user={this.state.user}
+                                langData={this.state.langData}
+                                onSetLanguage={this.onSetLanguage}
+                                changeKeyText={this.changeKeyText}
+                            />
                         </div>
-                    </div>
-                }
-            </Router>
+                        : <div className="pt-5 mt-3 d-flex">
+                            <div className="mx-auto d-block spinner-border text-success" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    }
+                </Router>
+            </Provider>
         );
     }
 }

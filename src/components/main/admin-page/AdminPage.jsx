@@ -1,118 +1,286 @@
 import React from 'react';
+import s from './admin.scss';
 import { history } from '../../../_helpers/history';
 import { authHeader } from '../../../_helpers/auth-header';
 import { userService } from '../../../_services/user.service';
 import $ from 'jquery'
+// import { adminService } from '../../../_services/admin.service';
+import { connect } from 'react-redux';
+import { getRequestsData, getUsersData } from '../../../redux/adminActions';
 
-export class AdminPage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            newKey: '',
-            newKeyLang: '',
-            newKeyText: '',
-        };
-        this.logout = this.logout.bind(this);
-        this.changeKeyText = this.changeKeyText.bind(this);
+class AdminPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      newKey: '',
+      newKeyLang: '',
+      newKeyText: '',
+      currentPage: 1,
+      currentPageUsers: 1,
+      component: 'requests'
+    };
+    this.pages = [];
+    this.userPages = [];
+    this.logout = this.logout.bind(this);
+    this.changeKeyText = this.changeKeyText.bind(this);
+    this.paginationDataHandler = this.paginationDataHandler.bind(this);
+  }
+
+  componentWillReceiveProps(props) {
+    this.userPages = [];
+    for (let i = 0; i < props.users.last_page; i++) {
+      this.userPages.push(1);
     }
+    this.pages = [];
+    for (let i = 0; i < props.data.last_page; i++) {
+      this.pages.push(1);
+    }
+  }
+  // users data
+  showPreviousPageUsers = (e) => {
+    e.preventDefault();
+    if (this.state.currentPageUsers > 1) {
+      this.setState({ currentPageUsers: this.state.currentPageUsers - 1 });
+      this.props.getUsersData(this.state.currentPageUsers - 1);
+    }
+  }
+  showNextPageUsers = (e) => {
+    e.preventDefault();
+    if (this.state.currentPageUsers < this.userPages.length) {
+      this.setState({ currentPageUsers: this.state.currentPageUsers + 1 });
+      this.props.getUsersData(this.state.currentPageUsers + 1);
+    }
+  }
+  paginationUsersHandler = (page, e) => {
+    e.preventDefault();
+    this.setState({ currentPageUsers: page });
+    this.props.getUsersData(page);
+  }
+  // requests data
+  showPreviousPageData = (e) => {
+    e.preventDefault();
+    if (this.state.currentPage > 1) {
+      this.setState({ currentPage: this.state.currentPage - 1 });
+      this.props.getRequestsData(this.state.currentPage - 1);
+    }
+  }
+  showNextPageData = (e) => {
+    e.preventDefault();
+    if (this.state.currentPage < this.pages.length) {
+      this.setState({ currentPage: this.state.currentPage + 1 });
+      this.props.getRequestsData(this.state.currentPage + 1);
+    }
+  }
+  paginationDataHandler = (page, e) => {
+    e.preventDefault();
+    this.setState({ currentPage: page });
+    this.props.getRequestsData(page);
+  }
 
-    componentWillMount() {
-        $('.language-text').slideUp();
+  changeComponent = ref => {
+    this.setState({ component: ref });
+  }
+  componentDidMount() {
+    $('.language-text').hide();
+    this.props.getRequestsData(1);
+    this.props.getUsersData(1);
+  }
+  componentWillMount() {
+    if (authHeader().Authorization.is_admin !== 1) {
+      history.push('/home');
+    }
+  }
+  logout() {
+    userService.logout();
+  }
+  sendData = async () => {
+    fetch('/api/notification_to/admin')
+      .then(res => res.json())
+      .catch(err => err)
+  }
+  changeKeyText = async (e) => {
+    e.preventDefault();
 
-        if (authHeader().Authorization.is_admin !== 1) {
-            history.push('/home');
+    if (this.state.newKey.length && this.state.newKeyText.length && this.state.newKeyLang.length) {
+      await this.props.changeKeyText(
+        this.state.newKey,
+        this.state.newKeyText,
+        this.state.newKeyLang
+      );
+      this.setState({
+        newKey: '', newKeyLang: '', newKeyText: ''
+      });
+      this.props.onSetLanguage(this.props.langData.id);
+    } else {
+      alert('Для отправки изменений поле "Ключ" и "Новый текст ключа" должны быть заполнены');
+    }
+  }
+
+  render() {
+    const user = authHeader().Authorization;
+    const text = this.props.langData;
+
+    return (
+      <div style={{ minHeight: '100vh' }}
+        className="mx-auto">
+        <h3 className="text-center py-5">Привіт, адмін {user.email}, Bи ввійшли в систему!</h3>
+
+        <div>
+          <div className="text-center pb-3">
+            <button
+              className="btn btn-info mr-2"
+              onClick={this.sendData}>
+              Отправить Данные
+          </button>
+            <button
+              className="btn btn-danger"
+              onClick={this.logout}>
+              Вийти
+          </button>
+          </div>
+          <nav aria-label="...">
+            <ul className="pagination justify-content-center">
+              <li className={`${this.state.component === 'text' && 'active'} page-item`} onClick={e => this.changeComponent('text')}>
+                <a className={`${this.state.component === 'text' && 'active'} page-link`} href="#">
+                  Изменить текст</a>
+              </li>
+              <li className={`${this.state.component === 'requests' && 'active'} page-item`} onClick={e => this.changeComponent('requests')}>
+                <a className="page-link" href="#">
+                  Данные по запросам</a>
+              </li>
+              <li className={`${this.state.component === 'users' && 'active'} page-item`} onClick={e => this.changeComponent('users')}>
+                <a className="page-link" href="#">
+                  Данные по пользователям</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <hr />
+        {this.state.component === 'requests' &&
+          <div className="container">
+            {this.pages.length > 0 && <ul className="pagination justify-content-center">
+              <li className="page-item"><a className="page-link" href="#" onClick={this.showPreviousPageData}>Previous</a></li>
+              {this.pages.map((p, i) => (
+                <li key={i} className={`${i + 1 == this.state.currentPage && 'active'} page-item`} onClick={(e) => this.paginationDataHandler(i + 1, e)}><a className="page-link" href="#">{i + 1}</a></li>
+              ))}
+              <li className="page-item"><a className="page-link" href="#" onClick={this.showNextPageData}>Next</a></li>
+            </ul>}
+
+            {this.props.data && this.props.data.data && this.props.data.data.length ? <div>
+              <h4 className="text-center">Данные по запросам</h4>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>№</th>
+                    <th>result</th>
+                    <th>query</th>
+                    <th>datetime</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.props.data.data.map((d, i) => (
+                    <tr key={i}>
+                      <th>{i + 1}</th>
+                      <td>{d.result}</td>
+                      <td>{d.query}</td>
+                      <td>{d.datetime}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div> : null}
+
+            {this.pages.length > 0 && <ul className="pagination justify-content-center">
+              <li className="page-item"><a className="page-link" href="#" onClick={this.showPreviousPageData}>Previous</a></li>
+              {this.pages.map((p, i) => (
+                <li key={i} className={`${i + 1 == this.state.currentPage && 'active'} page-item`} onClick={(e) => this.paginationDataHandler(i + 1, e)}><a className="page-link" href="#">{i + 1}</a></li>
+              ))}
+              <li className="page-item"><a className="page-link" href="#" onClick={this.showNextPageData}>Next</a></li>
+            </ul>}
+          </div>
         }
-    }
 
-    logout() {
-        userService.logout();
-    }
+        {this.state.component === 'users' &&
+          <div className="container">
+            {this.userPages.length > 0 && <ul className="pagination justify-content-center">
+              <li className="page-item"><a className="page-link" href="#" onClick={this.showPreviousPageUsers}>Previous</a></li>
+              {this.userPages.map((p, i) => (
+                <li key={i} className={`${i + 1 == this.state.currentPageUsers && 'active'} page-item`} onClick={(e) => this.paginationUsersHandler(i + 1, e)}><a className="page-link" href="#">{i + 1}</a></li>
+              ))}
+              <li className="page-item"><a className="page-link" href="#" onClick={this.showNextPageUsers}>Next</a></li>
+            </ul>}
 
-    sendData = async () => {
-        fetch('/api/notification_to/admin')
-            .then(res => res.json())
-            .catch(err => err)
-    }
+            {this.props.users && this.props.users.data && this.props.users.data.length ? <div>
+              <h4 className="text-center">Данные по пользователям</h4>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>№</th>
+                    <th>email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.props.users.data.map((u, i) => (
+                    <tr key={i}>
+                      <th>{i + 1}</th>
+                      <td>{u.email}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div> : null}
 
-    changeKeyText = async (e) => {
-        e.preventDefault();
-
-        if (this.state.newKey.length && this.state.newKeyText.length && this.state.newKeyLang.length) {
-            await this.props.changeKeyText(
-                this.state.newKey,
-                this.state.newKeyText,
-                this.state.newKeyLang
-            );
-            this.setState({
-                newKey: '', newKeyLang: '', newKeyText: ''
-            });
-            this.props.onSetLanguage(this.props.langData.id);
-        } else {
-            alert('Для отправки изменений поле "Ключ" и "Новый текст ключа" должны быть заполнены');
+            {this.userPages.length > 0 && <ul className="pagination justify-content-center">
+              <li className="page-item"><a className="page-link" href="#" onClick={this.showPreviousPageUsers}>Previous</a></li>
+              {this.userPages.map((p, i) => (
+                <li key={i} className={`${i + 1 == this.state.currentPageUsers && 'active'} page-item`} onClick={(e) => this.paginationUsersHandler(i + 1, e)}><a className="page-link" href="#">{i + 1}</a></li>
+              ))}
+              <li className="page-item"><a className="page-link" href="#" onClick={this.showNextPageUsers}>Next</a></li>
+            </ul>}
+          </div>
         }
-    }
 
-    render() {
-        const user = authHeader().Authorization;
-        const text = this.props.langData;
-
-        return (
-            <div style={{ minHeight: '100vh' }}
-                className="mx-auto">
-                <h3 className="text-center py-5">Привіт, адмін {user.email}, Bи ввійшли в систему!</h3>
-                <p className="text-center">
-                    <button
-                        className="btn btn-info mr-2"
-                        onClick={this.sendData}>
-                        Отправить Данные
-                    </button>
-                    <button
-                        className="btn btn-danger"
-                        onClick={this.logout}>
-                        Вийти
-                    </button>
-                </p>
-
-                <div className="text-center">
-                    <form>
-                        <label className="form-group">
-                            <span>Изменить текст</span>
-                            <input
-                                value={this.state.newKey}
-                                onChange={e => {
-                                    this.setState({ newKey: e.target.value });
-                                }}
-                                className="form-control" type="text" placeholder="ключ" />
-                            <textarea
-                                value={this.state.newKeyText}
-                                onChange={e => {
-                                    this.setState({ newKeyText: e.target.value });
-                                }}
-                                className=" mt-2 form-control" cols="" rows="3" placeholder="новый текст ключа" ></textarea>
-                            <select
-                                defaultValue={'DEFAULT'}
-                                className=" mt-2 form-control" onChange={e => {
-                                    this.setState({ newKeyLang: e.target.value });
-                                }}>
-                                <option value="DEFAULT" disabled>Язык</option>
-                                <option value="ua">ua</option>
-                                <option value="ru">ru</option>
-                                <option value="en">en</option>
-                            </select>
-                            <button
-                                onClick={e => this.changeKeyText(e)}
-                                className="btn btn-primary mt-2">
-                                Изменить
-                            </button>
-                        </label>
-                    </form>
-                </div>
-
-                <div>
-                    <button
-                        onClick={() => $('.language-text').slideToggle()}
-                        className="mx-auto mb-3 d-block btn btn-success">Cписок ключей &nbsp;  &#x2193;</button>
-                    <pre className="language-text">{`
+        {this.state.component === 'text' && <>
+          <div className="text-center">
+            <form>
+              <label className="form-group">
+                <span>Изменить текст</span>
+                <input
+                  value={this.state.newKey}
+                  onChange={e => {
+                    this.setState({ newKey: e.target.value });
+                  }}
+                  className="form-control" type="text" placeholder="ключ" />
+                <textarea
+                  value={this.state.newKeyText}
+                  onChange={e => {
+                    this.setState({ newKeyText: e.target.value });
+                  }}
+                  className=" mt-2 form-control" cols="" rows="3" placeholder="новый текст ключа" ></textarea>
+                <select
+                  defaultValue={'DEFAULT'}
+                  className=" mt-2 form-control" onChange={e => {
+                    this.setState({ newKeyLang: e.target.value });
+                  }}>
+                  <option value="DEFAULT" disabled>Язык</option>
+                  <option value="ua">ua</option>
+                  <option value="ru">ru</option>
+                  <option value="en">en</option>
+                </select>
+                <button
+                  onClick={e => this.changeKeyText(e)}
+                  className="btn btn-primary mt-2">
+                  Изменить
+              </button>
+              </label>
+            </form>
+          </div>
+          <div>
+            <button
+              onClick={() => $('.language-text').slideToggle()}
+              className="mx-auto mb-3 d-block btn btn-success">Cписок ключей &nbsp;  &#x2193;</button>
+            <pre className="language-text">{`
     СТРАНИЦА ПОИСКА: {
       complete_field_warning: ${text.complete_field_warning},
       limit_warning_unauthorized: ${text.limit_warning_unauthorized},
@@ -215,8 +383,19 @@ export class AdminPage extends React.Component {
         search_animation_text_4: ${text.search_animation_text_4},
       },
     `}</pre>
-                </div>
-            </div>
-        );
-    }
+          </div>
+        </>}
+      </div>
+    );
+  }
 }
+
+const mapStateToProps = ({ admin }) => {
+  return { data: admin.data, users: admin.users }
+}
+
+const mapDispatchToProps = {
+  getRequestsData, getUsersData
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminPage);

@@ -4,6 +4,14 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const domen = `https://api.avtotest.org`;
 
 module.exports = function (app) {
+  app.use("/api/report/query",
+    createProxyMiddleware({
+      target: domen,
+      secure: false,
+      changeOrigin: true
+    })
+  );
+
   app.use("/api",
     createProxyMiddleware({
       target: domen,

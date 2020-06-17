@@ -9,7 +9,7 @@ import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import Login from './login-page/Login';
 import Blog from './blog-page/Blog';
-import { AdminPage } from './admin-page/AdminPage';
+import AdminPage from './admin-page/AdminPage';
 
 
 export default class Main extends Component {
