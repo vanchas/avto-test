@@ -23,12 +23,10 @@ function login(email, password) {
   }).then((res) => {
     if (res.status === 200) {
       const result = res.json();
-      // console.log(res);
 
       result.then(async data => {
-        // console.log(data);
         const user = await data.user;
-        user.token = await data.token;
+        user.token = await data.api_token;
         user.token_type = await data.token_type;
         localStorage.setItem('avto-test-user', JSON.stringify(user));
       })
