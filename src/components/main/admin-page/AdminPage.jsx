@@ -1,10 +1,9 @@
 import React from 'react';
-import s from './admin.scss';
+import './admin.scss';
 import { history } from '../../../_helpers/history';
 import { authHeader } from '../../../_helpers/auth-header';
 import { userService } from '../../../_services/user.service';
 import $ from 'jquery'
-// import { adminService } from '../../../_services/admin.service';
 import { connect } from 'react-redux';
 import { getRequestsData, getUsersData } from '../../../redux/adminActions';
 
@@ -93,11 +92,6 @@ class AdminPage extends React.Component {
   logout() {
     userService.logout();
   }
-  sendData = async () => {
-    fetch('/api/notification_to/admin')
-      .then(res => res.json())
-      .catch(err => err)
-  }
   changeKeyText = async (e) => {
     e.preventDefault();
 
@@ -127,11 +121,6 @@ class AdminPage extends React.Component {
 
         <div>
           <div className="text-center pb-3">
-            <button
-              className="btn btn-info mr-2"
-              onClick={this.sendData}>
-              Отправить Данные
-          </button>
             <button
               className="btn btn-danger"
               onClick={this.logout}>

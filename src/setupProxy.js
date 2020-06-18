@@ -96,11 +96,4 @@ module.exports = function (app) {
       changeOrigin: true
     })
   );
-  app.use("/api/notification_to/admin",
-    createProxyMiddleware({
-      target: domen,
-      secure: false,
-      changeOrigin: true
-    })
-  );
 };
