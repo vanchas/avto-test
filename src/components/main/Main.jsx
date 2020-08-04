@@ -10,6 +10,7 @@ import Footer from '../footer/Footer';
 import Login from './login-page/Login';
 import Blog from './blog-page/Blog';
 import AdminPage from './admin-page/AdminPage';
+import ForgotPasswordForm from "./login-page/ForgotPasswordForm";
 
 
 export default class Main extends Component {
@@ -76,6 +77,13 @@ export default class Main extends Component {
               carInfo={this.state.carInfo}
               langData={this.props.langData}
             />} />
+
+            <Route
+                path="/login/forgot-password"
+                render={(props) => (
+                    <ForgotPasswordForm langData={this.props.langData} {...props} />
+                )}
+            />
           </Switch>
         </main>
 

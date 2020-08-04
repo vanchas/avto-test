@@ -1,9 +1,11 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types';
-import { Link, Route } from 'react-router-dom'
-import LoginForm from './LoginForm'
-import RegisterForm from './RegisterForm';
-import { userService } from '../../../_services/user.service';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link, Route } from "react-router-dom";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
+import { userService } from "../../../_services/user.service";
+import s from "./login.module.scss";
+import ForgotPasswordForm from "./ForgotPasswordForm";
 
 export default class Login extends Component {
   constructor(props) {
@@ -11,13 +13,13 @@ export default class Login extends Component {
     this.state = {
       loading: false,
       user: {},
-      email: '',
-      password: '',
-      message: '',
+      email: "",
+      password: "",
+      message: "",
       status: 200,
-      registerMessage: '',
-      registedEmail: '',
-      registedPassword: ''
+      registerMessage: "",
+      registedEmail: "",
+      registedPassword: "",
     };
     this.loginHandler = this.loginHandler.bind(this);
     this.registerHandler = this.registerHandler.bind(this);
@@ -29,21 +31,25 @@ export default class Login extends Component {
   componentWillUnmount() {
     this.setState({
       loading: false,
-      registerMessage: ''
-    })
+      registerMessage: "",
+    });
   }
 
   loginHandler(e) {
     e.preventDefault();
     if (
       (this.state.email.trim().length &&
-      this.state.password.toString().trim().length) ||
+        this.state.password.toString().trim().length) ||
       (this.state.registedEmail.trim().length &&
-      this.state.registedPassword.toString().trim().length)
+        this.state.registedPassword.toString().trim().length)
     ) {
-      new Promise(res => {
-        const email = this.state.registedEmail.length ? this.state.registedEmail : this.state.email;
-        const password = this.state.registedPassword.length ? this.state.registedPassword : this.state.password;
+      new Promise((res) => {
+        const email = this.state.registedEmail.length
+          ? this.state.registedEmail
+          : this.state.email;
+        const password = this.state.registedPassword.length
+          ? this.state.registedPassword
+          : this.state.password;
 
         this.setState({ loading: true });
 
@@ -53,16 +59,16 @@ export default class Login extends Component {
         .then(() => {
           setTimeout(() => {
             this.setState({
-              email: '',
-              password: ''
+              email: "",
+              password: "",
             });
           }, 500);
         })
-        .catch(err => {
-          console.log('Error: ', err);
-        })
+        .catch((err) => {
+          console.log("Error: ", err);
+        });
     } else {
-      alert('Все поля должны быть корректно заполнены.')
+      alert("Все поля должны быть корректно заполнены.");
     }
   }
 
@@ -72,95 +78,101 @@ export default class Login extends Component {
       this.state.email.trim().length &&
       this.state.password.toString().trim().length
     ) {
-      new Promise(res => {
-        localStorage.removeItem('avto-test-car');
+      new Promise((res) => {
+        localStorage.removeItem("avto-test-car");
         this.setState({
           registedEmail: this.state.email,
           registedPassword: this.state.password,
           loading: true,
-          registerMessage: 'Для того щоб зареєструватися, натисніть на  підтвердження, яке ми відправили вам на електронну адресу.'
+          registerMessage:
+            "Для того щоб зареєструватися, натисніть на  підтвердження, яке ми відправили вам на електронну адресу.",
         });
-        userService.registration(
-          this.state.email,
-          this.state.password
-        );
+        userService.registration(this.state.email, this.state.password);
         res();
       })
         .then(() => {
           setTimeout(() => {
             this.setState({
-              email: '',
-              password: ''
+              email: "",
+              password: "",
             });
           }, 500);
         })
-        .catch(err => {
-          console.log('Error: ', err);
-        })
+        .catch((err) => {
+          console.log("Error: ", err);
+        });
     } else {
-      alert('Все поля должны быть корректно заполнены.')
+      alert("Все поля должны быть корректно заполнены.");
     }
   }
 
   emailInput(email) {
-    this.setState({ email })
+    this.setState({ email });
   }
+
   loginInput(name) {
-    this.setState({ name })
+    this.setState({ name });
   }
+
   passwordInput(password) {
-    this.setState({ password })
+    this.setState({ password });
   }
 
   render() {
     const text = this.props.langData;
 
     return (
-      <div style={{ minHeight: '100vh' }}>
-        <div className="container mx-auto py-5">
-          <nav>
-            <ul className="p-0 d-flex justify-content-end">
-              <Link to="/login/sign-in"
-                className="btn btn-secondary px-3 py-2 mr-2" >
-                {text.nav_item_sign_in}
-              </Link>
-              <Link to="/login/sign-up"
-                className="btn btn-secondary px-3 py-2" >
-                {text.nav_item_sign_up}
-              </Link>
-            </ul>
-          </nav>
+      <div style={{ minHeight: "100vh" }}>
+        <div className={s.form}>
+          <Route
+            path="/login/sign-in"
+            render={(props) => (
+              <LoginForm
+                registedEmail={this.state.registedEmail}
+                registedPassword={this.state.registedPassword}
+                loading={this.state.loading}
+                email={this.state.email}
+                password={this.state.password}
+                emailInput={this.emailInput}
+                passwordInput={this.passwordInput}
+                loginHandler={this.loginHandler}
+                langData={this.props.langData}
+                {...props}
+              />
+            )}
+          />
 
-          <Route path="/login/sign-in" render={props => <LoginForm
-            registedEmail={this.state.registedEmail}
-            registedPassword={this.state.registedPassword}
-            loading={this.state.loading}
-            email={this.state.email}
-            password={this.state.password}
-            emailInput={this.emailInput}
-            passwordInput={this.passwordInput}
-            loginHandler={this.loginHandler}
-            langData={this.props.langData}
-            {...props} />} />
+          <Route
+            path="/login/sign-up"
+            render={(props) => (
+              <RegisterForm
+                registerMessage={this.state.registerMessage}
+                loading={this.state.loading}
+                email={this.state.email}
+                name={this.state.name}
+                password={this.state.password}
+                loginInput={this.loginInput}
+                emailInput={this.emailInput}
+                passwordInput={this.passwordInput}
+                registerHandler={this.registerHandler}
+                langData={this.props.langData}
+                {...props}
+              />
+            )}
+          />
 
-          <Route path="/login/sign-up" render={props => <RegisterForm
-            registerMessage={this.state.registerMessage}
-            loading={this.state.loading}
-            email={this.state.email}
-            name={this.state.name}
-            password={this.state.password}
-            loginInput={this.loginInput}
-            emailInput={this.emailInput}
-            passwordInput={this.passwordInput}
-            registerHandler={this.registerHandler}
-            langData={this.props.langData}
-            {...props} />} />
+          <Route
+            path="/login/forgot-password"
+            render={(props) => (
+              <ForgotPasswordForm langData={this.props.langData} {...props} />
+            )}
+          />
         </div>
       </div>
-    )
+    );
   }
 }
 
 Login.propTypes = {
-  langData: PropTypes.object
-}
+  langData: PropTypes.object,
+};

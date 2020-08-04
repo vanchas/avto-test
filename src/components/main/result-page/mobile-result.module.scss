@@ -1,0 +1,109 @@
+.mobile_result_block {
+  display: grid;
+  gap: 2em;
+}
+
+.results_group {
+  border: 1px solid #68bc9d;
+  padding: 1.5em 1em;
+  border-radius: 2em;
+  display: grid;
+  gap: 1em;
+
+  .btn_read_more {
+    text-align: center;
+    span {
+      border-radius: 2em;
+      font-weight: 600;
+    }
+  }
+}
+.result_item {
+  display: grid;
+  grid-template-columns: 3em auto;
+  border-bottom: 1px solid #eee;
+  .with_switch {
+    display: flex;
+    justify-content: space-between;
+  }
+  svg {
+    fill: #67bd9d;
+    width: 30px;
+  }
+  u {
+    cursor: pointer;
+    color: #008c74;
+  }
+}
+
+.more_info_block {
+  grid-column: span 2;
+  padding: .5em 0 0 0;
+  p {
+    display: flex;
+    align-items: center;
+    font-size: .7em;
+    font-weight: 600;
+    margin-bottom: .4em;
+    span {
+      height: fit-content;
+      margin-right: .5em;
+      font-size: 1em;
+      white-space: nowrap;
+      background-color: #afd9ce;
+      color: #fff;
+      border-radius: .3em;
+      padding: .3em .5em;
+    }
+  }
+  h6 {
+    margin-top: 1em;
+    color: #007c60;
+    font-size: .9em;
+    text-align: center;
+  }
+  form {
+    display: grid;
+    justify-items: center;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #999;
+    .form_control {
+      padding: .4em .8em;
+      border-radius: 2em;
+      border: 1px solid #e4dfdf;
+      width: 100%;
+      margin-bottom: .5em;
+      &:focus {
+        outline: none;
+      }
+    }
+    button {
+      border-radius: 2em;
+      font-weight: 600;
+    }
+    .react_tel_input .form_control {
+      width: 100% !important;
+      border-color: #96dcca !important;
+    }
+    .flag_dropdown {
+      border-top-left-radius: 2em !important;
+      border-bottom-left-radius: 2em !important;
+      width: 0;
+      border: none !important;
+
+      &:focus {
+        outline: none;
+      }
+
+      .selected_flag:focus {
+        background: none !important;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 991px) {
+  .mobile_result_block {
+    display: none;
+  }
+}

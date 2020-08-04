@@ -7,7 +7,6 @@ import PetrolImg from './image/petrol_g.png'
 import KgImg from './image/kg_g.png'
 import ReportImg from './image/report_g.png'
 import Owner from './image/owner-g.png'
-// import PlaceImg from './image/place_g.png'
 import WheelImg from './image/wheel_g.png'
 import MegaphoneImg from './image/rupport_g.png'
 import MreoGreen from './image/mreo-green.png'
@@ -21,10 +20,8 @@ import CvLogo from './image/cv-logo.png'
 import AvtoTestLogo from '../../footer/image/footer-logo.png'
 import { getCar } from '../../../_helpers/get-car'
 import { OrderForm } from './ModalForm';
-// import $ from 'jquery'
-
-
-
+import MobileResult from "./MobileResult";
+import Switch from "../../utils/Switch";
 
 export default class ResultPage extends Component {
   constructor(props) {
@@ -66,6 +63,7 @@ export default class ResultPage extends Component {
               <div className="h2 font-weight-bold mr-lg-3 mr-md-0">{text.result_page_header} : {' '}</div>
               <div className="car-vin h2 font-weight-bold text-success">{car.vin}</div>
             </div>
+
             <div className="what-we-found-description d-lg-flex justify-content-between px-lg-5 pt-lg-5 row container m-0">
               <div className="col-lg-6 col-md-12 pt-lg-0 pt-md-5">
                 <div className="row pt-3 pb-2 green-border">
@@ -158,15 +156,6 @@ export default class ResultPage extends Component {
                           </span>
                         })}
                     </div>
-                    {/* <div className=" btn p-0 pl-2 ">
-                      <span className="float-left font-weight-bold">
-                        {car.dep}</span>
-                    </div>
-                    <div className=" btn p-0 pl-2">
-                      <span className="float-left font-weight-bold question-sign"
-                        title={`${car.registration}`} > | &nbsp;
-                        {car.registration_code}</span>
-                    </div> */}
                   </div>
                 </div>
                 <div className="row py-2 green-border"
@@ -235,7 +224,6 @@ export default class ResultPage extends Component {
                     <img width={28} src={Seller} alt="" /></div>
                   <div className="col-10 p-0 pl-2">
                     <span className="float-left font-weight-bold"
-                    // title={text.title_outbid_owner}
                     >
                       {car.outbid}</span>
                   </div>
@@ -272,7 +260,6 @@ export default class ResultPage extends Component {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="float-left font-weight-bold text-dark"
-                    // title={text.title_registration_policies}
                     >
                       <u>ПЕРЕВІРИТИ ОБТЯЖЕННЯ</u></a>
                   </div>
@@ -301,6 +288,8 @@ export default class ResultPage extends Component {
               </div>
             </div>
 
+            <MobileResult text={text} car={car} />
+
             <div className="py-3">
               <img className="m-auto d-block" src={GreenArrow} alt="arrow" />
             </div>
@@ -309,7 +298,6 @@ export default class ResultPage extends Component {
           <div className="py-5 px-3 text-center">
             <div className="d-inline-block alert alert-danger" role="alert">
               <p>{text.error_message}</p>
-              {/* <p className="m-0">{text.error_submessage}</p> */}
               {(car && car.manufacturer) ?
                 <p>Дані по авто <b>{car.manufacturer}</b>, що виготовлено для регіону: <b>{car.region} ({car.country})</b> не доступні у відкритих реєстрах МВС України</p> : null}
               <p>
@@ -317,7 +305,6 @@ export default class ResultPage extends Component {
                   window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=more&vin=${inputValue}`, '_blanc');
                 }}>
                   <u>{text.error_link_btn_title}</u>
-                  {/* {`${text.error_link}${inputValue}`} */}
                 </button>
               </p>
             </div>
@@ -353,7 +340,6 @@ export default class ResultPage extends Component {
                 </div>
                 <div className="card-body">
                   <div className="text-danger h2 font-weight-bold">
-                    {/* 249 */}
                     {text.result_page_card_1_price}
                     {text.price_block_card_currency}</div>
                   <a href="https://www.carvertical.com/ua/zrazok-zvitu?a=avtotest&b=f1781078&data1=zrazok" target="_blank" rel="noopener noreferrer" className="btn text-dark small font-weight-bold"><u>{text.price_block_card_report_link}</u></a>
@@ -379,7 +365,6 @@ export default class ResultPage extends Component {
                 </div>
                 <div className="card-body pt-1">
                   <div className="text-danger h2 font-weight-bold">
-                    {/* 49 */}
                     {text.result_page_card_2_price}
                     {text.price_block_card_currency}</div>
                   <a href="https://www.carvertical.com/ua/zrazok-zvitu?a=avtotest&b=f1781078&data1=zrazok" target="_blank" rel="noopener noreferrer" className="btn text-dark small font-weight-bold"><u>{text.price_block_card_report_link}</u></a>
@@ -404,7 +389,6 @@ export default class ResultPage extends Component {
                 </div>
                 <div className="card-body pt-1">
                   <div className="text-danger h2 font-weight-bold">
-                    {/* 49 */}
                     {text.result_page_card_3_price}
                     {text.price_block_card_currency}</div>
                   <a href="https://avtotest.polis.ua/" target="_blank" rel="noopener noreferrer" className="btn text-dark small font-weight-bold"><u>{text.price_block_card_3_report_link}</u></a>

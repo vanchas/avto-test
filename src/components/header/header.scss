@@ -1,151 +1,250 @@
 .btn-send-email {
-	background-color: #66ac84;
+  background-color: #66ac84;
 }
 .header {
-	z-index: 2;
-	position: relative;
-	border-bottom: 1px solid #888;
-	background: #4b4d4b;
+  z-index: 2;
+  position: relative;
+  border-bottom: 1px solid #888;
+  background: #4b4d4b;
 
-	.img-reverse {
-		transition: .3s;
-		-webkit-transform: rotate(180deg) translateY(-0%);
-		-moz-transform: rotate(180deg) translateY(-0%);
-		-o-transform: rotate(180deg) translateY(-0%);
-		transform: rotate(180deg) translateY(-0%);
-	}
+  .img-reverse {
+    transition: 0.3s;
+    -webkit-transform: rotate(180deg) translateY(-0%);
+    -moz-transform: rotate(180deg) translateY(-0%);
+    -o-transform: rotate(180deg) translateY(-0%);
+    transform: rotate(180deg) translateY(-0%);
+  }
 }
 .navbar {
-	.navbar-nav {
-		padding: 0;
-	}
-	max-width: 1300px;
-	margin: 0 auto;
-	z-index: 1;
-	.nav-item .nav-link {
-		color: #fff;
-		&:hover {
-			color: #de4c59;
-		}
-	}
+  .navbar-nav {
+    padding: 0;
+  }
+  max-width: 1300px;
+  margin: 0 auto;
+  z-index: 1;
+  .nav-item .nav-link {
+    color: #fff;
+    &:hover {
+      color: #de4c59;
+    }
+  }
 
-	.navbar-toggler {
-		user-select: none;
-	}
+  .navbar-toggler {
+    user-select: none;
+    &:focus {
+      outline: none;
+    }
+  }
 }
 .call-info-block {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 .order-call-btn {
-	margin-left: 1em;
-	color: #de4c59;
-	border: 1px solid #de4c59;
-	border-radius: 2em;
-	font-weight: 500;
-	&:hover {
-		transition: 0.2s;
-		color: #fff;
-		border-color: #fff;
-	}
+  margin-left: 1em;
+  color: #de4c59;
+  border: 1px solid #de4c59;
+  border-radius: 2em;
+  font-weight: 500;
+  &:hover {
+    transition: 0.2s;
+    color: #fff;
+    border-color: #fff;
+  }
 }
 .nav-item-select {
-	position: relative;
-	display: flex;
-	align-content: center;
-	align-items: center;
-	max-width: 4em;
-	img {
-		position: absolute;
-		top: 50%;
-		right: 0;
-		height: .5em;
-		transform: translateY(-50%);
-	}
-	&:hover .language-select {
-		cursor: pointer;
-		transition: 0.2s;
-		color: #de4c59 !important;
-		text-decoration: none;
-	}
+  position: relative;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  max-width: 4em;
+  img {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    height: 0.5em;
+    transform: translateY(-50%);
+  }
+  &:hover .language-select {
+    cursor: pointer;
+    transition: 0.2s;
+    color: #de4c59 !important;
+    text-decoration: none;
+  }
 }
 .language-select {
-	border: none;
-	background: none;
-	z-index: 1;
-	-webkit-appearance: none;
-	appearance: none;
+  border: none;
+  background: none;
+  z-index: 1;
+  -webkit-appearance: none;
+  appearance: none;
 
-	&::-ms-expand {
-		display: none;
-	}
-	option {
-		background: #4b4d4b;
-	}
+  &::-ms-expand {
+    display: none;
+  }
+  option {
+    background: #4b4d4b;
+  }
 }
 
 .number,
 .nav-link {
-	i {
-		background-color: #fff;
-		width: 1.6em;
-		height: 2px;
-		display: block;
-		margin: 10px 0;
-	}
+  i {
+    background-color: #fff;
+    width: 1.6em;
+    height: 2px;
+    display: block;
+    margin: 10px 0;
+  }
 }
 
 @media screen and (max-width: 985px) {
-	.header-bg-image-holder {
-		height: 650%;
-	}
+  .header-bg-image-holder {
+    height: 650%;
+  }
 }
 
 .admin-home-links {
-	display: flex;
+  display: flex;
 }
 
 @media screen and (max-width: 1199px) {
-	.admin-home-links {
-		display: grid;
-	}
-	.navbar {
-		.navbar-nav {
-			padding: 0 0 1em 0;
-		}
-		.nav-item {
-			width: 100%;
-			.nav-link {
-				width: 100%;
-				text-align: center;
-			}
-		}
-		.nav-item-select {
-			margin: 0 auto;
-		}
-	}
-	.call-info-block {
-		display: grid;
-		justify-items: center;
-		grid-gap: 0.3em;
-		position: absolute;
-		left: 50%;
-		top: 0.9em;
-		transform: translate(-45%, 0);
-		.order-call-btn {
-			white-space: nowrap;
-		}
-	}
+  .admin-home-links {
+    display: grid;
+  }
+  .navbar {
+    .navbar-nav {
+      padding: 0 0 1em 0;
+    }
+    .nav-item {
+      width: 100%;
+      .nav-link {
+        width: 100%;
+        text-align: center;
+      }
+    }
+    .nav-item-select {
+      margin: 0 auto;
+    }
+  }
+  .call-info-block {
+    display: grid;
+    justify-items: center;
+    grid-gap: 0.3em;
+    position: absolute;
+    left: 50%;
+    top: 0.9em;
+    transform: translate(-45%, 0);
+    .order-call-btn {
+      white-space: nowrap;
+    }
+  }
+}
+.mobile-call-block {
+  display: none;
+}
+.inspection-modal-btn {
+  border-radius: 2em;
+  font-size: 0.8em;
 }
 
 @media screen and (max-width: 611px) {
-	.header-bg-image-holder {
-		height: 570%;
-	}
+  .header {
+    position: relative;
+  }
+  .header-bg-image-holder {
+    height: 570%;
+  }
+  .call-info-block,
+  .order-call-btn {
+    display: none;
+  }
+  .navbar-brand {
+    margin-right: 0.2em;
+  }
+  .mobile-call-block {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    top: 2em;
+    transform: translateX(-40%);
+    .number {
+      margin: 0 0.5em;
+      padding-top: 0.3em;
+      img {
+        width: 1.3em;
+      }
+    }
+    button {
+      white-space: nowrap;
+      font-weight: 600;
+      &:hover {
+        background-color: #dc3545 !important;
+      }
+    }
+  }
+  .navbar-toggler {
+    padding: 0.1em 0.3em;
+  }
 }
 
 @media screen and (max-width: 324px) {
-	.header-bg-image-holder {
-		height: 650%;
-	}
+  .header-bg-image-holder {
+    height: 650%;
+  }
+}
+
+.inspection-modal {
+  top: 10%;
+  .btn-outline-danger {
+    border-radius: 2em;
+    padding-right: 2em;
+    padding-left: 2em;
+  }
+  .form-control {
+    border-radius: 2em !important;
+    line-height: 25px;
+    padding: .25rem .75rem;
+    height: auto;
+    border-color:  #96dcca;
+  }
+  .react-tel-input .form-control {
+    width: 100% !important;
+    border-color: #96dcca !important;
+  }
+  .flag-dropdown {
+    border-top-left-radius: 2em !important;
+    border-bottom-left-radius: 2em !important;
+    width: 0;
+    border: none !important;
+    &:focus {
+      outline: none;
+    }
+    .selected-flag:focus {
+      background: none !important;
+    }
+  }
+  .modal-title {
+    p {
+      color: #007c60;
+      text-align: center;
+      font-size: 0.6em;
+      font-weight: 500;
+      line-height: 1.3em;
+      padding-left: 1em;
+      margin-bottom: 0;
+    }
+
+    .h5 {
+      color: #000;
+      font-weight: 300;
+      white-space: nowrap;
+    }
+
+    img {
+      width: 2em;
+      height: 1.5em;
+      margin-right: 1em;
+    }
+  }
 }
