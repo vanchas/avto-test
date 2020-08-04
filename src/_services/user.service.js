@@ -8,9 +8,9 @@ export const userService = {
   registration
 };
 
-function login(email, password) {
+async function login(email, password) {
 
-  return fetch('/api/login', {
+  return await fetch('/api/login', {
     method: 'POST',
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -42,10 +42,10 @@ function login(email, password) {
     });
 }
 
-function logout() {
+async function logout() {
   localStorage.removeItem('avto-test-user');
 
-  fetch('/api/logout', {
+  return await fetch('/api/logout', {
     method: 'GET',
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -58,8 +58,8 @@ function logout() {
     });
 }
 
-function registration(email, password) {
-  fetch('/api/register', {
+async function registration(email, password) {
+  return await fetch('/api/register', {
     method: 'POST',
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -74,20 +74,7 @@ function registration(email, password) {
       console.log(res);
 
       if (res.status === 201 || res.status === 200) {
-
-        // const result = res.json();
-        // result.then(data => {
-        //   console.log(data);
-
-        //   localStorage.setItem('avto-test-user', JSON.stringify(data.user));
-        // })
-        // .then(() => {
-        // window.open(`${email}`, '_blanc');
-        // }).then(() => {
         history.push('/login/sign-in');
-        // window.location.reload(true);
-        // })
-        // .catch(err => console.log(err));
       } else {
         alert('Не вдалося зареєструватися')
       }

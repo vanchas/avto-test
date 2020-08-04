@@ -28,12 +28,12 @@ export default class Login extends Component {
     this.passwordInput = this.passwordInput.bind(this);
   }
 
-  componentWillUnmount() {
-    this.setState({
-      loading: false,
-      registerMessage: "",
-    });
-  }
+  // componentWillUnmount() {
+  //   this.setState({
+  //     loading: false,
+  //     registerMessage: "",
+  //   });
+  // }
 
   loginHandler(e) {
     e.preventDefault();

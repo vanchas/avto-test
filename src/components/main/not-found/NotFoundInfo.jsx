@@ -1,27 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Owner from "./image/owner-g.png";
-import Home from "./image/home-g.png";
-import WheelImg from "./image/wheel_g.png";
-import CoinsImg from "./image/cash_g.png";
-import Seller from "./image/car-seller_g.png";
-import MegaphoneImg from "./image/rupport_g.png";
-import CustomsImg from "./image/customs_g.png";
-import Telegram from "../../../assets/tg.svg";
-import s from "./mobile-result.module.scss";
-import { getCar } from "../../../_helpers/get-car";
-import NumberImg from "./image/number_g.png";
-import CarImg from "./image/car_g.png";
-import CarSearchImg from "./image/car-search_g.png";
-import PetrolImg from "./image/petrol_g.png";
-import KgImg from "./image/kg_g.png";
-import ReportImg from "./image/report_g.png";
-import MreoGreen from "./image/mreo-green.png";
+import s from "./not-found.module.scss";
+import CarG from "../result-page/image/car_g.png";
 import Switch from "../../utils/Switch";
 import MaskedInput from "react-text-mask";
-import { history } from "../../../_helpers/history";
-import { authHeader } from "../../../_helpers/auth-header";
-import {resultForms} from "../../../_services/resultForms.service";
-import {userService} from "../../../_services/user.service";
+import Owner from "../result-page/image/owner-g.png";
+import CoinsImg from "../result-page/image/cash_g.png";
+import MegaphoneImg from "../result-page/image/rupport_g.png";
+import CustomsImg from "../result-page/image/customs_g.png";
+import MreoGreen from "../result-page/image/mreo-green.png";
+import { getCar } from "../../../_helpers/get-car";
 
 const phoneNumberMask = [
   // /[1-9]/,
@@ -44,7 +31,7 @@ const phoneNumberMask = [
   /\d/,
 ];
 
-function MobileResult({ text }) {
+function NotFoundInfo({ langData: text }) {
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(false);
   const [statusText, setStatusText] = useState("ПЕРЕВІРИТИ НА РОЗШУК");
@@ -54,189 +41,70 @@ function MobileResult({ text }) {
   const [priceSwitch, setPriceSwitch] = useState(false);
   const [discountSwitch, setDiscountSwitch] = useState(false);
   const [bonusSwitch, setBonusSwitch] = useState(false);
-  const [phone, setPhone] = useState('');
-  const [vin, setVin] = useState('');
-  const [formOwnerData, setFormOwnerData] = useState(0);
-  const [formInspectionData, setFormInspectionData] = useState(0);
-  const [formMonitoringData, setFormMonitoringData] = useState(0);
-  const [formDiscountData, setFormDiscountData] = useState(0);
-  const [formBonusData, setFormBonusData] = useState(0);
-
-  useEffect(() => {
-    const carData = getCar().Found;
-    if (carData && carData.brand) {
-      setCar(carData);
-    } else {
-      history.push("/not-found");
-    }
-    getSecretFormsDetails()
-  }, []);
 
   const newWindowOpen = () => {
+    const vin = getCar().Found.vin;
     window.open(
-      `https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=more&vin=${car.vin}`,
+      `https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=more&vin=${vin}`,
       "_blanc"
     );
   };
 
-  const inspectionSubmitHandler = (e) => {
-    e.preventDefault()
-    if (phone.length && vin.length) {
-      resultForms.inspection(phone.split(' ').join('').split('(').join('').split(')').join(''), vin)
-    }
-  }
-
-  const getSecretFormsDetails = () => {
-    userService.secretFormsDetails()
-        .then(data => {
-          data.map(item => {
-            if (item.key === 'form_owner_data') {
-              setFormOwnerData(parseInt(item.value))
-            } else if (item.key === 'form_on-site_inspection') {
-              setFormInspectionData(parseInt(item.value))
-            } else if (item.key === 'form_auto_monitoring') {
-              setFormMonitoringData(parseInt(item.value))
-            } else if (item.key === 'form_check_discount') {
-              setFormDiscountData(parseInt(item.value))
-            } else if (item.key === 'form_seller_bonus') {
-              setFormBonusData(parseInt(item.value))
-            }
-          })
-        }).catch(err => console.error(err))
-  }
+  //WBA8H91080K694016
+  useEffect(() => {
+    const carData = JSON.parse(localStorage.getItem("avto-test-car"));
+    if (carData) setCar(carData)
+  }, []);
 
   return car ? (
-    <div className={s.mobile_result_block}>
-      <div className={s.results_group}>
-        <div className={s.result_item}>
-          <div>
-            <span
-              id="vin"
-              style={{
-                letterSpacing: "3px",
-                color: "#68bc9d",
-                fontWeight: 900,
-              }}
-            >
-              VIN
-            </span>
-          </div>
-          <div>
-            <span>{car.vin}</span>
-          </div>
-        </div>
-        <div className={s.result_item}>
-          <div>
-            <img width={32} src={NumberImg} alt="" className="" />
-          </div>
-          <div>
-            <span>
-              {car.number}, {car.code}
-            </span>
-          </div>
-        </div>
-        <div className={s.result_item}>
-          <div>
-            <img width={30} src={CarImg} alt="" />
-          </div>
-          <div>
-            <span>
-              {car.brand} {car.model} {car.year}
-            </span>
-          </div>
-        </div>
-        <div className={s.result_item}>
-          <div>
-            <img width={30} src={CarSearchImg} alt="" />
-          </div>
-          <div>
-            <span>
-              <span>{car.kind} | </span>
-              <span>{car.color} | </span>
-              <span>{car.num_seating} МІСЦЬ</span>
-            </span>
-          </div>
-        </div>
-        <div className={s.result_item}>
-          <div>
-            <img width={25} src={PetrolImg} alt="" />
-          </div>
-          <div>
-            <span>
-              {car.fuel}, {car.capacity} см
-            </span>
-          </div>
-        </div>
-        <div className={s.result_item}>
-          <div>
-            <img width={30} src={KgImg} alt="" />
-          </div>
-          <div>
-            <span title={text.title_total_weight}>
-              {car.total_weight} кг
-              <span>&nbsp;|&nbsp;</span>
-            </span>
-            <span title={text.title_own_weight}>{car.own_weight} кг</span>
-          </div>
-        </div>
-        <div className={s.result_item}>
-          <div>
-            <img width={28} src={ReportImg} alt="" />
-          </div>
-          <div className={s.with_switch}>
-            <div>
-              {!car.first_reg_date ? (
-                ""
-              ) : (
-                <span>
-                  <span title={`Дата першої реєстрації`}>
-                    {car.first_reg_date}
-                  </span>
-                </span>
-              )}
-              {!car.reg_object[0].date
-                ? ""
-                : car.reg_object.map((reg, ind) => {
-                    return (
-                      <span
-                        key={ind}
-                        title={`${text.title_car_code}: ${reg.code}, ${text.title_car_number}: ${reg.number}`}
-                      >
-                        &nbsp;|&nbsp;{car.dep}
-                      </span>
-                    );
-                  })}
+    <div className={s.not_found_page}>
+      <div className={s.not_found_block}>
+        <h5 className={`text-center`}>Дані по VIN:</h5>
+        <p className={s.vin}>{car && car.vin}</p>
+
+        <div>
+          {car && car.vin ? (
+            <div className={s.not_found_result_item}>
+              <span className={s.vin_item}>VIN</span>
+              <span>{car.vin}</span>
             </div>
-            <Switch handler={setRegistrationSwitch} isOn={registrationSwitch} />
-          </div>
-          {registrationSwitch && (
-            <div className={s.more_info_block}>
-              <p>
-                <span>КОД {car.registration_code}</span> {car.registration}
-              </p>
-              <p>
-                <span>{car.dep}</span> {car.region}
-              </p>
-              <p>
-                <span>Перша реєстрація</span> {car.first_reg_date}
-              </p>
+          ) : null}
+          {car && (car.manufacturer || car.year) ? (
+            <div className={s.not_found_result_item}>
+              <span>
+                <img src={CarG} alt={``} />
+              </span>
+              <div>
+                {car.manufacturer && <span>{car.manufacturer}</span>}{" "}
+                {car.year && <span> , {car.year}</span>}
+              </div>
             </div>
-          )}
+          ) : null}
+          {car && (car.region || car.country) ? (
+            <div className={s.not_found_result_item}>
+              <span>
+                <img src={CarG} alt={``} />
+              </span>
+              <div>
+                {car.region && <span>{car.region}</span>}{" "}
+                {car.country && <span>, {car.country}</span>}
+              </div>
+            </div>
+          ) : null}
         </div>
         <div className={s.btn_read_more}>
-          <span
+        <span
             className={`btn btn-outline-danger px-4 pb-1`}
             title="Перевірити VIN та отримати повний звіт з історії транспортного засобу"
-            onClick={newWindowOpen}
-          >
-            Дізнатися більше
-          </span>
+            // onClick={newWindowOpen}
+        >
+          Дізнатися більше
+        </span>
         </div>
       </div>
 
       <div className={s.results_group}>
-        {formOwnerData ?
-          <div className={s.result_item}>
+        <div className={s.result_item}>
           <div>
             <img width={35} src={Owner} alt="" />
           </div>
@@ -246,12 +114,9 @@ function MobileResult({ text }) {
           </div>
           {ownerSwitch && (
             <div className={s.more_info_block}>
-              <p>
-                <span>Власник</span> {car.person}
-              </p>
-              <p>
+              {car.region && <p>
                 <span>Місце реєстрації</span> {car.region}
-              </p>
+              </p>}
               <div>
                 <h6>
                   Шукати історію продажів по номеру телефона продавця в
@@ -278,60 +143,55 @@ function MobileResult({ text }) {
               </div>
             </div>
           )}
-        </div> : null}
-        {formInspectionData ?
-          <div className={s.result_item} title={car.registration}>
+        </div>
+        <div className={s.result_item} title={car.registration}>
           <div>
-            <img width={35} src={MreoGreen} alt=""/>
+            <img width={35} src={MreoGreen} alt="" />
           </div>
           <div className={s.with_switch}>
             <span>ВИЇЗДНА ПЕРЕВІРКА</span>
-            <Switch handler={setInspectionSwitch} isOn={inspectionSwitch}/>
+            <Switch handler={setInspectionSwitch} isOn={inspectionSwitch} />
           </div>
           {inspectionSwitch && (
-              <div className={s.more_info_block}>
-                <h6>
-                  Експерт приїде та проведе огляд авто на місці. Ви отримаєте
-                  детальний звіт!
-                </h6>
-                <form onSubmit={inspectionSubmitHandler}>
-                  <MaskedInput
-                      mask={phoneNumberMask}
-                      id="phone"
-                      type="text"
-                      onChange={e => setPhone(e.target.value)}
-                      className={`${s.form_control} ${s.tel_input}`}
-                      placeholder={`38 (0__) ___-__-__`}
-                  />
-                  <input
-                      type="text"
-                      minLength={`17`}
-                      maxLength={`17`}
-                      placeholder="VIN:"
-                      onChange={(e) => setVin(e.target.value)}
-                      className={s.form_control}
-                  />
-                  <button
-                      type={`submit`}
-                      className={`btn btn-outline-danger py-1 px-4`}
-                  >
-                    Передзвоніть мені
-                  </button>
-                </form>
-              </div>
+            <div className={s.more_info_block}>
+              <h6>
+                Експерт приїде та проведе огляд авто на місці. Ви отримаєте
+                детальний звіт!
+              </h6>
+              <form>
+                <MaskedInput
+                  mask={phoneNumberMask}
+                  id="phone"
+                  type="text"
+                  className={`${s.form_control} ${s.tel_input}`}
+                  placeholder={`+38 (0__) ___-__-__`}
+                />
+                <input
+                  type="text"
+                  minLength={`17`}
+                  maxLength={`17`}
+                  // value={vin}
+                  placeholder="VIN:"
+                  onChange={(e) => {}}
+                  className={s.form_control}
+                />
+                <button
+                  type={`submit`}
+                  className={`btn btn-outline-danger py-1 px-4`}
+                >
+                  Передзвоніть мені
+                </button>
+              </form>
+            </div>
           )}
-        </div> : null}
-        {formMonitoringData ?
-          <div className={s.result_item}>
+        </div>
+        <div className={s.result_item}>
           <div>
             <img width={30} src={CoinsImg} alt="" />
           </div>
           <div className={s.with_switch}>
             <span title={text.title_arithmetic_mean}>
-              {car.arithmeticMean} USD |{" "}
-              <u style={{ color: "#000", fontWeight: "600" }}>
-                {car.count_top_0} авто
-              </u>
+              МОНІТОРИНГ АВТО
             </span>
             <Switch handler={setPriceSwitch} isOn={priceSwitch} />
           </div>
@@ -365,7 +225,7 @@ function MobileResult({ text }) {
               </form>
             </div>
           )}
-        </div> : null}
+        </div>
         <div className={s.result_item}>
           <div>
             <img width={30} src={CustomsImg} alt="" />
@@ -416,8 +276,7 @@ function MobileResult({ text }) {
       </div>
 
       <div className={s.results_group}>
-        {formDiscountData ?
-          <div className={s.result_item}>
+        <div className={s.result_item}>
           <div>
             <svg
               id="Capa_1"
@@ -455,24 +314,23 @@ function MobileResult({ text }) {
               </form>
             </div>
           )}
-        </div> : null}
-        {formBonusData ?
-          <div className={s.result_item}>
+        </div>
+        <div className={s.result_item}>
           <div>
             <svg
-                version="1.1"
-                id="Слой_1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                x="0px"
-                y="0px"
-                viewBox="0 0 793.7 793.7"
-                enableBackground={"new 0 0 793.7 793.7"}
-                xmlSpace="preserve"
+              version="1.1"
+              id="Слой_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 793.7 793.7"
+              enableBackground={"new 0 0 793.7 793.7"}
+              xmlSpace="preserve"
             >
               <g>
                 <path
-                    d="M325.5,555.6c6.4,2.2,11.2,4.5,16.2,5.4c11.8,2,14.1,8.2,9.3,18.4c-1.1,2.4-1.4,5.3-1.1,9.3c11.1-20.9,31.4-20.1,50-23.4
+                  d="M325.5,555.6c6.4,2.2,11.2,4.5,16.2,5.4c11.8,2,14.1,8.2,9.3,18.4c-1.1,2.4-1.4,5.3-1.1,9.3c11.1-20.9,31.4-20.1,50-23.4
 		c81.6-14.7,160-39.8,237.3-69.5c23.4-9,48.9-14.6,73.8-17c28.5-2.7,49.6,14.7,58.7,43.1c-14.1,5.4-28.2,11.1-42.5,16.2
 		c-75,26.8-149.8,53.9-225.1,79.9c-32.8,11.3-66.9,16.9-102,16.3c-35.9-0.6-71.8,1.7-107.6,0.6C252,633.7,218.7,647,191.2,677
 		c-15.4,16.8-32.8,31.9-50.3,48.7c-31-34.1-62.6-68.9-95.4-105.1c9.9-10.3,19.1-20.3,28.7-29.9c15.9-15.9,29.5-32.8,39.6-53.7
@@ -481,7 +339,7 @@ function MobileResult({ text }) {
 		C328.9,553.6,328.2,554.2,325.5,555.6z"
                 />
                 <path
-                    d="M421.7,197.5c-3.2,9.8-6.2,18.8-8.9,27.8c-3.7,12,0.1,21.5,9.7,25c9.7,3.5,18.6-1.6,23-13.4c2-5.4,3.8-10.8,8.5-16.5
+                  d="M421.7,197.5c-3.2,9.8-6.2,18.8-8.9,27.8c-3.7,12,0.1,21.5,9.7,25c9.7,3.5,18.6-1.6,23-13.4c2-5.4,3.8-10.8,8.5-16.5
 		c2.3,6.3,4.6,12.6,7.1,18.9c4.7,12.1,13.3,17.2,22.8,13.7c9.6-3.6,13.6-13.2,10-24.8c-3.1-9.9-6.4-19.7-9.9-30.3
 		c10.2-3.3,17.5-3.1,24.8,5.6c56.9,69.1,98.8,146.5,127.3,231.1c4.5,13.2,5.5,27.7,6.6,41.7c0.3,3.9-4.1,10.4-7.8,11.9
 		c-29.8,11.8-60,22.8-91.2,34.4c-1.4-3.8-2.7-6.7-3.4-9.7c-5.3-21.6-16.9-33-39.1-33.8c-17.4-0.6-35.1,0.6-52.2,3.8
@@ -495,28 +353,28 @@ function MobileResult({ text }) {
 		c-6.8-3.6-12.2-6.5-11.5-15.4c0.1-1.7-3.9-5.1-6.3-5.5C450.5,284.8,444.7,285.4,438.9,285.4z"
                 />
                 <path
-                    d="M408,98.5c-5.8-22.1-2.5-28.8,19.1-32.1c14.6-2.2,30-2.3,44.6-0.3c22.2,3.1,25.9,10,20.8,31.1c0.8,0.6,1.7,1.8,2.7,2
+                  d="M408,98.5c-5.8-22.1-2.5-28.8,19.1-32.1c14.6-2.2,30-2.3,44.6-0.3c22.2,3.1,25.9,10,20.8,31.1c0.8,0.6,1.7,1.8,2.7,2
 		c24.8,4.7,26.5,8.2,14.9,31.1c-3.4,6.7-7.1,13.2-10.8,19.7c-7.4,12.9-18.4,14.7-30.6,5.3c-12.4-9.6-25.2-9.5-37.7,0.3
 		c-11.7,9.2-23.3,7.1-30.5-5.8c-5.1-9.1-10.2-18.2-14.4-27.7c-6-13.4-2.8-19.1,11.5-21.9C400.7,99.5,404,99.1,408,98.5z"
                 />
                 <path
-                    d="M471.3,176.6c0.2,11.9-9.1,21.4-21.1,21.4c-12.3,0.1-21.3-8.8-21.5-21c-0.1-11.9,9.2-21.6,21-21.8
+                  d="M471.3,176.6c0.2,11.9-9.1,21.4-21.1,21.4c-12.3,0.1-21.3-8.8-21.5-21c-0.1-11.9,9.2-21.6,21-21.8
 		C461.3,155.1,471.1,164.8,471.3,176.6z"
                 />
                 <path
-                    d="M475.7,195.7c4,12.2,8.9,24.1,11.6,36.6c0.9,4-4,9.3-6.2,14c-4.2-2.4-10.5-3.8-12.3-7.4c-4.4-8.8-8.9-18.6-9.1-28.1
+                  d="M475.7,195.7c4,12.2,8.9,24.1,11.6,36.6c0.9,4-4,9.3-6.2,14c-4.2-2.4-10.5-3.8-12.3-7.4c-4.4-8.8-8.9-18.6-9.1-28.1
 		c-0.1-5.6,7.9-11.3,12.3-17C473.2,194.4,474.4,195,475.7,195.7z"
                 />
                 <path
-                    d="M448,207.2c-3.3,10-5.7,20.1-10.1,29.2c-1.8,3.6-8.1,4.9-12.4,7.3c-2.3-4.3-7.1-9.1-6.4-12.8c2.1-10.8,6.4-21.1,10.1-32.2
+                  d="M448,207.2c-3.3,10-5.7,20.1-10.1,29.2c-1.8,3.6-8.1,4.9-12.4,7.3c-2.3-4.3-7.1-9.1-6.4-12.8c2.1-10.8,6.4-21.1,10.1-32.2
 		C435.9,201.7,441.4,204.2,448,207.2z"
                 />
                 <path
-                    d="M421.3,165.4c0,9.7,0,15.8,0,25.2c-9.1-2.2-17.5-3.7-25.4-6.7c-1.4-0.5-1.6-10.1-0.4-10.7
+                  d="M421.3,165.4c0,9.7,0,15.8,0,25.2c-9.1-2.2-17.5-3.7-25.4-6.7c-1.4-0.5-1.6-10.1-0.4-10.7
 		C403.3,170,411.7,168.2,421.3,165.4z"
                 />
                 <path
-                    d="M477.6,190.7c0.5-9.6,0.8-15.3,1.3-24.5c9,2.1,17.4,3.6,25.2,6.5c1.4,0.5,1.5,10.3,0.4,10.8
+                  d="M477.6,190.7c0.5-9.6,0.8-15.3,1.3-24.5c9,2.1,17.4,3.6,25.2,6.5c1.4,0.5,1.5,10.3,0.4,10.8
 		C496.3,186.5,487.6,188.2,477.6,190.7z"
                 />
               </g>
@@ -525,27 +383,27 @@ function MobileResult({ text }) {
           </div>
           <div className={s.with_switch}>
             БОНУС ВІД ПРОДАВЦЯ
-            <Switch handler={setBonusSwitch} isOn={bonusSwitch}/>
+            <Switch handler={setBonusSwitch} isOn={bonusSwitch} />
           </div>
           {bonusSwitch && (
-              <div className={s.more_info_block}>
-                <h6>Замовляй промокод та отримай CashBack выд продавця</h6>
-                <form>
-                  <input
-                      type="email"
-                      className={s.form_control}
-                      placeholder={`Введіть e-mail`}
-                  />
-                  <button
-                      type={`submit`}
-                      className={`btn btn-outline-danger py-1 px-4`}
-                  >
-                    Хочу промокод
-                  </button>
-                </form>
-              </div>
+            <div className={s.more_info_block}>
+              <h6>Замовляй промокод та отримай CashBack выд продавця</h6>
+              <form>
+                <input
+                  type="email"
+                  className={s.form_control}
+                  placeholder={`Введіть e-mail`}
+                />
+                <button
+                  type={`submit`}
+                  className={`btn btn-outline-danger py-1 px-4`}
+                >
+                  Хочу промокод
+                </button>
+              </form>
+            </div>
           )}
-        </div> : null}
+        </div>
         <div className={s.result_item}>
           <div>
             <svg
@@ -639,8 +497,24 @@ function MobileResult({ text }) {
           </span>
         </div>
       </div>
+      {/*<p>{text.error_message}</p>*/}
+      {/*{(car && car.manufacturer) ?*/}
+      {/*    <p>Дані по авто <b>{car.manufacturer}</b>, що виготовлено для регіону: <b>{car.region} ({car.country})</b> не доступні у відкритих реєстрах МВС України</p> : null}*/}
+      {/*<p>*/}
+      {/*    <button className="btn text-primary" onClick={() => {*/}
+      {/*        window.open(`https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=more&vin=${inputValue}`, '_blanc');*/}
+      {/*    }}>*/}
+      {/*        <u>{text.error_link_btn_title}</u>*/}
+      {/*    </button>*/}
+      {/*</p>*/}
     </div>
-  ) : null;
+  ) : (
+    <div className={`text-center py-5`}>
+      <div className="spinner-border text-success" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+    </div>
+  );
 }
 
-export default MobileResult;
+export default NotFoundInfo;

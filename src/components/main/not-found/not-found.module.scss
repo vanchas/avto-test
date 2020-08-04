@@ -1,6 +1,47 @@
-.mobile_result_block {
+.not_found_page {
+  padding: 5em 1rem;
   display: grid;
-  gap: 2em;
+  gap: 3em;
+}
+
+.not_found_block {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  display: grid;
+  border: 1px solid #68bc9d;
+  border-radius: 2em;
+  padding: 2em 1em;
+  h5 {
+    text-align: center;
+    font-weight: 500;
+  }
+  .vin {
+    text-align: center;
+    font-weight: 600;
+    color: #007c60;
+  }
+  .not_found_result_item {
+    border-bottom: 1px solid #ccc;
+    padding: .5em;
+    display: grid;
+    grid-template-columns: 3em auto;
+    img, .vin_item {
+      font-weight: 900;
+      color: #007c60;
+      letter-spacing: 3px;
+      width: 2em;
+    }
+  }
+
+  .btn_read_more {
+    display: inline-block;
+    margin: 1em auto;
+    span {
+      border-radius: 2em;
+      font-weight: 600;
+    }
+  }
 }
 
 .results_group {
@@ -102,47 +143,3 @@
   }
 }
 
-.not_found_block {
-  max-width: 700px;
-  margin: 5em auto;
-  display: grid;
-  border: 1px solid #007c60;
-  border-radius: 2em;
-  padding: 2em 1em;
-  h5 {
-    text-align: center;
-    font-weight: 500;
-  }
-  .vin {
-    text-align: center;
-    font-weight: 600;
-    color: #007c60;
-  }
-  .not_found_result_item {
-    border-bottom: 1px solid #ccc;
-    padding: .5em;
-    display: grid;
-    grid-template-columns: 3em auto;
-    img, .vin_item {
-      font-weight: 900;
-      color: #007c60;
-      letter-spacing: 3px;
-      width: 2em;
-    }
-  }
-
-  .btn_read_more {
-    display: inline-block;
-    margin: 1em auto;
-    span {
-      border-radius: 2em;
-      font-weight: 600;
-    }
-  }
-}
-
-@media screen and (min-width: 991px) {
-  .mobile_result_block {
-    display: none;
-  }
-}

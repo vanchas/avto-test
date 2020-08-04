@@ -27,9 +27,10 @@ async function getCarInfo(value) {
         const data = res.json();
         data.then((car) => {
           if (car.error && car.error.vehicle) {
-            localStorage.setItem(
+              // vin: {wmi: "WBA", vds: "8H9108", vis: "0K694016"}
+              localStorage.setItem(
               "avto-test-car",
-              JSON.stringify(car.error.vehicle)
+              JSON.stringify({...car.error.vehicle, vin: `${car.error.vin.wmi}${car.error.vin.vds}${car.error.vin.vis}`})
             );
             setTimeout(() => {
               window.open(

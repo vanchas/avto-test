@@ -4,13 +4,14 @@ import IntroPage from './intro-page/IntroPage'
 import ResultPage from './result-page/ResultPage'
 import { Route, Switch } from 'react-router-dom';
 import { PrivateRoute } from '../../_services/PrivatRoute';
-import { HomePage } from '../main/home-page/HomePage';
+import { HomePage } from './home-page/HomePage';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import Login from './login-page/Login';
 import Blog from './blog-page/Blog';
 import AdminPage from './admin-page/AdminPage';
 import ForgotPasswordForm from "./login-page/ForgotPasswordForm";
+import NotFoundInfo from "./not-found/NotFoundInfo";
 
 
 export default class Main extends Component {
@@ -77,6 +78,12 @@ export default class Main extends Component {
               carInfo={this.state.carInfo}
               langData={this.props.langData}
             />} />
+
+              <Route path="/not-found" render={() => <NotFoundInfo
+                  inputValue={this.state.inputValue}
+                  carInfo={this.state.carInfo}
+                  langData={this.props.langData}
+              />} />
 
             <Route
                 path="/login/forgot-password"
