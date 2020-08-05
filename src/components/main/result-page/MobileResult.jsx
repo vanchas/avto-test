@@ -19,9 +19,12 @@ import MreoGreen from "./image/mreo-green.png";
 import Switch from "../../utils/Switch";
 import MaskedInput from "react-text-mask";
 import { history } from "../../../_helpers/history";
-import { authHeader } from "../../../_helpers/auth-header";
-import {resultForms} from "../../../_services/resultForms.service";
-import {userService} from "../../../_services/user.service";
+import { userService } from "../../../_services/user.service";
+import { resultForms } from "../../../_services/resultForms.service";
+import { connect } from "react-redux";
+import {OrderForm} from "./ModalForm";
+import {InfoTextModal} from "../../utils/InfoTextModal";
+import {authHeader} from "../../../_helpers/auth-header";
 
 const phoneNumberMask = [
   // /[1-9]/,
@@ -44,9 +47,10 @@ const phoneNumberMask = [
   /\d/,
 ];
 
-function MobileResult({ text }) {
+function MobileResult({ text, success }) {
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState(null);
   const [statusText, setStatusText] = useState("ПЕРЕВІРИТИ НА РОЗШУК");
   const [registrationSwitch, setRegistrationSwitch] = useState(false);
   const [ownerSwitch, setOwnerSwitch] = useState(false);
@@ -54,8 +58,9 @@ function MobileResult({ text }) {
   const [priceSwitch, setPriceSwitch] = useState(false);
   const [discountSwitch, setDiscountSwitch] = useState(false);
   const [bonusSwitch, setBonusSwitch] = useState(false);
-  const [phone, setPhone] = useState('');
-  const [vin, setVin] = useState('');
+  const [phone, setPhone] = useState("");
+  const [vin, setVin] = useState("");
+  const [email, setEmail] = useState("");
   const [formOwnerData, setFormOwnerData] = useState(0);
   const [formInspectionData, setFormInspectionData] = useState(0);
   const [formMonitoringData, setFormMonitoringData] = useState(0);
@@ -69,7 +74,11 @@ function MobileResult({ text }) {
     } else {
       history.push("/not-found");
     }
-    getSecretFormsDetails()
+    const user = authHeader().Authorization
+    if (user && user.email) setEmail(user.email)
+    const car = getCar().Found
+    if (car && car.vin) setVin(car.vin)
+    getSecretFormsDetails();
   }, []);
 
   const newWindowOpen = () => {
@@ -79,31 +88,78 @@ function MobileResult({ text }) {
     );
   };
 
-  const inspectionSubmitHandler = (e) => {
-    e.preventDefault()
-    if (phone.length && vin.length) {
-      resultForms.inspection(phone.split(' ').join('').split('(').join('').split(')').join(''), vin)
+  const switchHandler = (id, value) => {
+    setRegistrationSwitch(false);
+    setOwnerSwitch(false);
+    setInspectionSwitch(false);
+    setPriceSwitch(false);
+    setDiscountSwitch(false);
+    setBonusSwitch(false);
+    if (id === "R") {
+      setRegistrationSwitch(value);
+    } else if (id === "O") {
+      setOwnerSwitch(value);
+    } else if (id === "I") {
+      setInspectionSwitch(value);
+    } else if (id === "M") {
+      setPriceSwitch(value);
+    } else if (id === "D") {
+      setDiscountSwitch(value);
+    } else if (id === "B") {
+      setBonusSwitch(value);
     }
+  };
+
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    setTimeout(() => {
+      setMessage("Ваш запит успішно надіслано")
+    }, 500)
+    const form = e.target
+    resultForms.formFetch(
+        form.name,
+        phone.split(' ').join('').split('(').join('').split(')').join(''),
+        vin,
+        email
+    )
+    setTimeout(() => {
+      setEmail("")
+      setPhone("")
+      setVin("")
+      const car = getCar().Found
+      if (car && car.vin) setVin(car.vin)
+      const user = authHeader().Authorization
+      if (user && user.email) setEmail(user.email)
+      setMessage(null)
+      setRegistrationSwitch(false)
+      setOwnerSwitch(false)
+      setInspectionSwitch(false)
+      setPriceSwitch(false)
+      setDiscountSwitch(false)
+      setBonusSwitch(false)
+    }, 3500)
   }
 
   const getSecretFormsDetails = () => {
-    userService.secretFormsDetails()
-        .then(data => {
-          data.map(item => {
-            if (item.key === 'form_owner_data') {
-              setFormOwnerData(parseInt(item.value))
-            } else if (item.key === 'form_on-site_inspection') {
-              setFormInspectionData(parseInt(item.value))
-            } else if (item.key === 'form_auto_monitoring') {
-              setFormMonitoringData(parseInt(item.value))
-            } else if (item.key === 'form_check_discount') {
-              setFormDiscountData(parseInt(item.value))
-            } else if (item.key === 'form_seller_bonus') {
-              setFormBonusData(parseInt(item.value))
-            }
-          })
-        }).catch(err => console.error(err))
-  }
+    userService
+      .secretFormsDetails()
+      .then((data) => {
+        data.map((item) => {
+          if (item.key === "form_owner_data") {
+            setFormOwnerData(parseInt(item.value));
+          } else if (item.key === "form_on-site_inspection") {
+            setFormInspectionData(parseInt(item.value));
+          } else if (item.key === "form_auto_monitoring") {
+            setFormMonitoringData(parseInt(item.value));
+          } else if (item.key === "form_check_discount") {
+            setFormDiscountData(parseInt(item.value));
+          } else if (item.key === "form_seller_bonus") {
+            setFormBonusData(parseInt(item.value));
+          }
+        });
+      })
+      .catch((err) => console.error(err));
+  };
 
   return car ? (
     <div className={s.mobile_result_block}>
@@ -207,7 +263,11 @@ function MobileResult({ text }) {
                     );
                   })}
             </div>
-            <Switch handler={setRegistrationSwitch} isOn={registrationSwitch} />
+            <Switch
+              handler={switchHandler}
+              isOn={registrationSwitch}
+              id={"R"}
+            />
           </div>
           {registrationSwitch && (
             <div className={s.more_info_block}>
@@ -235,137 +295,200 @@ function MobileResult({ text }) {
       </div>
 
       <div className={s.results_group}>
-        {formOwnerData ?
+        {formOwnerData ? (
           <div className={s.result_item}>
-          <div>
-            <img width={35} src={Owner} alt="" />
-          </div>
-          <div className={s.with_switch}>
-            <span>ДАНІ ПРО ВЛАСНИКА</span>
-            <Switch handler={setOwnerSwitch} isOn={ownerSwitch} />
-          </div>
-          {ownerSwitch && (
-            <div className={s.more_info_block}>
-              <p>
-                <span>Власник</span> {car.person}
-              </p>
-              <p>
-                <span>Місце реєстрації</span> {car.region}
-              </p>
-              <div>
-                <h6>
-                  Шукати історію продажів по номеру телефона продавця в
-                  оголошенні
-                </h6>
-                <form>
-                  <input
-                    type={`text`}
-                    placeholder={`Введіть телефон продавця`}
-                    className={s.form_control}
-                  />
-                  <input
-                    type={`email`}
-                    placeholder={`Email (куди надіслати звіт)`}
-                    className={s.form_control}
-                  />
-                  <button
-                    type={`submit`}
-                    className={`btn btn-outline-danger py-1 px-4`}
-                  >
-                    Дізнатися історію
-                  </button>
-                </form>
-              </div>
+            <div>
+              <img width={35} src={Owner} alt="" />
             </div>
-          )}
-        </div> : null}
-        {formInspectionData ?
+            <div className={s.with_switch}>
+              <span>ДАНІ ПРО ВЛАСНИКА</span>
+              <Switch handler={switchHandler} isOn={ownerSwitch} id={"O"} />
+            </div>
+            {ownerSwitch && (
+              <div className={s.more_info_block}>
+                <p>
+                  <span>Власник</span> {car.person}
+                </p>
+                <p title={car.region + ', ' + car.place}>
+                  <span>Місце реєстрації</span> {car.reg_addr_koatuu}
+                </p>
+                <div>
+                  <h6>
+                    Шукати історію продажів по номеру телефона продавця в
+                    оголошенні
+                  </h6>
+                  <form onSubmit={formSubmitHandler} name={`owner`}>
+                    <MaskedInput
+                      mask={phoneNumberMask}
+                      id="phone"
+                      type="text"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className={`${s.form_control} ${s.tel_input}`}
+                      placeholder={`38 (0__) ___-__-__`}
+                    />
+                    <input
+                      type={`email`}
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder={`Email (куди надіслати звіт)`}
+                      className={s.form_control}
+                    />
+                    {!message ? (
+                      <button
+                        type={`submit`}
+                        className={`btn btn-outline-danger pb-1 pt-2 px-4`}
+                      >
+                        Дізнатися історію
+                      </button>
+                    ) : (
+                        <div className="alert alert-success py-1" style={{borderRadius: '3em'}} role="alert">{message}</div>
+                      // <div className={`text-center`}>
+                      //   <div
+                      //     className="spinner-border text-danger"
+                      //     role="status"
+                      //   >
+                      //     <span className="sr-only">Loading...</span>
+                      //   </div>
+                      // </div>
+                    )}
+                    <div className={s.info_sign}>
+                      <InfoTextModal text={`fghlkdsfhgsdkjfh`} buttonLabel={'i'} />
+                    </div>
+                  </form>
+                </div>
+              </div>
+            )}
+          </div>
+        ) : null}
+        {formInspectionData ? (
           <div className={s.result_item} title={car.registration}>
-          <div>
-            <img width={35} src={MreoGreen} alt=""/>
-          </div>
-          <div className={s.with_switch}>
-            <span>ВИЇЗДНА ПЕРЕВІРКА</span>
-            <Switch handler={setInspectionSwitch} isOn={inspectionSwitch}/>
-          </div>
-          {inspectionSwitch && (
+            <div>
+              <img width={35} src={MreoGreen} alt="" />
+            </div>
+            <div className={s.with_switch}>
+              <span>ВИЇЗДНА ПЕРЕВІРКА</span>
+              <Switch
+                handler={switchHandler}
+                isOn={inspectionSwitch}
+                id={"I"}
+              />
+            </div>
+            {inspectionSwitch && (
               <div className={s.more_info_block}>
                 <h6>
                   Експерт приїде та проведе огляд авто на місці. Ви отримаєте
                   детальний звіт!
                 </h6>
-                <form onSubmit={inspectionSubmitHandler}>
+                <form onSubmit={formSubmitHandler} name={`inspection`}>
                   <MaskedInput
-                      mask={phoneNumberMask}
-                      id="phone"
-                      type="text"
-                      onChange={e => setPhone(e.target.value)}
-                      className={`${s.form_control} ${s.tel_input}`}
-                      placeholder={`38 (0__) ___-__-__`}
+                    mask={phoneNumberMask}
+                    id="phone"
+                    type="text"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className={`${s.form_control} ${s.tel_input}`}
+                    placeholder={`38 (0__) ___-__-__`}
                   />
                   <input
-                      type="text"
-                      minLength={`17`}
-                      maxLength={`17`}
-                      placeholder="VIN:"
-                      onChange={(e) => setVin(e.target.value)}
-                      className={s.form_control}
+                    value={vin}
+                    type="text"
+                    minLength={`17`}
+                    maxLength={`17`}
+                    placeholder="VIN:"
+                    onChange={(e) => setVin(e.target.value)}
+                    className={s.form_control}
                   />
-                  <button
+                  {!message ? (
+                    <button
                       type={`submit`}
-                      className={`btn btn-outline-danger py-1 px-4`}
-                  >
-                    Передзвоніть мені
-                  </button>
+                      className={`btn btn-outline-danger pb-1 pt-2 px-4`}
+                    >
+                      Передзвоніть мені
+                    </button>
+                  ) : (
+                      <div className="alert alert-success py-1" style={{borderRadius: '3em'}} role="alert">{message}</div>
+                    // <div className={`text-center`}>
+                    //   <div className="spinner-border text-danger" role="status">
+                    //     <span className="sr-only">Loading...</span>
+                    //   </div>
+                    // </div>
+                  )}
+                  <div className={s.info_sign}>
+                    <InfoTextModal text={`fghlkdsfhgsdkjfh`} buttonLabel={'i'} />
+                  </div>
                 </form>
               </div>
-          )}
-        </div> : null}
-        {formMonitoringData ?
+            )}
+          </div>
+        ) : null}
+        {formMonitoringData ? (
           <div className={s.result_item}>
-          <div>
-            <img width={30} src={CoinsImg} alt="" />
-          </div>
-          <div className={s.with_switch}>
-            <span title={text.title_arithmetic_mean}>
-              {car.arithmeticMean} USD |{" "}
-              <u style={{ color: "#000", fontWeight: "600" }}>
-                {car.count_top_0} авто
-              </u>
-            </span>
-            <Switch handler={setPriceSwitch} isOn={priceSwitch} />
-          </div>
-          {priceSwitch && (
-            <div className={s.more_info_block}>
-              <h6>
-                Повідомити Вам, якщо зʼявиться цікавий варіант серед подібних
-                моделей?
-              </h6>
-              <form>
-                <input
-                  type="email"
-                  className={s.form_control}
-                  placeholder={`Email (куди надіслати звіт)`}
-                />
-                <input
-                  type="text"
-                  minLength={`17`}
-                  maxLength={`17`}
-                  // value={vin}
-                  placeholder="Введіть VIN"
-                  onChange={(e) => {}}
-                  className={s.form_control}
-                />
-                <button
-                  type={`submit`}
-                  className={`btn btn-outline-danger py-1 px-4`}
-                >
-                  Моніторити
-                </button>
-              </form>
+            <div>
+              <img width={30} src={CoinsImg} alt="" />
             </div>
-          )}
-        </div> : null}
+            <div className={s.with_switch}>
+              <span>
+                {/*{car.arithmeticMean} USD |{" "}*/}
+                {/*<u style={{ color: "#000", fontWeight: "600" }}>*/}
+                {/*  {car.count_top_0} авто*/}
+                {/*</u>*/}
+                МОНІТОРИНГ АВТО
+              </span>
+              <Switch handler={switchHandler} isOn={priceSwitch} id={"M"} />
+            </div>
+            {priceSwitch && (
+              <div className={s.more_info_block}>
+                <p>
+                  <span>Середня ціна:</span> <b className={`font-weight-bold`}>{car.arithmeticMean} USD</b>
+                </p>
+                <p>
+                  <span>К-ть оголошень:</span> <b className={`font-weight-bold`}>{car.count_top_0}</b>
+                </p>
+                <h6>
+                  Повідомити Вам, якщо зʼявиться цікавий варіант серед подібних
+                  моделей?
+                </h6>
+                <form onSubmit={formSubmitHandler} name={`monitoring`}>
+                  <input
+                    value={email}
+                    type="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    className={s.form_control}
+                    placeholder={`Email (куди надіслати звіт)`}
+                  />
+                  <input
+                    type="text"
+                    minLength={`17`}
+                    maxLength={`17`}
+                    value={vin}
+                    placeholder="Введіть VIN"
+                    onChange={(e) => setVin(e.target.value)}
+                    className={s.form_control}
+                  />
+                  {!message ? (
+                    <button
+                      type={`submit`}
+                      className={`btn btn-outline-danger pb-1 pt-2 px-4`}
+                    >
+                      Моніторити
+                    </button>
+                  ) : (
+                      <div className="alert alert-success py-1" style={{borderRadius: '3em'}} role="alert">{message}</div>
+                    // <div className={`text-center`}>
+                    //   <div className="spinner-border text-danger" role="status">
+                    //     <span className="sr-only">Loading...</span>
+                    //   </div>
+                    // </div>
+                  )}
+                  <div className={s.info_sign}>
+                    <InfoTextModal text={`fghlkdsfhgsdkjfh`} buttonLabel={'i'} />
+                  </div>
+                </form>
+              </div>
+            )}
+          </div>
+        ) : null}
         <div className={s.result_item}>
           <div>
             <img width={30} src={CustomsImg} alt="" />
@@ -384,13 +507,12 @@ function MobileResult({ text }) {
             <span
               title="Информация по базе угонов"
               onClick={() => {
-                // this.setState({ statusLoading: true });
-                // setTimeout(() => {
-                //   this.setState({
-                //     carStatusText: car.status,
-                //     statusLoading: false
-                //   });
-                // }, 1000);
+                setLoading(true)
+                setStatusText('')
+                setTimeout(() => {
+                  setStatusText(car.status)
+                  setLoading(false)
+                }, 1500);
               }}
             >
               <u>{statusText}</u>
@@ -405,61 +527,74 @@ function MobileResult({ text }) {
           </div>
         </div>
         <div className={s.btn_read_more}>
-          <span
-            className={`btn btn-outline-danger px-4 pb-1`}
-            title="Перевірити VIN та отримати повний звіт з історії транспортного засобу"
-            onClick={newWindowOpen}
-          >
-            Повна перевірка
-          </span>
+          <OrderForm
+              langData={text}
+              title="Перевірити VIN та отримати повний звіт з історії транспортного засобу"
+              price_block_card_btn_buy={'Повна перевірка'}
+          />
         </div>
       </div>
 
       <div className={s.results_group}>
-        {formDiscountData ?
+        {formDiscountData ? (
           <div className={s.result_item}>
-          <div>
-            <svg
-              id="Capa_1"
-              enableBackground="new 0 0 512 512"
-              viewBox="0 0 512 512"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g>
-                <path d="m124.394 222.991c-9.36 0-17.261 10.31-17.261 22.5 0 12.2 7.9 22.51 17.261 22.51 9.36 0 17.27-10.31 17.27-22.51 0-12.19-7.91-22.5-17.27-22.5z" />
-                <path d="m275.758 341.981c-9.36 0-17.261 10.31-17.261 22.51 0 12.19 7.9 22.5 17.261 22.5 9.36 0 17.271-10.31 17.271-22.5 0-12.2-7.911-22.51-17.271-22.51z" />
-                <path d="m373.851 159.691c-152.083-139.938-144.304-134.593-156.395-139.29-17.183-6.816-37.629-3.252-51.752 9.74l-140.793 129.55c-15.831 14.56-24.911 35.28-24.911 56.86v229.41c0 27.03 21.881 49.03 48.771 49.03h301.209c26.891 0 48.771-22 48.771-49.03v-229.41c.001-21.58-9.08-42.3-24.9-56.86zm-188.986-49.18c.909-8.718 8.905-14.909 17.851-13.23 8.556 1.784 13.375 9.994 11.78 17.64-1.695 8.146-9.358 13.335-17.64 11.78-7.91-1.65-12.738-8.836-11.991-16.19zm-107.733 134.98c0-28.95 21.201-52.5 47.262-52.5 26.071 0 47.271 23.55 47.271 52.5s-21.201 52.51-47.271 52.51c-26.061 0-47.262-23.56-47.262-52.51zm85.993 159.66c-10.6 0-17.998-10.868-13.82-20.81l73.022-174.04c3.21-7.64 12-11.24 19.64-8.03 7.64 3.2 11.23 12 8.03 19.64l-73.032 174.04c-2.41 5.74-7.97 9.2-13.84 9.2zm112.633 11.84c-26.061 0-47.261-23.55-47.261-52.5s21.201-52.51 47.261-52.51c26.061 0 47.271 23.56 47.271 52.51s-21.21 52.5-47.271 52.5z" />
-                <path d="m508.235 324.431c-48.84-142.174-75.967-221.222-76.352-222.12-8.49-19.66-24.991-34.95-45.251-41.94-1.163-.395 5.697 1.271-103.093-24.54l110.613 101.78c21.99 20.22 34.601 48.99 34.601 78.94v194.4l53.962-23.1c24.41-10.56 35.76-38.91 25.52-63.42z" />
-              </g>
-            </svg>
-          </div>
-          <div className={s.with_switch}>
-            ЗНИЖКА НА ПЕРЕВІРКУ
-            <Switch handler={setDiscountSwitch} isOn={discountSwitch} />
-          </div>
-          {discountSwitch && (
-            <div className={s.more_info_block}>
-              <h6>Підпишись на розсилку та отримай гарантований приз</h6>
-              <form>
-                <input
-                  type="email"
-                  className={s.form_control}
-                  placeholder={`Введіть e-mail`}
-                />
-                <button
-                  type={`submit`}
-                  className={`btn btn-outline-danger py-1 px-4`}
-                >
-                  Отримати приз
-                </button>
-              </form>
+            <div>
+              <svg
+                id="Capa_1"
+                enableBackground="new 0 0 512 512"
+                viewBox="0 0 512 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g>
+                  <path d="m124.394 222.991c-9.36 0-17.261 10.31-17.261 22.5 0 12.2 7.9 22.51 17.261 22.51 9.36 0 17.27-10.31 17.27-22.51 0-12.19-7.91-22.5-17.27-22.5z" />
+                  <path d="m275.758 341.981c-9.36 0-17.261 10.31-17.261 22.51 0 12.19 7.9 22.5 17.261 22.5 9.36 0 17.271-10.31 17.271-22.5 0-12.2-7.911-22.51-17.271-22.51z" />
+                  <path d="m373.851 159.691c-152.083-139.938-144.304-134.593-156.395-139.29-17.183-6.816-37.629-3.252-51.752 9.74l-140.793 129.55c-15.831 14.56-24.911 35.28-24.911 56.86v229.41c0 27.03 21.881 49.03 48.771 49.03h301.209c26.891 0 48.771-22 48.771-49.03v-229.41c.001-21.58-9.08-42.3-24.9-56.86zm-188.986-49.18c.909-8.718 8.905-14.909 17.851-13.23 8.556 1.784 13.375 9.994 11.78 17.64-1.695 8.146-9.358 13.335-17.64 11.78-7.91-1.65-12.738-8.836-11.991-16.19zm-107.733 134.98c0-28.95 21.201-52.5 47.262-52.5 26.071 0 47.271 23.55 47.271 52.5s-21.201 52.51-47.271 52.51c-26.061 0-47.262-23.56-47.262-52.51zm85.993 159.66c-10.6 0-17.998-10.868-13.82-20.81l73.022-174.04c3.21-7.64 12-11.24 19.64-8.03 7.64 3.2 11.23 12 8.03 19.64l-73.032 174.04c-2.41 5.74-7.97 9.2-13.84 9.2zm112.633 11.84c-26.061 0-47.261-23.55-47.261-52.5s21.201-52.51 47.261-52.51c26.061 0 47.271 23.56 47.271 52.51s-21.21 52.5-47.271 52.5z" />
+                  <path d="m508.235 324.431c-48.84-142.174-75.967-221.222-76.352-222.12-8.49-19.66-24.991-34.95-45.251-41.94-1.163-.395 5.697 1.271-103.093-24.54l110.613 101.78c21.99 20.22 34.601 48.99 34.601 78.94v194.4l53.962-23.1c24.41-10.56 35.76-38.91 25.52-63.42z" />
+                </g>
+              </svg>
             </div>
-          )}
-        </div> : null}
-        {formBonusData ?
+            <div className={s.with_switch}>
+              ЗНИЖКА НА ПЕРЕВІРКУ
+              <Switch handler={switchHandler} isOn={discountSwitch} id={"D"} />
+            </div>
+            {discountSwitch && (
+              <div className={s.more_info_block}>
+                <h6>Підпишись на розсилку та отримай гарантований приз</h6>
+                <form onSubmit={formSubmitHandler} name={`discount`}>
+                  <input
+                    value={email}
+                    type="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    className={s.form_control}
+                    placeholder={`Введіть e-mail`}
+                  />
+                  {!message ? (
+                    <button
+                      type={`submit`}
+                      className={`btn btn-outline-danger pb-1 pt-2 px-4`}
+                    >
+                      Отримати приз
+                    </button>
+                  ) : (
+                      <div className="alert alert-success py-1" style={{borderRadius: '3em'}} role="alert">{message}</div>
+                    // <div className={`text-center`}>
+                    //   <div className="spinner-border text-danger" role="status">
+                    //     <span className="sr-only">Loading...</span>
+                    //   </div>
+                    // </div>
+                  )}
+                  <div className={s.info_sign}>
+                    <InfoTextModal text={`fghlkdsfhgsdkjfh`} buttonLabel={'i'} />
+                  </div>
+                </form>
+              </div>
+            )}
+          </div>
+        ) : null}
+        {formBonusData ? (
           <div className={s.result_item}>
-          <div>
-            <svg
+            <div>
+              <svg
                 version="1.1"
                 id="Слой_1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -469,9 +604,9 @@ function MobileResult({ text }) {
                 viewBox="0 0 793.7 793.7"
                 enableBackground={"new 0 0 793.7 793.7"}
                 xmlSpace="preserve"
-            >
-              <g>
-                <path
+              >
+                <g>
+                  <path
                     d="M325.5,555.6c6.4,2.2,11.2,4.5,16.2,5.4c11.8,2,14.1,8.2,9.3,18.4c-1.1,2.4-1.4,5.3-1.1,9.3c11.1-20.9,31.4-20.1,50-23.4
 		c81.6-14.7,160-39.8,237.3-69.5c23.4-9,48.9-14.6,73.8-17c28.5-2.7,49.6,14.7,58.7,43.1c-14.1,5.4-28.2,11.1-42.5,16.2
 		c-75,26.8-149.8,53.9-225.1,79.9c-32.8,11.3-66.9,16.9-102,16.3c-35.9-0.6-71.8,1.7-107.6,0.6C252,633.7,218.7,647,191.2,677
@@ -479,8 +614,8 @@ function MobileResult({ text }) {
 		c25-51.7,78.7-75.8,141.4-65.6c20.9,3.4,41.4,9.5,62,14.6c45.7,11.4,91.6,11.1,137.8,3.3c15.9-2.7,32.4-3.3,48.5-2.8
 		c15.5,0.5,24.9,9.6,29,23.4c2.4,8,1.2,12.7-7.8,16.1c-56.9,21.6-115.3,33.3-176.4,28.2c-6.2-0.5-12.5-0.5-18.8-0.6
 		C328.9,553.6,328.2,554.2,325.5,555.6z"
-                />
-                <path
+                  />
+                  <path
                     d="M421.7,197.5c-3.2,9.8-6.2,18.8-8.9,27.8c-3.7,12,0.1,21.5,9.7,25c9.7,3.5,18.6-1.6,23-13.4c2-5.4,3.8-10.8,8.5-16.5
 		c2.3,6.3,4.6,12.6,7.1,18.9c4.7,12.1,13.3,17.2,22.8,13.7c9.6-3.6,13.6-13.2,10-24.8c-3.1-9.9-6.4-19.7-9.9-30.3
 		c10.2-3.3,17.5-3.1,24.8,5.6c56.9,69.1,98.8,146.5,127.3,231.1c4.5,13.2,5.5,27.7,6.6,41.7c0.3,3.9-4.1,10.4-7.8,11.9
@@ -493,59 +628,73 @@ function MobileResult({ text }) {
 		c16.9-8.4,24.7-21.7,24.5-40.2c-0.2-21.4-13.3-34.1-29.7-44.7c-8.4-5.4-17.1-10.5-24.5-17.2c-5.8-5.2-7.1-13.3,0.3-18.3
 		c6.9-4.7,14.3-3.7,19.2,4.5c1.6,2.6,3.7,7.1,5.6,7.1c8.5,0.1,17-1,25.5-1.7c-1.7-7.9-2.3-16.4-5.6-23.5c-2.4-5.2-7.9-10-13.2-12.7
 		c-6.8-3.6-12.2-6.5-11.5-15.4c0.1-1.7-3.9-5.1-6.3-5.5C450.5,284.8,444.7,285.4,438.9,285.4z"
-                />
-                <path
+                  />
+                  <path
                     d="M408,98.5c-5.8-22.1-2.5-28.8,19.1-32.1c14.6-2.2,30-2.3,44.6-0.3c22.2,3.1,25.9,10,20.8,31.1c0.8,0.6,1.7,1.8,2.7,2
 		c24.8,4.7,26.5,8.2,14.9,31.1c-3.4,6.7-7.1,13.2-10.8,19.7c-7.4,12.9-18.4,14.7-30.6,5.3c-12.4-9.6-25.2-9.5-37.7,0.3
 		c-11.7,9.2-23.3,7.1-30.5-5.8c-5.1-9.1-10.2-18.2-14.4-27.7c-6-13.4-2.8-19.1,11.5-21.9C400.7,99.5,404,99.1,408,98.5z"
-                />
-                <path
+                  />
+                  <path
                     d="M471.3,176.6c0.2,11.9-9.1,21.4-21.1,21.4c-12.3,0.1-21.3-8.8-21.5-21c-0.1-11.9,9.2-21.6,21-21.8
 		C461.3,155.1,471.1,164.8,471.3,176.6z"
-                />
-                <path
+                  />
+                  <path
                     d="M475.7,195.7c4,12.2,8.9,24.1,11.6,36.6c0.9,4-4,9.3-6.2,14c-4.2-2.4-10.5-3.8-12.3-7.4c-4.4-8.8-8.9-18.6-9.1-28.1
 		c-0.1-5.6,7.9-11.3,12.3-17C473.2,194.4,474.4,195,475.7,195.7z"
-                />
-                <path
+                  />
+                  <path
                     d="M448,207.2c-3.3,10-5.7,20.1-10.1,29.2c-1.8,3.6-8.1,4.9-12.4,7.3c-2.3-4.3-7.1-9.1-6.4-12.8c2.1-10.8,6.4-21.1,10.1-32.2
 		C435.9,201.7,441.4,204.2,448,207.2z"
-                />
-                <path
+                  />
+                  <path
                     d="M421.3,165.4c0,9.7,0,15.8,0,25.2c-9.1-2.2-17.5-3.7-25.4-6.7c-1.4-0.5-1.6-10.1-0.4-10.7
 		C403.3,170,411.7,168.2,421.3,165.4z"
-                />
-                <path
+                  />
+                  <path
                     d="M477.6,190.7c0.5-9.6,0.8-15.3,1.3-24.5c9,2.1,17.4,3.6,25.2,6.5c1.4,0.5,1.5,10.3,0.4,10.8
 		C496.3,186.5,487.6,188.2,477.6,190.7z"
-                />
-              </g>
-            </svg>
-            {/*<img width={28} src={WheelImg} alt="" />*/}
-          </div>
-          <div className={s.with_switch}>
-            БОНУС ВІД ПРОДАВЦЯ
-            <Switch handler={setBonusSwitch} isOn={bonusSwitch}/>
-          </div>
-          {bonusSwitch && (
+                  />
+                </g>
+              </svg>
+            </div>
+            <div className={s.with_switch}>
+              БОНУС ВІД ПРОДАВЦЯ
+              <Switch handler={switchHandler} isOn={bonusSwitch} id={"B"} />
+            </div>
+            {bonusSwitch && (
               <div className={s.more_info_block}>
                 <h6>Замовляй промокод та отримай CashBack выд продавця</h6>
-                <form>
+                <form onSubmit={formSubmitHandler} name={`bonus`}>
                   <input
-                      type="email"
-                      className={s.form_control}
-                      placeholder={`Введіть e-mail`}
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className={s.form_control}
+                    placeholder={`Введіть e-mail`}
                   />
-                  <button
+                  {!message ? (
+                    <button
                       type={`submit`}
-                      className={`btn btn-outline-danger py-1 px-4`}
-                  >
-                    Хочу промокод
-                  </button>
+                      className={`btn btn-outline-danger pb-1 pt-2 px-4`}
+                    >
+                      Хочу промокод
+                    </button>
+                  ) : (
+                      <div className="alert alert-success py-1" style={{borderRadius: '3em'}} role="alert">{message}</div>
+                    // <div className={`text-center`}>
+                    //   <div className="spinner-border text-danger" role="status">
+                    //     <span className="sr-only">Loading...</span>
+                    //   </div>
+                    // </div>
+                  )}
+                  <div className={s.info_sign}>
+                    <InfoTextModal text={`fghlkdsfhgsdkjfh`} buttonLabel={'i'} />
+                  </div>
                 </form>
               </div>
-          )}
-        </div> : null}
+            )}
+          </div>
+        ) : null}
         <div className={s.result_item}>
           <div>
             <svg
@@ -564,10 +713,9 @@ function MobileResult({ text }) {
                 <path d="m451 139.206c0 12.059 9.776 21.835 21.835 21.835s21.835-9.776 21.835-21.835v-10.462l-.089.004c-1.31-34.227-11.859-66.17-36.347-90.343-3.87-3.821-7.934-7.376-12.164-10.667 3.166 9.114 4.892 18.897 4.892 29.075z" />
               </g>
             </svg>
-            {/*<img width={28} src={WheelImg} alt="" />*/}
           </div>
           <div>
-            <u>20% ВІД СТРАХОВОЇ</u>
+            <a href={`https://avtotest.polis.ua/`} target={`_blank`}><u>20% ВІД СТРАХОВОЇ</u></a>
           </div>
         </div>
         <div className={s.result_item}>
@@ -612,10 +760,9 @@ function MobileResult({ text }) {
                 />
               </g>
             </svg>
-            {/*<img width={28} src={WheelImg} alt="" />*/}
           </div>
           <div>
-            <u>МОНІТОРИНГ ШТРАФІВ</u>
+            <a href={`https://bdr.mvs.gov.ua/`} target={`_blank`}><u>МОНІТОРИНГ ШТРАФІВ</u></a>
           </div>
         </div>
         <div className={s.result_item}>
@@ -623,17 +770,21 @@ function MobileResult({ text }) {
             <svg viewBox="0 -31 512 512" xmlns="http://www.w3.org/2000/svg">
               <path d="m123.195312 260.738281 63.679688 159.1875 82.902344-82.902343 142.140625 112.976562 100.082031-450-512 213.265625zm242.5-131.628906-156.714843 142.941406-19.519531 73.566407-36.058594-90.164063zm0 0" />
             </svg>
-            {/*<img width={28} src={Telegram} alt="" />*/}
           </div>
           <div>
-            <u>TELEGRAM BOT AvtoTest</u>
+            <a target={`_blank`} href={`https://t.me/AvtoTestOrgBot`}><u>TELEGRAM BOT AvtoTest</u></a>
           </div>
         </div>
         <div className={s.btn_read_more}>
           <span
             className={`btn btn-outline-danger px-4 pb-1`}
             title="Перевірити VIN та отримати повний звіт з історії транспортного засобу"
-            onClick={newWindowOpen}
+            onClick={() => {
+              window.open(
+                  `https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=moreD&vin=${car.vin}`,
+                  "_blanc"
+              );
+            }}
           >
             Перевірити VIN-код
           </span>
@@ -643,4 +794,7 @@ function MobileResult({ text }) {
   ) : null;
 }
 
-export default MobileResult;
+const mapStateToProps = (state) => ({
+  success: state.app.success,
+});
+export default connect(mapStateToProps, null)(MobileResult);

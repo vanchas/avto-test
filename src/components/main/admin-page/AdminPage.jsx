@@ -10,6 +10,8 @@ import UsersList from "./UsersList";
 import ChangeStrings from "./ChangeStrings";
 import Pagination from "../../utils/Pagination";
 import AdminFormsManage from "./AdminFormsManage";
+import AdminPageControl from "./AdminPageControl";
+import AdminRequestsList from "./AdminRequestsList";
 
 class AdminPage extends React.Component {
   constructor(props) {
@@ -24,9 +26,7 @@ class AdminPage extends React.Component {
     };
     this.pages = [];
     this.userPages = [];
-    this.logout = this.logout.bind(this);
     this.changeKeyText = this.changeKeyText.bind(this);
-    this.paginationDataHandler = this.paginationDataHandler.bind(this);
   }
 
   componentWillReceiveProps(props) {
@@ -39,63 +39,23 @@ class AdminPage extends React.Component {
       this.pages.push(1);
     }
   }
-  // users data
-  showPreviousPageUsers = (e) => {
-    e.preventDefault();
-    if (this.state.currentPageUsers > 1) {
-      this.setState({ currentPageUsers: this.state.currentPageUsers - 1 });
-      this.props.getUsersData(this.state.currentPageUsers - 1);
-    }
-  }
-  showNextPageUsers = (e) => {
-    e.preventDefault();
-    if (this.state.currentPageUsers < this.userPages.length) {
-      this.setState({ currentPageUsers: this.state.currentPageUsers + 1 });
-      this.props.getUsersData(this.state.currentPageUsers + 1);
-    }
-  }
-  paginationUsersHandler = (page, e) => {
-    e.preventDefault();
-    this.setState({ currentPageUsers: page });
-    this.props.getUsersData(page);
-  }
-  // requests data
-  showPreviousPageData = (e) => {
-    e.preventDefault();
-    if (this.state.currentPage > 1) {
-      this.setState({ currentPage: this.state.currentPage - 1 });
-      this.props.getRequestsData(this.state.currentPage - 1);
-    }
-  }
-  showNextPageData = (e) => {
-    e.preventDefault();
-    if (this.state.currentPage < this.pages.length) {
-      this.setState({ currentPage: this.state.currentPage + 1 });
-      this.props.getRequestsData(this.state.currentPage + 1);
-    }
-  }
-  paginationDataHandler = (page, e) => {
-    e.preventDefault();
-    this.setState({ currentPage: page });
-    this.props.getRequestsData(page);
-  }
 
   changeComponent = ref => {
     this.setState({ component: ref });
   }
+
   componentDidMount() {
     $('.language-text').hide();
     this.props.getRequestsData(1);
     this.props.getUsersData(1);
   }
+
   componentWillMount() {
     if (authHeader().Authorization.is_admin !== 1) {
       history.push('/home');
     }
   }
-  logout() {
-    userService.logout();
-  }
+
   changeKeyText = async (e) => {
     e.preventDefault();
 
@@ -169,30 +129,14 @@ class AdminPage extends React.Component {
           <div className="text-center pb-3">
             <button
               className="btn btn-danger"
-              onClick={this.logout}>
+              onClick={userService.logout}>
               Вийти
           </button>
           </div>
-          <nav aria-label="...">
-            <ul className="pagination justify-content-center admin-page-control">
-              <li className={`${this.state.component === 'text' && 'active'} page-item`} onClick={e => this.changeComponent('text')}>
-                <a className={`${this.state.component === 'text' && 'active'} page-link`} href="#">
-                  Изменить текст</a>
-              </li>
-              <li className={`${this.state.component === 'requests' && 'active'} page-item`} onClick={e => this.changeComponent('requests')}>
-                <a className="page-link" href="#">
-                  Данные по запросам</a>
-              </li>
-              <li className={`${this.state.component === 'users' && 'active'} page-item`} onClick={e => this.changeComponent('users')}>
-                <a className="page-link" href="#">
-                  Данные по пользователям</a>
-              </li>
-              <li className={`${this.state.component === 'forms' && 'active'} page-item`} onClick={e => this.changeComponent('forms')}>
-                <a className="page-link" href="#">
-                  Управление полями формы</a>
-              </li>
-            </ul>
-          </nav>
+          <AdminPageControl
+              component={this.state.component}
+              changeComponent={this.changeComponent}
+          />
         </div>
 
         <hr />
@@ -204,29 +148,8 @@ class AdminPage extends React.Component {
                 array={Array.from({length: this.props.data.last_page})}
             />
 
-            {this.props.data && this.props.data.data && this.props.data.data.length ? <div>
-              <h4 className="text-center">Данные по запросам</h4>
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>№</th>
-                    <th>result</th>
-                    <th>query</th>
-                    <th>datetime</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.props.data.data.map((d, i) => (
-                    <tr key={i}>
-                      <th>{i + 1}</th>
-                      <td>{d.result}</td>
-                      <td>{d.query}</td>
-                      <td>{d.datetime}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div> : null}
+            {this.props.data && this.props.data.data && this.props.data.data.length ?
+              <AdminRequestsList data={this.props.data.data} /> : null}
 
             <Pagination
                 handler={this.paginationClickHandlerRequests}

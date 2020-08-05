@@ -5,6 +5,7 @@ export const carInfoService = {
 };
 
 async function getCarInfo(value) {
+    localStorage.setItem('avto-test-value', value)
   return await fetch("/api/search", {
     method: "POST",
     headers: {
@@ -18,11 +19,11 @@ async function getCarInfo(value) {
     .then((res) => {
       if (res.status === 500 || res.status === 400 || res.status === 404) {
         localStorage.removeItem("avto-test-car");
-        window.open(
-          `https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${value}`,
-          "_blanc"
-        );
-        history.push("/result");
+        // window.open(
+        //   `https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${value}`,
+        //   "_blanc"
+        // );
+        history.push("/not-found");
       } else if (res.status === 203) {
         const data = res.json();
         data.then((car) => {
@@ -33,10 +34,10 @@ async function getCarInfo(value) {
               JSON.stringify({...car.error.vehicle, vin: `${car.error.vin.wmi}${car.error.vin.vds}${car.error.vin.vis}`})
             );
             setTimeout(() => {
-              window.open(
-                `https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${value}`,
-                "_blanc"
-              );
+              // window.open(
+              //   `https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=fc&vin=${value}`,
+              //   "_blanc"
+              // );
               history.push("/result");
             }, 1000);
           }

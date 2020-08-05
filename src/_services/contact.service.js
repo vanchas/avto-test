@@ -2,15 +2,16 @@ export const contactService = {
   sendEmail
 };
 
-async function sendEmail(name, phone, vin) {
-  return await fetch('/api/fb', {
+async function sendEmail(phone, vin) {
+  return await fetch('https://api.avtotest.org/api/fb', {
     method: 'POST',
     headers: {
       'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
     },
     body: JSON.stringify({
-      name, phone, vin
+      phone, vin
     })
   })
     .then((res) => {

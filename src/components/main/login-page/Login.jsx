@@ -84,8 +84,8 @@ export default class Login extends Component {
           registedEmail: this.state.email,
           registedPassword: this.state.password,
           loading: true,
-          registerMessage:
-            "Для того щоб зареєструватися, натисніть на  підтвердження, яке ми відправили вам на електронну адресу.",
+          // registerMessage:
+          //   "Для того щоб зареєструватися, натисніть на  підтвердження, яке ми відправили вам на електронну адресу.",
         });
         userService.registration(this.state.email, this.state.password);
         res();

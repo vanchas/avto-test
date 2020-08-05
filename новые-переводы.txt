@@ -1,0 +1,105 @@
+header modal {
+    inspection_on_site_modal_button - ВИЇЗДНА ПЕРЕВІРКА
+    inspection_on_site_modal_button - ВЫЕЗДНАЯ ПРОВЕРКА
+    inspection_on_site_modal_button - INSPECTION ON-SITE
+
+    inspection_on_site_modal_title - ВИЇЗДНА ПЕРЕВІРКА
+    inspection_on_site_modal_title - ВЫЕЗДНАЯ ПРОВЕРКА
+    inspection_on_site_modal_title - INSPECTION ON-SITE
+
+    inspection_on_site_modal_subtitle - Експерт приїде та проведе огляд авто на місці. Ви отримаєте детальний звіт!
+    inspection_on_site_modal_subtitle - Эксперт приедет и проведет осмотр авто на месте. Вы получите подробный отчет!
+    inspection_on_site_modal_subtitle - The expert will come and inspect the car on the spot. You will receive a detailed report!
+
+    inspection_on_site_modal_call_me_btn - Передзвоніть мені
+    inspection_on_site_modal_call_me_btn - Перезвоните мне
+    inspection_on_site_modal_call_me_btn - Call me
+}
+
+main {
+    intro page {
+        mobile_substring_services_history - Iсторiя операцiй
+        mobile_substring_services_history - История операций
+        mobile_substring_services_history - Operations history
+
+        mobile_substring_services_mileage - Перевiрка пробiгу
+        mobile_substring_services_mileage - Проверка пробега
+        mobile_substring_services_mileage - Mileage check
+
+        mobile_substring_services_damage - Прихованi пошкодження
+        mobile_substring_services_damage - Скрытые повреждения
+        mobile_substring_services_damage - Hidden damage
+    }
+
+    login page  {
+        (login)
+        forgot_password_btn - Забули пароль?
+        forgot_password_btn - Забыли пароль?
+        forgot_password_btn - Forgot password?
+
+        (registration)
+        registration_form_title - Зареєструйся, щоб перевіряти авто ефективно.
+        registration_form_title - Зарегистрируйся, чтобы проверять авто эффективно.
+        registration_form_title - Sign up to check the car effectively.
+
+        registration_form_substring - Ви отримаєте повідомлення на email для активації вашого облікогово запису
+        registration_form_substring - Вы получите уведомление на email для активации вашей учетной записи
+        registration_form_substring - You will receive an email to activate your account
+
+        registration_form_submit_btn - Реєстрація
+        registration_form_submit_btn - Регистрация
+        registration_form_submit_btn - Sign Up
+
+        registration_form_footer_string_part_1 - Натискаючи кнопку "Реєстрація", Ви погоджуєтесь з умовами розділів
+        registration_form_footer_string_part_1 - Нажимая кнопку "Регистрация", Вы соглашаетесь с условиями разделов
+        registration_form_footer_string_part_1 - By clicking the "Register" button, you agree to the terms of the
+
+        registration_form_footer_string_part_2 -  та
+        registration_form_footer_string_part_2 -  и
+        registration_form_footer_string_part_2 -  and
+
+        registration_form_footer_string_part_3 -  на сайті AvtoTest.
+        registration_form_footer_string_part_3 -  на сайте AvtoTest.
+        registration_form_footer_string_part_3 -  on the AvtoTest website.
+
+        registration_form_footer_string_terms_btn - Умови використання
+        registration_form_footer_string_terms_btn - Условия использования
+        registration_form_footer_string_terms_btn - Terms of use
+
+        registration_form_footer_string_privacy_btn - Політикою конфіденційності
+        registration_form_footer_string_privacy_btn - Политикой конфиденциальности
+        registration_form_footer_string_privacy_btn - Privacy policy
+
+        forgot_password_form_title - Забули пароль?
+        forgot_password_form_title - Забыли пароль?
+        forgot_password_form_title - Forgot password?
+
+        forgot_password_form_registration_btn - Реєстрація
+        forgot_password_form_registration_btn - Регистрация
+        forgot_password_form_registration_btn - Sign Up
+
+        forgot_password_form_submit_btn - Відновити пароль
+        forgot_password_form_submit_btn - Возобновить пароль
+        forgot_password_form_submit_btn - Recover password
+    }
+
+    terms-of-use page {
+        terms_of_use_page_header - Умови використання
+        terms_of_use_page_header - Условия использования
+        terms_of_use_page_header - Terms of use
+
+        terms_of_use_page_text - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        terms_of_use_page_text - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        terms_of_use_page_text - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    }
+
+    privacy-policy page {
+        privacy_policy_page_header - Політикою конфіденційності
+        privacy_policy_page_header - Политика конфиденциальности
+        privacy_policy_page_header - Privacy policy
+
+        privacy_policy_page_text - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        privacy_policy_page_text - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        privacy_policy_page_text - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    }
+}

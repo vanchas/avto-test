@@ -307,18 +307,24 @@ export default class IntroPage extends Component {
             <div className="header-mobile-links">
               <div>
                 <span>
-                  <a href={``} target={`_blank`}>
-                    <i className="fab fa-telegram-plane"></i>
+                  <a href={`https://t.me/AvtoTestOrgBot`} target={`_blank`}>
+                    <i className="fab fa-telegram-plane" />
                   </a>
                 </span>
                 <span>
-                  <a href={``} target={`_blank`}>
-                    <i className="fab fa-facebook-f"></i>
+                  <a
+                    href={`https://www.facebook.com/avtotestorg/`}
+                    target={`_blank`}
+                  >
+                    <i className="fab fa-facebook-f" />
                   </a>
                 </span>
                 <span>
-                  <a href={``} target={`_blank`}>
-                    <i className="fab fa-youtube"></i>
+                  <a
+                    href={`https://www.youtube.com/channel/UC4GUSR5SUWcCTsF-vaH8X4A`}
+                    target={`_blank`}
+                  >
+                    <i className="fab fa-youtube" />
                   </a>
                 </span>
               </div>
@@ -336,7 +342,7 @@ export default class IntroPage extends Component {
           <h4>{text.price_block_subheader}</h4>
           <div className="prices-cards row d-md-flex justify-content-around justify-items-center">
             <div className="price-card col-lg-4 col-md-12 pb-3">
-              <div className="price-description py-4 mx-1 row ">
+              <div className="price-description py-4 mx-1 row mb-3">
                 <h5 className="text-center w-100">
                   {text.price_block_card_1_header}
                 </h5>
@@ -365,21 +371,17 @@ export default class IntroPage extends Component {
                 href="https://www.carvertical.com/ua/landing/v3?a=avtotest&b=f1781078&data1=odM"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 btn btn-danger-modal text-white px-5"
+                // className="mt-3 btn btn-danger-modal text-white px-5"
+                className={`mt-1 d-flex mx-auto btn btn-outline-danger pb-0 btn-danger-modal px-4 font-weight-bold`}
               >
-                <span
-                  style={{
-                    transform: "translateY(-.3em)",
-                    display: "inline-block",
-                  }}
-                >
+                <span>
                   {text.price_block_card_btn}
                 </span>
               </a>
             </div>
 
             <div className="price-card col-lg-4 col-md-12">
-              <div className="price-description  mx-1 py-4 row">
+              <div className="price-description  mx-1 py-4 row mb-3">
                 <h5 className="text-center w-100">
                   {text.price_block_card_2_header}
                 </h5>
@@ -406,11 +408,11 @@ export default class IntroPage extends Component {
               <OrderForm
                 langData={this.props.langData}
                 price_block_card_btn_buy={text.price_block_card_btn}
-              ></OrderForm>
+              />
             </div>
 
             <div className="price-card col-lg-4 col-md-12">
-              <div className="price-description  mx-1 py-4 row">
+              <div className="price-description  mx-1 py-4 row mb-3">
                 <h5 className="text-center w-100">
                   {text.price_block_card_3_header}
                 </h5>
@@ -439,14 +441,10 @@ export default class IntroPage extends Component {
                 href="https://avtotest.polis.ua/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 btn btn-danger-modal text-white px-5"
+                // className="mt-3 btn btn-danger-modal text-white px-5"
+                className={`mt-1 d-flex mx-auto btn btn-outline-danger pb-0 btn-danger-modal px-4 font-weight-bold`}
               >
-                <span
-                  style={{
-                    transform: "translateY(-.3em)",
-                    display: "inline-block",
-                  }}
-                >
+                <span>
                   {text.price_block_card_btn}
                 </span>
               </a>
@@ -471,7 +469,7 @@ export default class IntroPage extends Component {
             <OrderForm
               langData={this.props.langData}
               price_block_card_btn_buy={text.consultation_block_btn}
-            ></OrderForm>
+            />
           </div>
         </section>
       </div>

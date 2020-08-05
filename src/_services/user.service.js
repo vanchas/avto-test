@@ -5,8 +5,16 @@ export const userService = {
   login,
   logout,
   userDetails,
-  registration
+  registration,
+  secretFormsDetails,
+  passwordRecovery,
+  setNewPassword
 };
+
+async function secretFormsDetails() {
+  return await fetch(`/api/forms`)
+      .then(res => res.json())
+}
 
 async function login(email, password) {
 
@@ -71,7 +79,7 @@ async function registration(email, password) {
     })
   })
     .then((res) => {
-      console.log(res);
+      // console.log(res);
 
       if (res.status === 201 || res.status === 200) {
         history.push('/login/sign-in');
@@ -82,6 +90,56 @@ async function registration(email, password) {
     .catch(error => {
       console.error('Error:', error);
     });
+}
+
+async function passwordRecovery(email) {
+  //?token=ASs8TslSfDIHhzcE
+  return await fetch('https://api.avtotest.org/api/send_link', {
+    method: 'POST',
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify({email})
+  }).then((res) => {
+    if (res.ok) {
+      const result = res.json();
+    } else {
+      alert('Не удалось отправить данные.');
+    }
+  })
+      .catch(error => {
+        console.error(error);
+      });
+}
+
+async function setNewPassword(token, password, password_confirmation) {
+  //?token=ASs8TslSfDIHhzcE
+  return await fetch('https://api.avtotest.org/api/reset_password', {
+    method: 'POST',
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({token, password, password_confirmation})
+  }).then((res) => {
+    if (res.ok) {
+      const result = res.json();
+      result.then(data => {
+        const user = data.user;
+        user.token = data.api_token;
+        user.token_type = data.token_type;
+        localStorage.setItem('avto-test-user', JSON.stringify(user));
+      })
+          .then(() => history.push('/'))
+          .catch(err => console.error(err))
+    } else {
+      alert('Не удалось отправить данные.');
+    }
+  })
+      .catch(error => {
+        console.error(error);
+      });
 }
 
 // /api/details

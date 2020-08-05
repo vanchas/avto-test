@@ -3,8 +3,16 @@ import PropTypes from "prop-types";
 import { Form, Button } from "react-bootstrap";
 import s from "./login.module.scss";
 import LoginPageControl from "./LoginPageControl";
+import {Link} from "react-router-dom";
 
 export default class RegisterForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+    };
+  }
+
   render() {
     const text = this.props.langData;
 
@@ -24,7 +32,6 @@ export default class RegisterForm extends React.Component {
 
           <Form className="mx-auto" style={{ maxWidth: "700px" }}>
             <Form.Group controlId="formBasicEmail">
-              {/*<Form.Label>{text.email_label}</Form.Label>*/}
               <p className={s.registration_form_heading}>
                 Зареєструйся, щоб <br /> перевіряти авто ефективно.
               </p>
@@ -34,44 +41,50 @@ export default class RegisterForm extends React.Component {
                 value={this.props.email}
                 onChange={(e) => this.props.emailInput(e.target.value)}
               />
-              {/*<Form.Text className="text-muted">*/}
-              {/*  {text.email_sublabel}*/}
-              {/*</Form.Text>*/}
             </Form.Group>
             <Form.Group controlId="formBasicPassword">
-              {/*<Form.Label>{text.password_label}</Form.Label>*/}
               <Form.Control
                 type="password"
-                placeholder="От 6 символов"
+                minLength={`6`}
+                placeholder="Придумайте пароль"
                 value={this.props.password}
                 onChange={(e) => this.props.passwordInput(e.target.value)}
               />
             </Form.Group>
-            {/* {this.props.loading ?
-            <div className="spinner-border text-primary" role="status">
-              <span className="sr-only">Loading...</span>
-            </div> : */}
             <Form.Text className={s.form_email_message}>
               Ви отримаєте повідомлення на email для активації вашого облікогово
               запису
             </Form.Text>
-            <Button
-              variant=""
-              // onClick={e => this.props.registerHandler(e)}
-              className={`btn btn-outline-danger ${s.submit_button}`}
-            >
-              {/*{text.nav_item_sign_in}*/}
-              Реєстрація
-            </Button>
+            {!this.state.loading ? (
+              <Button
+                variant=""
+                onClick={(e) => {
+                  this.setState({loading: true})
+                  this.props.registerHandler(e)
+                  setTimeout(() => {
+                    this.setState({loading: false})
+                  }, 3000)
+                }}
+                className={`btn btn-outline-danger ${s.submit_button}`}
+              >
+                Реєстрація
+              </Button>
+            ) : (
+              <div className={`text-center py-1`}>
+                <div className="spinner-border text-danger" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </div>
+            )}
             <Form.Text className={s.form_email_message}>
               Натискаючи кнопку "Реєстрація", Ви погоджуєтесь з умовами розділів{" "}
-              <a href={`#`} target={`_blank`}>
+              <Link to={`/terms-of-use`}>
                 <b>Умови використання</b>
-              </a>{" "}
+              </Link>{" "}
               та{" "}
-              <a href={`#`} target={`_blank`}>
+              <Link to={`/privacy-policy`}>
                 <b>Політикою конфіденційності</b>
-              </a>{" "}
+              </Link>{" "}
               на сайті <b>AvtoTest</b>
             </Form.Text>
           </Form>

@@ -12,6 +12,8 @@ import Blog from './blog-page/Blog';
 import AdminPage from './admin-page/AdminPage';
 import ForgotPasswordForm from "./login-page/ForgotPasswordForm";
 import NotFoundInfo from "./not-found/NotFoundInfo";
+import TermsOfUse from "./terms-of-use/TermsOfUse";
+import PrivacyPolicy from "./terms-of-use/PrivacyPolicy";
 
 
 export default class Main extends Component {
@@ -89,6 +91,20 @@ export default class Main extends Component {
                 path="/login/forgot-password"
                 render={(props) => (
                     <ForgotPasswordForm langData={this.props.langData} {...props} />
+                )}
+            />
+
+            <Route
+                path="/terms-of-use"
+                render={(props) => (
+                    <TermsOfUse langData={this.props.langData} {...props} />
+                )}
+            />
+
+            <Route
+                path="/privacy-policy"
+                render={(props) => (
+                    <PrivacyPolicy langData={this.props.langData} {...props} />
                 )}
             />
           </Switch>

@@ -171,8 +171,10 @@
     .number {
       margin: 0 0.5em;
       padding-top: 0.3em;
-      img {
-        width: 1.3em;
+      svg {
+        width: 1.4em;
+        margin-bottom: .1em;
+        fill: #009c69;
       }
     }
     button {
