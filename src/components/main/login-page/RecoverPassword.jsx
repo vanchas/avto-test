@@ -24,6 +24,7 @@ export default function RecoveryPassword(props) {
     };
 
     useEffect(() => {
+        // console.log(props)
         console.log(props.location.pathname.split('token=')[1])
     }, []);
 
