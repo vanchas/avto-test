@@ -14,6 +14,7 @@ import ForgotPasswordForm from "./login-page/ForgotPasswordForm";
 import NotFoundInfo from "./not-found/NotFoundInfo";
 import TermsOfUse from "./terms-of-use/TermsOfUse";
 import PrivacyPolicy from "./terms-of-use/PrivacyPolicy";
+import RecoverPassword from "./login-page/RecoverPassword";
 
 
 export default class Main extends Component {
@@ -95,9 +96,9 @@ export default class Main extends Component {
             />
 
               <Route
-                  path="/login/forgot-password/:token"
+                  path="/login/password-recovery/:token"
                   render={(props) => (
-                      <ForgotPasswordForm langData={this.props.langData} {...props} />
+                      <RecoverPassword langData={this.props.langData} {...props} />
                   )}
               />
 

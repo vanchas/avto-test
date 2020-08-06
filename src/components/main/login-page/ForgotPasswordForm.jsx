@@ -6,9 +6,6 @@ import { userService } from "../../../_services/user.service";
 
 export default function ForgotPasswordForm(props) {
   const [email, setEmail] = useState(null);
-  const [newPasswordForm, setNewPasswordForm] = useState(false);
-  const [newPassword, setNewPassword] = useState(null);
-  const [newPasswordConfirmed, setNewPasswordConfirmed] = useState(null);
   const [submitMessage, setSubmitMessage] = useState(null);
 
   const submitHandlerPasswordRecovery = (e) => {
@@ -24,37 +21,7 @@ export default function ForgotPasswordForm(props) {
     }
   };
 
-  const submitHandlerSettingNewPassword = (e) => {
-    e.preventDefault();
-    const token = props.location.search.includes("token")
-      ? props.location.search
-      : null;
-    console.log(token, newPassword, newPasswordConfirmed);
-
-    if (token && newPassword && newPassword === newPasswordConfirmed) {
-      userService.setNewPassword(
-        token.toString().split("?token=")[1],
-        newPassword,
-        newPasswordConfirmed
-      );
-    } else {
-      alert(
-        'Пароль має бути не меньший нiж 6 символів та Поле "Пароль" і "Підтвердження паролю" повинно співпадати'
-      );
-    }
-  };
-
-  useEffect(() => {
-    if (
-      props.location &&
-      props.location.search &&
-      props.location.search.includes("token")
-    ) {
-      setNewPasswordForm(true);
-    }
-  }, []);
-
-  return !newPasswordForm ? (
+  return (
     <Form
       onSubmit={submitHandlerPasswordRecovery}
       className={`mx-auto`}
@@ -94,39 +61,5 @@ export default function ForgotPasswordForm(props) {
         {props.langData.forgot_password_form_submit_btn}
       </Button>}
     </Form>
-  ) : (
-    <Form
-      onSubmit={submitHandlerSettingNewPassword}
-      className={`mx-auto`}
-      style={{ maxWidth: "700px" }}
-    >
-      <Form.Group controlId="formBasicPassword">
-        <Form.Control
-          required
-          autoComplete="true"
-          type="password"
-          minLength={`6`}
-          placeholder="введіть новий пароль"
-          onChange={(e) => setNewPassword(e.target.value)}
-        />
-      </Form.Group>
-      <Form.Group controlId="formBasicPassword">
-        <Form.Control
-          required
-          autoComplete="true"
-          type="password"
-          minLength={`6`}
-          placeholder="підтвердіть новий пароль"
-          onChange={(e) => setNewPasswordConfirmed(e.target.value)}
-        />
-      </Form.Group>
-      <Button
-        variant=""
-        type="submit"
-        className={`btn btn-outline-danger font-weight-bold ${s.submit_button}`}
-      >
-        {props.langData.forgot_password_form_save_password_btn}
-      </Button>
-    </Form>
-  );
+  )
 }
