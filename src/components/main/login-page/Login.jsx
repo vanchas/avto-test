@@ -29,13 +29,6 @@ export default class Login extends Component {
     this.passwordInput = this.passwordInput.bind(this);
   }
 
-  // componentWillUnmount() {
-  //   this.setState({
-  //     loading: false,
-  //     registerMessage: "",
-  //   });
-  // }
-
   loginHandler(e) {
     e.preventDefault();
     if (
@@ -170,7 +163,7 @@ export default class Login extends Component {
           />
 
           <Route
-              path="/login/password-recovery/:token"
+              path="/login/password-recovery/token=/:token"
               render={(props) => (
                   <RecoverPassword langData={this.props.langData} {...props} />
               )}
