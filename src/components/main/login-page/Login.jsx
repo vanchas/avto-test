@@ -6,6 +6,7 @@ import RegisterForm from "./RegisterForm";
 import { userService } from "../../../_services/user.service";
 import s from "./login.module.scss";
 import ForgotPasswordForm from "./ForgotPasswordForm";
+import RecoverPassword from "./RecoverPassword";
 
 export default class Login extends Component {
   constructor(props) {
@@ -167,6 +168,14 @@ export default class Login extends Component {
               <ForgotPasswordForm langData={this.props.langData} {...props} />
             )}
           />
+
+          <Route
+              path="/login/password-recovery/:token"
+              render={(props) => (
+                  <RecoverPassword langData={this.props.langData} {...props} />
+              )}
+          />
+
         </div>
       </div>
     );

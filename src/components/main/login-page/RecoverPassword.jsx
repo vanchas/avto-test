@@ -9,13 +9,10 @@ export default function RecoveryPassword(props) {
 
     const submitHandlerSettingNewPassword = (e) => {
         e.preventDefault();
-        const token = props.location.search.includes("token")
-            ? props.location.search
-            : null;
         // console.log(token, newPassword, newPasswordConfirmed);
-        if (token && newPassword && newPassword === newPasswordConfirmed) {
+        if (newPassword && newPassword === newPasswordConfirmed) {
             userService.setNewPassword(
-                token.toString().split("?token=")[1],
+                props.location.pathname.split('token=')[1],
                 newPassword,
                 newPasswordConfirmed
             );
@@ -27,7 +24,7 @@ export default function RecoveryPassword(props) {
     };
 
     useEffect(() => {
-        console.log(props.location.search)
+        console.log(props.location.pathname.split('token=')[1])
     }, []);
 
     return (
