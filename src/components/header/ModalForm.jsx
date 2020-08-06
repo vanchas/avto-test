@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { contactService } from '../../_services/contact.service';
@@ -9,7 +9,11 @@ export const OrderCall = props => {
   const [name, setName] = React.useState('');
   const [phone, setPhone] = React.useState('');
   const [loading, setLoading] = React.useState(false);
+  const [text, setText] = useState(props.langData)
 
+  useEffect(() => {
+    setText(props.langData)
+  }, [props.langData])
 
 
   const handleClose = () => {
@@ -82,20 +86,20 @@ export const OrderCall = props => {
         <Modal.Footer className="pt-0 bkg-light-info d-flex flex-column">
           {loading ?
             <div className="alert alert-success" role="alert">
-              Спасибо!
+              {text.inspection_on_site_modal_order_call_form_thanks_message}!
             </div>
             :
             <Button
               variant="info"
               className="btn text-white btn-send-email mx-auto d-block mt-3 mb-1 border-0 font-weight-bolder"
               onClick={e => fetchData(e)}>
-              Надіслати
+              {text.inspection_on_site_modal_order_call_form_submit_button}
         </Button>
           }
           <Button variant=""
             className="m-0 border-0 text-success"
             onClick={handleClose}>
-            <u>Скасувати</u>
+            <u>{text.inspection_on_site_modal_order_call_form_cancel_button}</u>
           </Button>
         </Modal.Footer>
       </Modal>

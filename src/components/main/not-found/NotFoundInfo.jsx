@@ -264,6 +264,7 @@ function NotFoundInfo({ langData: text }) {
                     )}
                     <div className={s.info_sign}>
                       <InfoTextModal
+                          title={`ghdkjfg`}
                         text={`fghlkdsfhgsdkjfh`}
                         buttonLabel={"i"}
                       />
@@ -335,6 +336,7 @@ function NotFoundInfo({ langData: text }) {
                   )}
                   <div className={s.info_sign}>
                     <InfoTextModal
+                        title={`ghdkjfg`}
                       text={`fghlkdsfhgsdkjfh`}
                       buttonLabel={"i"}
                     />
@@ -399,6 +401,7 @@ function NotFoundInfo({ langData: text }) {
                   )}
                   <div className={s.info_sign}>
                     <InfoTextModal
+                        title={`ghdkjfg`}
                       text={`fghlkdsfhgsdkjfh`}
                       buttonLabel={"i"}
                     />
@@ -510,6 +513,7 @@ function NotFoundInfo({ langData: text }) {
                   )}
                   <div className={s.info_sign}>
                     <InfoTextModal
+                        title={`ghdkjfg`}
                       text={`fghlkdsfhgsdkjfh`}
                       buttonLabel={"i"}
                     />
@@ -623,6 +627,7 @@ function NotFoundInfo({ langData: text }) {
                   )}
                   <div className={s.info_sign}>
                     <InfoTextModal
+                        title={`ghdkjfg`}
                       text={`fghlkdsfhgsdkjfh`}
                       buttonLabel={"i"}
                     />

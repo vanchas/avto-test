@@ -31,7 +31,7 @@ export default function InspectionModal(props) {
         onClick={(e) => handleShow(e)}
       >
         {/*{props.header_btn_call}*/}
-        ВИЇЗДНА ПЕРЕВІРКА
+        {props.langData.inspection_on_site_modal_button}
       </Button>
 
       <Modal className="mt-5 inspection-modal" show={show} onHide={handleClose}>
@@ -40,9 +40,9 @@ export default function InspectionModal(props) {
             <div className="d-flex h5">
               {/*{props.langData.title_contact_soon_form}*/}
               <img src={CarCheck} alt={``} />
-              ВИЇЗДНА ПЕРЕВІРКА
+              {props.langData.inspection_on_site_modal_title}
             </div>
-            <p>Експерт приїде та проведе огляд авто на місці. Ви отримаєте детальний звіт!</p>
+            <p>{props.langData.inspection_on_site_modal_subtitle}</p>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="py-0">
@@ -83,7 +83,7 @@ export default function InspectionModal(props) {
         <Modal.Footer className="pt-0 bkg-light-info d-flex flex-column border-0">
           {loading ? (
             <div className="alert alert-success" role="alert">
-              Спасибо!
+              {props.langData.inspection_on_site_modal_order_call_form_thanks_message}!
             </div>
           ) : (
             <Button
@@ -91,7 +91,7 @@ export default function InspectionModal(props) {
               className="btn btn-outline-danger mb-3"
               onClick={(e) => fetchData(e)}
             >
-              Передзвоніть мені
+              {props.langData.inspection_on_site_modal_call_me_btn}
             </Button>
           )}
         </Modal.Footer>

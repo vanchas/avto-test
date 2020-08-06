@@ -300,9 +300,9 @@ export default class IntroPage extends Component {
               </div>
             </div>
             <div className="instruction-mobile">
-              <p>Iсторiя операцiй</p>
-              <p>Перевiрка пробiгу</p>
-              <p>Прихованi пошкодження</p>
+              <p>{text.mobile_substring_services_history}</p>
+              <p>{text.mobile_substring_services_mileage}</p>
+              <p>{text.mobile_substring_services_damage}</p>
             </div>
             <div className="header-mobile-links">
               <div>
@@ -339,7 +339,7 @@ export default class IntroPage extends Component {
           <h2 style={{ fontSize: "2em" }} className="font-weight-bolder">
             {text.price_block_header}
           </h2>
-          <h4>{text.price_block_subheader}</h4>
+          <h4 className={`mt-2`}>{text.price_block_subheader}</h4>
           <div className="prices-cards row d-md-flex justify-content-around justify-items-center">
             <div className="price-card col-lg-4 col-md-12 pb-3">
               <div className="price-description py-4 mx-1 row mb-3">

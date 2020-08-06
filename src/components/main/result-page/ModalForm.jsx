@@ -98,15 +98,14 @@ export const OrderForm = (props) => {
               <img width={35} src={MreoGreen} alt="" />
             </div>
             <div>
-              <span>ВИЇЗДНА ПЕРЕВІРКА</span>
+              <span>{props.langData.inspection_on_site_modal_title}</span>
             </div>
             <div onClick={handleClose}>
               <i className="fas fa-times text-secondary" />
             </div>
             <div className={s.more_info_block}>
               <h6 style={{ color: "#67bd9d" }}>
-                Експерт приїде та проведе огляд авто на місці. Ви отримаєте
-                детальний звіт!
+                {props.langData.inspection_on_site_modal_subtitle}
               </h6>
               <form
                 onSubmit={formSubmitHandler}
@@ -138,7 +137,7 @@ export const OrderForm = (props) => {
                     type={`submit`}
                     className={`btn btn-outline-danger pb-1 pt-1 mt-1 px-4`}
                   >
-                    Передзвоніть мені
+                    {props.langData.inspection_on_site_modal_call_me_btn}
                   </button>
                 ) : (
                   <div
@@ -155,7 +154,7 @@ export const OrderForm = (props) => {
                   // </div>
                 )}
                 <div className={s.info_sign}>
-                  <InfoTextModal text={`fghlkdsfhgsdkjfh`} buttonLabel={"i"} />
+                  <InfoTextModal title={`ghdkjfg`} text={`fghlkdsfhgsdkjfh`} buttonLabel={"i"} />
                 </div>
               </form>
             </div>

@@ -14,6 +14,18 @@ header modal {
     inspection_on_site_modal_call_me_btn - Передзвоніть мені
     inspection_on_site_modal_call_me_btn - Перезвоните мне
     inspection_on_site_modal_call_me_btn - Call me
+
+    inspection_on_site_modal_order_call_form_submit_button - Надіслати
+    inspection_on_site_modal_order_call_form_submit_button - Отправить
+    inspection_on_site_modal_order_call_form_submit_button - Submit
+
+    inspection_on_site_modal_order_call_form_cancel_button - Скасувати
+    inspection_on_site_modal_order_call_form_cancel_button - Отменить
+    inspection_on_site_modal_order_call_form_cancel_button - Cancel
+
+    inspection_on_site_modal_order_call_form_thanks_message - Дякуємо
+    inspection_on_site_modal_order_call_form_thanks_message - Спасибо
+    inspection_on_site_modal_order_call_form_thanks_message - Thank you
 }
 
 main {
@@ -81,6 +93,10 @@ main {
         forgot_password_form_submit_btn - Відновити пароль
         forgot_password_form_submit_btn - Возобновить пароль
         forgot_password_form_submit_btn - Recover password
+
+        forgot_password_form_save_password_btn - Зберегти пароль
+        forgot_password_form_save_password_btn - Сохранить пароль
+        forgot_password_form_save_password_btn - Save password
     }
 
     terms-of-use page {
@@ -102,4 +118,46 @@ main {
         privacy_policy_page_text - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         privacy_policy_page_text - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     }
+
+    info_text_modal_window {
+        info_text_modal_window_owner_title - gsdgfdfgsdgf
+        info_text_modal_window_owner_title - dsgdsgsdf
+        info_text_modal_window_owner_title - gsdgdfgdfg
+
+        info_text_modal_window_owner_text - gsdgfdfgsdgf
+        info_text_modal_window_owner_text - dsgdsgsdf
+        info_text_modal_window_owner_text - gsdgdfgdfg
+
+        info_text_modal_window_inspection_title - gsdgfdfgsdgf
+        info_text_modal_window_inspection_title - dsgdsgsdf
+        info_text_modal_window_inspection_title - gsdgdfgdfg
+
+        info_text_modal_window_inspection_text - gsdgfdfgsdgf
+        info_text_modal_window_inspection_text - dsgdsgsdf
+        info_text_modal_window_inspection_text - gsdgdfgdfg
+
+        info_text_modal_window_monitoring_title - gsdgfdfgsdgf
+        info_text_modal_window_monitoring_title - dsgdsgsdf
+        info_text_modal_window_monitoring_title - gsdgdfgdfg
+
+        info_text_modal_window_monitoring_text - gsdgfdfgsdgf
+        info_text_modal_window_monitoring_text - dsgdsgsdf
+        info_text_modal_window_monitoring_text - gsdgdfgdfg
+
+        info_text_modal_window_discount_title - gsdgfdfgsdgf
+        info_text_modal_window_discount_title - dsgdsgsdf
+        info_text_modal_window_discount_title - gsdgdfgdfg
+
+        info_text_modal_window_discount_text - gsdgfdfgsdgf
+        info_text_modal_window_discount_text - dsgdsgsdf
+        info_text_modal_window_discount_text - gsdgdfgdfg
+
+        info_text_modal_window_bonus_title - gsdgfdfgsdgf
+        info_text_modal_window_bonus_title - dsgdsgsdf
+        info_text_modal_window_bonus_title - gsdgdfgdfg
+
+        info_text_modal_window_bonus_text - gsdgfdfgsdgf
+        info_text_modal_window_bonus_text - dsgdsgsdf
+        info_text_modal_window_bonus_text - gsdgdfgdfg
+        }
 }

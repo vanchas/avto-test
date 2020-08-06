@@ -33,7 +33,7 @@ export default class RegisterForm extends React.Component {
           <Form className="mx-auto" style={{ maxWidth: "700px" }}>
             <Form.Group controlId="formBasicEmail">
               <p className={s.registration_form_heading}>
-                Зареєструйся, щоб <br /> перевіряти авто ефективно.
+                {text.registration_form_title}
               </p>
               <Form.Control
                 type="email"
@@ -52,8 +52,7 @@ export default class RegisterForm extends React.Component {
               />
             </Form.Group>
             <Form.Text className={s.form_email_message}>
-              Ви отримаєте повідомлення на email для активації вашого облікогово
-              запису
+              {text.registration_form_substring}
             </Form.Text>
             {!this.state.loading ? (
               <Button
@@ -67,7 +66,7 @@ export default class RegisterForm extends React.Component {
                 }}
                 className={`btn btn-outline-danger ${s.submit_button}`}
               >
-                Реєстрація
+                {text.registration_form_submit_btn}
               </Button>
             ) : (
               <div className={`text-center py-1`}>
@@ -77,15 +76,15 @@ export default class RegisterForm extends React.Component {
               </div>
             )}
             <Form.Text className={s.form_email_message}>
-              Натискаючи кнопку "Реєстрація", Ви погоджуєтесь з умовами розділів{" "}
+              {text.registration_form_footer_string_part_1}{" "}
               <Link to={`/terms-of-use`}>
-                <b>Умови використання</b>
+                <b>{text.registration_form_footer_string_terms_btn}</b>
               </Link>{" "}
-              та{" "}
+              {text.registration_form_footer_string_part_2}{" "}
               <Link to={`/privacy-policy`}>
-                <b>Політикою конфіденційності</b>
+                <b>{text.registration_form_footer_string_privacy_btn}</b>
               </Link>{" "}
-              на сайті <b>AvtoTest</b>
+              {text.registration_form_footer_string_part_3}
             </Form.Text>
           </Form>
         </div>

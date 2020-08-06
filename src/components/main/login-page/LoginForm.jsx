@@ -47,7 +47,7 @@ export default class LoginForm extends React.Component {
           {/*</div>*/}
           <Form.Text className={s.forgot_password}>
             <Link to="/login/forgot-password">
-              <u>Забули пароль?</u>
+              <u>{text.forgot_password_btn}</u>
             </Link>
           </Form.Text>
           <Button

@@ -9,6 +9,9 @@ const styles = {
     fontFamily: "Courgette, cursive",
     outline: "none",
   },
+  title: {
+    textAlign: 'center'
+  },
     content: {
       color: '#007c60',
       padding: '2em 1em'
@@ -29,7 +32,10 @@ export const InfoTextModal = (props) => {
       </Button>
 
       <Modal className="mt-5" show={show} onHide={handleClose}>
-        <div style={styles.content}>{props.text}</div>
+        <div style={styles.content}>
+          <h5 style={styles.title}>{props.title}</h5>
+          <p>{props.text}</p>
+        </div>
       </Modal>
     </>
   );

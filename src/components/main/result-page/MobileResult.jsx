@@ -353,7 +353,9 @@ function MobileResult({ text, success }) {
                       // </div>
                     )}
                     <div className={s.info_sign}>
-                      <InfoTextModal text={`fghlkdsfhgsdkjfh`} buttonLabel={'i'} />
+                      <InfoTextModal
+                          title={text.info_text_modal_window_owner_title}
+                          text={text.info_text_modal_window_owner_text} buttonLabel={'i'} />
                     </div>
                   </form>
                 </div>
@@ -415,7 +417,10 @@ function MobileResult({ text, success }) {
                     // </div>
                   )}
                   <div className={s.info_sign}>
-                    <InfoTextModal text={`fghlkdsfhgsdkjfh`} buttonLabel={'i'} />
+                    <InfoTextModal
+                        title={text.info_text_modal_window_inspection_title}
+                        text={text.info_text_modal_window_inspection_text}
+                        buttonLabel={'i'} />
                   </div>
                 </form>
               </div>
@@ -482,7 +487,10 @@ function MobileResult({ text, success }) {
                     // </div>
                   )}
                   <div className={s.info_sign}>
-                    <InfoTextModal text={`fghlkdsfhgsdkjfh`} buttonLabel={'i'} />
+                    <InfoTextModal
+                        title={text.info_text_modal_window_monitoring_title}
+                        text={text.info_text_modal_window_monitoring_text}
+                        buttonLabel={'i'} />
                   </div>
                 </form>
               </div>
@@ -584,7 +592,10 @@ function MobileResult({ text, success }) {
                     // </div>
                   )}
                   <div className={s.info_sign}>
-                    <InfoTextModal text={`fghlkdsfhgsdkjfh`} buttonLabel={'i'} />
+                    <InfoTextModal
+                        title={text.info_text_modal_window_discount_title}
+                        text={text.info_text_modal_window_discount_text}
+                        buttonLabel={'i'} />
                   </div>
                 </form>
               </div>
@@ -688,7 +699,10 @@ function MobileResult({ text, success }) {
                     // </div>
                   )}
                   <div className={s.info_sign}>
-                    <InfoTextModal text={`fghlkdsfhgsdkjfh`} buttonLabel={'i'} />
+                    <InfoTextModal
+                        title={text.info_text_modal_window_bonus_title}
+                        text={text.info_text_modal_window_bonus_text}
+                        buttonLabel={'i'} />
                   </div>
                 </form>
               </div>

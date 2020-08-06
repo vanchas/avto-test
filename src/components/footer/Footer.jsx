@@ -15,7 +15,7 @@ export default class Footer extends Component {
           <div className={`${s.foot_block} px-2`}>
             <a href="tel:+380964702700" className={`text-dark font-weight-bolder`}>+38096 470 27 00</a>
             <div className={`${s.text_block}`}>
-              <p className="m-0"><b>Avto</b>Test - {text.footer_text} </p>
+              <p className="m-0"><b>Avto</b>Test  {text.footer_text} </p>
             </div>
             <p>© 2020 <b>Avto</b>Test. {text.company_information}</p>
           </div>

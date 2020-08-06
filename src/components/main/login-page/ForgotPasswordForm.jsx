@@ -43,12 +43,12 @@ export default function ForgotPasswordForm(props) {
     >
       <nav className={s.forgot_password_form_heading}>
         <div className={s.nav_links}>
-          <span className={`p-2`}>Забули пароль?</span>
+          <span className={`p-2`}>{props.langData.forgot_password_form_title}</span>
           <Link
             to={`/login/sign-up`}
             className={`px-3 py-2 mr-2 ${s.nav_link}`}
           >
-            <u>Реєстрація</u>
+            <u>{props.langData.forgot_password_form_registration_btn}</u>
           </Link>
         </div>
       </nav>
@@ -66,7 +66,7 @@ export default function ForgotPasswordForm(props) {
         type="submit"
         className={`btn btn-outline-danger ${s.submit_button}`}
       >
-        Відновити пароль
+        {props.langData.forgot_password_form_submit_btn}
       </Button>
     </Form>
   ) : (
@@ -100,7 +100,7 @@ export default function ForgotPasswordForm(props) {
         type="submit"
         className={`btn btn-outline-danger font-weight-bold ${s.submit_button}`}
       >
-        Зберегти пароль
+        {props.langData.forgot_password_form_save_password_btn}
       </Button>
     </Form>
   );
