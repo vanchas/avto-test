@@ -6,17 +6,19 @@ import { userService } from "../../../_services/user.service";
 
 export default function ForgotPasswordForm(props) {
   const [email, setEmail] = useState(null);
-  const [submitMessage, setSubmitMessage] = useState(null);
+  const [submitLoader, setSubmitLoader] = useState(false);
 
   const submitHandlerPasswordRecovery = (e) => {
     e.preventDefault();
     if (email) {
       setTimeout(() => {
-        setSubmitMessage('Підтвердіть відновлення паролю, яке ми вислали Вам на email')
+        setSubmitLoader(true)
+        // setSubmitMessage('Підтвердіть відновлення паролю, яке ми вислали Вам на email')
       }, 500)
       userService.passwordRecovery(email);
       setTimeout(() => {
-        setSubmitMessage(null)
+        setSubmitLoader(false)
+        // setSubmitMessage(null)
       }, 5000)
     }
   };
@@ -49,9 +51,11 @@ export default function ForgotPasswordForm(props) {
           onChange={(e) => setEmail(e.target.value)}
         />
       </Form.Group>
-      {submitMessage ?
-          <div className="alert alert-info" role="alert">
-            {submitMessage}
+      {submitLoader ?
+          <div className={`text-center py-1`}>
+            <div className="spinner-border text-danger" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
           </div>
       : <Button
         variant=""

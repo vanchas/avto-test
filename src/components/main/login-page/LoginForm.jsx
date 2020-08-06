@@ -45,11 +45,11 @@ export default class LoginForm extends React.Component {
           {/*<div className="spinner-border text-primary" role="status">*/}
           {/*  <span className="sr-only">Loading...</span>*/}
           {/*</div>*/}
-          <Form.Text className={s.forgot_password}>
-            <Link to="/login/forgot-password">
-              <u>{text.forgot_password_btn}</u>
-            </Link>
-          </Form.Text>
+          {/*<Form.Text className={s.forgot_password}>*/}
+          {/*  <Link to="/login/forgot-password">*/}
+          {/*    <u>{text.forgot_password_btn}</u>*/}
+          {/*  </Link>*/}
+          {/*</Form.Text>*/}
           <Button
             variant=""
             type="submit"
