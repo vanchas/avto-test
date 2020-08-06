@@ -95,13 +95,6 @@ export default class Main extends Component {
                 )}
             />
 
-              <Route
-                  path="/login/password-recovery/:token"
-                  render={(props) => (
-                      <RecoverPassword langData={this.props.langData} {...props} />
-                  )}
-              />
-
             <Route
                 path="/terms-of-use"
                 render={(props) => (
