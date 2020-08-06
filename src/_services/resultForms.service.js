@@ -4,8 +4,6 @@ export const resultForms = {
   formFetch
 };
 
-const user = authHeader().Authorization;
-
 async function formFetch(formName, phone, vin, email) {
   let body
   let id
@@ -26,6 +24,7 @@ async function formFetch(formName, phone, vin, email) {
     body = JSON.stringify({ email })
     id = 5
   }
+  const user = authHeader().Authorization;
 
   return await fetch(`https://api.avtotest.org/api/fb_inspection/${id}`, {
     method: "POST",
@@ -33,7 +32,7 @@ async function formFetch(formName, phone, vin, email) {
       "Access-Control-Allow-Origin": "*",
       // "Accept": "application/json",
       "Content-Type": "application/json",
-      Authorization: `${user.token_type} ${user.token}`,
+      Authorization: `${user ? user.token_type : ''} ${user ? user.token : ''}`,
     },
     body: body,
   })

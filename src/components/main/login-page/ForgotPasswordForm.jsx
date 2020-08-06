@@ -9,28 +9,47 @@ export default function ForgotPasswordForm(props) {
   const [newPasswordForm, setNewPasswordForm] = useState(false);
   const [newPassword, setNewPassword] = useState(null);
   const [newPasswordConfirmed, setNewPasswordConfirmed] = useState(null);
+  const [submitMessage, setSubmitMessage] = useState(null);
 
   const submitHandlerPasswordRecovery = (e) => {
     e.preventDefault();
     if (email) {
+      setTimeout(() => {
+        setSubmitMessage('Підтвердіть відновлення паролю, яке ми вислали Вам на email')
+      }, 500)
       userService.passwordRecovery(email);
+      setTimeout(() => {
+        setSubmitMessage(null)
+      }, 5000)
     }
   };
 
   const submitHandlerSettingNewPassword = (e) => {
     e.preventDefault();
-    const token = props.location.search.includes("token") ? props.location.search : null;
-    console.log(token, newPassword, newPasswordConfirmed)
+    const token = props.location.search.includes("token")
+      ? props.location.search
+      : null;
+    console.log(token, newPassword, newPasswordConfirmed);
 
     if (token && newPassword && newPassword === newPasswordConfirmed) {
-      userService.setNewPassword(token.toString().split('?token=')[1], newPassword, newPasswordConfirmed);
+      userService.setNewPassword(
+        token.toString().split("?token=")[1],
+        newPassword,
+        newPasswordConfirmed
+      );
     } else {
-      alert('Пароль має бути не меньший нiж 6 символів та Поле "Пароль" і "Підтвердження паролю" повинно співпадати')
+      alert(
+        'Пароль має бути не меньший нiж 6 символів та Поле "Пароль" і "Підтвердження паролю" повинно співпадати'
+      );
     }
   };
 
   useEffect(() => {
-    if (props.location.search.includes("token")) {
+    if (
+      props.location &&
+      props.location.search &&
+      props.location.search.includes("token")
+    ) {
       setNewPasswordForm(true);
     }
   }, []);
@@ -43,7 +62,9 @@ export default function ForgotPasswordForm(props) {
     >
       <nav className={s.forgot_password_form_heading}>
         <div className={s.nav_links}>
-          <span className={`p-2`}>{props.langData.forgot_password_form_title}</span>
+          <span className={`p-2`}>
+            {props.langData.forgot_password_form_title}
+          </span>
           <Link
             to={`/login/sign-up`}
             className={`px-3 py-2 mr-2 ${s.nav_link}`}
@@ -61,13 +82,17 @@ export default function ForgotPasswordForm(props) {
           onChange={(e) => setEmail(e.target.value)}
         />
       </Form.Group>
-      <Button
+      {submitMessage ?
+          <div className="alert alert-info" role="alert">
+            {submitMessage}
+          </div>
+      : <Button
         variant=""
         type="submit"
         className={`btn btn-outline-danger ${s.submit_button}`}
       >
         {props.langData.forgot_password_form_submit_btn}
-      </Button>
+      </Button>}
     </Form>
   ) : (
     <Form

@@ -213,8 +213,10 @@
   .react-tel-input .form-control {
     width: 100% !important;
     border-color: #96dcca !important;
+    padding-left: 1em;
   }
   .flag-dropdown {
+    display: none;
     border-top-left-radius: 2em !important;
     border-bottom-left-radius: 2em !important;
     width: 0;

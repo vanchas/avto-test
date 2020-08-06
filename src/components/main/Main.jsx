@@ -94,6 +94,13 @@ export default class Main extends Component {
                 )}
             />
 
+              <Route
+                  path="/login/forgot-password/:token"
+                  render={(props) => (
+                      <ForgotPasswordForm langData={this.props.langData} {...props} />
+                  )}
+              />
+
             <Route
                 path="/terms-of-use"
                 render={(props) => (

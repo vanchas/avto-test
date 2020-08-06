@@ -22,9 +22,9 @@ import { history } from "../../../_helpers/history";
 import { userService } from "../../../_services/user.service";
 import { resultForms } from "../../../_services/resultForms.service";
 import { connect } from "react-redux";
-import {OrderForm} from "./ModalForm";
-import {InfoTextModal} from "../../utils/InfoTextModal";
-import {authHeader} from "../../../_helpers/auth-header";
+import { OrderForm } from "./ModalForm";
+import { InfoTextModal } from "../../utils/InfoTextModal";
+import { authHeader } from "../../../_helpers/auth-header";
 
 const phoneNumberMask = [
   // /[1-9]/,
@@ -74,10 +74,10 @@ function MobileResult({ text, success }) {
     } else {
       history.push("/not-found");
     }
-    const user = authHeader().Authorization
-    if (user && user.email) setEmail(user.email)
-    const car = getCar().Found
-    if (car && car.vin) setVin(car.vin)
+    const user = authHeader().Authorization;
+    if (user && user.email) setEmail(user.email);
+    const car = getCar().Found;
+    if (car && car.vin) setVin(car.vin);
     getSecretFormsDetails();
   }, []);
 
@@ -113,32 +113,32 @@ function MobileResult({ text, success }) {
   const formSubmitHandler = (e) => {
     e.preventDefault();
     setTimeout(() => {
-      setMessage("Ваш запит успішно надіслано")
-    }, 500)
-    const form = e.target
+      setMessage("Ваш запит успішно надіслано");
+    }, 500);
+    const form = e.target;
     resultForms.formFetch(
-        form.name,
-        phone.split(' ').join('').split('(').join('').split(')').join(''),
-        vin,
-        email
-    )
+      form.name,
+      phone.split(" ").join("").split("(").join("").split(")").join(""),
+      vin,
+      email
+    );
     setTimeout(() => {
-      setEmail("")
-      setPhone("")
-      setVin("")
-      const car = getCar().Found
-      if (car && car.vin) setVin(car.vin)
-      const user = authHeader().Authorization
-      if (user && user.email) setEmail(user.email)
-      setMessage(null)
-      setRegistrationSwitch(false)
-      setOwnerSwitch(false)
-      setInspectionSwitch(false)
-      setPriceSwitch(false)
-      setDiscountSwitch(false)
-      setBonusSwitch(false)
-    }, 3500)
-  }
+      setEmail("");
+      setPhone("");
+      setVin("");
+      const car = getCar().Found;
+      if (car && car.vin) setVin(car.vin);
+      const user = authHeader().Authorization;
+      if (user && user.email) setEmail(user.email);
+      setMessage(null);
+      setRegistrationSwitch(false);
+      setOwnerSwitch(false);
+      setInspectionSwitch(false);
+      setPriceSwitch(false);
+      setDiscountSwitch(false);
+      setBonusSwitch(false);
+    }, 3500);
+  };
 
   const getSecretFormsDetails = () => {
     userService
@@ -309,7 +309,7 @@ function MobileResult({ text, success }) {
                 <p>
                   <span>Власник</span> {car.person}
                 </p>
-                <p title={car.region + ', ' + car.place}>
+                <p title={car.region + ", " + car.place}>
                   <span>Місце реєстрації</span> {car.reg_addr_koatuu}
                 </p>
                 <div>
@@ -322,6 +322,7 @@ function MobileResult({ text, success }) {
                       mask={phoneNumberMask}
                       id="phone"
                       type="text"
+                      required
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       className={`${s.form_control} ${s.tel_input}`}
@@ -330,6 +331,7 @@ function MobileResult({ text, success }) {
                     <input
                       type={`email`}
                       value={email}
+                      required
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder={`Email (куди надіслати звіт)`}
                       className={s.form_control}
@@ -342,7 +344,13 @@ function MobileResult({ text, success }) {
                         Дізнатися історію
                       </button>
                     ) : (
-                        <div className="alert alert-success py-1" style={{borderRadius: '3em'}} role="alert">{message}</div>
+                      <div
+                        className="alert alert-success py-1"
+                        style={{ borderRadius: "3em" }}
+                        role="alert"
+                      >
+                        {message}
+                      </div>
                       // <div className={`text-center`}>
                       //   <div
                       //     className="spinner-border text-danger"
@@ -354,8 +362,10 @@ function MobileResult({ text, success }) {
                     )}
                     <div className={s.info_sign}>
                       <InfoTextModal
-                          title={text.info_text_modal_window_owner_title}
-                          text={text.info_text_modal_window_owner_text} buttonLabel={'i'} />
+                        title={text.info_text_modal_window_owner_title}
+                        text={text.info_text_modal_window_owner_text}
+                        buttonLabel={"i"}
+                      />
                     </div>
                   </form>
                 </div>
@@ -387,6 +397,7 @@ function MobileResult({ text, success }) {
                     mask={phoneNumberMask}
                     id="phone"
                     type="text"
+                    required
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     className={`${s.form_control} ${s.tel_input}`}
@@ -395,6 +406,7 @@ function MobileResult({ text, success }) {
                   <input
                     value={vin}
                     type="text"
+                    required
                     minLength={`17`}
                     maxLength={`17`}
                     placeholder="VIN:"
@@ -409,7 +421,13 @@ function MobileResult({ text, success }) {
                       Передзвоніть мені
                     </button>
                   ) : (
-                      <div className="alert alert-success py-1" style={{borderRadius: '3em'}} role="alert">{message}</div>
+                    <div
+                      className="alert alert-success py-1"
+                      style={{ borderRadius: "3em" }}
+                      role="alert"
+                    >
+                      {message}
+                    </div>
                     // <div className={`text-center`}>
                     //   <div className="spinner-border text-danger" role="status">
                     //     <span className="sr-only">Loading...</span>
@@ -418,9 +436,10 @@ function MobileResult({ text, success }) {
                   )}
                   <div className={s.info_sign}>
                     <InfoTextModal
-                        title={text.info_text_modal_window_inspection_title}
-                        text={text.info_text_modal_window_inspection_text}
-                        buttonLabel={'i'} />
+                      title={text.info_text_modal_window_inspection_title}
+                      text={text.info_text_modal_window_inspection_text}
+                      buttonLabel={"i"}
+                    />
                   </div>
                 </form>
               </div>
@@ -445,10 +464,12 @@ function MobileResult({ text, success }) {
             {priceSwitch && (
               <div className={s.more_info_block}>
                 <p>
-                  <span>Середня ціна:</span> <b className={`font-weight-bold`}>{car.arithmeticMean} USD</b>
+                  <span>Середня ціна:</span>{" "}
+                  <b className={`font-weight-bold`}>{car.arithmeticMean} USD</b>
                 </p>
                 <p>
-                  <span>К-ть оголошень:</span> <b className={`font-weight-bold`}>{car.count_top_0}</b>
+                  <span>К-ть оголошень:</span>{" "}
+                  <b className={`font-weight-bold`}>{car.count_top_0}</b>
                 </p>
                 <h6>
                   Повідомити Вам, якщо зʼявиться цікавий варіант серед подібних
@@ -458,6 +479,7 @@ function MobileResult({ text, success }) {
                   <input
                     value={email}
                     type="email"
+                    required
                     onChange={(e) => setEmail(e.target.value)}
                     className={s.form_control}
                     placeholder={`Email (куди надіслати звіт)`}
@@ -467,6 +489,7 @@ function MobileResult({ text, success }) {
                     minLength={`17`}
                     maxLength={`17`}
                     value={vin}
+                    required
                     placeholder="Введіть VIN"
                     onChange={(e) => setVin(e.target.value)}
                     className={s.form_control}
@@ -479,7 +502,13 @@ function MobileResult({ text, success }) {
                       Моніторити
                     </button>
                   ) : (
-                      <div className="alert alert-success py-1" style={{borderRadius: '3em'}} role="alert">{message}</div>
+                    <div
+                      className="alert alert-success py-1"
+                      style={{ borderRadius: "3em" }}
+                      role="alert"
+                    >
+                      {message}
+                    </div>
                     // <div className={`text-center`}>
                     //   <div className="spinner-border text-danger" role="status">
                     //     <span className="sr-only">Loading...</span>
@@ -488,9 +517,10 @@ function MobileResult({ text, success }) {
                   )}
                   <div className={s.info_sign}>
                     <InfoTextModal
-                        title={text.info_text_modal_window_monitoring_title}
-                        text={text.info_text_modal_window_monitoring_text}
-                        buttonLabel={'i'} />
+                      title={text.info_text_modal_window_monitoring_title}
+                      text={text.info_text_modal_window_monitoring_text}
+                      buttonLabel={"i"}
+                    />
                   </div>
                 </form>
               </div>
@@ -515,11 +545,11 @@ function MobileResult({ text, success }) {
             <span
               title="Информация по базе угонов"
               onClick={() => {
-                setLoading(true)
-                setStatusText('')
+                setLoading(true);
+                setStatusText("");
                 setTimeout(() => {
-                  setStatusText(car.status)
-                  setLoading(false)
+                  setStatusText(car.status);
+                  setLoading(false);
                 }, 1500);
               }}
             >
@@ -536,9 +566,9 @@ function MobileResult({ text, success }) {
         </div>
         <div className={s.btn_read_more}>
           <OrderForm
-              langData={text}
-              title="Перевірити VIN та отримати повний звіт з історії транспортного засобу"
-              price_block_card_btn_buy={'Повна перевірка'}
+            langData={text}
+            title="Перевірити VIN та отримати повний звіт з історії транспортного засобу"
+            price_block_card_btn_buy={"Повна перевірка"}
           />
         </div>
       </div>
@@ -572,6 +602,7 @@ function MobileResult({ text, success }) {
                   <input
                     value={email}
                     type="email"
+                    required
                     onChange={(e) => setEmail(e.target.value)}
                     className={s.form_control}
                     placeholder={`Введіть e-mail`}
@@ -584,7 +615,13 @@ function MobileResult({ text, success }) {
                       Отримати приз
                     </button>
                   ) : (
-                      <div className="alert alert-success py-1" style={{borderRadius: '3em'}} role="alert">{message}</div>
+                    <div
+                      className="alert alert-success py-1"
+                      style={{ borderRadius: "3em" }}
+                      role="alert"
+                    >
+                      {message}
+                    </div>
                     // <div className={`text-center`}>
                     //   <div className="spinner-border text-danger" role="status">
                     //     <span className="sr-only">Loading...</span>
@@ -593,9 +630,10 @@ function MobileResult({ text, success }) {
                   )}
                   <div className={s.info_sign}>
                     <InfoTextModal
-                        title={text.info_text_modal_window_discount_title}
-                        text={text.info_text_modal_window_discount_text}
-                        buttonLabel={'i'} />
+                      title={text.info_text_modal_window_discount_title}
+                      text={text.info_text_modal_window_discount_text}
+                      buttonLabel={"i"}
+                    />
                   </div>
                 </form>
               </div>
@@ -679,6 +717,7 @@ function MobileResult({ text, success }) {
                   <input
                     type="email"
                     value={email}
+                    required
                     onChange={(e) => setEmail(e.target.value)}
                     className={s.form_control}
                     placeholder={`Введіть e-mail`}
@@ -691,7 +730,13 @@ function MobileResult({ text, success }) {
                       Хочу промокод
                     </button>
                   ) : (
-                      <div className="alert alert-success py-1" style={{borderRadius: '3em'}} role="alert">{message}</div>
+                    <div
+                      className="alert alert-success py-1"
+                      style={{ borderRadius: "3em" }}
+                      role="alert"
+                    >
+                      {message}
+                    </div>
                     // <div className={`text-center`}>
                     //   <div className="spinner-border text-danger" role="status">
                     //     <span className="sr-only">Loading...</span>
@@ -700,9 +745,10 @@ function MobileResult({ text, success }) {
                   )}
                   <div className={s.info_sign}>
                     <InfoTextModal
-                        title={text.info_text_modal_window_bonus_title}
-                        text={text.info_text_modal_window_bonus_text}
-                        buttonLabel={'i'} />
+                      title={text.info_text_modal_window_bonus_title}
+                      text={text.info_text_modal_window_bonus_text}
+                      buttonLabel={"i"}
+                    />
                   </div>
                 </form>
               </div>
@@ -729,7 +775,9 @@ function MobileResult({ text, success }) {
             </svg>
           </div>
           <div>
-            <a href={`https://avtotest.polis.ua/`} target={`_blank`}><u>20% ВІД СТРАХОВОЇ</u></a>
+            <a href={`https://avtotest.polis.ua/`} target={`_blank`}>
+              <u>20% ВІД СТРАХОВОЇ</u>
+            </a>
           </div>
         </div>
         <div className={s.result_item}>
@@ -776,7 +824,9 @@ function MobileResult({ text, success }) {
             </svg>
           </div>
           <div>
-            <a href={`https://bdr.mvs.gov.ua/`} target={`_blank`}><u>МОНІТОРИНГ ШТРАФІВ</u></a>
+            <a href={`https://bdr.mvs.gov.ua/`} target={`_blank`}>
+              <u>МОНІТОРИНГ ШТРАФІВ</u>
+            </a>
           </div>
         </div>
         <div className={s.result_item}>
@@ -786,7 +836,9 @@ function MobileResult({ text, success }) {
             </svg>
           </div>
           <div>
-            <a target={`_blank`} href={`https://t.me/AvtoTestOrgBot`}><u>TELEGRAM BOT AvtoTest</u></a>
+            <a target={`_blank`} href={`https://t.me/AvtoTestOrgBot`}>
+              <u>TELEGRAM BOT AvtoTest</u>
+            </a>
           </div>
         </div>
         <div className={s.btn_read_more}>
@@ -795,8 +847,8 @@ function MobileResult({ text, success }) {
             title="Перевірити VIN та отримати повний звіт з історії транспортного засобу"
             onClick={() => {
               window.open(
-                  `https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=moreD&vin=${car.vin}`,
-                  "_blanc"
+                `https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=moreD&vin=${car.vin}`,
+                "_blanc"
               );
             }}
           >
