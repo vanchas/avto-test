@@ -2,7 +2,7 @@ export const SET_LANGUAGE = "SET_LANGUAGE";
 export const SHOW_SUCCESS = "SHOW_SUCCESS";
 
 export const setCurrentLanguage = (lang) => async (dispatch) => {
-  const response = await fetch("/api", {
+  const response = await fetch("https://api.avtotest.org/api", {
     method: "GET",
     headers: {
       "Access-Control-Allow-Origin": "*",
