@@ -87,6 +87,9 @@ function ChangeStrings({onValueInput, onKeyInput, text, key, value, onNewKeyLang
       consultation_block_header: ${text.consultation_block_header},
       consultation_block_subheader: ${text.consultation_block_subheader},
       consultation_block_btn: ${text.consultation_block_btn}
+      mobile_substring_services_history - ${text.mobile_substring_services_history},
+      mobile_substring_services_mileage - ${text.mobile_substring_services_mileage},
+      mobile_substring_services_damage - ${text.mobile_substring_services_damage},
     },
     FOOTER: {
       footer_btn: ${text.footer_btn},
@@ -107,6 +110,13 @@ function ChangeStrings({onValueInput, onKeyInput, text, key, value, onNewKeyLang
       header_exit_item: ${text.header_exit_item},
       header_home_item: ${text.header_home_item},
       header_btn_call: ${text.header_btn_call}
+      inspection_on_site_modal_button - ${text.inspection_on_site_modal_button},
+    inspection_on_site_modal_title - ${text.inspection_on_site_modal_title},
+    inspection_on_site_modal_subtitle - ${text.inspection_on_site_modal_subtitle},
+    inspection_on_site_modal_call_me_btn - ${text.inspection_on_site_modal_call_me_btn},
+    inspection_on_site_modal_order_call_form_submit_button - ${text.inspection_on_site_modal_order_call_form_submit_button},
+    inspection_on_site_modal_order_call_form_cancel_button - ${text.inspection_on_site_modal_order_call_form_cancel_button},
+    inspection_on_site_modal_order_call_form_thanks_message - ${text.inspection_on_site_modal_order_call_form_thanks_message},
     },
     СТРАНИЦА ЛОГИНА: {
       nav_item_sign_in: ${text.nav_item_sign_in},
@@ -115,6 +125,21 @@ function ChangeStrings({onValueInput, onKeyInput, text, key, value, onNewKeyLang
       password_label: ${text.password_label},
       login_label: ${text.login_label},
       email_sublabel: ${text.email_sublabel}
+      (login)
+        forgot_password_btn - ${text.forgot_password_btn},
+      (registration)
+        registration_form_title - ${text.registration_form_title},
+        registration_form_substring - ${text.registration_form_substring},
+        registration_form_submit_btn - ${text.registration_form_submit_btn},
+        registration_form_footer_string_part_1 - ${text.registration_form_footer_string_part_1},
+        registration_form_footer_string_part_2 -  ${text.registration_form_footer_string_part_2},
+        registration_form_footer_string_part_3 -  ${text.registration_form_footer_string_part_3},
+        registration_form_footer_string_terms_btn - ${text.registration_form_footer_string_terms_btn},
+        registration_form_footer_string_privacy_btn - ${text.registration_form_footer_string_privacy_btn},
+        forgot_password_form_title - ${text.forgot_password_form_title},
+        forgot_password_form_registration_btn - ${text.forgot_password_form_registration_btn},
+        forgot_password_form_submit_btn - ${text.forgot_password_form_submit_btn},
+        forgot_password_form_save_password_btn - ${text.forgot_password_form_save_password_btn},
     },
     СТРАНИЦА РЕЗУЛЬТАТА: {
       error_submessage: ${text.error_submessage},
@@ -153,6 +178,39 @@ function ChangeStrings({onValueInput, onKeyInput, text, key, value, onNewKeyLang
         search_animation_text_3: ${text.search_animation_text_3},
         search_animation_text_4: ${text.search_animation_text_4},
       },
+      
+      УСЛОВИЯ ИСПОЛЬЗОВАНИЯЖ {
+       terms_of_use_page_header - ${text.terms_of_use_page_header},
+       terms_of_use_page_text - ${text.terms_of_use_page_text},
+       }
+      
+      ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ: {
+      privacy_policy_page_header - ${text.privacy_policy_page_header},
+      privacy_policy_page_text - ${text.privacy_policy_page_text},
+      }
+      
+      POP_UP ОКНА С ИНФОРМАЦИЕЙ ОБ УСЛУГЕ 
+      (буква "і" в выпадающих формах на странице результата)
+      
+      (форма о владельце)
+        info_text_modal_window_owner_title - ${text.info_text_modal_window_owner_title},
+        info_text_modal_window_owner_text - ${text.info_text_modal_window_owner_text},
+
+      (форма выездной проверки)
+        info_text_modal_window_inspection_title - ${text.info_text_modal_window_inspection_title},
+        info_text_modal_window_inspection_text - ${text.info_text_modal_window_inspection_text},
+
+      (форма мониторинга)
+        info_text_modal_window_monitoring_title - ${text.info_text_modal_window_monitoring_title},
+        info_text_modal_window_monitoring_text - ${text.info_text_modal_window_monitoring_text},
+
+      (форма скидки на проверку)
+        info_text_modal_window_discount_title - ${text.info_text_modal_window_discount_title},
+        info_text_modal_window_discount_text - ${text.info_text_modal_window_discount_text},
+
+      (форма бонуса от продавца)
+        info_text_modal_window_bonus_title - ${text.info_text_modal_window_bonus_title},
+        info_text_modal_window_bonus_text - ${text.info_text_modal_window_bonus_text},
     `}</pre>
       </div>
     </>

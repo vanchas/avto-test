@@ -25,6 +25,7 @@ import { connect } from "react-redux";
 import { OrderForm } from "./ModalForm";
 import { InfoTextModal } from "../../utils/InfoTextModal";
 import { authHeader } from "../../../_helpers/auth-header";
+import InspectionModal from "../../header/InspectionModal";
 
 const phoneNumberMask = [
   // /[1-9]/,
@@ -70,6 +71,7 @@ function MobileResult({ text, success }) {
   useEffect(() => {
     const carData = getCar().Found;
     if (carData && carData.brand) {
+      // console.log(carData)
       setCar(carData);
     } else {
       history.push("/not-found");
@@ -82,10 +84,18 @@ function MobileResult({ text, success }) {
   }, []);
 
   const newWindowOpen = () => {
-    window.open(
-      `https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=more&vin=${car.vin}`,
-      "_blanc"
-    );
+    const inputValue = localStorage.getItem('avto-test-value')
+    if (inputValue.length === 17) {
+      window.open(
+          `https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=more&vin=${car.vin}`,
+          "_blanc"
+      );
+    } else {
+      window.open(
+          `https://www.carvertical.com/ua/landing/v3?a=avtotest&b=f1781078&data1=plates`,
+          "_blanc"
+      );
+    }
   };
 
   const switchHandler = (id, value) => {
@@ -241,12 +251,12 @@ function MobileResult({ text, success }) {
           </div>
           <div className={s.with_switch}>
             <div>
-              {!car.first_reg_date ? (
+              {!car.date ? (
                 ""
               ) : (
                 <span>
-                  <span title={`Дата першої реєстрації`}>
-                    {car.first_reg_date}
+                  <span title={`Дата останньої реєстрації`}>
+                    {car.date}
                   </span>
                 </span>
               )}
@@ -309,8 +319,8 @@ function MobileResult({ text, success }) {
                 <p>
                   <span>Власник</span> {car.person}
                 </p>
-                <p title={car.region + ", " + car.place}>
-                  <span>Місце реєстрації</span> {car.reg_addr_koatuu}
+                <p title={car.reg_addr_koatuu}>
+                  <span>Місце реєстрації</span> {car.region}, {car.place}
                 </p>
                 <div>
                   <h6>
@@ -565,10 +575,10 @@ function MobileResult({ text, success }) {
           </div>
         </div>
         <div className={s.btn_read_more}>
-          <OrderForm
+          <InspectionModal
             langData={text}
             title="Перевірити VIN та отримати повний звіт з історії транспортного засобу"
-            price_block_card_btn_buy={"Повна перевірка"}
+            inspection_on_site_modal_button={"Повна перевірка"}
           />
         </div>
       </div>

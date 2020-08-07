@@ -1,28 +1,19 @@
 {
   "files": {
     "main.css": "./static/css/main.fbb21472.chunk.css",
-<<<<<<< HEAD
-    "main.js": "./static/js/main.8cb6227f.chunk.js",
-    "main.js.map": "./static/js/main.8cb6227f.chunk.js.map",
-=======
-    "main.js": "./static/js/main.cc0a16d2.chunk.js",
-    "main.js.map": "./static/js/main.cc0a16d2.chunk.js.map",
->>>>>>> d386436ddd1926621a673ba542273ec8b6f4ccde
+    "main.js": "./static/js/main.1cbaee1a.chunk.js",
+    "main.js.map": "./static/js/main.1cbaee1a.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.9b68e04c.js",
     "runtime-main.js.map": "./static/js/runtime-main.9b68e04c.js.map",
     "static/css/2.a6baef0e.chunk.css": "./static/css/2.a6baef0e.chunk.css",
-    "static/js/2.b2941611.chunk.js": "./static/js/2.b2941611.chunk.js",
-    "static/js/2.b2941611.chunk.js.map": "./static/js/2.b2941611.chunk.js.map",
+    "static/js/2.68b8fbc3.chunk.js": "./static/js/2.68b8fbc3.chunk.js",
+    "static/js/2.68b8fbc3.chunk.js.map": "./static/js/2.68b8fbc3.chunk.js.map",
     "index.html": "./index.html",
-<<<<<<< HEAD
-    "precache-manifest.53e3e6c933a108fdf3d12ec6d45bda03.js": "./precache-manifest.53e3e6c933a108fdf3d12ec6d45bda03.js",
-=======
-    "precache-manifest.d97037a6f741a7e9b5487ce44c0a8dec.js": "./precache-manifest.d97037a6f741a7e9b5487ce44c0a8dec.js",
->>>>>>> d386436ddd1926621a673ba542273ec8b6f4ccde
+    "precache-manifest.dd69f10b44ee77e3ef55730e089dcda0.js": "./precache-manifest.dd69f10b44ee77e3ef55730e089dcda0.js",
     "service-worker.js": "./service-worker.js",
     "static/css/2.a6baef0e.chunk.css.map": "./static/css/2.a6baef0e.chunk.css.map",
     "static/css/main.fbb21472.chunk.css.map": "./static/css/main.fbb21472.chunk.css.map",
-    "static/js/2.b2941611.chunk.js.LICENSE.txt": "./static/js/2.b2941611.chunk.js.LICENSE.txt",
+    "static/js/2.68b8fbc3.chunk.js.LICENSE.txt": "./static/js/2.68b8fbc3.chunk.js.LICENSE.txt",
     "static/media/index.css": "./static/media/HelveticaNeueCyr.afe760ff.ttf",
     "static/media/car-check_g.png": "./static/media/car-check_g.e0384dc4.png",
     "static/media/car-search_g.png": "./static/media/car-search_g.7e1aa228.png",
@@ -41,12 +32,8 @@
   "entrypoints": [
     "static/js/runtime-main.9b68e04c.js",
     "static/css/2.a6baef0e.chunk.css",
-    "static/js/2.b2941611.chunk.js",
+    "static/js/2.68b8fbc3.chunk.js",
     "static/css/main.fbb21472.chunk.css",
-<<<<<<< HEAD
-    "static/js/main.8cb6227f.chunk.js"
-=======
-    "static/js/main.cc0a16d2.chunk.js"
->>>>>>> d386436ddd1926621a673ba542273ec8b6f4ccde
+    "static/js/main.1cbaee1a.chunk.js"
   ]
 }

@@ -20,6 +20,7 @@ import { authHeader } from "../../_helpers/auth-header";
 import { history } from "../../_helpers/history";
 import { OrderCall } from "./ModalForm";
 import InspectionModal from "./InspectionModal";
+import {OrderForm} from "../main/result-page/ModalForm";
 
 export default class Header extends Component {
   constructor(props) {
@@ -187,8 +188,12 @@ export default class Header extends Component {
             <div className="mobile-call-block">
               <InspectionModal
                 langData={this.props.langData}
-                header_btn_call={text.header_btn_call}
+                inspection_on_site_modal_button={text.inspection_on_site_modal_button}
               />
+              {/*<OrderForm*/}
+              {/*    price_block_card_btn_buy={text.inspection_on_site_modal_button}*/}
+              {/*    langData={this.props.langData}*/}
+              {/*/>*/}
               <a href="tel:+380964702700" className="text-white number">
                 {/*<img src={Phone} alt="phone" className="mr-2 mb-1" />*/}
                 <svg
