@@ -19,7 +19,6 @@ export default class LoginForm extends React.Component {
         >
           <Form.Group controlId="formBasicEmail">
             <Form.Control
-              autoComplete="true"
               type="email"
               placeholder="введіть Ваш email"
               value={

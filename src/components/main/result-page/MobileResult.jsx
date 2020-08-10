@@ -171,6 +171,18 @@ function MobileResult({ text, success }) {
       .catch((err) => console.error(err));
   };
 
+  const buttonCheckVinHandler = () => {
+    // https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=moreD&vin=
+    // https://www.carvertical.com/ua/landing/v3?a=avtotest&b=f1781078&data1=plates
+    const link = car && car.vin
+        ? 'https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=moreD&vin=' + car.vin
+        : localStorage.getItem("avto-test-value").length === 17
+            ? 'https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=moreD&vin='
+                + localStorage.getItem("avto-test-value")
+            : 'https://www.carvertical.com/ua/landing/v3?a=avtotest&b=f1781078&data1=plates';
+    window.open(link ,"_blanc");
+  }
+
   return car ? (
     <div className={s.mobile_result_block}>
       <div className={s.results_group}>
@@ -247,10 +259,10 @@ function MobileResult({ text, success }) {
         </div>
         <div className={s.result_item}>
           <div>
-            <img width={28} src={ReportImg} alt="" />
+            <img width={28} src={ReportImg} alt="" onClick={() => switchHandler("R", !registrationSwitch)} />
           </div>
           <div className={s.with_switch}>
-            <div>
+            <div onClick={() => switchHandler("R", !registrationSwitch)}>
               {!car.date ? (
                 ""
               ) : (
@@ -308,10 +320,10 @@ function MobileResult({ text, success }) {
         {formOwnerData ? (
           <div className={s.result_item}>
             <div>
-              <img width={35} src={Owner} alt="" />
+              <img width={35} src={Owner} alt="" onClick={() => switchHandler("O", !ownerSwitch)} />
             </div>
             <div className={s.with_switch}>
-              <span>ДАНІ ПРО ВЛАСНИКА</span>
+              <span onClick={() => switchHandler("O", !ownerSwitch)}>ДАНІ ПРО ВЛАСНИКА</span>
               <Switch handler={switchHandler} isOn={ownerSwitch} id={"O"} />
             </div>
             {ownerSwitch && (
@@ -386,10 +398,10 @@ function MobileResult({ text, success }) {
         {formInspectionData ? (
           <div className={s.result_item} title={car.registration}>
             <div>
-              <img width={35} src={MreoGreen} alt="" />
+              <img width={35} src={MreoGreen} alt="" onClick={() => switchHandler("I", !inspectionSwitch)} />
             </div>
             <div className={s.with_switch}>
-              <span>ВИЇЗДНА ПЕРЕВІРКА</span>
+              <span onClick={() => switchHandler("I", !inspectionSwitch)}>ВИЇЗНА ПЕРЕВІРКА</span>
               <Switch
                 handler={switchHandler}
                 isOn={inspectionSwitch}
@@ -459,14 +471,10 @@ function MobileResult({ text, success }) {
         {formMonitoringData ? (
           <div className={s.result_item}>
             <div>
-              <img width={30} src={CoinsImg} alt="" />
+              <img width={30} src={CoinsImg} alt="" onClick={() => switchHandler("M", !priceSwitch)} />
             </div>
             <div className={s.with_switch}>
-              <span>
-                {/*{car.arithmeticMean} USD |{" "}*/}
-                {/*<u style={{ color: "#000", fontWeight: "600" }}>*/}
-                {/*  {car.count_top_0} авто*/}
-                {/*</u>*/}
+              <span onClick={() => switchHandler("M", !priceSwitch)}>
                 МОНІТОРИНГ АВТО
               </span>
               <Switch handler={switchHandler} isOn={priceSwitch} id={"M"} />
@@ -588,6 +596,7 @@ function MobileResult({ text, success }) {
           <div className={s.result_item}>
             <div>
               <svg
+                onClick={() => switchHandler("D", !discountSwitch)}
                 id="Capa_1"
                 enableBackground="new 0 0 512 512"
                 viewBox="0 0 512 512"
@@ -602,7 +611,7 @@ function MobileResult({ text, success }) {
               </svg>
             </div>
             <div className={s.with_switch}>
-              ЗНИЖКА НА ПЕРЕВІРКУ
+              <span onClick={() => switchHandler("D", !discountSwitch)}>ЗНИЖКА НА ПЕРЕВІРКУ</span>
               <Switch handler={switchHandler} isOn={discountSwitch} id={"D"} />
             </div>
             {discountSwitch && (
@@ -654,6 +663,7 @@ function MobileResult({ text, success }) {
           <div className={s.result_item}>
             <div>
               <svg
+                onClick={() => switchHandler("B", !bonusSwitch)}
                 version="1.1"
                 id="Слой_1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -717,12 +727,12 @@ function MobileResult({ text, success }) {
               </svg>
             </div>
             <div className={s.with_switch}>
-              БОНУС ВІД ПРОДАВЦЯ
+              <span onClick={() => switchHandler("B", !bonusSwitch)}>БОНУС ВІД ПРОДАВЦЯ</span>
               <Switch handler={switchHandler} isOn={bonusSwitch} id={"B"} />
             </div>
             {bonusSwitch && (
               <div className={s.more_info_block}>
-                <h6>Замовляй промокод та отримай CashBack выд продавця</h6>
+                <h6>Замовляй промокод та отримай CashBack від продавця</h6>
                 <form onSubmit={formSubmitHandler} name={`bonus`}>
                   <input
                     type="email"
@@ -855,14 +865,8 @@ function MobileResult({ text, success }) {
           <span
             className={`btn btn-outline-danger px-4 pb-1`}
             title="Перевірити VIN та отримати повний звіт з історії транспортного засобу"
-            onClick={() => {
-              window.open(
-                `https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=moreD&vin=${car.vin}`,
-                "_blanc"
-              );
-            }}
-          >
-            Перевірити VIN-код
+            onClick={buttonCheckVinHandler}>
+              Перевірити VIN-код
           </span>
         </div>
       </div>

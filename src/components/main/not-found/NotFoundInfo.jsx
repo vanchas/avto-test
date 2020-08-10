@@ -17,6 +17,7 @@ import { authHeader } from "../../../_helpers/auth-header";
 import { userService } from "../../../_services/user.service";
 import { resultForms } from "../../../_services/resultForms.service";
 import moment from "moment";
+import InspectionModal from "../../header/InspectionModal";
 
 const phoneNumberMask = [
   // /[1-9]/,
@@ -89,13 +90,14 @@ function NotFoundInfo({ langData: text }) {
     const carData = JSON.parse(localStorage.getItem("avto-test-car"));
     if (carData) {
       setCar(carData);
+      if (carData.vin) {
+        setVin(carData.vin);
+      }
     } else {
       history.push("/not-found");
     }
     const user = authHeader().Authorization;
     if (user && user.email) setEmail(user.email);
-    const car = getCar().Found;
-    if (car && car.vin) setVin(car.vin);
     getSecretFormsDetails();
   }, []);
 
@@ -151,11 +153,31 @@ function NotFoundInfo({ langData: text }) {
   };
 
   const newWindowOpen = () => {
-    window.open(
-      `https://www.carvertical.com/ua/landing/v3?a=avtotest&b=f1781078&data1=plates`,
-      "_blanc"
-    );
+    const inputValue = localStorage.getItem('avto-test-value')
+    if (inputValue.length === 17) {
+      window.open(
+          `https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=more&vin=${car.vin}`,
+          "_blanc"
+      );
+    } else {
+      window.open(
+          `https://www.carvertical.com/ua/landing/v3?a=avtotest&b=f1781078&data1=plates`,
+          "_blanc"
+      );
+    }
   };
+
+  const buttonCheckVinHandler = () => {
+    // https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=moreD&vin=
+    // https://www.carvertical.com/ua/landing/v3?a=avtotest&b=f1781078&data1=plates
+    const link = car && car.vin
+        ? 'https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=moreD&vin=' + car.vin
+        : localStorage.getItem("avto-test-value").length === 17
+            ? 'https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=moreD&vin='
+            + localStorage.getItem("avto-test-value")
+            : 'https://www.carvertical.com/ua/landing/v3?a=avtotest&b=f1781078&data1=plates';
+    window.open(link ,"_blanc");
+  }
 
   return (
     <div className={s.not_found_page}>
@@ -216,10 +238,10 @@ function NotFoundInfo({ langData: text }) {
         {formOwnerData ? (
           <div className={s.result_item}>
             <div>
-              <img width={35} src={Owner} alt="" />
+              <img width={35} src={Owner} alt="" onClick={() => switchHandler("O", !ownerSwitch)} />
             </div>
             <div className={s.with_switch}>
-              <span>ДАНІ ПРО ВЛАСНИКА</span>
+              <span onClick={() => switchHandler("O", !ownerSwitch)}>ДАНІ ПРО ВЛАСНИКА</span>
               <Switch handler={switchHandler} isOn={ownerSwitch} id={"O"} />
             </div>
             {ownerSwitch && (
@@ -264,9 +286,9 @@ function NotFoundInfo({ langData: text }) {
                     )}
                     <div className={s.info_sign}>
                       <InfoTextModal
-                          title={`ghdkjfg`}
-                        text={`fghlkdsfhgsdkjfh`}
-                        buttonLabel={"i"}
+                          title={text.info_text_modal_window_owner_title}
+                          text={text.info_text_modal_window_owner_text}
+                          buttonLabel={"i"}
                       />
                     </div>
                   </form>
@@ -278,10 +300,10 @@ function NotFoundInfo({ langData: text }) {
         {formInspectionData ? (
           <div className={s.result_item}>
             <div>
-              <img width={35} src={MreoGreen} alt="" />
+              <img width={35} src={MreoGreen} alt="" onClick={() => switchHandler("I", !inspectionSwitch)} />
             </div>
             <div className={s.with_switch}>
-              <span>ВИЇЗДНА ПЕРЕВІРКА</span>
+              <span onClick={() => switchHandler("I", !inspectionSwitch)}>ВИЇЗНА ПЕРЕВІРКА</span>
               <Switch
                 handler={switchHandler}
                 isOn={inspectionSwitch}
@@ -336,9 +358,9 @@ function NotFoundInfo({ langData: text }) {
                   )}
                   <div className={s.info_sign}>
                     <InfoTextModal
-                        title={`ghdkjfg`}
-                      text={`fghlkdsfhgsdkjfh`}
-                      buttonLabel={"i"}
+                        title={text.info_text_modal_window_owner_title}
+                        text={text.info_text_modal_window_owner_text}
+                        buttonLabel={"i"}
                     />
                   </div>
                 </form>
@@ -349,10 +371,10 @@ function NotFoundInfo({ langData: text }) {
         {formMonitoringData ? (
           <div className={s.result_item}>
             <div>
-              <img width={30} src={CoinsImg} alt="" />
+              <img width={30} src={CoinsImg} onClick={() => switchHandler("M", !priceSwitch)} alt="" />
             </div>
             <div className={s.with_switch}>
-              <span>МОНІТОРИНГ АВТО</span>
+              <span onClick={() => switchHandler("M", !priceSwitch)}>МОНІТОРИНГ АВТО</span>
               <Switch handler={switchHandler} isOn={priceSwitch} id={"M"} />
             </div>
             {priceSwitch && (
@@ -401,9 +423,9 @@ function NotFoundInfo({ langData: text }) {
                   )}
                   <div className={s.info_sign}>
                     <InfoTextModal
-                        title={`ghdkjfg`}
-                      text={`fghlkdsfhgsdkjfh`}
-                      buttonLabel={"i"}
+                        title={text.info_text_modal_window_owner_title}
+                        text={text.info_text_modal_window_owner_text}
+                        buttonLabel={"i"}
                     />
                   </div>
                 </form>
@@ -449,10 +471,15 @@ function NotFoundInfo({ langData: text }) {
           </div>
         </div>
         <div className={s.btn_read_more}>
-          <OrderForm
-            langData={text}
-            title="Перевірити VIN та отримати повний звіт з історії транспортного засобу"
-            price_block_card_btn_buy={"Повна перевірка"}
+          {/*<OrderForm*/}
+          {/*  langData={text}*/}
+          {/*  title="Перевірити VIN та отримати повний звіт з історії транспортного засобу"*/}
+          {/*  price_block_card_btn_buy={"Повна перевірка"}*/}
+          {/*/>*/}
+          <InspectionModal
+                langData={text}
+                title="Перевірити VIN та отримати повний звіт з історії транспортного засобу"
+                inspection_on_site_modal_button={"Повна перевірка"}
           />
         </div>
       </div>
@@ -462,6 +489,7 @@ function NotFoundInfo({ langData: text }) {
           <div className={s.result_item}>
             <div>
               <svg
+                onClick={() => switchHandler("D", !discountSwitch)}
                 id="Capa_1"
                 enableBackground="new 0 0 512 512"
                 viewBox="0 0 512 512"
@@ -476,7 +504,7 @@ function NotFoundInfo({ langData: text }) {
               </svg>
             </div>
             <div className={s.with_switch}>
-              ЗНИЖКА НА ПЕРЕВІРКУ
+              <span onClick={() => switchHandler("D", !discountSwitch)}>ЗНИЖКА НА ПЕРЕВІРКУ</span>
               <Switch handler={switchHandler} isOn={discountSwitch} id={"D"} />
             </div>
             {discountSwitch && (
@@ -513,9 +541,9 @@ function NotFoundInfo({ langData: text }) {
                   )}
                   <div className={s.info_sign}>
                     <InfoTextModal
-                        title={`ghdkjfg`}
-                      text={`fghlkdsfhgsdkjfh`}
-                      buttonLabel={"i"}
+                        title={text.info_text_modal_window_owner_title}
+                        text={text.info_text_modal_window_owner_text}
+                        buttonLabel={"i"}
                     />
                   </div>
                 </form>
@@ -527,6 +555,7 @@ function NotFoundInfo({ langData: text }) {
           <div className={s.result_item}>
             <div>
               <svg
+                onClick={() => switchHandler("B", !bonusSwitch)}
                 version="1.1"
                 id="Слой_1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -590,12 +619,12 @@ function NotFoundInfo({ langData: text }) {
               </svg>
             </div>
             <div className={s.with_switch}>
-              БОНУС ВІД ПРОДАВЦЯ
+              <span onClick={() => switchHandler("B", !bonusSwitch)}>БОНУС ВІД ПРОДАВЦЯ</span>
               <Switch handler={switchHandler} isOn={bonusSwitch} id={"B"} />
             </div>
             {bonusSwitch && (
               <div className={s.more_info_block}>
-                <h6>Замовляй промокод та отримай CashBack выд продавця</h6>
+                <h6>Замовляй промокод та отримай CashBack від продавця</h6>
                 <form onSubmit={formSubmitHandler} name={`bonus`}>
                   <input
                     type="email"
@@ -627,9 +656,9 @@ function NotFoundInfo({ langData: text }) {
                   )}
                   <div className={s.info_sign}>
                     <InfoTextModal
-                        title={`ghdkjfg`}
-                      text={`fghlkdsfhgsdkjfh`}
-                      buttonLabel={"i"}
+                        title={text.info_text_modal_window_owner_title}
+                        text={text.info_text_modal_window_owner_text}
+                        buttonLabel={"i"}
                     />
                   </div>
                 </form>
@@ -727,14 +756,8 @@ function NotFoundInfo({ langData: text }) {
           <span
             className={`btn btn-outline-danger px-4 pb-1`}
             title="Перевірити VIN та отримати повний звіт з історії транспортного засобу"
-            onClick={() => {
-              window.open(
-                `https://www.carvertical.com/ua/poperednja-perevirka?a=avtotest&b=f1781078&data1=moreD&vin=${car.vin}`,
-                "_blanc"
-              );
-            }}
-          >
-            Перевірити VIN-код
+            onClick={buttonCheckVinHandler}>
+              Перевірити VIN-код
           </span>
         </div>
       </div>

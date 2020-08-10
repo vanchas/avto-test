@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import $ from "jquery";
 
-function ChangeStrings({onValueInput, onKeyInput, text, key, value, onNewKeyLanguageChange, submitHandler}) {
+function ChangeStrings({
+  onValueInput,
+  onKeyInput,
+  text,
+  stringKey: key,
+  value,
+  onNewKeyLanguageChange,
+  submitHandler,
+}) {
+  const [template, setTemplate] = useState("list");
+
   return (
     <>
       <div className="text-center">
         <form>
-          <label className="form-group">
+          <label className={`container`}>
             <span>Изменить текст</span>
             <input
               value={key}
@@ -22,7 +32,7 @@ function ChangeStrings({onValueInput, onKeyInput, text, key, value, onNewKeyLang
               cols=""
               rows="3"
               placeholder="новый текст ключа"
-             />
+            />
             <select
               defaultValue={"DEFAULT"}
               className=" mt-2 form-control"
@@ -35,23 +45,46 @@ function ChangeStrings({onValueInput, onKeyInput, text, key, value, onNewKeyLang
               <option value="ru">ru</option>
               <option value="en">en</option>
             </select>
-            <button
-              onClick={submitHandler}
-              className="btn btn-primary mt-2"
-            >
+            <button onClick={submitHandler} className="btn btn-primary mt-2">
               Изменить
             </button>
           </label>
         </form>
       </div>
       <div>
-        <button
-          onClick={() => $(".language-text").slideToggle()}
-          className="mx-auto mb-3 d-block btn btn-success"
-        >
-          Cписок ключей &nbsp; &#x2193;
-        </button>
-        <pre className="language-text">{`
+        <div className={`d-flex justify-content-center mt-4`}>
+          <span
+            className={`btn btn${template === 'list' ? "" : '-outline'}-secondary mr-2`}
+            onClick={() => setTemplate("list")}
+          >
+            Список (старый вариант)
+          </span>
+          <span
+            className={`btn btn${template === 'table' ? "" : '-outline'}-secondary`}
+            onClick={() => setTemplate("table")}
+          >
+            Таблица (тестовый вариант)
+          </span>
+        </div>
+
+        {template === "table" ? (
+          <table className="table table-striped container my-3">
+            <tbody>
+              {Object.entries(text).map(([keyText, valueText], ind) => {
+                return (
+                  <tr key={ind}>
+                    <th>
+                      {ind + 1}. {keyText}:
+                    </th>
+                    <td>{valueText}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        ) : (
+          <pre className="language-text">
+            {`
     СТРАНИЦА ПОИСКА: {
       complete_field_warning: ${text.complete_field_warning},
       limit_warning_unauthorized: ${text.limit_warning_unauthorized},
@@ -180,13 +213,18 @@ function ChangeStrings({onValueInput, onKeyInput, text, key, value, onNewKeyLang
       },
       
       УСЛОВИЯ ИСПОЛЬЗОВАНИЯЖ {
-       terms_of_use_page_header - ${text.terms_of_use_page_header},
-       terms_of_use_page_text - ${text.terms_of_use_page_text},
+      (Принимает также html теги)
+      (Доступны все возможные стили для тегов. Пример записи:
+        <span style="color: red">Этот текст будет крассным</span>)
+        
+        terms_of_use_page_header - ${text.terms_of_use_page_header},
+        terms_of_use_page_text - ${text.terms_of_use_page_text},
        }
       
       ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ: {
-      privacy_policy_page_header - ${text.privacy_policy_page_header},
-      privacy_policy_page_text - ${text.privacy_policy_page_text},
+      (принимает также html теги и стили)
+        privacy_policy_page_header - ${text.privacy_policy_page_header},
+        privacy_policy_page_text - ${text.privacy_policy_page_text},
       }
       
       POP_UP ОКНА С ИНФОРМАЦИЕЙ ОБ УСЛУГЕ 
@@ -211,7 +249,9 @@ function ChangeStrings({onValueInput, onKeyInput, text, key, value, onNewKeyLang
       (форма бонуса от продавца)
         info_text_modal_window_bonus_title - ${text.info_text_modal_window_bonus_title},
         info_text_modal_window_bonus_text - ${text.info_text_modal_window_bonus_text},
-    `}</pre>
+    `}
+          </pre>
+        )}
       </div>
     </>
   );

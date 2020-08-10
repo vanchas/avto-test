@@ -190,7 +190,7 @@ class AdminPage extends React.Component {
             onKeyInput={this.onKeyInput}
             onValueInput={this.onValueInput}
             onNewKeyLanguageChange={this.onNewKeyLanguageChange}
-            key={this.state.newKey}
+            stringKey={this.state.newKey}
             value={this.state.newKeyText}
             submitHandler={this.changeKeyText}
         />

@@ -17,7 +17,10 @@ export default class Footer extends Component {
             <div className={`${s.text_block}`}>
               <p className="m-0"><b>Avto</b>Test  {text.footer_text} </p>
             </div>
-            <p>© 2020 <b>Avto</b>Test. {text.company_information}</p>
+            <p className={s.footer_links}>© 2020 <b>Avto</b>Test.{` `}
+              <Link to={`/privacy-policy`}>Політика конфіденційності</Link>.{` `}
+              <Link to={`/terms-of-use`}>Умови використаня</Link>.
+            </p>
           </div>
 
           <div className={s.logo_block}>
