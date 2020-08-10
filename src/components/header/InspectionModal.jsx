@@ -85,8 +85,8 @@ export default function InspectionModal(props) {
       <>
         <Button
             variant=""
-            style={{ borderRadius: "2em" }}
-            className="mt-1 d-flex mx-auto btn btn-outline-danger pb-0 px-4 font-weight-bold"
+            style={{ borderRadius: "2em", fontSize: '0.9em' }}
+            className="mt-1 d-flex mx-auto btn btn-outline-danger pb-0 px-3 font-weight-bold"
             onClick={(e) => handleShow(e)}
         >
           {props.inspection_on_site_modal_button}
